@@ -53,7 +53,6 @@ public class codingUI : MonoBehaviour {
 
 	public string addToCode(string s,TextEditor e,string added){
 		s = s.Insert(e.pos,added);
-		e.pos
 		return s;
 	}
 

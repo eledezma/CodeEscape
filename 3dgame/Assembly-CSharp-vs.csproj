@@ -61,14 +61,14 @@
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>C:/Users/Dani/Desktop/firstpersonpuzzle/3dgame/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
+ <Reference Include="ProBuilderCore">
+ <HintPath>C:/Users/Dani/Desktop/firstpersonpuzzle/3dgame/Assets/ProCore/Prototype/Classes/ProBuilderCore.dll</HintPath>
+ </Reference>
  <Reference Include="ProBuilderMeshOps">
  <HintPath>C:/Users/Dani/Desktop/firstpersonpuzzle/3dgame/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps.dll</HintPath>
  </Reference>
  <Reference Include="ProCore">
  <HintPath>C:/Users/Dani/Desktop/firstpersonpuzzle/3dgame/Assets/ProCore/Shared/Code/ProCore.dll</HintPath>
- </Reference>
- <Reference Include="ProBuilderCore">
- <HintPath>C:/Users/Dani/Desktop/firstpersonpuzzle/3dgame/Assets/ProCore/Prototype/Classes/ProBuilderCore.dll</HintPath>
  </Reference>
  <Reference Include="SixBySeven">
  <HintPath>C:/Users/Dani/Desktop/firstpersonpuzzle/3dgame/Assets/ProCore/Shared/Code/SixBySeven.dll</HintPath>

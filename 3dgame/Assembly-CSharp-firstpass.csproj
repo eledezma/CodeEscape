@@ -57,14 +57,14 @@
      <None Include="Assets\ProCore\Prototype\Shader\UnlitColor-Overlay.shader" />
      <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorEmission.shader" />
      <None Include="Assets\ProCore\Prototype\About\Credits.txt" />
+ <Reference Include="ProBuilderCore">
+ <HintPath>C:/Users/Dani/Desktop/firstpersonpuzzle/3dgame/Assets/ProCore/Prototype/Classes/ProBuilderCore.dll</HintPath>
+ </Reference>
  <Reference Include="ProBuilderMeshOps">
  <HintPath>C:/Users/Dani/Desktop/firstpersonpuzzle/3dgame/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps.dll</HintPath>
  </Reference>
  <Reference Include="ProCore">
  <HintPath>C:/Users/Dani/Desktop/firstpersonpuzzle/3dgame/Assets/ProCore/Shared/Code/ProCore.dll</HintPath>
- </Reference>
- <Reference Include="ProBuilderCore">
- <HintPath>C:/Users/Dani/Desktop/firstpersonpuzzle/3dgame/Assets/ProCore/Prototype/Classes/ProBuilderCore.dll</HintPath>
  </Reference>
  <Reference Include="SixBySeven">
  <HintPath>C:/Users/Dani/Desktop/firstpersonpuzzle/3dgame/Assets/ProCore/Shared/Code/SixBySeven.dll</HintPath>
