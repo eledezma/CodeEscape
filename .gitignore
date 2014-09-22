@@ -8,5 +8,9 @@
 /Library/cache/
 /Library/previews/
 /Library/ScriptAssemblies
+3dgame/Library
+/Libray/
+/Library/*
+Library/*
 /obj
 /Temp
