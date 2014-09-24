@@ -37,10 +37,10 @@ public class codingUI : MonoBehaviour {
 	public void OnGUI()
 	{
 		if (guiEnabled) {
-			GUI.Box (new Rect (10, 10, 1000, 900), "List of Functions");
+			GUI.Box (new Rect (0, 0, Screen.width, Screen.height), "List of Functions");
 		
 			// inserts the method that shoots a bullet
-			GUI.TextArea (new Rect (260, 50, 600, 600),code);
+			GUI.TextArea (new Rect (260, 50, Screen.width*0.75f, Screen.height*0.75f),code);
 			editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
 
 			GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
@@ -52,7 +52,6 @@ public class codingUI : MonoBehaviour {
 
 			int temp;
 
-	
 			GUI.Label(new Rect(140,80,40,20),("string"));						//print statement title
 			text = GUI.TextField (new Rect (140,100,40,20), text);    			//print statement textfield
 	
@@ -88,16 +87,24 @@ public class codingUI : MonoBehaviour {
 			// Button that inserts a print statement
 			if (GUI.Button (new Rect (20, 100, 120, 20), "Printout")) 
 			{
-				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2))
+				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
 				{
-					code = addToCode (code,editor,"System.out.println(\""+text+"\");");
+					code = addToCode (code,editor,"System.out.println(\""+text+"\");\n");
+			//		int i=getNumOfTabs(code,editor.pos);
+			//		while (code.Substring(editor.pos,1)!="\n")
+			//		editor.MoveRight();
+			//		for(;i>0;i--)
+			//		{
+			//			code = addToCode(code,editor,"\t");
+			//		}
+			//		editor.MoveLineEnd();
 				}
 			}
 
 			// Button that inserts a for loop
 			if (GUI.Button (new Rect (20, 150, 120, 20), "For Loop")) 
 			{
-				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2))
+				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
 				{
 					code = addToCode (code,editor,"For(int counter="+fs+";counter<="+ff+";counter++){};\n");
 				}
@@ -107,7 +114,7 @@ public class codingUI : MonoBehaviour {
 			if (GUI.Button (new Rect (20, 200, 120, 20), "While Loop"))
 			{
 				{
-				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2))
+					if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
 					code = addToCode (code,editor,"while(){};\n");
 				}
 			}
@@ -115,7 +122,7 @@ public class codingUI : MonoBehaviour {
 			// Button that inserts the method that shoots a bullet
 			if (GUI.Button (new Rect (20, 250, 120, 20), "Shooting Method")) 
 			{
-				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2))
+				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
 				{
 					code = addToCode (code,editor,"shoot();\n");
 				}
@@ -169,5 +176,34 @@ public class codingUI : MonoBehaviour {
 				lines++;
 		}
 		return lines;
+	}
+
+	public bool isBlankLine(string s, int index)
+	{
+		char[] a = s.ToCharArray();
+		if (((a [index - 1] == '\t')||(a [index - 1] == '\n'))&&(a[index]=='\n'))
+			return true;
+		else
+			return false;
+	}
+
+	public int getNumOfTabs(string s, int index)
+	{
+		int tabs = 0;
+		char[] a = s.ToCharArray();
+		while( a[index-1]!='\n')
+		{
+			if(a[index-1]=='\t')
+				tabs++;
+		}
+		return tabs;
+    }
+
+	public TextEditor moveNextLine(TextEditor te, string s)
+	{
+		char[] a = s.ToCharArray();
+		while (a[te.pos]!='\n')
+			te.MoveRight ();
+		return te;
 	}
 }
