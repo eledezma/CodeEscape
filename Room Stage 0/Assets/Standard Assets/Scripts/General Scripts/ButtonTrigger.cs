@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ButtonTrigger : MonoBehaviour {
 
+	public AudioClip ButtonClick;
 	public GameObject button;
 	public GameObject door; //Abel's Door
 	public AnimationClip PushDown;
@@ -24,6 +25,8 @@ public class ButtonTrigger : MonoBehaviour {
 			if (button.animation.isPlaying)
 				yield return new WaitForSeconds (0.5f);
 			Debug.Log("Object Entered the trigger");
+			//audio.clip = buttonclick;
+			audio.PlayOneShot(ButtonClick);
 			button.animation.Play (PushDown.name);
 		}
 		
@@ -40,4 +43,3 @@ public class ButtonTrigger : MonoBehaviour {
 		}
 	}	
 }
-
