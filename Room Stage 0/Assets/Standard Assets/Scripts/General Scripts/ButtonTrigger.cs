@@ -24,8 +24,7 @@ public class ButtonTrigger : MonoBehaviour {
 		if (other.gameObject.tag == "Player"){
 			if (button.animation.isPlaying)
 				yield return new WaitForSeconds (0.5f);
-			Debug.Log("Object Entered the trigger");
-			//audio.clip = buttonclick;
+			//Debug.Log("Object Entered the trigger");
 			audio.PlayOneShot(ButtonClick);
 			button.animation.Play (PushDown.name);
 		}
@@ -38,7 +37,7 @@ public class ButtonTrigger : MonoBehaviour {
 		if (other.gameObject.tag == "Player"){
 			if (button.animation.isPlaying)
 				yield return new WaitForSeconds (0.5f);
-			Debug.Log("Object Exited the trigger");	
+			//Debug.Log("Object Exited the trigger");	
 			button.animation.Play (PushUp.name);
 		}
 	}	
