@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class codingUI : MonoBehaviour {
-
+	
 	bool guiEnabled = false;
 	TextEditor editor;
 	string text="";
@@ -21,13 +21,21 @@ public class codingUI : MonoBehaviour {
 		if (Input.GetKeyDown ("escape")) {
 			if (guiEnabled)
 			{
+				Time.timeScale = 1.0f;
 				guiEnabled = false;
+				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
+				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
 			}
 			else
 			{
+				Time.timeScale = 0.0f;
 				guiEnabled = true;
+				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=false;
+				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=false;
+
 			}
 		}
+
 	}
 	//*******************************************************
 
@@ -55,7 +63,6 @@ public class codingUI : MonoBehaviour {
 			GUI.Label(new Rect(140,80,40,20),("string"));						//print statement title
 			text = GUI.TextField (new Rect (140,100,40,20), text);    			//print statement textfield
 	
-
 			// for loop starting value textfield
 			//*******************************************************
 			string fs = GUI.TextField (new Rect (140,150,40,20), forStart.ToString());
