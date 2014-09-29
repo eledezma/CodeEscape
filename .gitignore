@@ -20,8 +20,7 @@ ExportedObj/
 *.sln
 *.user
 *.unityproj
-*.booproj
-*.meta
+*.boopro
  
 # ============ #
 # OS generated #
