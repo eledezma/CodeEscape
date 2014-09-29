@@ -136,7 +136,7 @@ public class codingUI : MonoBehaviour {
 			}
 
 			// Button that restores the code in the textArea to its original state
-			if (GUI.Button (new Rect (800, 20, 120, 20), "Reset")) 
+			if (GUI.Button (new Rect (Screen.width*0.5, Screen.height*0.75f +270, 120, 20), "Reset")) 
 			{
 				code = restoreCode();
 			}
