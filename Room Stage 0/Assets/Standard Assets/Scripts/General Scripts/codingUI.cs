@@ -54,7 +54,7 @@ public class codingUI : MonoBehaviour {
 			GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
 			                                                    editor.SelectedText,
 			                                                    editor.pos,
-			                                                    editor.selectPos,
+			                                                    0,
 			                                                    countLinesBefore(code,editor.pos),
 			                                                    countLinesAfter(code,editor.pos)));
 
@@ -92,11 +92,14 @@ public class codingUI : MonoBehaviour {
 			GUI.Label(new Rect(180,130,40,20),("finish"));  	//for loop parameter title
 			
 			// Button that inserts a print statement
-			if (GUI.Button (new Rect (20, 100, 120, 20), "Printout")) 
+			if (GUI.Button (new Rect (20, 100, Screen.width*0.08f, 20), "Printout")) 
 			{
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
 				{
-					code = addToCode (code,editor,"System.out.println(\""+text+"\");\n");
+					int num =getNumOfTabs(code,editor.pos);
+					code = addToCode (code,editor,"System.out.println(\""+text+"\");\n"+addedTabs(num));
+
+		
 			//		int i=getNumOfTabs(code,editor.pos);
 			//		while (code.Substring(editor.pos,1)!="\n")
 			//		editor.MoveRight();
@@ -109,7 +112,7 @@ public class codingUI : MonoBehaviour {
 			}
 
 			// Button that inserts a for loop
-			if (GUI.Button (new Rect (20, 150, 120, 20), "For Loop")) 
+			if (GUI.Button (new Rect (20, 150, Screen.width*0.08f, 20), "For Loop")) 
 			{
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
 				{
@@ -118,7 +121,7 @@ public class codingUI : MonoBehaviour {
 			}
 
 			// Button inserts a while loop
-			if (GUI.Button (new Rect (20, 200, 120, 20), "While Loop"))
+			if (GUI.Button (new Rect (20, 200, Screen.width*0.08f, 20), "While Loop"))
 			{
 				{
 					if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
@@ -127,7 +130,7 @@ public class codingUI : MonoBehaviour {
 			}
 
 			// Button that inserts the method that shoots a bullet
-			if (GUI.Button (new Rect (20, 250, 120, 20), "Shooting Method")) 
+			if (GUI.Button (new Rect (20, 250, Screen.width*0.08f, 20), "Shooting Method")) 
 			{
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
 				{
@@ -135,8 +138,20 @@ public class codingUI : MonoBehaviour {
 				}
 			}
 
+			// Button that activates the user's code
+			if (GUI.Button (new Rect (Screen.width*0.6f, Screen.height*0.9f , Screen.width*0.08f, 20), "Submit")) 
+			{
+
+			}
+
+			// Button that closes the UI and disregards changes
+			if (GUI.Button (new Rect (Screen.width*0.7f, Screen.height*0.9f , Screen.width*0.08f, 20), "Cancel")) 
+			{
+				guiEnabled=false;
+			}
+
 			// Button that restores the code in the textArea to its original state
-			if (GUI.Button (new Rect (Screen.width*0.5f, Screen.height*0.75f , 120, 20), "Reset")) 
+			if (GUI.Button (new Rect (Screen.width*0.8f, Screen.height*0.9f , Screen.width*0.08f, 20), "Reset")) 
 			{
 				code = restoreCode();
 			}
@@ -196,12 +211,15 @@ public class codingUI : MonoBehaviour {
 
 	public int getNumOfTabs(string s, int index)
 	{
+		if (index <= 1)
+						return 0;
 		int tabs = 0;
 		char[] a = s.ToCharArray();
-		while( a[index-1]!='\n')
+		while( a[index-1]!='\n' && index>1)
 		{
 			if(a[index-1]=='\t')
 				tabs++;
+			index--;
 		}
 		return tabs;
     }
@@ -212,5 +230,15 @@ public class codingUI : MonoBehaviour {
 		while (a[te.pos]!='\n')
 			te.MoveRight ();
 		return te;
+	}
+
+	public string addedTabs(int num)
+	{
+		string tabs = "";
+		while (num>0) {
+			tabs = tabs.Insert(0,"\t");
+			num--;
+		}
+		return tabs;
 	}
 }
