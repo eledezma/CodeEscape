@@ -39,10 +39,6 @@ public class codingUI : MonoBehaviour {
 				if (guiEnabled)
 				{
 					resume();
-					if (puzzle1Complete){ 
-						code = restoreCode();
-						GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
-					}
 				}
 				else
 				{

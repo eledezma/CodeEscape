@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TextChanger: MonoBehaviour {
 
-	static string inputmessage1= "First Message";
+	static string inputmessage1= "";
 	
 	static private TextMesh tm;
 	
