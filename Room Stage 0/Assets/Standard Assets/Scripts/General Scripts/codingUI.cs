@@ -14,7 +14,7 @@ public class codingUI : MonoBehaviour {
 	bool puzzle10Complete = false;
 	bool guiEnabled = false;
 	TextEditor editor;
-	string text="";
+	static string text="";
 	int forStart;
 	int forFinish;
 	public string code="public class game{\n" +
@@ -159,7 +159,7 @@ public class codingUI : MonoBehaviour {
 			// Button that activates the user's code
 			if (GUI.Button (new Rect (Screen.width*0.6f, Screen.height*0.9f , Screen.width*0.08f, 20), "Submit")) 
 			{
-
+				TextChanger.Update();
 			}
 
 			// Button that closes the UI and disregards changes
