@@ -18,10 +18,10 @@ public class codingUI : MonoBehaviour {
 	int forStart;
 	int forFinish;
 	public string code="public class game{\n" +
-						"\tpublic static void main(String[] args){\n" +
-						"\t\t\n" +
-						"\t}\n" +
-						"}";
+		"\tpublic static void main(String[] args){\n" +
+			"\t\t\n" +
+			"\t}\n" +
+			"}";
 	
 	//Switches the GUI on and off
 	//*******************************************************
@@ -30,10 +30,7 @@ public class codingUI : MonoBehaviour {
 		if (Input.GetKeyDown ("escape")) {
 			if (guiEnabled)
 			{
-				Time.timeScale = 1.0f;
-				guiEnabled = false;
-				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
-				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
+				resume();
 				if (puzzle1Complete){ 
 					code = restoreCode();
 					GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
@@ -45,42 +42,36 @@ public class codingUI : MonoBehaviour {
 				guiEnabled = true;
 				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=false;
 				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=false;
-
 			}
 		}
-
-		//checks if the user entered the right solution
-		if (text.ToLower() == "hello world"){
-			puzzle1Complete = true;	
-		}
-
+		
 	}
 	//*******************************************************
-
-
+	
+	
 	//Includes all the GUI elements
 	//*******************************************************
 	public void OnGUI()
 	{
 		if (guiEnabled) {
 			GUI.Box (new Rect (0, 0, Screen.width, Screen.height), "List of Functions");
-		
+			
 			// inserts the method that shoots a bullet
 			GUI.TextArea (new Rect (260, 50, Screen.width*0.75f, Screen.height*0.75f),code);
 			editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
-
+			
 			GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
-			                                                    editor.SelectedText,
-			                                                    editor.pos,
-			                                                    0,
-			                                                    countLinesBefore(code,editor.pos),
-			                                                    countLinesAfter(code,editor.pos)));
-
+			                                                      editor.SelectedText,
+			                                                      editor.pos,
+			                                                      0,
+			                                                      countLinesBefore(code,editor.pos),
+			                                                      countLinesAfter(code,editor.pos)));
+			
 			int temp;
-
+			
 			GUI.Label(new Rect(140,80,40,20),("string"));						//print statement title
 			text = GUI.TextField (new Rect (140,100,40,20), text);    			//print statement textfield
-	
+			
 			// for loop starting value textfield
 			//*******************************************************
 			string fs = GUI.TextField (new Rect (140,150,40,20), forStart.ToString());
@@ -94,7 +85,7 @@ public class codingUI : MonoBehaviour {
 			}
 			//*******************************************************
 			GUI.Label(new Rect(140,130,40,20),("start"));  	//for loop parameter title
-
+			
 			//for loop ending value textfield
 			//*******************************************************
 			string ff = GUI.TextField (new Rect (180,150,40,20), forFinish.ToString());
@@ -110,27 +101,23 @@ public class codingUI : MonoBehaviour {
 			GUI.Label(new Rect(180,130,40,20),("finish"));  	//for loop parameter title
 			
 			// Button that inserts a print statement
-			if (GUI.Button (new Rect (20, 100, Screen.width*0.12f, 20), "Printout")) 
+			if (GUI.Button (new Rect (20, 100, Screen.width*0.14f, 20), "Printout")) 
 			{
+				//checks if the user entered the right solution
+				if (text.ToLower() == "hello world"){
+					puzzle1Complete = true;	
+				}
+
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
 				{
 					int num =getNumOfTabs(code,editor.pos);
 					code = addToCode (code,editor,"System.out.println(\""+text+"\");\n"+addedTabs(num));
-
-		
-			//		int i=getNumOfTabs(code,editor.pos);
-			//		while (code.Substring(editor.pos,1)!="\n")
-			//		editor.MoveRight();
-			//		for(;i>0;i--)
-			//		{
-			//			code = addToCode(code,editor,"\t");
-			//		}
-			//		editor.MoveLineEnd();
+					
 				}
 			}
-
+			
 			// Button that inserts a for loop
-			if (GUI.Button (new Rect (20, 150, Screen.width*0.12f, 20), "For Loop")) 
+			if (GUI.Button (new Rect (20, 150, Screen.width*0.14f, 20), "For Loop")) 
 			{
 				int num =getNumOfTabs(code,editor.pos);
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
@@ -138,17 +125,17 @@ public class codingUI : MonoBehaviour {
 					code = addToCode (code,editor,"For(int counter="+fs+";counter<="+ff+";counter++){\n"+addedTabs(num)+"\t\n"+addedTabs(num)+"}\n"+addedTabs(num));
 				}
 			}
-
+			
 			// Button inserts a while loop
-			if (GUI.Button (new Rect (20, 200, Screen.width*0.12f, 20), "While Loop"))
+			if (GUI.Button (new Rect (20, 200, Screen.width*0.14f, 20), "While Loop"))
 			{
 				int num =getNumOfTabs(code,editor.pos);
-					if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
+				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
 					code = addToCode (code,editor,"while(){\n"+addedTabs(num)+"\t\n"+addedTabs(num)+"}\n"+addedTabs(num));
 			}
-
+			
 			// Button that inserts the method that shoots a bullet
-			if (GUI.Button (new Rect (20, 250, Screen.width*0.12f, 20), "Shooting Method")) 
+			if (GUI.Button (new Rect (20, 250, Screen.width*0.14f, 20), "Shooting Method")) 
 			{
 				int num =getNumOfTabs(code,editor.pos);
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
@@ -156,19 +143,24 @@ public class codingUI : MonoBehaviour {
 					code = addToCode (code,editor,"shoot();\n"+addedTabs(num));
 				}
 			}
-
+			
 			// Button that activates the user's code
 			if (GUI.Button (new Rect (Screen.width*0.6f, Screen.height*0.9f , Screen.width*0.08f, 20), "Submit")) 
 			{
 				TextChanger.Update();
+				if (puzzle1Complete){ 
+					code = restoreCode();
+					GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
+				}
+				resume();
 			}
-
+			
 			// Button that closes the UI and disregards changes
 			if (GUI.Button (new Rect (Screen.width*0.7f, Screen.height*0.9f , Screen.width*0.08f, 20), "Cancel")) 
 			{
-				guiEnabled=false;
+				resume();
 			}
-
+			
 			// Button that restores the code in the textArea to its original state
 			if (GUI.Button (new Rect (Screen.width*0.8f, Screen.height*0.9f , Screen.width*0.08f, 20), "Reset")) 
 			{
@@ -176,7 +168,7 @@ public class codingUI : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	//Adds new Code to the TextArea based on the user input
 	//*******************************************************
 	public string addToCode(string s,TextEditor e,string added)
@@ -184,7 +176,7 @@ public class codingUI : MonoBehaviour {
 		s = s.Insert(e.pos,added);
 		return s;
 	}
-
+	
 	public string restoreCode()
 	{
 		string dummy="public class game{\n" +
@@ -199,14 +191,14 @@ public class codingUI : MonoBehaviour {
 	{
 		int lines = 0;
 		char[] a = s.ToCharArray ();
-			for (int i=0; i<position; i++)
-			{
+		for (int i=0; i<position; i++)
+		{
 			if(a[i]=='\n')
 				lines++;
-			}
+		}
 		return lines;
 	}
-
+	
 	public int countLinesAfter(string s, int position)
 	{
 		int lines = 0;
@@ -218,7 +210,7 @@ public class codingUI : MonoBehaviour {
 		}
 		return lines;
 	}
-
+	
 	public bool isBlankLine(string s, int index)
 	{
 		char[] a = s.ToCharArray();
@@ -227,11 +219,11 @@ public class codingUI : MonoBehaviour {
 		else
 			return false;
 	}
-
+	
 	public int getNumOfTabs(string s, int index)
 	{
 		if (index <= 1)
-						return 0;
+			return 0;
 		int tabs = 0;
 		char[] a = s.ToCharArray();
 		while( a[index-1]!='\n' && index>1)
@@ -241,8 +233,8 @@ public class codingUI : MonoBehaviour {
 			index--;
 		}
 		return tabs;
-    }
-
+	}
+	
 	public TextEditor moveNextLine(TextEditor te, string s)
 	{
 		char[] a = s.ToCharArray();
@@ -250,7 +242,7 @@ public class codingUI : MonoBehaviour {
 			te.MoveRight ();
 		return te;
 	}
-
+	
 	public string addedTabs(int num)
 	{
 		string tabs = "";
@@ -259,5 +251,12 @@ public class codingUI : MonoBehaviour {
 			num--;
 		}
 		return tabs;
+	}
+	
+	public void resume(){
+		Time.timeScale = 1.0f;
+		guiEnabled = false;
+		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
+		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
 	}
 }
