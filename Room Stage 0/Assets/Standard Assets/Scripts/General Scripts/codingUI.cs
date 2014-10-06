@@ -2,7 +2,16 @@
 using System.Collections;
 
 public class codingUI : MonoBehaviour {
-	
+	bool puzzel1Complete = false;
+	bool puzzel2Complete = false;
+	bool puzzel3Complete = false;
+	bool puzzel4Complete = false;
+	bool puzzel5Complete = false;
+	bool puzzel6Complete = false;
+	bool puzzel7Complete = false;
+	bool puzzel8Complete = false;
+	bool puzzel9Complete = false;
+	bool puzzel10Complete = false;
 	bool guiEnabled = false;
 	TextEditor editor;
 	string text="";
@@ -35,6 +44,10 @@ public class codingUI : MonoBehaviour {
 
 			}
 		}
+
+		//checks if the user entered the right solution
+		if (text.ToLower() == "hello world")
+			puzzel1Complete = true;
 
 	}
 	//*******************************************************
