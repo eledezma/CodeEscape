@@ -199,7 +199,7 @@ public class codingUI : MonoBehaviour {
 	{
 		int lines = 0;
 		char[] a = s.ToCharArray ();
-		for (int i=0; i<position; i++)
+		for (int i=0; i<position-1; i++)
 		{
 			if(a[i]=='\n')
 				lines++;
