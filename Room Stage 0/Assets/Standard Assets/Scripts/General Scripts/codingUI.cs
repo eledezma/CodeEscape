@@ -105,7 +105,7 @@ public class codingUI : MonoBehaviour {
 			GUI.Label(new Rect(180,130,40,20),("finish"));  	//for loop parameter title
 			
 			// Button that inserts a print statement
-			if (GUI.Button (new Rect (20, 100, Screen.width*0.14f, 20), "Printout")) 
+			if (GUI.Button (new Rect (20, 100, Screen.width*0.08f, 20), "Printout")) 
 			{
 				//checks if the user entered the right solution
 				if (text.ToLower() == "hello world"){
@@ -121,7 +121,7 @@ public class codingUI : MonoBehaviour {
 			}
 			
 			// Button that inserts a for loop
-			if (GUI.Button (new Rect (20, 150, Screen.width*0.14f, 20), "For Loop")) 
+			if (GUI.Button (new Rect (20, 150, Screen.width*0.08f, 20), "For Loop")) 
 			{
 				int num =getNumOfTabs(code,editor.pos);
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
@@ -131,7 +131,7 @@ public class codingUI : MonoBehaviour {
 			}
 			
 			// Button inserts a while loop
-			if (GUI.Button (new Rect (20, 200, Screen.width*0.14f, 20), "While Loop"))
+			if (GUI.Button (new Rect (20, 200, Screen.width*0.08f, 20), "While Loop"))
 			{
 				int num =getNumOfTabs(code,editor.pos);
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
@@ -139,7 +139,7 @@ public class codingUI : MonoBehaviour {
 			}
 			
 			// Button that inserts the method that shoots a bullet
-			if (GUI.Button (new Rect (20, 250, Screen.width*0.14f, 20), "Shooting Method")) 
+			if (GUI.Button (new Rect (20, 250, Screen.width*0.08f, 20), "Shooting Method")) 
 			{
 				int num =getNumOfTabs(code,editor.pos);
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
@@ -166,7 +166,7 @@ public class codingUI : MonoBehaviour {
 			}
 			
 			// Button that restores the code in the textArea to its original state
-			if (GUI.Button (new Rect (Screen.width*0.8f, Screen.height*0.9f , Screen.width*0.08f, 20), "Reset")) 
+			if (GUI.Button (new Rect (Screen.width*0.08f, Screen.height*0.9f , Screen.width*0.08f, 20), "Reset")) 
 			{
 				code = restoreCode();
 			}
