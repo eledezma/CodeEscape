@@ -13,6 +13,7 @@ public class codingUI : MonoBehaviour {
 	bool puzzle9Complete = false;
 	bool puzzle10Complete = false;
 	bool guiEnabled = false;
+	bool atWall = false;
 	TextEditor editor;
 	static string text="";
 	int forStart;
@@ -22,29 +23,36 @@ public class codingUI : MonoBehaviour {
 			"\t\t\n" +
 			"\t}\n" +
 			"}";
-	
+	void OnTriggerEnter(Collider other){
+		atWall=true;
+	}
+	void OnTriggerExit(Collider other){
+		atWall=false;
+		guiEnabled=false;
+	}
 	//Switches the GUI on and off
 	//*******************************************************
 	void Update()
 	{
-		if (Input.GetKeyDown ("escape")) {
-			if (guiEnabled)
-			{
-				resume();
-				if (puzzle1Complete){ 
-					code = restoreCode();
-					GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
+		if(atWall){
+			if (Input.GetKeyDown ("escape")) {
+				if (guiEnabled)
+				{
+					resume();
+					if (puzzle1Complete){ 
+						code = restoreCode();
+						GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
+					}
+				}
+				else
+				{
+					Time.timeScale = 0.0f;
+					guiEnabled = true;
+					GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=false;
+					GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=false;
 				}
 			}
-			else
-			{
-				Time.timeScale = 0.0f;
-				guiEnabled = true;
-				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=false;
-				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=false;
-			}
 		}
-		
 	}
 	//*******************************************************
 	
