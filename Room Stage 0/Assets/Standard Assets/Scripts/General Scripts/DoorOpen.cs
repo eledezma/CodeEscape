@@ -4,7 +4,7 @@ using System.Collections;
 public class DoorOpen : MonoBehaviour {
 
 	public AnimationClip doorOpen;
-	public bool open; //needs to start off as false
+	public bool open = false; //needs to start off as false
 	// Use this for initialization
 	void Start () {
 

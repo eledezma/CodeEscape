@@ -2,19 +2,19 @@
 using System.Collections;
 
 public class codingUI : MonoBehaviour {
-	bool puzzel1Complete = false;
-	bool puzzel2Complete = false;
-	bool puzzel3Complete = false;
-	bool puzzel4Complete = false;
-	bool puzzel5Complete = false;
-	bool puzzel6Complete = false;
-	bool puzzel7Complete = false;
-	bool puzzel8Complete = false;
-	bool puzzel9Complete = false;
-	bool puzzel10Complete = false;
+	bool puzzle1Complete = false;
+	bool puzzle2Complete = false;
+	bool puzzle3Complete = false;
+	bool puzzle4Complete = false;
+	bool puzzle5Complete = false;
+	bool puzzle6Complete = false;
+	bool puzzle7Complete = false;
+	bool puzzle8Complete = false;
+	bool puzzle9Complete = false;
+	bool puzzle10Complete = false;
 	bool guiEnabled = false;
 	TextEditor editor;
-	string text="";
+	static string text="";
 	int forStart;
 	int forFinish;
 	public string code="public class game{\n" +
@@ -34,6 +34,10 @@ public class codingUI : MonoBehaviour {
 				guiEnabled = false;
 				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
 				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
+				if (puzzle1Complete){ 
+					code = restoreCode();
+					GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
+				}
 			}
 			else
 			{
@@ -46,8 +50,9 @@ public class codingUI : MonoBehaviour {
 		}
 
 		//checks if the user entered the right solution
-		if (text.ToLower() == "hello world")
-			puzzel1Complete = true;
+		if (text.ToLower() == "hello world"){
+			puzzle1Complete = true;	
+		}
 
 	}
 	//*******************************************************
@@ -155,7 +160,7 @@ public class codingUI : MonoBehaviour {
 			// Button that activates the user's code
 			if (GUI.Button (new Rect (Screen.width*0.6f, Screen.height*0.9f , Screen.width*0.08f, 20), "Submit")) 
 			{
-
+				TextChanger.Update();
 			}
 
 			// Button that closes the UI and disregards changes
