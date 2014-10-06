@@ -5,7 +5,7 @@ public class ButtonTrigger : MonoBehaviour {
 
 	public AudioClip ButtonClick;
 	public GameObject button;
-	public bool puzzleComplete; //needs to start off as false
+	public bool puzzleComplete = false; //needs to start off as false
 	public AnimationClip PushDown;
 	public AnimationClip PushUp;
 	
@@ -29,8 +29,8 @@ public class ButtonTrigger : MonoBehaviour {
 				audio.PlayOneShot(ButtonClick);
 				button.animation.Play (PushDown.name);
 			}
-			GameObject.Find("Door").GetComponent<DoorOpen>().open = true;
 			puzzleComplete = false;
+			GameObject.Find("Door").GetComponent<DoorOpen>().open = true;
 		}
 		
 	}
