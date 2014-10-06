@@ -5,13 +5,13 @@ public class ButtonTrigger : MonoBehaviour {
 
 	public AudioClip ButtonClick;
 	public GameObject button;
-	public GameObject door; //Abel's Door
+	public bool puzzleComplete; //needs to start off as false
 	public AnimationClip PushDown;
 	public AnimationClip PushUp;
 	
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -20,19 +20,22 @@ public class ButtonTrigger : MonoBehaviour {
 	}
 
 	IEnumerator OnTriggerEnter (Collider other){
-		
-		if (other.gameObject.tag == "Player"){
-			if (button.animation.isPlaying)
-				yield return new WaitForSeconds (0.5f);
-			//Debug.Log("Object Entered the trigger");
-			audio.PlayOneShot(ButtonClick);
-			button.animation.Play (PushDown.name);
+
+		if (puzzleComplete)	{
+			if (other.gameObject.tag == "Player"){
+				if (button.animation.isPlaying)
+					yield return new WaitForSeconds (0.5f);
+				//Debug.Log("Object Entered the trigger");
+				audio.PlayOneShot(ButtonClick);
+				button.animation.Play (PushDown.name);
+			}
+			GameObject.Find("Door").GetComponent<DoorOpen>().open = true;
+			puzzleComplete = false;
 		}
-		
 		
 	}
 
-	IEnumerator OnTriggerExit (Collider other){
+	/*IEnumerator OnTriggerExit (Collider other){  //for button pushing down which we don't need
 		
 		if (other.gameObject.tag == "Player"){
 			if (button.animation.isPlaying)
@@ -40,5 +43,5 @@ public class ButtonTrigger : MonoBehaviour {
 			//Debug.Log("Object Exited the trigger");	
 			button.animation.Play (PushUp.name);
 		}
-	}	
+	}*/	
 }
