@@ -15,7 +15,7 @@ public class codingUI : MonoBehaviour {
 	bool guiEnabled = false;
 	bool atWall = false;
 	TextEditor editor;
-	static string text="";
+	public static string text="";
 	int forStart;
 	int forFinish;
 	public string code="public class game{\n" +
