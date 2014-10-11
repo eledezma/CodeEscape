@@ -3,7 +3,9 @@ using System.Collections;
 
 public class TextChanger: MonoBehaviour {
 
-	private static TextMesh tm;
+	static string inputmessage1= "";
+	
+	static private TextMesh tm;
 	
 	void  Start (){  
 		
@@ -13,7 +15,8 @@ public class TextChanger: MonoBehaviour {
 	
 	public static void Update (){
 
-			tm.text = codingUI.text;
+			print ( inputmessage1 );
+			tm.text = codingUI.output;
 		
 	}
 }

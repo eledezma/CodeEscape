@@ -15,7 +15,8 @@ public class codingUI : MonoBehaviour {
 	bool guiEnabled = false;
 	bool atWall = false;
 	TextEditor editor;
-	public static string text="";
+	static string text="";
+	public static string output="";
 	int forStart;
 	int forFinish;
 	public string code="public class game{\n" +
@@ -61,7 +62,7 @@ public class codingUI : MonoBehaviour {
 			GUI.Box (new Rect (0, 0, Screen.width, Screen.height), "List of Functions");
 			
 			// inserts the method that shoots a bullet
-			GUI.TextArea (new Rect (260, 50, Screen.width*0.75f, Screen.height*0.75f),code);
+			GUI.TextArea (new Rect (Screen.width*0.2f, Screen.width*0.04f, Screen.width*0.75f, Screen.height*0.75f),code);
 			editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
 			
 			GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
@@ -73,12 +74,12 @@ public class codingUI : MonoBehaviour {
 			
 			int temp;
 			
-			GUI.Label(new Rect(140,80,40,20),("string"));						//print statement title
-			text = GUI.TextField (new Rect (140,100,40,20), text);    			//print statement textfield
+			GUI.Label(new Rect(Screen.width*0.12f,Screen.height*0.14f,Screen.width*0.4f,Screen.height*0.1f),("string"));						//print statement title
+			text = GUI.TextField (new Rect (Screen.width*0.12f,Screen.height*0.18f,Screen.width*0.04f,Screen.height*0.05f), text);    			//print statement textfield
 			
 			// for loop starting value textfield
 			//*******************************************************
-			string fs = GUI.TextField (new Rect (140,150,40,20), forStart.ToString());
+			string fs = GUI.TextField (new Rect (Screen.width*0.12f,Screen.height*0.28f,Screen.width*0.04f,Screen.height*0.05f), forStart.ToString());
 			if (int.TryParse(fs,out temp))
 			{
 				forStart = Mathf.Clamp(temp,0,100);
@@ -88,11 +89,11 @@ public class codingUI : MonoBehaviour {
 				forStart = 0;
 			}
 			//*******************************************************
-			GUI.Label(new Rect(140,130,40,20),("start"));  	//for loop parameter title
+			GUI.Label(new Rect(Screen.width*0.12f,Screen.height*0.24f,Screen.width*0.04f,Screen.height*0.05f),("start"));  	//for loop parameter title
 			
 			//for loop ending value textfield
 			//*******************************************************
-			string ff = GUI.TextField (new Rect (180,150,40,20), forFinish.ToString());
+			string ff = GUI.TextField (new Rect (Screen.width*0.16f,Screen.height*0.28f,Screen.width*0.04f,Screen.height*0.05f), forFinish.ToString());
 			if (int.TryParse(ff,out temp))
 			{
 				forFinish = Mathf.Clamp(temp,0,100);
@@ -102,10 +103,10 @@ public class codingUI : MonoBehaviour {
 				forFinish = 0;
 			}
 			//*******************************************************
-			GUI.Label(new Rect(180,130,40,20),("finish"));  	//for loop parameter title
+			GUI.Label(new Rect(Screen.width*0.16f,Screen.height*0.24f,Screen.width*0.04f,Screen.height*0.05f),("finish"));  	//for loop parameter title
 			
 			// Button that inserts a print statement
-			if (GUI.Button (new Rect (20, 100, Screen.width*0.08f, 20), "Printout")) 
+			if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.18f, Screen.width*0.1f, Screen.height*0.05f), "Printout")) 
 			{
 				//checks if the user entered the right solution
 				if (text.ToLower() == "hello world"){
@@ -116,12 +117,12 @@ public class codingUI : MonoBehaviour {
 				{
 					int num =getNumOfTabs(code,editor.pos);
 					code = addToCode (code,editor,"System.out.println(\""+text+"\");\n"+addedTabs(num));
-					
+					output = output.Insert(output.Length,text+"\n");
 				}
 			}
 			
 			// Button that inserts a for loop
-			if (GUI.Button (new Rect (20, 150, Screen.width*0.08f, 20), "For Loop")) 
+			if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.28f, Screen.width*0.1f, Screen.height*0.05f), "For Loop")) 
 			{
 				int num =getNumOfTabs(code,editor.pos);
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
@@ -131,7 +132,7 @@ public class codingUI : MonoBehaviour {
 			}
 			
 			// Button inserts a while loop
-			if (GUI.Button (new Rect (20, 200, Screen.width*0.08f, 20), "While Loop"))
+			if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.38f, Screen.width*0.1f, Screen.height*0.05f), "While Loop"))
 			{
 				int num =getNumOfTabs(code,editor.pos);
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
@@ -139,7 +140,7 @@ public class codingUI : MonoBehaviour {
 			}
 			
 			// Button that inserts the method that shoots a bullet
-			if (GUI.Button (new Rect (20, 250, Screen.width*0.08f, 20), "Shooting Method")) 
+			if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.48f, Screen.width*0.1f, Screen.height*0.05f), "Shooting Method")) 
 			{
 				int num =getNumOfTabs(code,editor.pos);
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
@@ -149,7 +150,7 @@ public class codingUI : MonoBehaviour {
 			}
 			
 			// Button that activates the user's code
-			if (GUI.Button (new Rect (Screen.width*0.6f, Screen.height*0.9f , Screen.width*0.08f, 20), "Submit")) 
+			if (GUI.Button (new Rect (Screen.width*0.6f, Screen.height*0.9f , Screen.width*0.08f, Screen.height*0.05f), "Submit")) 
 			{
 				TextChanger.Update();
 				if (puzzle1Complete){ 
@@ -160,15 +161,19 @@ public class codingUI : MonoBehaviour {
 			}
 			
 			// Button that closes the UI and disregards changes
-			if (GUI.Button (new Rect (Screen.width*0.7f, Screen.height*0.9f , Screen.width*0.08f, 20), "Cancel")) 
+			if (GUI.Button (new Rect (Screen.width*0.7f, Screen.height*0.9f , Screen.width*0.08f, Screen.height*0.05f), "Cancel")) 
 			{
 				resume();
 			}
 			
 			// Button that restores the code in the textArea to its original state
-			if (GUI.Button (new Rect (Screen.width*0.08f, Screen.height*0.9f , Screen.width*0.08f, 20), "Reset")) 
+			if (GUI.Button (new Rect (Screen.width*0.8f, Screen.height*0.9f , Screen.width*0.08f, Screen.height*0.05f), "Reset")) 
 			{
 				code = restoreCode();
+				text="";
+				output="";
+				forStart=0;
+				forFinish=0;
 			}
 		}
 	}
