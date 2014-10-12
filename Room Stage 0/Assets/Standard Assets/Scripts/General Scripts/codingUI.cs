@@ -3,15 +3,6 @@ using System.Collections;
 
 public class codingUI : MonoBehaviour {
 	bool puzzle1Complete = false;
-	bool puzzle2Complete = false;
-	bool puzzle3Complete = false;
-	bool puzzle4Complete = false;
-	bool puzzle5Complete = false;
-	bool puzzle6Complete = false;
-	bool puzzle7Complete = false;
-	bool puzzle8Complete = false;
-	bool puzzle9Complete = false;
-	bool puzzle10Complete = false;
 	bool guiEnabled = false;
 	bool atWall = false;
 	public AudioClip missionComplete;
@@ -66,16 +57,16 @@ public class codingUI : MonoBehaviour {
 			GUI.TextArea (new Rect (Screen.width*0.2f, Screen.width*0.04f, Screen.width*0.75f, Screen.height*0.75f),code);
 			editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
 			
-			GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
+		/*	GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
 			                                                      editor.SelectedText,
 			                                                      editor.pos,
 			                                                      0,
 			                                                      countLinesBefore(code,editor.pos),
-			                                                      countLinesAfter(code,editor.pos)));
+			                                                      countLinesAfter(code,editor.pos)));*/
 			
 			int temp;
 			
-			GUI.Label(new Rect(Screen.width*0.12f,Screen.height*0.14f,Screen.width*0.4f,Screen.height*0.1f),("string"));						//print statement title
+			GUI.Label(new Rect(Screen.width*0.12f,Screen.height*0.14f,Screen.width*0.04f,Screen.height*0.05f),("string"));						//print statement title
 			text = GUI.TextField (new Rect (Screen.width*0.12f,Screen.height*0.18f,Screen.width*0.04f,Screen.height*0.05f), text);    			//print statement textfield
 			
 			// for loop starting value textfield
