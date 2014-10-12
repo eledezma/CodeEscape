@@ -14,7 +14,6 @@ public class codingUI : MonoBehaviour {
 	bool puzzle10Complete = false;
 	bool guiEnabled = false;
 	bool atWall = false;
-	public AudioClip missionComplete;
 	TextEditor editor;
 	static string text="";
 	public static string output="";
@@ -157,8 +156,6 @@ public class codingUI : MonoBehaviour {
 				if (puzzle1Complete){ 
 					code = restoreCode();
 					GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
-					audio.PlayOneShot(missionComplete);
-					puzzle1Complete = false;
 				}
 				resume();
 			}
