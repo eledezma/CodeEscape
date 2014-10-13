@@ -24,10 +24,17 @@ public class scannerUi : MonoBehaviour {
 		void Update()
 		{
 		if (Input.GetKeyDown ("o")) {
-			if(!guiEnabled)
-				guiEnabled=true;
+			if(guiEnabled)
+			{
+				resume();
+			}
 			else
-				guiEnabled=false;
+			{
+				Time.timeScale = 0.0f;
+				guiEnabled = true;
+				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=false;
+				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=false;
+			}
 		}
 		}
 		//*******************************************************
@@ -84,11 +91,11 @@ public class scannerUi : MonoBehaviour {
 				// Button that activates the user's code
 				if (GUI.Button (new Rect (Screen.width*0.6f, Screen.height*0.9f , Screen.width*0.08f, Screen.height*0.05f), "Submit")) 
 				{
-					TextChanger.Update();
+					/*TextChanger.Update();
 					if (puzzle1Complete){ 
 						code = restoreCode();
 						GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
-					}
+					}*/
 					resume();
 				}
 				

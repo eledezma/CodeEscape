@@ -28,7 +28,7 @@ public class codingUI : MonoBehaviour {
 	void Update()
 	{
 		if(atWall){
-			if (Input.GetKeyDown ("escape")) {
+			if (Input.GetKeyDown ("e")) {
 				if (guiEnabled)
 				{
 					resume();

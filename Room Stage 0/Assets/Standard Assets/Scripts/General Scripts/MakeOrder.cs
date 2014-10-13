@@ -9,17 +9,24 @@ public class MakeOrder : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 		if (Input.GetKeyDown ("p")) {
-			if(!guiEnabled)
-			guiEnabled=true;
+			if(guiEnabled)
+			{
+				resume();
+			}
 			else
-				guiEnabled=false;
+			{
+				Time.timeScale = 0.0f;
+				guiEnabled = true;
+				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=false;
+				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=false;
+			}
 		}
 	}
 
@@ -38,8 +45,16 @@ public class MakeOrder : MonoBehaviour {
 			GUI.Label (new Rect(Screen.width*.4f, Screen.height*.37f, Screen.width*.2f, Screen.height*.05f),"What would you like to order?");
 		order = GUI.TextField (new Rect (Screen.width * .40f, Screen.height * .52f, Screen.width * .20f, Screen.height * 0.05f),order);
 		if (GUI.Button (new Rect (Screen.width*0.46f, Screen.height*0.60f, Screen.width*0.08f, Screen.height*0.05f), "Feed Me!")){ 
-
+				resume();
 		}
 		}
 	}
+
+	public void resume(){
+		Time.timeScale = 1.0f;
+		guiEnabled = false;
+		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
+		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
+	}
+
 }
