@@ -9,6 +9,7 @@ public class codingUI : MonoBehaviour {
 	TextEditor editor;
 	static string text="";
 	public static string output="";
+	public Texture2D cursorImage;
 	int forStart;
 	int forFinish;
 	public string code="public class game{\n" +
@@ -23,24 +24,31 @@ public class codingUI : MonoBehaviour {
 		atWall=false;
 		guiEnabled=false;
 	}
+
+	void Start(){
+		Screen.lockCursor = true;
+	}
 	//Switches the GUI on and off
 	//*******************************************************
 	void Update()
 	{
-		if(atWall){
+		if (atWall) {
 			if (Input.GetKeyDown ("e")) {
-				if (guiEnabled)
-				{
-					resume();
-				}
-				else
-				{
+//			Screen.lockCursor = false;  //Cursor is free to move when user goes into terminal
+				if (guiEnabled) {
+					resume ();
+				} else {
 					Time.timeScale = 0.0f;
 					guiEnabled = true;
-					GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=false;
-					GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=false;
+					GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
+					GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
+					}
 				}
-			}
+			} 
+		else {
+
+			Screen.lockCursor = true;
+			Screen.lockCursor = false; //Cursor remains locked if not in terminal
 		}
 	}
 	//*******************************************************
@@ -50,6 +58,16 @@ public class codingUI : MonoBehaviour {
 	//*******************************************************
 	public void OnGUI()
 	{
+		if (!atWall) {  //If not at wall terminal jack in - "show crosshair"
+			Vector3 mPos = Input.mousePosition;
+			GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
+		} 
+
+		else if (atWall && Input.GetKeyDown ("e")) { 
+
+			//If at wall terminal show default cursor instead
+		}
+
 		if (guiEnabled) {
 			GUI.Box (new Rect (0, 0, Screen.width, Screen.height), "List of Functions");
 			
