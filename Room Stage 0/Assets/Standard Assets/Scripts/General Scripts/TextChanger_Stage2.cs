@@ -4,7 +4,7 @@ public class TextChanger_Stage2: MonoBehaviour {
 	
 	static string inputmessage1= "";
 	
-	static private TextMesh tm;
+	private static TextMesh tm;
 	
 	void  Start (){  
 		
@@ -15,7 +15,12 @@ public class TextChanger_Stage2: MonoBehaviour {
 	public static void Update (){
 		
 		print ( inputmessage1 );
-		tm.text = MakeOrder.order;
 		
+		if (scannerUi.puzzle2Complete) {
+			tm.text = MakeOrder.order;
+		} 
+		else {
+			tm.text = "I can't read your Order";
+		}
 	}
 }
