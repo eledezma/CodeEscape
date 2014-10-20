@@ -6,19 +6,24 @@ public class scannerUi : MonoBehaviour {
 		bool puzzle1Complete = false;
 		bool guiEnabled = false;
 		bool atWall = false;
+		bool scannerCreated=false;
+		bool scannerAssigned=false;
+		bool showError = false;
 		TextEditor editor;
 		public static string output="";
 		int forStart;
 		static string var = "";
 		public string code="public class game{\n" +
 			"\tpublic static void main(String[] args){\n" +
-			"\t\tstring order = \"No input\";\n" +
+			"\t\tString order = \"No input\";\n" +
 			"\t\t\n" +
 			"\t\tSystem.out.println(order);\n" +	
 			"\t}\n" +
 				"}";
-		
-
+	string noScannerError="No scanner was created yet.";
+	string noVariableError="There's no such variable in the code.";
+	string cantType="You can't type code in that area.";
+	string errorString = "";
 		//Switches the GUI on and off
 		//*******************************************************
 		void Update()
@@ -46,12 +51,30 @@ public class scannerUi : MonoBehaviour {
 		{
 			if (guiEnabled) {
 				GUI.Box (new Rect (0, 0, Screen.width, Screen.height), "System Input Puzzle");
-				
-				// inserts the method that shoots a bullet
-				GUI.TextArea (new Rect (Screen.width*0.2f, Screen.width*0.04f, Screen.width*0.75f, Screen.height*0.75f),code);
+
+			//GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\n",showError));
+
+			if(showError)
+			{
+				GUI.Label ( new Rect ( Screen.width*0.4f,Screen.height*0.45f, Screen.width*0.2f,Screen.height*0.1f),errorString);
+				if(GUI.Button (new Rect (Screen.width*0.47f,Screen.height*0.55f, Screen.width*0.06f,Screen.height*0.04f), "sorry"))
+				{
+					showError=false;
+				}
+			}
+
+			GUI.TextArea (new Rect (Screen.width*0.2f, Screen.width*0.04f, Screen.width*0.75f, Screen.height*0.75f),code);
+
+			if(showError)
+			{
+				GUI.Label ( new Rect ( Screen.width*0.4f,Screen.height*0.45f, Screen.width*0.2f,Screen.height*0.1f),errorString);
+				if(GUI.Button (new Rect (Screen.width*0.47f,Screen.height*0.55f, Screen.width*0.06f,Screen.height*0.04f), "sorry"))
+				{
+					showError=false;
+				}
+			}
 				editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
 				
-				int temp;
 				GUI.skin.label.fontSize = 12;
 				
 				//variable textfield
@@ -61,41 +84,58 @@ public class scannerUi : MonoBehaviour {
 				//*******************************************************
 				GUI.Label(new Rect(Screen.width*0.16f,Screen.height*0.24f,Screen.width*0.04f,Screen.height*0.05f),("variable"));  	//for loop parameter title
 				
-				// Button that inserts a scanner
-				if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.18f, Screen.width*0.14f, Screen.height*0.05f), "Create a Scanner")) 
-				{
+			// Button that inserts a scanner
+			if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.18f, Screen.width*0.14f, Screen.height*0.05f), "Create a Scanner")) 
+			{
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
 				{
-				int num =getNumOfTabs(code,editor.pos);
-				code = addToCode(code,editor,"Scanner reader = new Scanner(System.in);\n"+addedTabs(num));
+					int num =getNumOfTabs(code,editor.pos);
+					code = addToCode(code,editor,"Scanner reader = new Scanner(System.in);\n"+addedTabs(num));
+					scannerCreated=true;
 				}
+				else 
+				{
+					errorString=cantType;
+					showError=true;
 				}
+			}
 				
-				// Button that assigns a scanner to a variable
-				if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.28f, Screen.width*0.14f, Screen.height*0.05f), "Assign scanner to variable")) 
+			// Button that assigns a scanner to a variable
+			if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.28f, Screen.width*0.14f, Screen.height*0.05f), "Assign scanner to variable")) 
+			{
+				if(scannerCreated)
 				{
-				int num =getNumOfTabs(code,editor.pos);
-				if(var=="order")
-				{
-					if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
+					int num =getNumOfTabs(code,editor.pos);
+					if(var=="order")
 					{
-					code = addToCode (code,editor,"order = reader.nextInt();");
+						if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
+						{
+							code = addToCode (code,editor,"order = reader.nextLine();");
+						}
+						else
+						{
+							errorString=cantType;
+							showError=true;
+						}
+					}
+					else
+					{
+						errorString=noVariableError;
+						showError=true;
 					}
 				}
-				else
+				else 
 				{
-
-				}
+					errorString=noScannerError;
+					showError=true;
 				}				
+			}				
 				
 				// Button that activates the user's code
 				if (GUI.Button (new Rect (Screen.width*0.6f, Screen.height*0.9f , Screen.width*0.08f, Screen.height*0.05f), "Submit")) 
 				{
-					/*TextChanger.Update();
-					if (puzzle1Complete){ 
-						code = restoreCode();
-						GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
-					}*/
+				if((scannerCreated)&&(scannerAssigned))
+					puzzle1Complete=true;
 					resume();
 				}
 				
@@ -105,6 +145,7 @@ public class scannerUi : MonoBehaviour {
 					resume();
 				}
 				
+
 				// Button that restores the code in the textArea to its original state
 				if (GUI.Button (new Rect (Screen.width*0.8f, Screen.height*0.9f , Screen.width*0.08f, Screen.height*0.05f), "Reset")) 
 				{
@@ -112,8 +153,13 @@ public class scannerUi : MonoBehaviour {
 					output="";
 					forStart=0;
 					var="";
+					showError = false;
+					scannerCreated= false;
+					scannerAssigned = false;
 				}
+				
 			}
+
 		}
 		
 		//Adds new Code to the TextArea based on the user input
@@ -128,7 +174,7 @@ public class scannerUi : MonoBehaviour {
 		{
 		string dummy="public class game{\n" +
 			"\tpublic static void main(String[] args){\n" +
-				"\t\tstring order = \"No input\";\n" +
+				"\t\tString order = \"No input\";\n" +
 				"\t\t\n" +
 				"\t\tSystem.out.println(order);\n" +	
 				"\t}\n" +
@@ -208,5 +254,5 @@ public class scannerUi : MonoBehaviour {
 			GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
 			GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
 		}
-	}
+}
 
