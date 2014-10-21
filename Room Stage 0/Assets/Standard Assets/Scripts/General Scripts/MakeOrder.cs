@@ -12,8 +12,8 @@ public class MakeOrder : MonoBehaviour {
 	// Use this for initialization
 	
 	void OnTriggerEnter(Collider wall){
-		
 		atOrderWall = true;
+		Debug.Log ("at wall");
 	}
 	
 	void OnTriggerExit(Collider wall){

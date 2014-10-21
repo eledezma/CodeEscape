@@ -25,9 +25,10 @@ public class scannerUi : MonoBehaviour {
 	string noVariableError="There's no such variable in the code.";
 	string cantType="You can't type code in that area.";
 	string errorString = "";
-	/*
+	//Ray outwardRay;
+	//RaycastHit hit;
+
 	void OnTriggerEnter(Collider scanner){
-		
 		atScanner = true;
 	}
 	
@@ -35,11 +36,11 @@ public class scannerUi : MonoBehaviour {
 		atScanner=false;
 		guiEnabled=false;
 	}
-	*/
+
 	//Switches the GUI on and off
 	//*******************************************************
 	void Update(){
-		/*if (atScanner) {
+		if (atScanner) {
 			if (Input.GetKeyDown ("o")) {
 				if (guiEnabled) {
 					resume ();
@@ -51,9 +52,9 @@ public class scannerUi : MonoBehaviour {
 				}
 			} 
 			
-		}*/
-		RaycastHit hit;
-		Ray outwardRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+		}
+		/*
+		outwardRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		//Ray outwardRay = new Ray(transform.position, Vector3.back);
 		if(Physics.Raycast(outwardRay, out hit,15f)){
 			Debug.Log("you did it buddy");
@@ -70,7 +71,7 @@ public class scannerUi : MonoBehaviour {
 					}
 				}
 			}
-		}
+		}*/
 		else {
 			
 			Screen.lockCursor = true;
@@ -84,7 +85,7 @@ public class scannerUi : MonoBehaviour {
 	//*******************************************************
 	public void OnGUI()
 	{
-		
+		//if(!(Physics.Raycast(outwardRay, out hit,15f))){
 		if (!atScanner) {  //If not at wall terminal jack in - "show crosshair"
 			Vector3 mPos = Input.mousePosition;
 			GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
