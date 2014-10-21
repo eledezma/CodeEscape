@@ -8,6 +8,7 @@ public class ToolTipTxt : MonoBehaviour {
 	private string currentToolTipText= "";
 	private GUIStyle guiStyleFore;
 	private GUIStyle guiStyleBack;
+	private bool nextTo = false;
 	
 	void  Start (){
 		guiStyleFore = new GUIStyle();
@@ -24,10 +25,12 @@ public class ToolTipTxt : MonoBehaviour {
 		guiStyleBack.fontStyle = FontStyle.Italic;
 		guiStyleBack.fontSize = 18;
 	}
-	
+	void OnTriggerEnter(){
+		nextTo = true;
+	}
 	void  OnMouseEnter (){
-		
 		currentToolTipText = toolTipText;
+
 	}
 	
 	void  OnMouseExit (){

@@ -25,7 +25,7 @@ public class scannerUi : MonoBehaviour {
 	string noVariableError="There's no such variable in the code.";
 	string cantType="You can't type code in that area.";
 	string errorString = "";
-	
+	/*
 	void OnTriggerEnter(Collider scanner){
 		
 		atScanner = true;
@@ -35,10 +35,11 @@ public class scannerUi : MonoBehaviour {
 		atScanner=false;
 		guiEnabled=false;
 	}
+	*/
 	//Switches the GUI on and off
 	//*******************************************************
 	void Update(){
-		if (atScanner) {
+		/*if (atScanner) {
 			if (Input.GetKeyDown ("o")) {
 				if (guiEnabled) {
 					resume ();
@@ -50,8 +51,26 @@ public class scannerUi : MonoBehaviour {
 				}
 			} 
 			
+		}*/
+		RaycastHit hit;
+		Ray outwardRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+		//Ray outwardRay = new Ray(transform.position, Vector3.back);
+		if(Physics.Raycast(outwardRay, out hit,15f)){
+			Debug.Log("you did it buddy");
+			if(hit.collider.tag=="Terminal"){
+				if(Input.GetKeyDown("o")){
+					if(guiEnabled){
+						resume();
+					}
+					else{
+						Time.timeScale = 0.0f;
+						guiEnabled = true;
+						GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
+						GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
+					}
+				}
+			}
 		}
-		
 		else {
 			
 			Screen.lockCursor = true;
