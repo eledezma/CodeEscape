@@ -32,6 +32,7 @@ public class codingUI : MonoBehaviour {
 
 	void Start(){ //I've commented this method out and nothing bad happens :o -Joseph
 		Screen.lockCursor = true;
+		//Screen.showCursor = false;
 	}
 	//Switches the GUI on and off
 	//*******************************************************
