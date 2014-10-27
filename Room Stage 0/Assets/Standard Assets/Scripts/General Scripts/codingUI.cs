@@ -12,6 +12,7 @@ public class codingUI : MonoBehaviour {
 	public Texture2D cursorImage;
 	int forStart;
 	int forFinish;
+	//GameObject Arms;
 	public string code="public class game{\n" +
 		"\tpublic static void main(String[] args){\n" +
 			"\t\t\n" +
@@ -19,13 +20,17 @@ public class codingUI : MonoBehaviour {
 			"}";
 	void OnTriggerEnter(Collider other){
 		atWall=true;
+		GameObject.Find("Arm Camera").camera.enabled = false;
+		//Arms.camera.enabled = false;
 	}
 	void OnTriggerExit(Collider other){
 		atWall=false;
 		guiEnabled=false;
+		//Arms.camera.enabled = true;
+		GameObject.Find("Arm Camera").camera.enabled = true;
 	}
 
-	void Start(){
+	void Start(){ //I've commented this method out and nothing bad happens :o -Joseph
 		Screen.lockCursor = true;
 	}
 	//Switches the GUI on and off
@@ -46,8 +51,8 @@ public class codingUI : MonoBehaviour {
 				}
 			} 
 		else {
-
-			Screen.lockCursor = true;
+			//Screen.showCursor = false;
+			Screen.lockCursor = true;  //Hiding Cursor means redoing the way the crosshair was implemented -Josephs
 			Screen.lockCursor = false; //Cursor remains locked if not in terminal
 		}
 	}

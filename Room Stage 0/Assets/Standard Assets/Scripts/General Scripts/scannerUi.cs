@@ -30,11 +30,13 @@ public class scannerUi : MonoBehaviour {
 
 	void OnTriggerEnter(Collider scanner){
 		atScanner = true;
+		GameObject.Find("Arm Camera").camera.enabled = false;
 	}
 	
 	void OnTriggerExit(Collider scanner){
 		atScanner=false;
 		guiEnabled=false;
+		GameObject.Find("Arm Camera").camera.enabled = true;
 	}
 
 	//Switches the GUI on and off
