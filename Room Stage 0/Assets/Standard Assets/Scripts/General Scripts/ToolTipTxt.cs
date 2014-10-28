@@ -19,14 +19,14 @@ public class ToolTipTxt : MonoBehaviour {
 		guiStyleFore.alignment = TextAnchor.UpperCenter ;
 		guiStyleFore.wordWrap = true;
 		guiStyleFore.fontStyle = FontStyle.Italic;
-		guiStyleFore.fontSize = 18;
+		guiStyleFore.fontSize = 15;
 
 		guiStyleBack = new GUIStyle();
 		guiStyleBack.normal.textColor = Color.black;  
 		guiStyleBack.alignment = TextAnchor.UpperCenter ;
 		guiStyleBack.wordWrap = true;
 		guiStyleBack.fontStyle = FontStyle.Italic;
-		guiStyleBack.fontSize = 18;
+		guiStyleBack.fontSize = 15;
 	}
 
 	void Update(){
@@ -44,6 +44,7 @@ public class ToolTipTxt : MonoBehaviour {
 	}
 	void  OnMouseEnter (){
 		currentToolTipText = toolTipText;
+
 		clickable = true;
 	}
 	

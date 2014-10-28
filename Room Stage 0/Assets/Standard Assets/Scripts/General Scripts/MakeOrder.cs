@@ -11,14 +11,22 @@ public class MakeOrder : MonoBehaviour {
 	
 	// Use this for initialization
 	
-	void OnTriggerEnter(Collider wall){
-		atOrderWall = true;
-		Debug.Log ("at wall");
+	void OnTriggerEnter(Collider col1){
+		if (col1.gameObject.name == "Terminal_Stage2") {
+			atOrderWall = true;
+			GameObject.Find ("Arm Camera").camera.enabled = false;
+			Debug.Log ("at wall");
+		}
 	}
 	
-	void OnTriggerExit(Collider wall){
-		atOrderWall=false;
-		guiEnabled=false;
+	void OnTriggerExit(Collider col1){
+
+		if (col1.gameObject.name == "Terminal_Stage2") {
+			atOrderWall = false;
+			guiEnabled = false;
+			GameObject.Find ("Arm Camera").camera.enabled = false;
+		}
+
 	}
 	
 	void Start(){
@@ -29,7 +37,7 @@ public class MakeOrder : MonoBehaviour {
 	void Update()
 	{
 		if (atOrderWall) {
-			if (Input.GetKeyDown ("p")) {
+			if (Input.GetKeyDown ("e")) {
 				
 				if (guiEnabled) {
 					resume ();
@@ -41,7 +49,7 @@ public class MakeOrder : MonoBehaviour {
 				}
 			}
 		} 
-		else {
+		else if (!atOrderWall && !scannerUi.atScanner){
 			
 			Screen.lockCursor = true;
 			Screen.lockCursor = false; //Cursor remains locked if not in terminal
@@ -51,12 +59,12 @@ public class MakeOrder : MonoBehaviour {
 	public void OnGUI()
 	{
 		
-		if (!atOrderWall) {  //If not at wall terminal jack in - "show crosshair"
+		if (!atOrderWall && !scannerUi.atScanner) {  //If not at wall terminal jack in - "show crosshair"
 			Vector3 mPos = Input.mousePosition;
 			GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
 		} 
 		
-		else if (atOrderWall && Input.GetKeyDown ("p")) { 
+		else if (atOrderWall && Input.GetKeyDown ("e")) { 
 			
 			//If at wall terminal show default cursor instead
 		}

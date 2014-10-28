@@ -5,7 +5,7 @@ public class scannerUi : MonoBehaviour {
 	
 	public static bool puzzle2Complete = false;
 	bool guiEnabled = false;
-	bool atScanner = false;
+	public static bool atScanner = false;
 	bool scannerCreated=false;
 	bool scannerAssigned=false;
 	bool showError = false;
@@ -28,22 +28,30 @@ public class scannerUi : MonoBehaviour {
 	//Ray outwardRay;
 	//RaycastHit hit;
 
-	void OnTriggerEnter(Collider scanner){
-		atScanner = true;
-		GameObject.Find("Arm Camera").camera.enabled = false;
+	void OnTriggerEnter(Collider col2){
+		if (col2.gameObject.name == "Wall_Jack_S2") {
+				atScanner = true;
+				GameObject.Find ("Arm Camera").camera.enabled = false;
+		}
 	}
 	
-	void OnTriggerExit(Collider scanner){
-		atScanner=false;
-		guiEnabled=false;
-		GameObject.Find("Arm Camera").camera.enabled = true;
+	void OnTriggerExit(Collider col2){
+		if (col2.gameObject.name == "Wall_Jack_S2") {
+				atScanner = false;
+				guiEnabled = false;
+				GameObject.Find ("Arm Camera").camera.enabled = true;
+			}
+	}
+
+	void Start(){
+		Screen.lockCursor = true;
 	}
 
 	//Switches the GUI on and off
 	//*******************************************************
 	void Update(){
 		if (atScanner) {
-			if (Input.GetKeyDown ("o")) {
+			if (Input.GetKeyDown ("e")) {
 				if (guiEnabled) {
 					resume ();
 				} else {
@@ -74,7 +82,7 @@ public class scannerUi : MonoBehaviour {
 				}
 			}
 		}*/
-		else {
+		else if(!MakeOrder.atOrderWall && !atScanner) {
 			
 			Screen.lockCursor = true;
 			Screen.lockCursor = false; //Cursor remains locked if not in terminal
@@ -88,12 +96,12 @@ public class scannerUi : MonoBehaviour {
 	public void OnGUI()
 	{
 		//if(!(Physics.Raycast(outwardRay, out hit,15f))){
-		if (!atScanner) {  //If not at wall terminal jack in - "show crosshair"
+		if (!atScanner && !MakeOrder.atOrderWall) {  //If not at wall terminal jack in - "show crosshair"
 			Vector3 mPos = Input.mousePosition;
 			GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
 		} 
 		
-		else if (atScanner && Input.GetKeyDown ("o")) { 
+		else if (atScanner && Input.GetKeyDown ("e")) { 
 			
 			//If at wall terminal show default cursor instead
 		}
