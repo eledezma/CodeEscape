@@ -4,10 +4,10 @@ using System.Collections;
 public class MoveBlock : MonoBehaviour {
 
 	public int height;
-	float initialHeight = -3.029409f;
+	float initialHeight;
 	// Use this for initialization
 	void Start () {
-		
+		initialHeight = transform.position.y;
 	}
 	
 	// Update is called once per frame

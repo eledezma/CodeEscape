@@ -8,13 +8,13 @@ public class Indentation : MonoBehaviour {
 	public AudioClip missionComplete;
 	TextEditor editor;
 	public Texture2D cursorImage;
-	int height1=0;
-	int height2=0;
-	int height3=0;
-	int height4=0;
-	int height5=0;
-	int height6=0;
-	int height7=0;
+	public int height1=0;
+	public int height2=0;
+	public int height3=0;
+	public int height4=0;
+	public int height5=0;
+	public int height6=0;
+	public int height7=0;
 	string output="Door is open";
 
 	//GameObject Arms;
@@ -143,13 +143,13 @@ public class Indentation : MonoBehaviour {
 			if (GUI.Button (new Rect (Screen.width*0.6f, Screen.height*0.9f , Screen.width*0.08f, Screen.height*0.05f), "Submit")) 
 			{
 				TextChanger.Update();
-				GameObject.Find ("Cube1").GetComponent<MoveBlock>().height+=height1;
-				GameObject.Find ("Cube2").GetComponent<MoveBlock>().height+=height2;
-				GameObject.Find ("Cube3").GetComponent<MoveBlock>().height+=height3;
-				GameObject.Find ("Cube4").GetComponent<MoveBlock>().height+=height4;
-				GameObject.Find ("Cube5").GetComponent<MoveBlock>().height+=height5;
-				GameObject.Find ("Cube6").GetComponent<MoveBlock>().height+=height6;
-				GameObject.Find ("Cube7").GetComponent<MoveBlock>().height+=height7;
+				GameObject.Find ("Cube1").GetComponent<MoveBlock>().height = height1;
+				GameObject.Find ("Cube2").GetComponent<MoveBlock>().height = height2;
+				GameObject.Find ("Cube3").GetComponent<MoveBlock>().height = height3;
+				GameObject.Find ("Cube4").GetComponent<MoveBlock>().height = height4;
+				GameObject.Find ("Cube5").GetComponent<MoveBlock>().height = height5;
+				GameObject.Find ("Cube6").GetComponent<MoveBlock>().height = height6;
+				GameObject.Find ("Cube7").GetComponent<MoveBlock>().height = height7;
 
 				if((height1==0)&&(height2==-1)&&(height3==-2)&&(height4==-3)&&(height7==0)&&(height6==-1)&&(height5==-2))
 				audio.PlayOneShot(missionComplete);
@@ -173,6 +173,14 @@ public class Indentation : MonoBehaviour {
 				height5=0;
 				height6=0;
 				height7=0;
+
+				GameObject.Find ("Cube1").GetComponent<MoveBlock> ().height = 0;
+				GameObject.Find ("Cube2").GetComponent<MoveBlock> ().height = 0;
+				GameObject.Find ("Cube3").GetComponent<MoveBlock> ().height = 0;
+				GameObject.Find ("Cube4").GetComponent<MoveBlock> ().height = 0;
+				GameObject.Find ("Cube5").GetComponent<MoveBlock> ().height = 0;
+				GameObject.Find ("Cube6").GetComponent<MoveBlock> ().height = 0;
+				GameObject.Find ("Cube7").GetComponent<MoveBlock> ().height = 0;
 
 			}
 		}
