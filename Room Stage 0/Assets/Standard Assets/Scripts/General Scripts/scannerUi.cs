@@ -31,7 +31,7 @@ public class scannerUi : MonoBehaviour {
 	void OnTriggerEnter(Collider col2){
 		if (col2.gameObject.name == "Wall_Jack_S2") {
 				atScanner = true;
-				GameObject.Find ("Arm Camera").camera.enabled = false;
+				//GameObject.Find ("Arm Camera").camera.enabled = false;
 		}
 	}
 	
@@ -39,12 +39,13 @@ public class scannerUi : MonoBehaviour {
 		if (col2.gameObject.name == "Wall_Jack_S2") {
 				atScanner = false;
 				guiEnabled = false;
-				GameObject.Find ("Arm Camera").camera.enabled = true;
+				//GameObject.Find ("Arm Camera").camera.enabled = true;
 			}
 	}
 
 	void Start(){
 		Screen.lockCursor = true;
+		GameObject.Find ("Arm Camera").camera.enabled = true;
 	}
 
 	//Switches the GUI on and off

@@ -14,8 +14,6 @@ public class MakeOrder : MonoBehaviour {
 	void OnTriggerEnter(Collider col1){
 		if (col1.gameObject.name == "Terminal_Stage2") {
 			atOrderWall = true;
-			GameObject.Find ("Arm Camera").camera.enabled = false;
-			Debug.Log ("at wall");
 		}
 	}
 	
@@ -24,7 +22,6 @@ public class MakeOrder : MonoBehaviour {
 		if (col1.gameObject.name == "Terminal_Stage2") {
 			atOrderWall = false;
 			guiEnabled = false;
-			GameObject.Find ("Arm Camera").camera.enabled = false;
 		}
 
 	}
