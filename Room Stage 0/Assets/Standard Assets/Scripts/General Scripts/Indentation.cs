@@ -16,6 +16,7 @@ public class Indentation : MonoBehaviour {
 	int height6=0;
 	int height7=0;
 	bool added = false;
+	bool deleted = false;
 	string output="Door is open";
 
 	//GameObject Arms;
@@ -64,6 +65,7 @@ public class Indentation : MonoBehaviour {
 			Screen.lockCursor = true;  //Hiding Cursor means redoing the way the crosshair was implemented -Josephs
 			Screen.lockCursor = false; //Cursor remains locked if not in terminal
 		}
+		editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
 		editor.MoveLineStart ();
 	}
 	//*******************************************************
@@ -127,7 +129,7 @@ public class Indentation : MonoBehaviour {
 			if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.28f, Screen.width*0.1f, Screen.height*0.05f), "Erase Tab")) 
 			{
 					code = deleteFromCode (code,editor);
-				if (added)
+				if (deleted)
 				{
 				if (countLinesBefore(code,editor.pos)==0)
 					height1++;
@@ -220,10 +222,15 @@ public class Indentation : MonoBehaviour {
 	public string deleteFromCode(string s,TextEditor e)
 	{
 		char[] a = s.ToCharArray();
-		if (a [e.pos] == '\t')
-			s = s.Remove(e.pos,1);
-		else if (a [e.pos-1] == '\t')
-			s = s.Remove(e.pos-1,1);
+		if (a [e.pos] == '\t') {
+						s = s.Remove (e.pos, 1);
+						deleted = true;
+				} else if ((e.pos!=0 )&&(a [e.pos - 1] == '\t')) {
+						s = s.Remove (e.pos - 1, 1);
+						deleted = true;
+				} else {
+						deleted = false;
+				}
 		return s;
 	}
 	
@@ -314,4 +321,5 @@ public class Indentation : MonoBehaviour {
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
 	}
+	
 }
