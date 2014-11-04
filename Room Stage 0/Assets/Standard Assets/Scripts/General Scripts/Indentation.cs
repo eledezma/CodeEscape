@@ -153,13 +153,13 @@ public class Indentation : MonoBehaviour {
 			if (GUI.Button (new Rect (Screen.width*0.6f, Screen.height*0.9f , Screen.width*0.08f, Screen.height*0.05f), "Submit")) 
 			{
 				TextChanger.Update();
-				GameObject.Find ("Cube1").GetComponent<MoveBlock>().height += height1;
-				GameObject.Find ("Cube2").GetComponent<MoveBlock>().height += height2;
-				GameObject.Find ("Cube3").GetComponent<MoveBlock>().height += height3;
-				GameObject.Find ("Cube4").GetComponent<MoveBlock>().height += height4;
-				GameObject.Find ("Cube5").GetComponent<MoveBlock>().height += height5;
-				GameObject.Find ("Cube6").GetComponent<MoveBlock>().height += height6;
-				GameObject.Find ("Cube7").GetComponent<MoveBlock>().height += height7;
+				GameObject.Find ("Cube1").GetComponent<MoveBlockStage3>().height += height1;
+				GameObject.Find ("Cube2").GetComponent<MoveBlockStage3>().height += height2;
+				GameObject.Find ("Cube3").GetComponent<MoveBlockStage3>().height += height3;
+				GameObject.Find ("Cube4").GetComponent<MoveBlockStage3>().height += height4;
+				GameObject.Find ("Cube5").GetComponent<MoveBlockStage3>().height += height5;
+				GameObject.Find ("Cube6").GetComponent<MoveBlockStage3>().height += height6;
+				GameObject.Find ("Cube7").GetComponent<MoveBlockStage3>().height += height7;
 				height1=0;
 				height2=0;
 				height3=0;
@@ -191,13 +191,13 @@ public class Indentation : MonoBehaviour {
 				height6=0;
 				height7=0;
 
-				GameObject.Find ("Cube1").GetComponent<MoveBlock> ().height = 0;
-				GameObject.Find ("Cube2").GetComponent<MoveBlock> ().height = 0;
-				GameObject.Find ("Cube3").GetComponent<MoveBlock> ().height = 0;
-				GameObject.Find ("Cube4").GetComponent<MoveBlock> ().height = 0;
-				GameObject.Find ("Cube5").GetComponent<MoveBlock> ().height = 0;
-				GameObject.Find ("Cube6").GetComponent<MoveBlock> ().height = 0;
-				GameObject.Find ("Cube7").GetComponent<MoveBlock> ().height = 0;
+				GameObject.Find ("Cube1").GetComponent<MoveBlockStage3> ().height = 0;
+				GameObject.Find ("Cube2").GetComponent<MoveBlockStage3> ().height = 0;
+				GameObject.Find ("Cube3").GetComponent<MoveBlockStage3> ().height = 0;
+				GameObject.Find ("Cube4").GetComponent<MoveBlockStage3> ().height = 0;
+				GameObject.Find ("Cube5").GetComponent<MoveBlockStage3> ().height = 0;
+				GameObject.Find ("Cube6").GetComponent<MoveBlockStage3> ().height = 0;
+				GameObject.Find ("Cube7").GetComponent<MoveBlockStage3> ().height = 0;
 
 			}
 		}
