@@ -9,6 +9,7 @@ public class RayCastZoomAttempt : MonoBehaviour {
 	public GameObject cam;
 	public GameObject redEye1;
 	public GameObject redEye2;
+	public GameObject armCam;
 	bool colliderHit;
 	//public bool ray;
 	// Use this for initialization
@@ -29,7 +30,9 @@ public class RayCastZoomAttempt : MonoBehaviour {
 		if (hit.collider.tag == "Respawn" && colliderHit) {
 			colliderHit = false;
 			Debug.Log ("I did it");
-			//GameObject.Find ("First Person Controller").GetComponent<CharacterMotor>().canControl = false;
+			GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
+			GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
+			armCam.SetActive (false);
 			Screen.showCursor = false;
 			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
 			cam.SetActive (true);
@@ -44,12 +47,14 @@ public class RayCastZoomAttempt : MonoBehaviour {
 	IEnumerator Playback(){
 		audio.Play ();
 		yield return new WaitForSeconds(audio.clip.length);
-		//GameObject.Find ("First Person Controller").GetComponent<CharacterMotor>().canControl = true;
+		GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = true;
+		GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = true;
+		armCam.SetActive (true);
 		cam.SetActive (false);
 		redEye1.SetActive (false);
 		redEye2.SetActive (false);
 		Screen.showCursor = true;
-		GameObject.Find ("OscarColid").GetComponent<CursorTime> ().showCursor = true;
+		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 		Destroy (this);
 	}
 }

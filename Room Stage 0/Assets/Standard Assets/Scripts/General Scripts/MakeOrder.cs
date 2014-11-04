@@ -51,8 +51,8 @@ public class MakeOrder : MonoBehaviour {
 		} 
 		else if (!atOrderWall && !scannerUi.atScanner){
 
-			Screen.lockCursor = true;
-			Screen.lockCursor = false;
+			//Screen.lockCursor = true;
+			//Screen.lockCursor = false;
 			 //Cursor remains locked if not in terminal
 		}
 	}

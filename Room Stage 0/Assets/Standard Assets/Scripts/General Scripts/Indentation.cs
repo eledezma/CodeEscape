@@ -62,8 +62,8 @@ public class Indentation : MonoBehaviour {
 		} 
 		else {
 			//Screen.showCursor = false;
-			Screen.lockCursor = true;  //Hiding Cursor means redoing the way the crosshair was implemented -Josephs
-			Screen.lockCursor = false; //Cursor remains locked if not in terminal
+			//Screen.lockCursor = true;  //Hiding Cursor means redoing the way the crosshair was implemented -Josephs
+			//Screen.lockCursor = false; //Cursor remains locked if not in terminal
 		}
 		editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
 		editor.MoveLineStart ();
@@ -327,6 +327,7 @@ public class Indentation : MonoBehaviour {
 	public void resume(){
 		Time.timeScale = 1.0f;
 		guiEnabled = false;
+		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
 	}

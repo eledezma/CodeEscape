@@ -12,12 +12,13 @@ public class CursorTime : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 	}
 	void OnGUI(){
 		if (showCursor) {
 			Vector3 mPos = Input.mousePosition;
-			GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);	
+			GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
+			Screen.lockCursor = true;
+			Screen.lockCursor = false;
 		} 
 		else {
 

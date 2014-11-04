@@ -84,8 +84,8 @@ public class scannerUi : MonoBehaviour {
 		}*/
 		else if(!MakeOrder.atOrderWall && !atScanner) {
 			
-			Screen.lockCursor = true;
-			Screen.lockCursor = false; //Cursor remains locked if not in terminal
+			//Screen.lockCursor = true;
+			//Screen.lockCursor = false; //Cursor remains locked if not in terminal
 		}
 	}
 	//*******************************************************
