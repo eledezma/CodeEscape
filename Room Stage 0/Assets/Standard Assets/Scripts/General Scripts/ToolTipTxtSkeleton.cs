@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ToolTipTxt : MonoBehaviour {
+public class ToolTipTxtSkeleton : MonoBehaviour {
 	public string toolTipText= "";
 	public string info = "";
 	
@@ -33,8 +33,18 @@ public class ToolTipTxt : MonoBehaviour {
 				if (Input.GetMouseButtonDown (0)) {
 						if (clickable && !enabled) {
 								enabled = true;
+								Screen.lockCursor = true;
+								GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
+								GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
+								GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
+								//Screen.showCursor = false;
 						} else if (clickable && enabled) {
 								enabled = false;
+								GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = true;
+								GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = true;
+								GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=true;
+								Screen.lockCursor = false;
+								//Screen.showCursor = true;
 						}
 				}
 	}
