@@ -14,6 +14,8 @@ public class MakeOrder : MonoBehaviour {
 	void OnTriggerEnter(Collider col1){
 		if (col1.gameObject.name == "Terminal_Stage2") {
 			atOrderWall = true;
+			GameObject.Find ("Arm Camera").camera.enabled = false;
+			Debug.Log ("at wall");
 		}
 	}
 	
@@ -22,11 +24,13 @@ public class MakeOrder : MonoBehaviour {
 		if (col1.gameObject.name == "Terminal_Stage2") {
 			atOrderWall = false;
 			guiEnabled = false;
+			GameObject.Find ("Arm Camera").camera.enabled = false;
 		}
 
 	}
 	
 	void Start(){
+		//Screen.showCursor = false; 
 		Screen.lockCursor = true;
 	}
 	//Switches the GUI on and off
@@ -35,7 +39,6 @@ public class MakeOrder : MonoBehaviour {
 	{
 		if (atOrderWall) {
 			if (Input.GetKeyDown ("e")) {
-				
 				if (guiEnabled) {
 					resume ();
 				} else {
@@ -47,25 +50,24 @@ public class MakeOrder : MonoBehaviour {
 			}
 		} 
 		else if (!atOrderWall && !scannerUi.atScanner){
-			
+
 			Screen.lockCursor = true;
-			Screen.lockCursor = false; //Cursor remains locked if not in terminal
+			Screen.lockCursor = false;
+			 //Cursor remains locked if not in terminal
 		}
 	}
 	
 	public void OnGUI()
 	{
-		
 		if (!atOrderWall && !scannerUi.atScanner) {  //If not at wall terminal jack in - "show crosshair"
-			Vector3 mPos = Input.mousePosition;
-			GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
+			//Vector3 mPos = Input.mousePosition;
+			//GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
 		} 
-		
 		else if (atOrderWall && Input.GetKeyDown ("e")) { 
-			
-			//If at wall terminal show default cursor instead
-		}
-		
+			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
+				//If at wall terminal show default cursor instead
+		} 
+
 		title = new GUIStyle ();
 		title.fontSize = 34;
 		title.normal.textColor = Color.white;
@@ -95,6 +97,7 @@ public class MakeOrder : MonoBehaviour {
 			GameObject.Find("Door").GetComponent<Food>().bfast=true;
 		if (string.Compare (order,"cake",true) == 0)
 			GameObject.Find("Door").GetComponent<Food>().pie=true;
+		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
 	}

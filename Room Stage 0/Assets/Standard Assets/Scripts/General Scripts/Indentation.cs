@@ -76,12 +76,12 @@ public class Indentation : MonoBehaviour {
 	public void OnGUI()
 	{
 		if (!atWall) {  //If not at wall terminal jack in - "show crosshair"
-			Vector3 mPos = Input.mousePosition;
-			GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
+			//Vector3 mPos = Input.mousePosition;
+			//GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
 		} 
 		
 		else if (atWall && Input.GetKeyDown ("e")) { 
-			
+			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
 			//If at wall terminal show default cursor instead
 		}
 		
@@ -160,6 +160,18 @@ public class Indentation : MonoBehaviour {
 				GameObject.Find ("Cube5").GetComponent<MoveBlockStage3>().height += height5;
 				GameObject.Find ("Cube6").GetComponent<MoveBlockStage3>().height += height6;
 				GameObject.Find ("Cube7").GetComponent<MoveBlockStage3>().height += height7;
+
+				int cube1 = GameObject.Find ("Cube1").GetComponent<MoveBlockStage3>().height;
+				int cube2 = GameObject.Find ("Cube2").GetComponent<MoveBlockStage3>().height;
+				int cube3 = GameObject.Find ("Cube3").GetComponent<MoveBlockStage3>().height;
+				int cube4 = GameObject.Find ("Cube4").GetComponent<MoveBlockStage3>().height;
+				int cube5 = GameObject.Find ("Cube5").GetComponent<MoveBlockStage3>().height;
+				int cube6 = GameObject.Find ("Cube6").GetComponent<MoveBlockStage3>().height;
+				int cube7 = GameObject.Find ("Cube7").GetComponent<MoveBlockStage3>().height;
+
+				if((cube1 == 0)&&(cube2 == -1)&&(cube3 == -2)&&(cube4 == -3)&&(cube5 == -2)&&(cube6 == -1)&&(cube7 == 0))
+					audio.PlayOneShot(missionComplete);
+
 				height1=0;
 				height2=0;
 				height3=0;
@@ -167,9 +179,6 @@ public class Indentation : MonoBehaviour {
 				height5=0;
 				height6=0;
 				height7=0;
-
-				if((height1==0)&&(height2==-1)&&(height3==-2)&&(height4==-3)&&(height7==0)&&(height6==-1)&&(height5==-2))
-				audio.PlayOneShot(missionComplete);
 				resume();
 			}
 			

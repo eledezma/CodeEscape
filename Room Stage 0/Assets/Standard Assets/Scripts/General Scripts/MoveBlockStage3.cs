@@ -5,6 +5,7 @@ public class MoveBlockStage3 : MonoBehaviour {
 
 	public int height;
 	float initialHeight;
+	public float currentHeight;
 	// Use this for initialization
 	void Start () {
 		initialHeight = transform.position.y;
@@ -19,5 +20,6 @@ public class MoveBlockStage3 : MonoBehaviour {
 		}
 
 		transform.position = new Vector3(transform.position.x, newHeight, transform.position.z);
+		currentHeight = newHeight;
 	}
 }

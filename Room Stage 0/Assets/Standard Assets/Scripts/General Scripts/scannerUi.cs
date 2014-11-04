@@ -31,7 +31,7 @@ public class scannerUi : MonoBehaviour {
 	void OnTriggerEnter(Collider col2){
 		if (col2.gameObject.name == "Wall_Jack_S2") {
 				atScanner = true;
-				//GameObject.Find ("Arm Camera").camera.enabled = false;
+				GameObject.Find ("Arm Camera").camera.enabled = false;
 		}
 	}
 	
@@ -39,13 +39,12 @@ public class scannerUi : MonoBehaviour {
 		if (col2.gameObject.name == "Wall_Jack_S2") {
 				atScanner = false;
 				guiEnabled = false;
-				//GameObject.Find ("Arm Camera").camera.enabled = true;
+				GameObject.Find ("Arm Camera").camera.enabled = true;
 			}
 	}
 
 	void Start(){
 		Screen.lockCursor = true;
-		GameObject.Find ("Arm Camera").camera.enabled = true;
 	}
 
 	//Switches the GUI on and off
@@ -98,14 +97,14 @@ public class scannerUi : MonoBehaviour {
 	{
 		//if(!(Physics.Raycast(outwardRay, out hit,15f))){
 		if (!atScanner && !MakeOrder.atOrderWall) {  //If not at wall terminal jack in - "show crosshair"
-			Vector3 mPos = Input.mousePosition;
-			GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
+
 		} 
 		
 		else if (atScanner && Input.GetKeyDown ("e")) { 
-			
+			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
 			//If at wall terminal show default cursor instead
 		}
+
 		
 		if (guiEnabled) {
 			GUI.Box (new Rect (0, 0, Screen.width, Screen.height), "System Input Puzzle");
@@ -310,6 +309,7 @@ public class scannerUi : MonoBehaviour {
 	public void resume(){
 		Time.timeScale = 1.0f;
 		guiEnabled = false;
+		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
 	}
