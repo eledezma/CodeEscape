@@ -303,5 +303,8 @@ public class PlayerDice : MonoBehaviour {
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=true;
+		text = "Your die is fair. Don't" +
+						"mess with it. Cheating will" +
+						"result in dire consequences.";
 	}
 }
