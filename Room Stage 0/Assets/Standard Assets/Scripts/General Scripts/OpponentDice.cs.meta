@@ -2,7 +2,9 @@ fileFormatVersion: 2
 guid: a795324e1c5428e4a8ff6b0e16ad1b3a
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - missionComplete: {fileID: 8300000, guid: 655aeab744f5f444ca10b38b775e54b7, type: 3}
+  - cursorImage: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

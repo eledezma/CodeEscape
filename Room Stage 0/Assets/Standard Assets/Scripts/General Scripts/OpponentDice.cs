@@ -13,6 +13,27 @@ public class OpponentDice : MonoBehaviour {
 	int forStart;
 	int forFinish;
 	int value=0;
+	bool showError = false;
+	bool randClicked = false;
+	bool switchClicked = false;
+	bool facesClicked= false;
+	bool switch2 =false;
+	bool rand1 = false;
+	bool face3 = false;
+	bool facesCorrect = false;
+	bool randCorrect = false;
+	bool case1 = false;
+	bool case2 = false;
+	bool case3 = false;
+	bool case4 = false;
+	bool case5 = false;
+	bool case6 = false;
+
+	string errorString = "";
+	string randFalseError = "Wrong range of numbers that dice can have.";
+	string switch1Error = "You only need one switch statement to do this puzzle, don't be greedy! >:[";
+	string cantType="You can't type code in that area.";
+	
 	//GameObject Arms;
 	public string code="public class game{\n" +
 		"\tpublic static void main(String[] args){\n" +
@@ -53,14 +74,10 @@ public class OpponentDice : MonoBehaviour {
 					GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
 					GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
 
+				}
 			}
-			}
-	//	} 
-		else {
-			//Screen.showCursor = false;
-	//		Screen.lockCursor = true;  //Hiding Cursor means redoing the way the crosshair was implemented -Josephs
-	//		Screen.lockCursor = false; //Cursor remains locked if not in terminal
-		}
+		editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
+
 	}
 	//*******************************************************
 	
@@ -82,16 +99,33 @@ public class OpponentDice : MonoBehaviour {
 		if (guiEnabled) {
 			GUI.Box (new Rect (0, 0, Screen.width, Screen.height), "List of Functions");
 			
-			// inserts the method that shoots a bullet
+			if(showError)
+			{
+				GUI.Label ( new Rect ( Screen.width*0.4f,Screen.height*0.45f, Screen.width*0.3f,Screen.height*0.1f),errorString);
+				if(GUI.Button (new Rect (Screen.width*0.47f,Screen.height*0.55f, Screen.width*0.06f,Screen.height*0.04f), "sorry"))
+				{
+					showError=false;
+				}
+			}
 			GUI.TextArea (new Rect (Screen.width*0.2f, Screen.width*0.04f, Screen.width*0.75f, Screen.height*0.75f),code);
+
+			if(showError)
+			{
+				GUI.Label ( new Rect ( Screen.width*0.4f,Screen.height*0.45f, Screen.width*0.3f,Screen.height*0.1f),errorString);
+				if(GUI.Button (new Rect (Screen.width*0.47f,Screen.height*0.55f, Screen.width*0.06f,Screen.height*0.04f), "sorry"))
+				{
+					showError=false;
+				}
+			}
+
 			editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
 			
-			/*	GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
-			                                                      editor.SelectedText,
-			                                                      editor.pos,
-			                                                      0,
-			                                                      countLinesBefore(code,editor.pos),
-			                                                      countLinesAfter(code,editor.pos)));*/
+				GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
+			                                                      facesCorrect,
+			                                                      randCorrect,
+			                                                      rand1,
+			                                                      switch2,
+			                                                      face3));
 			
 			int temp;
 			
@@ -123,6 +157,18 @@ public class OpponentDice : MonoBehaviour {
 				forFinish = 0;
 			}
 			//*******************************************************
+
+			string val = GUI.TextField (new Rect (Screen.width*0.12f,Screen.height*0.48f,Screen.width*0.04f,Screen.height*0.05f), value.ToString());
+			if (int.TryParse(val,out temp))
+			{
+				value = Mathf.Clamp(temp,0,100);
+			}
+			else if (val == "")
+			{
+				value = 0;
+			}
+
+
 			GUI.Label(new Rect(Screen.width*0.16f,Screen.height*0.24f,Screen.width*0.04f,Screen.height*0.05f),("finish"));  	//for loop parameter title
 
 			
@@ -132,35 +178,130 @@ public class OpponentDice : MonoBehaviour {
 				int num =getNumOfTabs(code,editor.pos);
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
 				{
-					code = addToCode (code,editor,"rolledNumber = (int)(Math.random() * "+ff+" + "+fs+");\n"+addedTabs(num));
+					randClicked=true;
+					if(!switchClicked&&!facesClicked)
+						rand1=true;
+					if((forFinish==6)&&(forStart==1))
+					{
+						randCorrect=true;
+						code = addToCode (code,editor,"rolledNumber = (int)(Math.random() * "+ff+" + "+fs+");\n"+addedTabs(num));
+					}
+					else
+					{
+						randCorrect=false;
+						errorString = randFalseError;
+						showError = true;
+					}
 				}
+				else
+				{
+					errorString = cantType;
+					showError=true;
+				}
+
 			}
 			// Button inserts a switch statement
 			if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.38f, Screen.width*0.1f, Screen.height*0.05f), "Add Switch Statement"))
 			{
-				int num =getNumOfTabs(code,editor.pos);
-				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
-					code = addToCode (code,editor,"switch(rolledNumber){\n"+addedTabs(num)+"\tcase 1:\n"+"\t\t"+addedTabs(num)+"\t\t\n"+addedTabs(num)+"\t\tbreak;\n"+addedTabs(num)+"\tcase 2:\n"+"\t\t"+addedTabs(num)+"\n"+addedTabs(num)+"\t\tbreak;\n"+addedTabs(num)+"\tcase 3:\n"+"\t\t"+addedTabs(num)+"\n"+addedTabs(num)+"\t\tbreak;\n"+addedTabs(num)+"\tcase 4:\n"+"\t\t"+addedTabs(num)+"\n"+addedTabs(num)+"\t\tbreak;\n"+addedTabs(num)+"\tcase 5:\n"+"\t\t"+addedTabs(num)+"\n"+addedTabs(num)+"\t\tbreak;\n"+addedTabs(num)+"\tcase 6:\n"+"\t\t"+addedTabs(num)+"\n"+addedTabs(num)+"\t\tbreak;\n"+addedTabs(num)+"\tdefault:\n"+addedTabs(num)+"\t\tSystem.out.println(\"Wrong value, check your random generation\");");
-			}
-
-
-			string val = GUI.TextField (new Rect (Screen.width*0.12f,Screen.height*0.48f,Screen.width*0.04f,Screen.height*0.05f), value.ToString());
-			if (int.TryParse(val,out temp))
-			{
-				value = Mathf.Clamp(temp,0,100);
-			}
-			else if (ff == "")
-			{
-				value = 0;
-			}
-
-			// Button that inserts the method that shoots a bullet
-			if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.48f, Screen.width*0.1f, Screen.height*0.05f), "Assign an int to topFace")) 
-			{
+				editor.MoveLineEnd ();
 				int num =getNumOfTabs(code,editor.pos);
 				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
 				{
+					if(!switchClicked)
+					{
+						code = addToCode (code,editor,"switch(rolledNumber){\n"+
+						                  addedTabs(num)+"\tcase 1:\n"+"\t\t"
+						                  +addedTabs(num)+"\n"
+						                  +addedTabs(num)+"\t\tbreak;\n"
+						                  +addedTabs(num)+"\tcase 2:\n"+"\t\t"
+						                  +addedTabs(num)+"\n"
+						                  +addedTabs(num)+"\t\tbreak;\n"
+						                  +addedTabs(num)+"\tcase 3:\n"+"\t\t"
+						                  +addedTabs(num)+"\n"
+						                  +addedTabs(num)+"\t\tbreak;\n"
+						                  +addedTabs(num)+"\tcase 4:\n"+"\t\t"
+						                  +addedTabs(num)+"\n"
+						                  +addedTabs(num)+"\t\tbreak;\n"
+						                  +addedTabs(num)+"\tcase 5:\n"+"\t\t"
+						                  +addedTabs(num)+"\n"
+						                  +addedTabs(num)+"\t\tbreak;\n"
+						                  +addedTabs(num)+"\tcase 6:\n"+"\t\t"
+						                  +addedTabs(num)+"\n"
+						                  +addedTabs(num)+"\t\tbreak;\n"
+						                  +addedTabs(num)+"\tdefault:\n"
+						                  +addedTabs(num)+"\t\tSystem.out.println(\"Wrong value, check your random generation\");");
+						switchClicked=true;
+					}
+					else
+					{
+						errorString = switch1Error;
+						showError = true;
+					}
+					if(randClicked&&!facesClicked)
+						switch2=true;
+				}
+				else
+				{
+					errorString = cantType;
+					showError=true;
+				}
+			}
+
+
+			// Button that assigns a number to face
+			if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.48f, Screen.width*0.1f, Screen.height*0.05f), "Assign an int to topFace")) 
+			{
+				facesClicked=true;
+				int num =getNumOfTabs(code,editor.pos);
+				if(randClicked&&switchClicked)
+					face3 = true;
+
+				if ((value==6)&&!randClicked&&!switchClicked){
+					//cheating hsppened
+
+				}
+				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
+				{
+					if(countLinesBefore(code,editor.pos)==7)
+						if(value==1)
+							case1=true;
+						else
+							case1=false;
+					if(countLinesBefore(code,editor.pos)==10)
+						if(value==2)
+							case2=true;
+						else
+							case2=false;
+					if(countLinesBefore(code,editor.pos)==13)
+						if(value==3)
+							case3=true;
+						else
+							case3=false;
+					if(countLinesBefore(code,editor.pos)==16)
+						if(value==4)
+							case4=true;
+						else
+							case4=false;
+					if(countLinesBefore(code,editor.pos)==19)
+						if(value==5)
+							case5=true;
+						else
+							case5=false;
+					if(countLinesBefore(code,editor.pos)==22)
+						if(value==6)
+							case6=true;
+						else
+							case6=false;
+
+					if((case1)&&(case2)&&(case3)&&(case4)&&(case5)&&(case6))
+						facesCorrect = true;
 					code = addToCode (code,editor,"topFace = "+value+" ;");
+
+				}
+				else
+				{
+					errorString = cantType;
+					showError=true;
 				}
 			}
 			
@@ -168,9 +309,9 @@ public class OpponentDice : MonoBehaviour {
 			if (GUI.Button (new Rect (Screen.width*0.6f, Screen.height*0.9f , Screen.width*0.08f, Screen.height*0.05f), "Submit")) 
 			{
 				TextChanger.Update();
-				if (puzzle1Complete){ 
-					code = restoreCode();
-					GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
+				if(facesCorrect&&face3&&switch2&&rand1&&randCorrect){
+					//code = restoreCode();
+					//GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
 					audio.PlayOneShot(missionComplete);
 					puzzle1Complete = false;
 				}
@@ -180,6 +321,8 @@ public class OpponentDice : MonoBehaviour {
 			// Button that closes the UI and disregards changes
 			if (GUI.Button (new Rect (Screen.width*0.7f, Screen.height*0.9f , Screen.width*0.08f, Screen.height*0.05f), "Cancel")) 
 			{
+				code = restoreCode();
+				resetValues();
 				resume();
 			}
 			
@@ -187,11 +330,6 @@ public class OpponentDice : MonoBehaviour {
 			if (GUI.Button (new Rect (Screen.width*0.8f, Screen.height*0.9f , Screen.width*0.08f, Screen.height*0.05f), "Reset")) 
 			{
 				code = restoreCode();
-				text="";
-				output="";
-				forStart=0;
-				forFinish=0;
-				value=0;
 			}
 		}
 	}
@@ -215,6 +353,29 @@ public class OpponentDice : MonoBehaviour {
 				"}";
 		return dummy;
 	}
+
+	public void resetValues(){
+				text = "";
+				output = "";
+				forStart = 0;
+				forFinish = 0;
+				value = 0;
+				showError = false;
+				randClicked = false;
+				switchClicked = false;
+				facesClicked = false;
+				switch2 = false;
+				rand1 = false;
+				face3 = false;
+				facesCorrect = false;
+				randCorrect = false;
+				case1 = false;
+				case2 = false;
+				case3 = false;
+				case4 = false;
+				case5 = false;
+				case6 = false;
+		}
 	
 	public int countLinesBefore(string s, int position)
 	{
