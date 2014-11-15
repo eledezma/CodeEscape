@@ -43,6 +43,10 @@ public class ButtonTriggerStage4 : MonoBehaviour {
 
 	public void PushItUp(){
 		button.animation.Play (PushUp.name);
+		int value1 = GameObject.Find ("d6").GetComponent<Die_d6> ().value;
+		int value2 = GameObject.Find ("d67").GetComponent<Die_d6> ().value;
+		if (value2 > value1)
+			GameObject.Find ("Door").GetComponent<DoorOpen> ().open = true;
 		Debug.Log ("PUSH ME UP");
 		buttondown = false;
 
