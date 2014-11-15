@@ -11,9 +11,9 @@ public class Timer : MonoBehaviour {
 		
 		timer -= Time.deltaTime;
 		
-		if(timer <=0){
+		if(timer ==0){
 			
-			timer = 0;
+
 			//DO SOMETHING KOOL
 		}
 		
