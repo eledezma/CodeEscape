@@ -4,7 +4,7 @@ public class RunMaybeCrouch : MonoBehaviour
 {
 	public float walk = 7; // regular speed
 	public float crouch = 4; // crouching speed
-	public float  sprint = 25; // run speed
+	public float  sprint = 20; // run speed
 	private CharacterMotor chMotor;
 	private Transform trans;
 	private float dist; // distance to ground
