@@ -1,17 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BlockRotate : MonoBehaviour {
+public class DiceRotateLoaded : MonoBehaviour {
 
 	public bool rot;
 	public bool delay;
 	public bool loaded;
-	private bool wasLoaded;
 	public GameObject dice;
 	// Use this for initialization
 
 	void Start(){
-		wasLoaded = false;
 	}
 	
 	void Update(){
@@ -28,7 +26,6 @@ public class BlockRotate : MonoBehaviour {
 	
 	void RandomTime()
 	{
-		//yield return new WaitForSeconds (10f);
 		int sw = Random.Range (1, 5);
 		switch (sw)
 		{
@@ -54,7 +51,7 @@ public class BlockRotate : MonoBehaviour {
 		rot = false;
 		if (loaded)
 			StartCoroutine (Get6 ());
-		else if (!loaded && wasLoaded)
+		else if (!loaded)
 			GameObject.Find ("ButtonTrigger").GetComponent<ButtonTriggerStage4> ().PushItUp ();
 	}
 	
@@ -81,8 +78,6 @@ public class BlockRotate : MonoBehaviour {
 			Debug.Log("Wait for 0.5 seconds");
 			
 		}
-		wasLoaded = true;
 		GameObject.Find ("ButtonTrigger").GetComponent<ButtonTriggerStage4> ().PushItUp ();
-
 	}
 }

@@ -31,10 +31,10 @@ public class ButtonTriggerStage4 : MonoBehaviour {
 			Debug.Log("Object Entered the trigger");
 			audio.PlayOneShot(ButtonClick);
 			button.animation.Play (PushDown.name);
-			GameObject.Find ("d67").GetComponent<BlockRotate>().rot = true;
-			GameObject.Find ("d67").GetComponent<BlockRotate>().delay = true;
-			GameObject.Find ("d6").GetComponent<BlockRotate>().rot = true;
-			GameObject.Find ("d6").GetComponent<BlockRotate>().delay = true;
+			GameObject.Find ("d67").GetComponent<DiceRotate>().rot = true;
+			GameObject.Find ("d67").GetComponent<DiceRotate>().delay = true;
+			GameObject.Find ("d6").GetComponent<DiceRotateLoaded>().rot = true;
+			GameObject.Find ("d6").GetComponent<DiceRotateLoaded>().delay = true;
 			//yield return new WaitForSeconds (PushDown.length);
 		}
 		
@@ -61,24 +61,12 @@ public class ButtonTriggerStage4 : MonoBehaviour {
 			Debug.Log("Object Stayed in the trigger");
 			audio.PlayOneShot(ButtonClick);
 			button.animation.Play (PushDown.name);
-			GameObject.Find ("d67").GetComponent<BlockRotate>().rot = true;
-			GameObject.Find ("d67").GetComponent<BlockRotate>().delay = true;
-			GameObject.Find ("d6").GetComponent<BlockRotate>().rot = true;
-			GameObject.Find ("d6").GetComponent<BlockRotate>().delay = true;
+			GameObject.Find ("d67").GetComponent<DiceRotate>().rot = false;
+			GameObject.Find ("d67").GetComponent<DiceRotate>().delay = false;
+			GameObject.Find ("d6").GetComponent<DiceRotateLoaded>().rot = false;
+			GameObject.Find ("d6").GetComponent<DiceRotateLoaded>().delay = false;
 			//yield return new WaitForSeconds (PushDown.length);
 		}
 
 	}
-
-	/*IEnumerator OnTriggerExit (Collider other){
-		
-		if (other.gameObject.tag == "Player"){
-			if (button.animation.isPlaying)
-				yield return new WaitForSeconds (0.5f);
-			//Debug.Log("Object Exited the trigger");	
-			button.animation.Play (PushUp.name);
-		}
-	}*/
-
-
 }
