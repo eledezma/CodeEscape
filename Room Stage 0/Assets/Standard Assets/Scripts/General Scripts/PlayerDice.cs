@@ -15,20 +15,7 @@ public class PlayerDice : MonoBehaviour {
 	int forFinish;
 	int value=0;
 	bool showError = false;
-	bool randClicked = false;
-	bool switchClicked = false;
 	bool facesClicked= false;
-	bool switch2 =false;
-	bool rand1 = false;
-	bool face3 = false;
-	bool facesCorrect = false;
-	bool randCorrect = false;
-	bool case1 = false;
-	bool case2 = false;
-	bool case3 = false;
-	bool case4 = false;
-	bool case5 = false;
-	bool case6 = false;
 	
 	string errorString = "";
 	string wrongValue = "Wrong value for die face.";
@@ -84,8 +71,7 @@ public class PlayerDice : MonoBehaviour {
 				Time.timeScale = 0.0f;
 				guiEnabled = true;
 				GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
-				GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
-				
+				GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;			
 			}
 		}
 		//	} 
@@ -146,48 +132,43 @@ public class PlayerDice : MonoBehaviour {
 			int temp;
 
 			
-			string val = GUI.TextField (new Rect (Screen.width*0.12f,Screen.height*0.48f,Screen.width*0.04f,Screen.height*0.05f), value.ToString());
-			if (int.TryParse(val,out temp))
-			{
-				value = Mathf.Clamp(temp,0,100);
-			}
-			else if (val == "")
-			{
-				value = 0;
-			}
+
 			
 			// Button that inserts the method that shoots a bullet
-			if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.48f, Screen.width*0.1f, Screen.height*0.05f), "Assign an int to topFace")) 
+			if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.48f, Screen.width*0.1f, Screen.height*0.05f), "Cheat now!")) 
 			{
-				facesClicked=true;
-				int num =getNumOfTabs(code,editor.pos);
-				if(randClicked&&switchClicked)
-					face3 = true;
-				
-				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
-				{
-					if((value<6)||(value>1))
-					{
-						code = addToCode (code,editor,"topFace = "+value+" ;");
-						//cheating occured do stuff
-					}
-					else 
-					{
-						errorString = wrongValue;
-						showError = true;
-					}
-				}
+
+					code = "public class game{\n" +
+						"\tpublic static void main(String[] args){\n" +
+							"\t\tint rolledNumber = (int)(Math.random() * 6 ) + 1;\n" +
+							"\t\tswitch(rolledNumber){\n" +
+							"\t\t\tcase 1:\n" +
+							"\t\t\t\ttopFace = 1;\n" +
+							"\t\t\tcase 2:\n" +
+							"\t\t\t\ttopFace = 2;\n" +
+							"\t\t\tcase 3:\n" +
+							"\t\t\t\ttopFace = 3;\n" +
+							"\t\t\tcase 4:\n" +
+							"\t\t\t\ttopFace = 4;\n" +
+							"\t\t\tcase 5:\n" +
+							"\t\t\t\ttopFace = 5;\n" +
+							"\t\t\tcase 6:\n" +
+							"\t\t\t\ttopFace = 6;\n" +
+							"\t\t}\n" +
+							"\t\ttopFace = 6;\n" +
+							"\t}\n" +
+							"}";
+				facesClicked = true;
 			}
 			
 			// Button that activates the user's code
 			if (GUI.Button (new Rect (Screen.width*0.6f, Screen.height*0.9f , Screen.width*0.08f, Screen.height*0.05f), "Submit")) 
 			{
 				TextChanger.Update();
-				if (puzzle1Complete){ 
-					code = restoreCode();
-		//			GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
-					audio.PlayOneShot(missionComplete);
-					puzzle1Complete = false;
+				if (facesClicked){ 
+					GameObject.Find("Initialization").GetComponent<PoisonTime>().cheating = true;
+					GameObject.Find("d67").GetComponent<DiceRotateLoaded>().loaded = true;
+
 				}
 				resume();
 			}
@@ -203,7 +184,7 @@ public class PlayerDice : MonoBehaviour {
 			{
 				code = restoreCode();
 				text="";
-				output="";
+				//output="";
 				forStart=0;
 				forFinish=0;
 				value=0;

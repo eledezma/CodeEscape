@@ -31,7 +31,9 @@ public class OpponentDice : MonoBehaviour {
 
 	string errorString = "";
 	string randFalseError = "Wrong range of numbers that dice can have.";
+	string wrongFace = "Die face can't have that value. ";
 	string switch1Error = "You only need one switch statement to do this puzzle, don't be greedy! >:[";
+	string cheatError = "Don't cheat! You must make the dice fair.";
 	string cantType="You can't type code in that area.";
 	
 	//GameObject Arms;
@@ -251,16 +253,15 @@ public class OpponentDice : MonoBehaviour {
 			// Button that assigns a number to face
 			if (GUI.Button (new Rect (Screen.width*0.02f, Screen.height*0.48f, Screen.width*0.1f, Screen.height*0.05f), "Assign an int to topFace")) 
 			{
-				facesClicked=true;
-				int num =getNumOfTabs(code,editor.pos);
 				if(randClicked&&switchClicked)
 					face3 = true;
 
-				if ((value==6)&&!randClicked&&!switchClicked){
-					//cheating hsppened
+				if (((value==1)||(value==2)||(value==3)||(value==4)||(value==5))&&!randClicked&&!switchClicked){
+					errorString = cheatError;
+					showError = true;
 
 				}
-				if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
+				else if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,editor.pos))
 				{
 					if(countLinesBefore(code,editor.pos)==7)
 						if(value==1)
@@ -295,7 +296,16 @@ public class OpponentDice : MonoBehaviour {
 
 					if((case1)&&(case2)&&(case3)&&(case4)&&(case5)&&(case6))
 						facesCorrect = true;
-					code = addToCode (code,editor,"topFace = "+value+" ;");
+					if((value>6)||(value<1))
+					{
+						errorString = wrongFace;
+						showError = true;
+					}
+					else
+					{
+						facesClicked=true;
+						code = addToCode (code,editor,"topFace = "+value+" ;");
+					}
 
 				}
 				else
@@ -313,8 +323,11 @@ public class OpponentDice : MonoBehaviour {
 					//code = restoreCode();
 					//GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
 					audio.PlayOneShot(missionComplete);
-					puzzle1Complete = false;
+					//puzzle1Complete = false;
+					GameObject.Find("d6").GetComponent<DiceRotateLoaded>().loaded = false;
+					GameObject.Find("Initialization").GetComponent<PoisonTime>().cheating = false;
 				}
+			
 				resume();
 			}
 			
@@ -355,8 +368,9 @@ public class OpponentDice : MonoBehaviour {
 	}
 
 	public void resetValues(){
-				text = "";
-				output = "";
+		text =  "The opponent die is not fair\n"+
+				"You need to make it fair.";
+				//output = "";
 				forStart = 0;
 				forFinish = 0;
 				value = 0;
@@ -449,5 +463,7 @@ public class OpponentDice : MonoBehaviour {
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=true;
+		text =  "The opponent die is not fair\n"+
+			"You need to make it fair.";
 	}
 }
