@@ -7,9 +7,11 @@ public class DiceRotateLoaded : MonoBehaviour {
 	public bool delay;
 	public bool loaded;
 	public GameObject dice;
+	public bool diceComplete;
 	// Use this for initialization
 
 	void Start(){
+		diceComplete = false;
 	}
 	
 	void Update(){
@@ -52,7 +54,7 @@ public class DiceRotateLoaded : MonoBehaviour {
 		if (loaded)
 			StartCoroutine (Get6 ());
 		else if (!loaded)
-			GameObject.Find ("ButtonTrigger").GetComponent<ButtonTriggerStage4> ().PushItUp ();
+			diceComplete = true;
 	}
 	
 	
@@ -78,6 +80,6 @@ public class DiceRotateLoaded : MonoBehaviour {
 			Debug.Log("Wait for 0.5 seconds");
 			
 		}
-		GameObject.Find ("ButtonTrigger").GetComponent<ButtonTriggerStage4> ().PushItUp ();
+		diceComplete = true;
 	}
 }

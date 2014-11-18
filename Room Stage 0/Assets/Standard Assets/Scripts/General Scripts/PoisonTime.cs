@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-
+//handles poison and button pushing up for stage 4
 
 public class PoisonTime : MonoBehaviour {
 
@@ -14,6 +14,13 @@ public class PoisonTime : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		bool d6 = GameObject.Find ("d6").GetComponent<DiceRotateLoaded> ().diceComplete;
+		bool d67 = GameObject.Find ("d67").GetComponent<DiceRotateLoaded> ().diceComplete;
+		if (d6 && d67) {
+			GameObject.Find ("ButtonTrigger").GetComponent<ButtonTriggerStage4> ().pushup = true;
+			GameObject.Find ("d6").GetComponent<DiceRotateLoaded> ().diceComplete = false;
+			GameObject.Find ("d67").GetComponent<DiceRotateLoaded> ().diceComplete = false;
+		}
 		if (cheating) {
 			GameObject.Find("Initialization").GetComponent<Timer>().enabled = true;
 			for (int x = -20; x <= 20; x+= 20){ 
@@ -26,6 +33,7 @@ public class PoisonTime : MonoBehaviour {
 			}
 			Destroy (this);
 		}
+
 	}
 
 	void createCloud(float x, float y, float z){

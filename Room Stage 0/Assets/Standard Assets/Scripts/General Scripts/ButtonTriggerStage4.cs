@@ -8,18 +8,21 @@ public class ButtonTriggerStage4 : MonoBehaviour {
 	//public GameObject door; //Abel's Door
 	public AnimationClip PushDown;
 	public AnimationClip PushUp;
-	//public bool k;
+	public bool pushup;
 	private bool buttondown;
 	
 	// Use this for initialization
 	void Start () {
 		buttondown = false;
+		pushup = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		/*if (k)
-			button.animation.Play (PushDown.name);*/
+		if (pushup) {
+			StartCoroutine (PushItUp ());
+			pushup = false;
+		}
 	}
 
 	IEnumerator OnTriggerEnter (Collider other){
@@ -31,8 +34,8 @@ public class ButtonTriggerStage4 : MonoBehaviour {
 			Debug.Log("Object Entered the trigger");
 			audio.PlayOneShot(ButtonClick);
 			button.animation.Play (PushDown.name);
-			GameObject.Find ("d67").GetComponent<DiceRotate>().rot = true;
-			GameObject.Find ("d67").GetComponent<DiceRotate>().delay = true;
+			GameObject.Find ("d67").GetComponent<DiceRotateLoaded>().rot = true;
+			GameObject.Find ("d67").GetComponent<DiceRotateLoaded>().delay = true;
 			GameObject.Find ("d6").GetComponent<DiceRotateLoaded>().rot = true;
 			GameObject.Find ("d6").GetComponent<DiceRotateLoaded>().delay = true;
 			//yield return new WaitForSeconds (PushDown.length);
@@ -41,10 +44,13 @@ public class ButtonTriggerStage4 : MonoBehaviour {
 		
 	}
 
-	public void PushItUp(){
+	IEnumerator PushItUp(){
 		button.animation.Play (PushUp.name);
+		yield return new WaitForSeconds (1);
 		int value1 = GameObject.Find ("d6").GetComponent<Die_d6> ().value;
 		int value2 = GameObject.Find ("d67").GetComponent<Die_d6> ().value;
+		//Debug.Log (value1);
+		//Debug.Log (value2);
 		if (value2 > value1)
 			GameObject.Find ("Door").GetComponent<DoorOpen> ().open = true;
 		Debug.Log ("PUSH ME UP");
@@ -61,10 +67,10 @@ public class ButtonTriggerStage4 : MonoBehaviour {
 			Debug.Log("Object Stayed in the trigger");
 			audio.PlayOneShot(ButtonClick);
 			button.animation.Play (PushDown.name);
-			GameObject.Find ("d67").GetComponent<DiceRotate>().rot = false;
-			GameObject.Find ("d67").GetComponent<DiceRotate>().delay = false;
-			GameObject.Find ("d6").GetComponent<DiceRotateLoaded>().rot = false;
-			GameObject.Find ("d6").GetComponent<DiceRotateLoaded>().delay = false;
+			GameObject.Find ("d67").GetComponent<DiceRotateLoaded>().rot = true;
+			GameObject.Find ("d67").GetComponent<DiceRotateLoaded>().delay = true;
+			GameObject.Find ("d6").GetComponent<DiceRotateLoaded>().rot = true;
+			GameObject.Find ("d6").GetComponent<DiceRotateLoaded>().delay = true;
 			//yield return new WaitForSeconds (PushDown.length);
 		}
 
