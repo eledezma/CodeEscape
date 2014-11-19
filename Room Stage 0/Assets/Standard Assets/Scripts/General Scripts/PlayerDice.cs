@@ -5,7 +5,7 @@ public class PlayerDice : MonoBehaviour {
 
 	bool puzzle1Complete = false;
 	bool guiEnabled = false;
-	bool atWall = false;
+	bool atPlayerWall = false;
 	public AudioClip missionComplete;
 	TextEditor editor;
 	static string text="";
@@ -42,15 +42,19 @@ public class PlayerDice : MonoBehaviour {
 				"\t}\n" +
 			"}";
 	void OnTriggerEnter(Collider other){
-		atWall=true;
-		GameObject.Find("Arm Camera").camera.enabled = false;
-		//Arms.camera.enabled = false;
+		if (other.gameObject.name == "Player_Wall_Jack_S2") {
+			atPlayerWall = true;
+			GameObject.Find ("Arm Camera").camera.enabled = false;
+			//Arms.camera.enabled = false;
+		}
 	}
 	void OnTriggerExit(Collider other){
-		atWall=false;
-		guiEnabled=false;
-		//Arms.camera.enabled = true;
-		GameObject.Find("Arm Camera").camera.enabled = true;
+		if (other.gameObject.name == "Player_Wall_Jack_S2") {
+			atPlayerWall = false;
+			guiEnabled = false;
+			//Arms.camera.enabled = true;
+			GameObject.Find ("Arm Camera").camera.enabled = true;
+		}
 	}
 	
 	void Start(){ //I've commented this method out and nothing bad happens :o -Joseph
@@ -61,24 +65,25 @@ public class PlayerDice : MonoBehaviour {
 	//*******************************************************
 	void Update()
 	{
-		///	if (atWall) {
-		if (Input.GetKeyDown ("o")) {
-			Screen.lockCursor = false;  //Cursor is free to move when user goes into terminal
-			if (guiEnabled) {
-				resume ();
-			} else {
-				GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
-				Time.timeScale = 0.0f;
-				guiEnabled = true;
-				GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
-				GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;			
+		if (atPlayerWall) {
+			if (Input.GetKeyDown ("e")) {
+					Screen.lockCursor = false;  //Cursor is free to move when user goes into terminal
+					if (guiEnabled) {
+							resume ();
+					} else {
+							GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false;
+							Time.timeScale = 0.0f;
+							guiEnabled = true;
+							GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
+							GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;			
+					}
 			}
-		}
-		//	} 
-		else {
-			//Screen.showCursor = false;
-			//		Screen.lockCursor = true;  //Hiding Cursor means redoing the way the crosshair was implemented -Josephs
-			//		Screen.lockCursor = false; //Cursor remains locked if not in terminal
+			//	} 
+			else {
+				//Screen.showCursor = false;
+				//		Screen.lockCursor = true;  //Hiding Cursor means redoing the way the crosshair was implemented -Josephs
+				//		Screen.lockCursor = false; //Cursor remains locked if not in terminal
+			}
 		}
 	}
 	//*******************************************************
@@ -88,12 +93,12 @@ public class PlayerDice : MonoBehaviour {
 	//*******************************************************
 	public void OnGUI()
 	{
-		if (!atWall) {  //If not at wall terminal jack in - "show crosshair"
+		if (!atPlayerWall) {  //If not at wall terminal jack in - "show crosshair"
 			Vector3 mPos = Input.mousePosition;
 			GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
 		} 
 		
-		else if (atWall && Input.GetKeyDown ("e")) { 
+		else if (atPlayerWall && Input.GetKeyDown ("e")) { 
 			
 			//If at wall terminal show default cursor instead
 		}

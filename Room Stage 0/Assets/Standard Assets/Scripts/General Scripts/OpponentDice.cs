@@ -4,7 +4,7 @@ using System.Collections;
 public class OpponentDice : MonoBehaviour {
 	bool puzzle1Complete = false;
 	bool guiEnabled = false;
-	bool atWall = false;
+	bool atOpponentWall = false;
 	public AudioClip missionComplete;
 	TextEditor editor;
 	static string text="";
@@ -45,12 +45,16 @@ public class OpponentDice : MonoBehaviour {
 			"\t}\n" +
 			"}";
 	void OnTriggerEnter(Collider other){
-		atWall=true;
-		GameObject.Find("Arm Camera").camera.enabled = false;
-		//Arms.camera.enabled = false;
+		if (other.gameObject.name == "Opponent_Wall_Jack_S2") {
+			atOpponentWall = true;
+			GameObject.Find ("Arm Camera").camera.enabled = false;
+			//Arms.camera.enabled = false;
+		}
 	}
+
+
 	void OnTriggerExit(Collider other){
-		atWall=false;
+		atOpponentWall=false;
 		guiEnabled=false;
 		//Arms.camera.enabled = true;
 		GameObject.Find("Arm Camera").camera.enabled = true;
@@ -62,24 +66,23 @@ public class OpponentDice : MonoBehaviour {
 	}
 	//Switches the GUI on and off
 	//*******************************************************
-	void Update()
-	{
-	///	if (atWall) {
-			if (Input.GetKeyDown ("p")) {
-							Screen.lockCursor = false;  //Cursor is free to move when user goes into terminal
-				if (guiEnabled) {
-					resume ();
-				} else {
-					GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
-					Time.timeScale = 0.0f;
-					guiEnabled = true;
-					GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
-					GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
+	void Update(){
+		if (atOpponentWall) {
+			if (Input.GetKeyDown ("e")) {
+					Screen.lockCursor = false;  //Cursor is free to move when user goes into terminal
+					if (guiEnabled) {
+							resume ();
+					} else {
+							GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false;
+							Time.timeScale = 0.0f;
+							guiEnabled = true;
+							GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
+							GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
 
-				}
+					}
 			}
-		editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
-
+			editor = (TextEditor)GUIUtility.GetStateObject (typeof(TextEditor), GUIUtility.keyboardControl);
+		}
 	}
 	//*******************************************************
 	
@@ -88,12 +91,12 @@ public class OpponentDice : MonoBehaviour {
 	//*******************************************************
 	public void OnGUI()
 	{
-		if (!atWall) {  //If not at wall terminal jack in - "show crosshair"
+		if (!atOpponentWall) {  //If not at wall terminal jack in - "show crosshair"
 			Vector3 mPos = Input.mousePosition;
 			GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
 		} 
 		
-		else if (atWall && Input.GetKeyDown ("e")) { 
+		else if (atOpponentWall && Input.GetKeyDown ("e")) { 
 			
 			//If at wall terminal show default cursor instead
 		}
