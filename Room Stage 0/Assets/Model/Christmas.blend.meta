@@ -1,0 +1,134 @@
+fileFormatVersion: 2
+guid: 3b9cf25fbe3b64ba7a3ba8aadab57a73
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: cap
+    100002: //RootNode
+    100004: Cylinder_004
+    100006: ground
+    100008: hohoho
+    100010: hohoho1
+    100012: hohoho1_MeshPart0
+    100014: hohoho1_MeshPart1
+    100016: hohoho_MeshPart0
+    100018: hohoho_MeshPart1
+    100020: hohohohand
+    100022: light
+    100024: outdor
+    100026: scarf
+    100028: snowmen
+    100030: snowmen_MeshPart0
+    100032: snowmen_MeshPart1
+    400000: cap
+    400002: //RootNode
+    400004: Cylinder_004
+    400006: ground
+    400008: hohoho
+    400010: hohoho1
+    400012: hohoho1_MeshPart0
+    400014: hohoho1_MeshPart1
+    400016: hohoho_MeshPart0
+    400018: hohoho_MeshPart1
+    400020: hohohohand
+    400022: light
+    400024: outdor
+    400026: scarf
+    400028: snowmen
+    400030: snowmen_MeshPart0
+    400032: snowmen_MeshPart1
+    2300000: cap
+    2300002: Cylinder_004
+    2300004: ground
+    2300006: hohoho1_MeshPart0
+    2300008: hohoho1_MeshPart1
+    2300010: hohoho_MeshPart0
+    2300012: hohoho_MeshPart1
+    2300014: hohohohand
+    2300016: light
+    2300018: outdor
+    2300020: scarf
+    2300022: snowmen_MeshPart0
+    2300024: snowmen_MeshPart1
+    3300000: cap
+    3300002: Cylinder_004
+    3300004: ground
+    3300006: hohoho1_MeshPart0
+    3300008: hohoho1_MeshPart1
+    3300010: hohoho_MeshPart0
+    3300012: hohoho_MeshPart1
+    3300014: hohohohand
+    3300016: light
+    3300018: outdor
+    3300020: scarf
+    3300022: snowmen_MeshPart0
+    3300024: snowmen_MeshPart1
+    4300000: Cylinder_004
+    4300002: hohohohand
+    4300004: hohoho1_MeshPart0
+    4300006: hohoho1_MeshPart1
+    4300008: hohoho_MeshPart0
+    4300010: hohoho_MeshPart1
+    4300012: light
+    4300014: snowmen_MeshPart0
+    4300016: snowmen_MeshPart1
+    4300018: cap
+    4300020: scarf
+    4300022: outdor
+    4300024: ground
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
