@@ -13,6 +13,7 @@ public class ScannerInfoLevel2 : MonoBehaviour
 		void Start (){
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=false;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=false;
+		GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = false;
 		}
 	
 		// Update is called once per frame
@@ -36,11 +37,12 @@ public class ScannerInfoLevel2 : MonoBehaviour
 		guiEnabeled = false;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
-		GameObject.Find("Initialization").GetComponent<CursorTimeLevel2>().enabled=true;
+		GameObject.Find("Initialization").GetComponent<CursorTime>().enabled=true;
 		GameObject.Find ("First Person Controller").GetComponent<MakeOrder>().enabled = true;
 		GameObject.Find ("First Person Controller").GetComponent<scannerUi>().enabled = true;
 		GameObject.Find ("Wall_Jack_S2").GetComponent<ToolTipTxt> ().enabled = true;
 		GameObject.Find ("Terminal_Stage2").GetComponent<ToolTipTxt> ().enabled = true;
+		GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = true;
 	}
 }
 

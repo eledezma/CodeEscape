@@ -101,7 +101,7 @@ public class scannerUi : MonoBehaviour {
 		} 
 		
 		else if (atScanner && Input.GetKeyDown ("e")) { 
-			GameObject.Find("Initialization").GetComponent<CursorTimeLevel2>().showCursor=false;
+			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
 			//If at wall terminal show default cursor instead
 		}
 
@@ -309,7 +309,7 @@ public class scannerUi : MonoBehaviour {
 	public void resume(){
 		Time.timeScale = 1.0f;
 		guiEnabled = false;
-		GameObject.Find ("Initialization").GetComponent<CursorTimeLevel2> ().showCursor = true;
+		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
 	}

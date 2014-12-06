@@ -35,7 +35,7 @@ public class RayCastZoomAttempt : MonoBehaviour {
 			armCam.SetActive (false);
 			Screen.lockCursor = true;
 			//Screen.showCursor = false;
-			GameObject.Find("Initialization").GetComponent<CursorTimeLevel2>().showCursor=false;
+			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
 			cam.SetActive (true);
 			redEye1.SetActive (true);
 			redEye2.SetActive (true);
@@ -56,7 +56,7 @@ public class RayCastZoomAttempt : MonoBehaviour {
 		redEye1.SetActive (false);
 		redEye2.SetActive (false);
 		//Screen.showCursor = true;
-		GameObject.Find ("Initialization").GetComponent<CursorTimeLevel2> ().showCursor = true;
+		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 		Destroy (this);
 	}
 }

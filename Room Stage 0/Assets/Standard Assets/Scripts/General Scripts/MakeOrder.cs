@@ -64,7 +64,7 @@ public class MakeOrder : MonoBehaviour {
 			//GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
 		} 
 		else if (atOrderWall && Input.GetKeyDown ("e")) { 
-			GameObject.Find("Initialization").GetComponent<CursorTimeLevel2>().showCursor=false;
+			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
 				//If at wall terminal show default cursor instead
 		} 
 
@@ -97,7 +97,7 @@ public class MakeOrder : MonoBehaviour {
 			GameObject.Find("Door").GetComponent<Food>().bfast=true;
 		if (string.Compare (order,"cake",true) == 0)
 			GameObject.Find("Door").GetComponent<Food>().pie=true;
-		GameObject.Find ("Initialization").GetComponent<CursorTimeLevel2> ().showCursor = true;
+		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
 	}

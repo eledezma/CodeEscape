@@ -93,11 +93,11 @@ public class OpponentDice : MonoBehaviour {
 	{
 		if (!atOpponentWall) {  //If not at wall terminal jack in - "show crosshair"
 			Vector3 mPos = Input.mousePosition;
-			GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
+			//GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
 		} 
 		
 		else if (atOpponentWall && Input.GetKeyDown ("e")) { 
-			
+			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
 			//If at wall terminal show default cursor instead
 		}
 		

@@ -37,12 +37,14 @@ public class ToolTipTxtSkeleton : MonoBehaviour {
 								GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
 								GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
 								GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
+								GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = false;
 								//Screen.showCursor = false;
 						} else if (clickable && enabled) {
 								enabled = false;
 								GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = true;
 								GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = true;
 								GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=true;
+								GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = true;
 								Screen.lockCursor = false;
 								//Screen.showCursor = true;
 						}
