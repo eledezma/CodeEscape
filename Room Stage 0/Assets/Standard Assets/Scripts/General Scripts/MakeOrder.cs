@@ -24,7 +24,7 @@ public class MakeOrder : MonoBehaviour {
 		if (col1.gameObject.name == "Terminal_Stage2") {
 			atOrderWall = false;
 			guiEnabled = false;
-			GameObject.Find ("Arm Camera").camera.enabled = false;
+			GameObject.Find ("Arm Camera").camera.enabled = true;
 		}
 
 	}
