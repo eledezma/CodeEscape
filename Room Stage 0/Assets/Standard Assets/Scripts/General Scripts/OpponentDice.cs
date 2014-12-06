@@ -97,7 +97,7 @@ public class OpponentDice : MonoBehaviour {
 		} 
 		
 		else if (atOpponentWall && Input.GetKeyDown ("e")) { 
-			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
+			//GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor=false;
 			//If at wall terminal show default cursor instead
 		}
 		

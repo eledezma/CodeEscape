@@ -46,6 +46,7 @@ public class codingUI : MonoBehaviour {
 				} else {
 					Time.timeScale = 0.0f;
 					guiEnabled = true;
+					GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false;
 					GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
 					GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
 					}
@@ -66,7 +67,7 @@ public class codingUI : MonoBehaviour {
 	{
 		if (!atWall) {  //If not at wall terminal jack in - "show crosshair"
 			Vector3 mPos = Input.mousePosition;
-			GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
+			//GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
 		} 
 
 		else if (atWall && Input.GetKeyDown ("e")) { 
@@ -285,5 +286,6 @@ public class codingUI : MonoBehaviour {
 		guiEnabled = false;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled=true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled=true;
+		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 	}
 }
