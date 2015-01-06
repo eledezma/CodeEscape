@@ -124,7 +124,7 @@ public class LifeSaving : MonoBehaviour
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.18f, Screen.width * 0.14f, Screen.height * 0.05f), "Insert if statement")) {
 								if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
 										int num = getNumOfTabs (code, editor.pos);
-										code = addToCode (code, editor, "If(ballMoving)\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "else\n" + addedTabs (num) + "\t\n" + addedTabs (num));
+					code = addToCode (code, editor, "If(ballMoving){\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "}\n"+ addedTabs (num) + "else{\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "}");
 										ifAdded = true;
 								} else {
 										errorString = cantType;
@@ -138,7 +138,7 @@ public class LifeSaving : MonoBehaviour
 										int num = getNumOfTabs (code, editor.pos);
 						
 										if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
-												code = addToCode (code, editor, "closeGate();\n" + addedTabs (num));
+												code = addToCode (code, editor, "closeGate();");
 												gateClosed = true;
 										} else {
 												errorString = cantType;
@@ -156,7 +156,7 @@ public class LifeSaving : MonoBehaviour
 										int num = getNumOfTabs (code, editor.pos);
 					
 										if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
-												code = addToCode (code, editor, "openHole();\n" + addedTabs (num));
+												code = addToCode (code, editor, "openHole();");
 												holeOpened = true;
 										} else {
 												errorString = cantType;
@@ -174,7 +174,7 @@ public class LifeSaving : MonoBehaviour
 										int num = getNumOfTabs (code, editor.pos);
 					
 										if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
-												code = addToCode (code, editor, "openDoor();\n" + addedTabs (num));
+												code = addToCode (code, editor, "openDoor();");
 												doorOpened = true;
 										} else {
 												errorString = cantType;
