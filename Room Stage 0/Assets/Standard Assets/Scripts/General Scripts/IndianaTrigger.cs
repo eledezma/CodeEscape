@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class IndianaTrigger : MonoBehaviour {
@@ -17,6 +17,9 @@ public class IndianaTrigger : MonoBehaviour {
 		if (other.gameObject.tag == "Player"){
 			GameObject.Find ("Main Camera").GetComponent<AudioSource> ().audio.Stop ();
 			GameObject.Find ("IndianaJones").GetComponent<IndianaTime> ().playVideo = true;
+			GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false;
+			Screen.lockCursor = true;
+			Screen.showCursor = false;
 			Destroy (this);
 		}
 	}

@@ -29,6 +29,7 @@ public class IndianaTime : MonoBehaviour {
 		movie.Play ();
 		yield return new WaitForSeconds (audio.clip.length); 
 		GameObject.Find ("Main Camera").GetComponent<AudioSource> ().audio.Play ();
+		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 		cam.depth = -2;
 	}
 }

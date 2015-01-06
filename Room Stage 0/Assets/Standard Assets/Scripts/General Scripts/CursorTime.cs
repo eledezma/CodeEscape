@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class CursorTime : MonoBehaviour {
 
 	public bool showCursor;
 	public Texture2D cursorImage;
-	public bool mouseTime;
+	//public bool mouseTime;
 	// Use this for initialization
 	void Start () {
 		showCursor = true;
-		mouseTime = true;
+		//mouseTime = true;
 	}
 	
 	// Update is called once per frame
