@@ -6,7 +6,7 @@ public class LifeSaving : MonoBehaviour
 		
 		public static bool puzzle2Complete = false;
 		bool guiEnabled = false;
-		public static bool atScanner = false;
+		public static bool atScanner = true;
 		bool showError = false;
 		bool ifAdded = false;
 		bool doorOpened = false;
@@ -67,7 +67,8 @@ public class LifeSaving : MonoBehaviour
 										guiEnabled = true;
 										GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
 										GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
-				Screen.lockCursor = true;
+										GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false; //remove this line when atScanner works
+										Screen.lockCursor = false;
 								}
 						} 
 				

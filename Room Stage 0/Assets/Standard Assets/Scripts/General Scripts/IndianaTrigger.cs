@@ -15,7 +15,7 @@ public class IndianaTrigger : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other){
 		if (other.gameObject.tag == "Player"){
-			GameObject.Find ("Main Camera").GetComponent<AudioSource> ().audio.Stop ();
+			GameObject.Find ("Initialization").GetComponent<AudioSource> ().audio.Stop ();
 			GameObject.Find ("IndianaJones").GetComponent<IndianaTime> ().playVideo = true;
 			GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false;
 			Screen.lockCursor = true;
