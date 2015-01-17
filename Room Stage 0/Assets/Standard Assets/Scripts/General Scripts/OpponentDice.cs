@@ -78,7 +78,7 @@ public class OpponentDice : MonoBehaviour
 										resume ();
 								} else {
 										GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false;
-										Time.timeScale = 0.0f;
+//										Time.timeScale = 0.0f;
 										guiEnabled = true;
 										GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
 										GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
