@@ -20,6 +20,12 @@ public class IndianaTrigger : MonoBehaviour {
 			GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false;
 			Screen.lockCursor = true;
 			Screen.showCursor = false;
+
+			/*  Move these to after video ends
+			GameObject.Find ("Object").GetComponent<Rollinrollinrollin>().roll = true;
+			GameObject.Find ("IndianaTrigger").GetComponent<BoxCollider>().enabled = false;
+			*/
+
 			Destroy (this);
 		}
 	}

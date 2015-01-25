@@ -4,8 +4,9 @@ using System.Collections;
 public class Rollinrollinrollin : MonoBehaviour
 {
 
-		bool roll = false;
-		public static float speed = 0.1f;
+		public bool roll = false;
+		bool floorOpen = false;
+		public static float speed = 0.17f;
 		public static float offset = 0;
 		// Use this for initialization
 		void Start ()
@@ -29,10 +30,18 @@ public class Rollinrollinrollin : MonoBehaviour
 						GameObject.Find ("Object").renderer.material.SetTextureOffset ("_MainTex", new Vector2 (0, offset));
 						
 				}
-				if (Input.GetKeyDown ("r"))
+				
+				if (floorOpen) {
+						GameObject.Find ("Hatch").GetComponent<MeshRenderer> ().enabled = false;
+						GameObject.Find ("Hatch").GetComponent<BoxCollider> ().enabled = false;
+				}
+
+			if (Input.GetKeyDown ("r"))
 						roll = true;
-	
-		}
+				if (Input.GetKeyDown ("f"))
+				floorOpen = true;
+		
+	}
 	    void OnCollisionEnter(Collision col){
 		    if (col.gameObject.tag == "Player")
 				roll = false;
