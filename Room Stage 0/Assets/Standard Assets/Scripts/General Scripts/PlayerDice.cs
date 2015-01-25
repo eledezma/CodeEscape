@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlayerDice : MonoBehaviour
 {
-
 		bool puzzle1Complete = false;
 		bool guiEnabled = false;
 		bool atPlayerWall = false;
@@ -81,8 +80,10 @@ public class PlayerDice : MonoBehaviour
 										guiEnabled = true;
 										GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
 										GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;			
-								}
-						}
+					GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = false;
+
+				}
+			}
 			//	} 
 			else {
 								//Screen.showCursor = false;
@@ -98,6 +99,7 @@ public class PlayerDice : MonoBehaviour
 		//*******************************************************
 		public void OnGUI ()
 		{
+				
 				if (!atPlayerWall) {  //If not at wall terminal jack in - "show crosshair"
 						Vector3 mPos = Input.mousePosition;
 						//GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
@@ -115,6 +117,7 @@ public class PlayerDice : MonoBehaviour
 										showError = false;
 								}
 						}
+						GUI.SetNextControlName ("textarea");
 						GUI.TextArea (new Rect (Screen.width * 0.2f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
 			
 						if (showError) {
@@ -125,7 +128,8 @@ public class PlayerDice : MonoBehaviour
 						}
 			
 						editor = (TextEditor)GUIUtility.GetStateObject (typeof(TextEditor), GUIUtility.keyboardControl);
-			
+						editor.SelectNone ();
+			editor.MoveLineEnd();
 						GUI.Label (new Rect (500, 500, 200, 200), string.Format ("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
 			                                                      editor.SelectedText,
 			                                                      editor.pos,
@@ -140,7 +144,8 @@ public class PlayerDice : MonoBehaviour
 			
 						// Button that inserts the method that shoots a bullet
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.48f, Screen.width * 0.1f, Screen.height * 0.05f), "Cheat now!")) {
-
+								GUI.FocusControl ("textarea");
+								editor = goToNextEmptyLine (editor, code);				
 								code = "public class game{\n" +
 										"\tpublic static void main(String[] args){\n" +
 										"\t\tint rolledNumber = (int)(Math.random() * 6 ) + 1;\n" +
@@ -274,7 +279,24 @@ public class PlayerDice : MonoBehaviour
 				}
 				return tabs;
 		}
-	
+
+		public TextEditor goToNextEmptyLine (TextEditor e, string s)
+		{
+				char[] a = s.ToCharArray ();
+				int i;
+				if (editor.pos < 1)
+						i = editor.pos;
+				else
+						i = editor.pos - 1;
+				for (; i<s.Length; i++) {
+						if ((a [i] == '\t') && (a [i + 1] == '\n')) {
+								e.pos = i + 1;
+								return e;
+						}
+				}
+				return e;
+		}
+
 		public void resume ()
 		{
 				Time.timeScale = 1.0f;
@@ -282,7 +304,9 @@ public class PlayerDice : MonoBehaviour
 				GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = true;
 				GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = true;
 				GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
-				text = "Your die is fair. Don't" +
+				GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = true;
+
+		text = "Your die is fair. Don't" +
 						"mess with it. Cheating will" +
 						"result in dire consequences.";
 		}

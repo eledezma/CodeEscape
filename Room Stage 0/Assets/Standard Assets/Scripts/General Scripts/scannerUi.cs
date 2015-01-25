@@ -3,7 +3,6 @@ using System.Collections;
 
 public class scannerUi : MonoBehaviour
 {
-	
 		public static bool puzzle2Complete = false;
 		bool guiEnabled = false;
 		public static bool atScanner = false;
@@ -120,7 +119,7 @@ public class scannerUi : MonoBehaviour
 										showError = false;
 								}
 						}
-			
+						GUI.SetNextControlName ("textarea");
 						GUI.TextArea (new Rect (Screen.width * 0.2f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
 			
 						if (showError) {
@@ -130,7 +129,8 @@ public class scannerUi : MonoBehaviour
 								}
 						}
 						editor = (TextEditor)GUIUtility.GetStateObject (typeof(TextEditor), GUIUtility.keyboardControl);
-			
+						editor.SelectNone ();
+
 						GUI.skin.label.fontSize = 12;
 			
 						//variable textfield
@@ -142,6 +142,8 @@ public class scannerUi : MonoBehaviour
 			
 						// Button that inserts a scanner
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.18f, Screen.width * 0.14f, Screen.height * 0.05f), "Create a Scanner")) {
+								GUI.FocusControl ("textarea");
+								editor = goToNextEmptyLine (editor, code);				
 								if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
 										int num = getNumOfTabs (code, editor.pos);
 										code = addToCode (code, editor, "Scanner reader = new Scanner(System.in);\n" + addedTabs (num));
@@ -154,6 +156,8 @@ public class scannerUi : MonoBehaviour
 			
 						// Button that assigns a scanner to a variable
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.28f, Screen.width * 0.14f, Screen.height * 0.05f), "Assign scanner to variable")) {
+								GUI.FocusControl ("textarea");
+								editor = goToNextEmptyLine (editor, code);				
 								if (scannerCreated) {
 										int num = getNumOfTabs (code, editor.pos);
 										if (var == "order") {
@@ -284,7 +288,24 @@ public class scannerUi : MonoBehaviour
 				}
 				return tabs;
 		}
-	
+
+		public TextEditor goToNextEmptyLine (TextEditor e, string s)
+		{
+				char[] a = s.ToCharArray ();
+				int i;
+				if (editor.pos < 1)
+						i = editor.pos;
+				else
+						i = editor.pos - 1;
+				for (; i<s.Length; i++) {
+						if ((a [i] == '\t') && (a [i + 1] == '\n')) {
+								e.pos = i + 1;
+								return e;
+						}
+				}
+				return e;
+		}
+
 		public void resume ()
 		{
 				Time.timeScale = 1.0f;

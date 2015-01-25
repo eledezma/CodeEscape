@@ -82,10 +82,13 @@ public class OpponentDice : MonoBehaviour
 										guiEnabled = true;
 										GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
 										GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
+					GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = false;
 
-								}
-						}
+					
+				}
+			}
 						editor = (TextEditor)GUIUtility.GetStateObject (typeof(TextEditor), GUIUtility.keyboardControl);
+
 				}
 		}
 		//*******************************************************
@@ -95,6 +98,7 @@ public class OpponentDice : MonoBehaviour
 		//*******************************************************
 		public void OnGUI ()
 		{
+				
 				if (!atOpponentWall) {  //If not at wall terminal jack in - "show crosshair"
 						Vector3 mPos = Input.mousePosition;
 						//GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
@@ -112,7 +116,8 @@ public class OpponentDice : MonoBehaviour
 										showError = false;
 								}
 						}
-						GUI.TextArea (new Rect (Screen.width * 0.2f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
+			GUI.SetNextControlName ("textarea");
+			GUI.TextArea (new Rect (Screen.width * 0.2f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
 
 						if (showError) {
 								GUI.Label (new Rect (Screen.width * 0.4f, Screen.height * 0.45f, Screen.width * 0.3f, Screen.height * 0.1f), errorString);
@@ -122,8 +127,11 @@ public class OpponentDice : MonoBehaviour
 						}
 
 						editor = (TextEditor)GUIUtility.GetStateObject (typeof(TextEditor), GUIUtility.keyboardControl);
+						editor.SelectNone ();
+			editor.MoveLineEnd();
+
 			
-						GUI.Label (new Rect (500, 500, 200, 200), string.Format ("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
+			GUI.Label (new Rect (500, 500, 200, 200), string.Format ("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
 			                                                      facesCorrect,
 			                                                      randCorrect,
 			                                                      rand1,
@@ -168,6 +176,8 @@ public class OpponentDice : MonoBehaviour
 			
 						// Button that inserts a Random generator function
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.28f, Screen.width * 0.1f, Screen.height * 0.05f), "Assign a Random int between")) {
+								GUI.FocusControl ("textarea");
+								editor = goToNextEmptyLine (editor, code);				
 								int num = getNumOfTabs (code, editor.pos);
 								if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
 										randClicked = true;
@@ -189,6 +199,8 @@ public class OpponentDice : MonoBehaviour
 						}
 						// Button inserts a switch statement
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.1f, Screen.height * 0.05f), "Add Switch Statement")) {
+								GUI.FocusControl ("textarea");
+								editor = goToNextEmptyLine (editor, code);				
 								editor.MoveLineEnd ();
 								int num = getNumOfTabs (code, editor.pos);
 								if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
@@ -230,6 +242,8 @@ public class OpponentDice : MonoBehaviour
 
 						// Button that assigns a number to face
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.48f, Screen.width * 0.1f, Screen.height * 0.05f), "Assign an int to topFace")) {
+								GUI.FocusControl ("textarea");
+								editor = goToNextEmptyLine (editor, code);				
 								if (randClicked && switchClicked)
 										face3 = true;
 
@@ -421,14 +435,33 @@ public class OpponentDice : MonoBehaviour
 				}
 				return tabs;
 		}
-	
+
+		public TextEditor goToNextEmptyLine (TextEditor e, string s)
+		{
+				char[] a = s.ToCharArray ();
+				int i;
+				if (editor.pos < 1)
+						i = editor.pos;
+				else
+						i = editor.pos - 1;
+				for (; i<s.Length; i++) {
+						if ((a [i] == '\t') && (a [i + 1] == '\n')) {
+								e.pos = i + 1;
+								return e;
+						}
+				}
+				return e;
+		}
+
 		public void resume ()
 		{
 				Time.timeScale = 1.0f;
 				guiEnabled = false;
 				GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = true;
 				GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = true;
-				GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
+		GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = true;
+
+		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 				text = "The opponent die is not fair\n" +
 						"You need to make it fair.";
 		}

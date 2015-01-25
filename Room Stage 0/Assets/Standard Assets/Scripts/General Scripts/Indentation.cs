@@ -80,6 +80,7 @@ public class Indentation : MonoBehaviour
 		//*******************************************************
 		public void OnGUI ()
 		{
+				
 				if (!atWall) {  //If not at wall terminal jack in - "show crosshair"
 						//Vector3 mPos = Input.mousePosition;
 						//GUI.DrawTexture (new Rect (mPos.x - 32, Screen.height - mPos.y - 32, 64, 64), cursorImage);
@@ -91,10 +92,11 @@ public class Indentation : MonoBehaviour
 				if (guiEnabled) {
 						GUI.Box (new Rect (0, 0, Screen.width, Screen.height), "Indentation");
 			
-						// inserts the method that shoots a bullet
+						GUI.SetNextControlName ("textarea");
 						GUI.TextArea (new Rect (Screen.width * 0.2f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
 						editor = (TextEditor)GUIUtility.GetStateObject (typeof(TextEditor), GUIUtility.keyboardControl);
-			
+						editor.SelectNone ();
+
 						/*			GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
 			                                                      height1,
 			                                                      height2,
@@ -103,9 +105,10 @@ public class Indentation : MonoBehaviour
 			                                                      height4));*/
 			
 
-						// Button that inserts a print statement
+						// Button that inserts a tab 
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.18f, Screen.width * 0.1f, Screen.height * 0.05f), "Add Tab")) {
-
+								GUI.FocusControl ("textarea");
+								editor = goToNextEmptyLine (editor, code);				
 								//if((countLinesBefore(code,editor.pos)>=2)&&(countLinesAfter(code,editor.pos)>=2)&&isBlankLine(code,edi
 								code = addToCode (code, editor, "\t");
 								if (added) {
@@ -128,6 +131,8 @@ public class Indentation : MonoBehaviour
 			
 						// Button that inserts a for loop
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.28f, Screen.width * 0.1f, Screen.height * 0.05f), "Erase Tab")) {
+								GUI.FocusControl ("textarea");
+								editor = goToNextEmptyLine (editor, code);				
 								code = deleteFromCode (code, editor);
 								if (deleted) {
 										if (countLinesBefore (code, editor.pos) == 0)
@@ -315,7 +320,24 @@ public class Indentation : MonoBehaviour
 				}
 				return tabs;
 		}
-	
+
+		public TextEditor goToNextEmptyLine (TextEditor e, string s)
+		{
+				char[] a = s.ToCharArray ();
+				int i;
+				if (editor.pos < 1)
+						i = editor.pos;
+				else
+						i = editor.pos - 1;
+				for (; i<s.Length; i++) {
+						if ((a [i] == '\t') && (a [i + 1] == '\n')) {
+								e.pos = i + 1;
+								return e;
+						}
+				}
+				return e;
+		}
+
 		public void resume ()
 		{
 				Time.timeScale = 1.0f;

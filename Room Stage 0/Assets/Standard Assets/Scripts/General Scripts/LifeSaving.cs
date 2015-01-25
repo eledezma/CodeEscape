@@ -3,15 +3,16 @@ using System.Collections;
 
 public class LifeSaving : MonoBehaviour
 {
-		
+		int position = 0;
 		public static bool puzzle2Complete = false;
 		bool guiEnabled = false;
 		public static bool atScanner = true;
 		bool showError = false;
 		bool ifAdded = false;
-		bool doorOpened = false;
-		bool holeOpened = false;
-		bool gateClosed = false;
+		static bool doorOpen = false;
+		static bool holeOpened = false;
+		static bool gateOpen = false;
+		static bool ballMoving = true;
 		public Texture2D cursorImage;
 		TextEditor editor;
 		public static string output = "";
@@ -19,16 +20,17 @@ public class LifeSaving : MonoBehaviour
 		static string var = "";
 		public string code = "public class game{\n" +
 				"\tpublic static void main(String[] args){\n" +
-				"\t\tgateOpen = true;\n" +
-				"\t\tdoorOpen = false;\n" +
-				"\t\tholeOpen = false;\n" +
-				"\t\tballMoving = true;\n" +
+				"\t\tgateOpen = " + gateOpen + ";\n" +
+				"\t\tdoorOpen = " + doorOpen + ";\n" +
+				"\t\tholeOpen = " + holeOpened + ";\n" +
+				"\t\tballMoving =" + ballMoving + ";\n" +
 				"\t\t\n" +
 				"\t}\n" +
 				"}";
 		string errorString = "";
 		string cantType = "You can not add code here.";
 		string noIfStatement = "You must use an if statement.";
+		string oneIf = "You do not need more than one if statement.";
 		//Ray outwardRay;
 		//RaycastHit hit;
 		
@@ -58,25 +60,24 @@ public class LifeSaving : MonoBehaviour
 		//*******************************************************
 		void Update ()
 		{
-				
-						if (Input.GetKeyDown ("e")) {
-								if (guiEnabled) {
-										resume ();
-								} else {
-										Time.timeScale = 0.0f;
-										guiEnabled = true;
-										GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
-										GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
-										GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false; //remove this line when atScanner works
-										Screen.lockCursor = false;
-								}
-						} 
+				if (Input.GetKeyDown ("e")) {
+						if (guiEnabled) {
+								resume ();
+						} else {
+								Time.timeScale = 0.0f;
+								guiEnabled = true;
+								GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
+								GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
+								GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false; //remove this line when atScanner works
+								Screen.lockCursor = false;
+						}
+				} 
 				
 				// else if (!MakeOrder.atOrderWall && !atScanner) {
 				
-						//Screen.lockCursor = true;
-						//Screen.lockCursor = false; //Cursor remains locked if not in terminal
-			//	}
+				//Screen.lockCursor = true;
+				//Screen.lockCursor = false; //Cursor remains locked if not in terminal
+				//	}
 		}
 		//*******************************************************
 		
@@ -85,6 +86,9 @@ public class LifeSaving : MonoBehaviour
 		//*******************************************************
 		public void OnGUI ()
 		{
+			//	if (Input.GetMouseButtonDown (0) && editor.pos != 0) {
+			//			position = editor.pos;
+			//	}
 				//if(!(Physics.Raycast(outwardRay, out hit,15f))){
 				if (!atScanner && !MakeOrder.atOrderWall) {  //If not at wall terminal jack in - "show crosshair"
 				
@@ -96,6 +100,7 @@ public class LifeSaving : MonoBehaviour
 			
 				if (guiEnabled) {
 						GUI.Box (new Rect (0, 0, Screen.width, Screen.height), "Selection Statement Puzzle");
+
 				
 						//GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\n",showError));
 				
@@ -106,6 +111,7 @@ public class LifeSaving : MonoBehaviour
 								}
 						}
 				
+						GUI.SetNextControlName ("textarea");
 						GUI.TextArea (new Rect (Screen.width * 0.2f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
 				
 						if (showError) {
@@ -115,31 +121,36 @@ public class LifeSaving : MonoBehaviour
 								}
 						}
 						editor = (TextEditor)GUIUtility.GetStateObject (typeof(TextEditor), GUIUtility.keyboardControl);
-				
+			editor.SelectNone ();
+
 						GUI.skin.label.fontSize = 12;
 				
 				
 						//*******************************************************
-						// Button that inserts a scanner
+						// Button that inserts an if statement
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.18f, Screen.width * 0.14f, Screen.height * 0.05f), "Insert if statement")) {
-								if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
+								GUI.FocusControl ("textarea");
+				editor = goToNextEmptyLine(editor,code);				
+				if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
 										int num = getNumOfTabs (code, editor.pos);
-					code = addToCode (code, editor, "If(ballMoving){\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "}\n"+ addedTabs (num) + "else{\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "}");
+										code = addToCode (code, editor, "If(ballMoving){\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "}\n" + addedTabs (num) + "else{\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "}");
 										ifAdded = true;
 								} else {
-										errorString = cantType;
+										errorString = oneIf;
 										showError = true;
 								}
 						}
 				
 						// Button that adds a function that closes the gate
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.28f, Screen.width * 0.14f, Screen.height * 0.05f), "Close gate")) {
+								GUI.FocusControl ("textarea");
+				editor = goToNextEmptyLine(editor,code);				
 								if (ifAdded) {
 										int num = getNumOfTabs (code, editor.pos);
 						
 										if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
 												code = addToCode (code, editor, "closeGate();");
-												gateClosed = true;
+												gateOpen = true;
 										} else {
 												errorString = cantType;
 												showError = true;
@@ -147,12 +158,14 @@ public class LifeSaving : MonoBehaviour
 								} else {
 										errorString = noIfStatement;
 										showError = true;
-								}				
-						}
+								}		
+			}
 
 						// Button that adds a function that closes the gate
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.14f, Screen.height * 0.05f), "Open hole")) {
-								if (ifAdded) {
+				GUI.FocusControl ("textarea");
+				editor = goToNextEmptyLine(editor,code);				
+				if (ifAdded) {
 										int num = getNumOfTabs (code, editor.pos);
 					
 										if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
@@ -165,17 +178,19 @@ public class LifeSaving : MonoBehaviour
 								} else {
 										errorString = noIfStatement;
 										showError = true;
-								}				
-						}
+								}
+			}
 
 						// Button that opens level door
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.48f, Screen.width * 0.14f, Screen.height * 0.05f), "Open Door")) {
-								if (ifAdded) {
+								GUI.FocusControl ("textarea");
+				editor = goToNextEmptyLine(editor,code);				
+				if (ifAdded) {
 										int num = getNumOfTabs (code, editor.pos);
 					
 										if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
 												code = addToCode (code, editor, "openDoor();");
-												doorOpened = true;
+												doorOpen = true;
 										} else {
 												errorString = cantType;
 												showError = true;
@@ -183,15 +198,20 @@ public class LifeSaving : MonoBehaviour
 								} else {
 										errorString = noIfStatement;
 										showError = true;
-								}				
-						}		
-				
+								}		
+			}		
+						GUI.Label (new Rect (500, 500, 200, 200), string.Format ("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
+			                                                      position,
+			                                                      editor.pos,
+			                                                      0,
+			                                                      countLinesBefore (code, editor.pos),
+			                                                      countLinesAfter (code, editor.pos)));
 						// Button that activates the user's code
 						if (GUI.Button (new Rect (Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Submit")) {
-								if (doorOpened) {
+								if (doorOpen) {
 										// add code that opens door				
 								}
-								if (gateClosed) {
+								if (gateOpen) {
 										// add code that closes gate
 								}
 								if (holeOpened) {
@@ -206,7 +226,7 @@ public class LifeSaving : MonoBehaviour
 								code = restoreCode ();
 								showError = false;
 								ifAdded = false;
-								doorOpened = false;
+								doorOpen = false;
 						}
 				
 				
@@ -215,7 +235,7 @@ public class LifeSaving : MonoBehaviour
 								code = restoreCode ();
 								showError = false;
 								ifAdded = false;
-								doorOpened = false;
+								doorOpen = false;
 						}
 				
 				}
@@ -234,9 +254,11 @@ public class LifeSaving : MonoBehaviour
 		{
 				string dummy = "public class game{\n" +
 						"\tpublic static void main(String[] args){\n" +
-						"\t\tString order = \"No input\";\n" +
+						"\t\tgateOpen = " + gateOpen + ";\n" +
+						"\t\tdoorOpen = " + doorOpen + ";\n" +
+						"\t\tholeOpen = " + holeOpened + ";\n" +
+						"\t\tballMoving =" + ballMoving + ";\n" +
 						"\t\t\n" +
-						"\t\tSystem.out.println(order);\n" + 
 						"\t}\n" +
 						"}";
 				return dummy;
@@ -305,6 +327,21 @@ public class LifeSaving : MonoBehaviour
 				return tabs;
 		}
 		
+	public TextEditor goToNextEmptyLine(TextEditor e,string s){
+		char[] a = s.ToCharArray ();
+		int i;
+		if (editor.pos < 1)
+						i = editor.pos;
+				else
+						i = editor.pos - 1;
+		for (; i<s.Length; i++) {
+			if((a[i] == '\t')&&(a[i+1]=='\n')){
+				e.pos = i+1;
+			return e;
+			}
+			}
+		return e;
+		}
 		public void resume ()
 		{
 				Time.timeScale = 1.0f;
