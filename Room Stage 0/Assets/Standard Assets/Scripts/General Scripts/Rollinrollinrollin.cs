@@ -31,5 +31,11 @@ public class Rollinrollinrollin : MonoBehaviour
 				}
 				if (Input.GetKeyDown ("r"))
 						roll = true;
+	
+		}
+	    void OnCollisionEnter(Collision col){
+		    if (col.gameObject.tag == "Player")
+				roll = false;
+
 		}
 }
