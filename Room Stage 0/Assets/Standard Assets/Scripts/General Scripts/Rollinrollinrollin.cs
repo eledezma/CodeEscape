@@ -19,25 +19,25 @@ public class Rollinrollinrollin : MonoBehaviour
 		{
 			if (roll) {
 
-					GameObject.Find ("Object").transform.Translate (Vector3.forward * speed);
-					GameObject.Find ("Object").transform.Translate (Vector3.down * speed * 0.36397f); 
-					// angle of hallway is 20 degrees 0.36397f is tan of 20 ... mother of math!
+				GameObject.Find ("Object").transform.Translate (Vector3.forward * speed);
+				GameObject.Find ("Object").transform.Translate (Vector3.down * speed * 0.36397f); 
+				// angle of hallway is 20 degrees 0.36397f is tan of 20 ... mother of math!
 
 
-					offset += (Time.deltaTime * speed * 8) / 1.0f;
+				offset += (Time.deltaTime * speed * 8) / 1.0f;
 
-					//moves textures
-					GameObject.Find ("Object").renderer.material.SetTextureOffset ("_MainTex", new Vector2 (0, offset));
+				//moves textures
+				GameObject.Find ("Object").renderer.material.SetTextureOffset ("_MainTex", new Vector2 (0, offset));
 					
 			}
 			
 			if (floorOpen) {
-					GameObject.Find ("Hatch").GetComponent<MeshRenderer> ().enabled = false;
-					GameObject.Find ("Hatch").GetComponent<BoxCollider> ().enabled = false;
+				GameObject.Find ("Hatch").GetComponent<MeshRenderer> ().enabled = false;
+				GameObject.Find ("Hatch").GetComponent<BoxCollider> ().enabled = false;
 			}
 
 			if (Input.GetKeyDown ("r"))
-					roll = true;
+				roll = true;
 			if (Input.GetKeyDown ("f"))
 				floorOpen = true;
 		
@@ -45,6 +45,7 @@ public class Rollinrollinrollin : MonoBehaviour
 	    void OnCollisionEnter(Collision col){
 		    if (col.gameObject.tag == "Player")
 				roll = false;
-
+			if (col.gameObject.tag == "Stop_Boulder")
+				roll = false;
 		}
 }
