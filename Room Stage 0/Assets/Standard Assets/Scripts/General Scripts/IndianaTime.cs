@@ -31,5 +31,6 @@ public class IndianaTime : MonoBehaviour {
 		GameObject.Find ("Initialization").GetComponent<AudioSource> ().audio.Play ();
 		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 		cam.depth = -2;
+		GameObject.Find ("Object").GetComponent<Rollinrollinrollin>().roll = true;
 	}
 }
