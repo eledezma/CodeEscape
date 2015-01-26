@@ -5,7 +5,7 @@ public class Rollinrollinrollin : MonoBehaviour
 {
 
 		public bool roll = false;
-		bool floorOpen = false;
+		public bool floorOpen = false;
 		public static float speed = 0.17f;
 		public static float offset = 0;
 		// Use this for initialization
