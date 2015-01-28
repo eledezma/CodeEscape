@@ -16,5 +16,6 @@ public class GateOpenLevel5 : MonoBehaviour {
 			animation.Play (gateClosed.name);
 			lowered = false;
 		}
+
 	}
 }

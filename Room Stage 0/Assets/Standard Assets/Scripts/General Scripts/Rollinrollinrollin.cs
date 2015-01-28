@@ -40,6 +40,8 @@ public class Rollinrollinrollin : MonoBehaviour
 				roll = true;
 			if (Input.GetKeyDown ("f"))
 				floorOpen = true;
+
+			
 		
 	}
 	    void OnCollisionEnter(Collision col){

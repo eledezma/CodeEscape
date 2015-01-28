@@ -9,10 +9,13 @@ public class LifeSaving : MonoBehaviour
 		public static bool atScanner = true;
 		bool showError = false;
 		bool ifAdded = false;
-		static bool doorOpen = false;
-		static bool holeOpened = false;
-		static bool gateOpen = false;
-		static bool ballMoving = true;
+		public static bool doorOpen = false;
+		public static bool holeOpened = false;
+		public static bool gateLowered = false;
+		public static bool ballMoving = true;
+		public static bool doorOpenDone = false;
+		public static bool holeOpenedDone = false;
+		public static bool gateLoweredDone = false;
 		public Texture2D cursorImage;
 		TextEditor editor;
 		public static string output = "";
@@ -20,7 +23,7 @@ public class LifeSaving : MonoBehaviour
 		static string var = "";
 		public string code = "public class game{\n" +
 				"\tpublic static void main(String[] args){\n" +
-				"\t\tgateOpen = " + gateOpen + ";\n" +
+				"\t\tgateLowered = " + gateLowered + ";\n" +
 				"\t\tdoorOpen = " + doorOpen + ";\n" +
 				"\t\tholeOpen = " + holeOpened + ";\n" +
 				"\t\tballMoving =" + ballMoving + ";\n" +
@@ -73,6 +76,20 @@ public class LifeSaving : MonoBehaviour
 						}
 				} 
 				
+		ballMoving = GameObject.Find ("Object").GetComponent<Rollinrollinrollin> ().roll;
+		if(doorOpen&&!doorOpenDone){
+			GameObject.Find ("Door").GetComponent<DoorOpen> ().open = true;
+			doorOpenDone = true;
+		}
+		if (gateLowered && !doorOpenDone) {
+						GameObject.Find ("Gate").GetComponent<GateOpenLevel5> ().lowered = true;
+						gateLoweredDone = true;
+				}
+		if (holeOpened && !holeOpenedDone) {
+						GameObject.Find ("Object").GetComponent<Rollinrollinrollin> ().floorOpen = true;
+						holeOpenedDone = true;
+				}
+
 				// else if (!MakeOrder.atOrderWall && !atScanner) {
 				
 				//Screen.lockCursor = true;
@@ -150,7 +167,7 @@ public class LifeSaving : MonoBehaviour
 						
 										if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
 												code = addToCode (code, editor, "closeGate();");
-												gateOpen = true;
+												gateLowered = true;
 										} else {
 												errorString = cantType;
 												showError = true;
@@ -211,7 +228,7 @@ public class LifeSaving : MonoBehaviour
 								if (doorOpen) {
 										// add code that opens door				
 								}
-								if (gateOpen) {
+								if (gateLowered) {
 										// add code that closes gate
 								}
 								if (holeOpened) {
@@ -254,7 +271,7 @@ public class LifeSaving : MonoBehaviour
 		{
 				string dummy = "public class game{\n" +
 						"\tpublic static void main(String[] args){\n" +
-						"\t\tgateOpen = " + gateOpen + ";\n" +
+						"\t\tgateLowered = " + gateLowered + ";\n" +
 						"\t\tdoorOpen = " + doorOpen + ";\n" +
 						"\t\tholeOpen = " + holeOpened + ";\n" +
 						"\t\tballMoving =" + ballMoving + ";\n" +
