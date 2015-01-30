@@ -6,7 +6,7 @@ public class LifeSaving : MonoBehaviour
 		int position = 0;
 		public static bool puzzle2Complete = false;
 		bool guiEnabled = false;
-		public static bool atScanner = true;
+		public static bool atWall5 = false;
 		bool showError = false;
 		bool ifAdded = false;
 		public static bool doorOpen = false;
@@ -39,16 +39,16 @@ public class LifeSaving : MonoBehaviour
 		
 		void OnTriggerEnter (Collider col2)
 		{
-				if (col2.gameObject.name == "Wall_Jack_S2") {
-						atScanner = true;
+				if (col2.gameObject.name == "Wall_Jack_S5") {
+						atWall5 = true;
 						GameObject.Find ("Arm Camera").camera.enabled = false;
 				}
 		}
 		
 		void OnTriggerExit (Collider col2)
 		{
-				if (col2.gameObject.name == "Wall_Jack_S2") {
-						atScanner = false;
+				if (col2.gameObject.name == "Wall_Jack_S5") {
+						atWall5 = false;
 						guiEnabled = false;
 						GameObject.Find ("Arm Camera").camera.enabled = true;
 				}
@@ -63,19 +63,20 @@ public class LifeSaving : MonoBehaviour
 		//*******************************************************
 		void Update ()
 		{
-				if (Input.GetKeyDown ("e")) {
-						if (guiEnabled) {
-								resume ();
-						} else {
-								Time.timeScale = 0.0f;
-								guiEnabled = true;
-								GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
-								GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
-								GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false; //remove this line when atScanner works
-								Screen.lockCursor = false;
-						}
-				} 
-				
+		if (atWall5) {
+			if (Input.GetKeyDown ("e")) {
+				if (guiEnabled) {
+						resume ();
+				} else {
+						Time.timeScale = 0.0f;
+						guiEnabled = true;
+						GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
+						GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
+						GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false; //remove this line when atScanner works
+						Screen.lockCursor = false;
+				}
+			} 
+		}	
 		ballMoving = GameObject.Find ("Object").GetComponent<Rollinrollinrollin> ().roll;
 		if(doorOpen&&!doorOpenDone){
 			GameObject.Find ("Door").GetComponent<DoorOpen> ().open = true;
@@ -107,9 +108,9 @@ public class LifeSaving : MonoBehaviour
 			//			position = editor.pos;
 			//	}
 				//if(!(Physics.Raycast(outwardRay, out hit,15f))){
-				if (!atScanner && !MakeOrder.atOrderWall) {  //If not at wall terminal jack in - "show crosshair"
+				if (!atWall5) {  //If not at wall terminal jack in - "show crosshair"
 				
-				} else if (atScanner && Input.GetKeyDown ("e")) { 
+				} else if (atWall5 && Input.GetKeyDown ("e")) { 
 						GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false;
 						//If at wall terminal show default cursor instead
 				}
