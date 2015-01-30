@@ -18,6 +18,10 @@ public class IndianaTime : MonoBehaviour {
 		if (playVideo) {
 			playVideo = false;
 			cam.depth = 1;
+			GameObject.Find ("Main Camera").GetComponent<MouseLook>().enabled = false;
+			GameObject.Find ("First Person Controller").GetComponent<MouseLook>().enabled = false;
+			GameObject.Find ("First Person Controller").GetComponent<CharacterMotor>().canControl = false;
+			GameObject.Find ("First Person Controller").transform.rotation = Quaternion.Euler(-10, 180, 0);
 			movie = renderer.material.mainTexture as MovieTexture;
 			StartCoroutine (Playback ());
 		}
@@ -31,6 +35,9 @@ public class IndianaTime : MonoBehaviour {
 		GameObject.Find ("Initialization").GetComponent<AudioSource> ().audio.Play ();
 		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 		cam.depth = -2;
+		GameObject.Find ("Main Camera").GetComponent<MouseLook>().enabled = true;
+		GameObject.Find ("First Person Controller").GetComponent<MouseLook>().enabled = true;
+		GameObject.Find ("First Person Controller").GetComponent<CharacterMotor>().canControl = true;
 		GameObject.Find ("Object").GetComponent<Rollinrollinrollin>().roll = true;
 	}
 }

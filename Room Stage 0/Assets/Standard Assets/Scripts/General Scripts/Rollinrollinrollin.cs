@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Rollinrollinrollin : MonoBehaviour
 {
-
+		
+		public AudioClip pain;
 		public bool roll = false;
 		public bool floorOpen = false;
 		public static float speed = 0.17f;
@@ -44,9 +45,17 @@ public class Rollinrollinrollin : MonoBehaviour
 			
 		
 	}
-	    void OnCollisionEnter(Collision col){
-		    if (col.gameObject.tag == "Player")
+	    IEnumerator OnCollisionEnter(Collision col){
+		    if (col.gameObject.tag == "Player") {
 				roll = false;
+				Destroy (GameObject.Find ("Main Camera").GetComponent<MouseLook>());
+				Destroy (GameObject.Find ("First Person Controller").GetComponent<MouseLook>());
+				GameObject.Find ("First Person Controller").GetComponent<CharacterMotor>().canControl = false;
+				audio.clip = pain;
+				audio.Play ();
+				yield return new WaitForSeconds (audio.clip.length);
+				Application.LoadLevel (4);
+			}
 			if (col.gameObject.tag == "Stop_Boulder")
 				roll = false;
 		}

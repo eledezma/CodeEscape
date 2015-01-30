@@ -20,6 +20,7 @@ public class HatchTrigger : MonoBehaviour {
 			Debug.Log("Yahoo");
 			Destroy (this);
 		}
+
 	}
 	void OnTriggerStay (Collider other){
 		
