@@ -35,6 +35,7 @@ public class IndianaTime : MonoBehaviour {
 		GameObject.Find ("Initialization").GetComponent<AudioSource> ().audio.Play ();
 		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 		cam.depth = -2;
+		movie.Stop ();
 		GameObject.Find ("Main Camera").GetComponent<MouseLook>().enabled = true;
 		GameObject.Find ("First Person Controller").GetComponent<MouseLook>().enabled = true;
 		GameObject.Find ("First Person Controller").GetComponent<CharacterMotor>().canControl = true;
