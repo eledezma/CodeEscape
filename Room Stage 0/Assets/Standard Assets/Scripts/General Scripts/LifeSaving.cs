@@ -250,12 +250,24 @@ public class LifeSaving : MonoBehaviour
 				
 				
 						// Button that restores the code in the textArea to its original state
-						if (GUI.Button (new Rect (Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Reset") || reset) {
+						if (GUI.Button (new Rect (Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Reset")) {
 								code = restoreCode ();
 								showError = false;
 								ifAdded = false;
 								doorOpen = false;
-								reset = false;
+						}
+						if (reset){
+							code = restoreCode ();
+							showError = false;
+							ifAdded = false;
+							doorOpen = false;
+							holeOpened = false;
+							gateLowered = false;
+							ballMoving = true;
+							doorOpenDone = false;
+							holeOpenedDone = false;
+							gateLoweredDone = false;
+							reset = false;
 						}
 				
 				}
