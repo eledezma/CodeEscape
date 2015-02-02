@@ -33,6 +33,7 @@ public class Rollinrollinrollin : MonoBehaviour
 			}
 			
 			if (floorOpen) {
+				
 				GameObject.Find ("Hatch").GetComponent<MeshRenderer> ().enabled = false;
 				GameObject.Find ("Hatch").GetComponent<BoxCollider> ().enabled = false;
 			}
@@ -41,9 +42,8 @@ public class Rollinrollinrollin : MonoBehaviour
 				roll = true;
 			if (Input.GetKeyDown ("f"))
 				floorOpen = true;
-
-			
-		
+			if (Input.GetKeyDown ("t"))
+				roll = false;
 	}
 	    IEnumerator OnCollisionEnter(Collision col){
 		    if (col.gameObject.tag == "Player") {

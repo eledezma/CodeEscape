@@ -16,7 +16,7 @@ public class HatchTrigger : MonoBehaviour {
 	void OnTriggerEnter (Collider other){
 
 		if (other.gameObject.tag == "Boulder" && GameObject.Find ("Object").GetComponent<Rollinrollinrollin>().floorOpen) {
-			GameObject.Find ("Object").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+			//GameObject.Find ("Object").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 			GameObject.Find ("Object").GetComponent<Rollinrollinrollin>().roll = false;
 			Debug.Log("Yahoo");
 			Destroy (this);
@@ -26,7 +26,7 @@ public class HatchTrigger : MonoBehaviour {
 	void OnTriggerStay (Collider other){
 		
 		if (other.gameObject.tag == "Boulder" && GameObject.Find ("Object").GetComponent<Rollinrollinrollin>().floorOpen) {
-			GameObject.Find ("Object").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+			//GameObject.Find ("Object").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 			GameObject.Find ("Object").GetComponent<Rollinrollinrollin>().roll = false;
 			Debug.Log("Yahoo");
 			Destroy (this);

@@ -9,6 +9,7 @@ public class LifeSaving : MonoBehaviour
 		public static bool atWall5 = false;
 		bool showError = false;
 		bool ifAdded = false;
+		public bool reset = false;
 		public static bool doorOpen = false;
 		public static bool holeOpened = false;
 		public static bool gateLowered = false;
@@ -82,7 +83,7 @@ public class LifeSaving : MonoBehaviour
 			GameObject.Find ("Door").GetComponent<DoorOpen> ().open = true;
 			doorOpenDone = true;
 		}
-		if (gateLowered && !doorOpenDone) {
+		if (gateLowered && !gateLoweredDone) {
 						GameObject.Find ("Gate").GetComponent<GateOpenLevel5> ().lowered = true;
 						gateLoweredDone = true;
 				}
@@ -249,11 +250,12 @@ public class LifeSaving : MonoBehaviour
 				
 				
 						// Button that restores the code in the textArea to its original state
-						if (GUI.Button (new Rect (Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Reset")) {
+						if (GUI.Button (new Rect (Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Reset") || reset) {
 								code = restoreCode ();
 								showError = false;
 								ifAdded = false;
 								doorOpen = false;
+								reset = false;
 						}
 				
 				}
