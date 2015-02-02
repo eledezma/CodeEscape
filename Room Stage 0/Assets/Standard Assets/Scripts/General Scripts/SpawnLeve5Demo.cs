@@ -29,6 +29,7 @@ public class SpawnLeve5Demo : MonoBehaviour {
 			GameObject.Find ("Hatch").GetComponent<MeshRenderer> ().enabled = true;
 			GameObject.Find ("Hatch").GetComponent<BoxCollider> ().enabled = true;
 			GameObject.Find ("Door").transform.position = new Vector3(-10.98F, -185.4771F, 493.1635F);
+			GameObject.Find ("Door").transform.rotation = Quaternion.Euler(20, 0, 0);
 
 			GameObject.Find ("Main Camera").GetComponent<MouseLook>().enabled = true;
 			GameObject.Find ("First Person Controller").GetComponent<MouseLook>().enabled = true;
@@ -56,6 +57,7 @@ public class SpawnLeve5Demo : MonoBehaviour {
 			GameObject.Find ("Hatch").GetComponent<MeshRenderer> ().enabled = true;
 			GameObject.Find ("Hatch").GetComponent<BoxCollider> ().enabled = true;
 			GameObject.Find ("Door").transform.position = new Vector3(-10.98F, -185.4771F, 493.1635F);
+			GameObject.Find ("Door").transform.rotation = Quaternion.Euler(20, 0, 0);
 			
 			GameObject.Find ("Main Camera").GetComponent<MouseLook>().enabled = true;
 			GameObject.Find ("First Person Controller").GetComponent<MouseLook>().enabled = true;
