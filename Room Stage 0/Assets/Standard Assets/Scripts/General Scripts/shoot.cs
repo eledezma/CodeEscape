@@ -5,6 +5,7 @@ public class shoot: MonoBehaviour {
 	
 	public GameObject bullet_prefab;
 	float bulletImpulse = 20f;
+	GameObject[] NumBullets;
 	
 	// Use this for initialization
 	void Start () {
@@ -12,11 +13,34 @@ public class shoot: MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update(){
 		if( Input.GetButtonDown("Fire1") ) {
 			Camera cam = Camera.main;
 			GameObject thebullet = (GameObject)Instantiate(bullet_prefab, cam.transform.position + cam.transform.forward, cam.transform.rotation);
+			thebullet.tag = "Bullet";
 			thebullet.rigidbody.AddForce( cam.transform.forward * bulletImpulse, ForceMode.Impulse);
 		}
+		NumBullets = GameObject.FindGameObjectsWithTag("Bullet");
+		if (NumBullets.Length > 9) {
+			Destroy(NumBullets[0]);
+		}
 	}
+
+
+
+	/*void Update () {
+		if( Input.GetButtonDown("Fire1") ) {
+			Camera cam = Camera.main;
+			GameObject thebullet = (GameObject)Instantiate(bullet_prefab, cam.transform.position + cam.transform.forward, cam.transform.rotation);
+			thebullet.tag = "Bullet";
+			thebullet.rigidbody.AddForce( cam.transform.forward * bulletImpulse, ForceMode.Impulse);
+			StartCoroutine (DestroyBullet(thebullet));
+		}
+	}
+
+	IEnumerator DestroyBullet(GameObject bullet){
+		yield return new WaitForSeconds (10);
+		Destroy (bullet);	
+	}
+	*/
 }
