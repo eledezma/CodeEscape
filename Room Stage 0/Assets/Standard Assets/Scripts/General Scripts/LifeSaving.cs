@@ -69,12 +69,14 @@ public class LifeSaving : MonoBehaviour
 				if (guiEnabled) {
 						resume ();
 				} else {
-						Time.timeScale = 0.0f;
+					//	Time.timeScale = 0.0f;
 						guiEnabled = true;
 						GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
 						GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
 						GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false; //remove this line when atScanner works
 						Screen.lockCursor = false;
+						GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = false;
+
 				}
 			} 
 		}	
@@ -369,6 +371,8 @@ public class LifeSaving : MonoBehaviour
 				GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 				GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = true;
 				GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = true;
-		}
+				GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = true;
+
+	}
 }
 	
