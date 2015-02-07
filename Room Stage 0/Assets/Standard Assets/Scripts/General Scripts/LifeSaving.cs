@@ -3,7 +3,10 @@ using System.Collections;
 
 public class LifeSaving : MonoBehaviour
 {
+	string ifVar;
+	string elseVar;
 		int position = 0;
+		int action;
 		public static bool puzzle2Complete = false;
 		bool guiEnabled = false;
 		public static bool atWall5 = false;
@@ -17,6 +20,7 @@ public class LifeSaving : MonoBehaviour
 		public static bool doorOpenDone = false;
 		public static bool holeOpenedDone = false;
 		public static bool gateLoweredDone = false;
+		public static bool didTheThingAfterTheBallStopped = false;
 		public Texture2D cursorImage;
 		TextEditor editor;
 		public static string output = "";
@@ -94,6 +98,22 @@ public class LifeSaving : MonoBehaviour
 						holeOpenedDone = true;
 				}
 
+		if ((!ballMoving)&&(!didTheThingAfterTheBallStopped)&&(ifAdded)) {
+			if (action == 1)
+			{
+				gateLowered = true;
+			}
+			if(action ==2)
+			{
+				holeOpened = true;
+			}
+			if(action == 3)
+			{
+				doorOpen = true;
+			}			
+			didTheThingAfterTheBallStopped = true;
+		}
+
 				// else if (!MakeOrder.atOrderWall && !atScanner) {
 				
 				//Screen.lockCursor = true;
@@ -166,12 +186,20 @@ public class LifeSaving : MonoBehaviour
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.28f, Screen.width * 0.14f, Screen.height * 0.05f), "Close gate")) {
 								GUI.FocusControl ("textarea");
 				editor = goToNextEmptyLine(editor,code);				
-								if (ifAdded) {
+								if (ifAdded) 
+				{
 										int num = getNumOfTabs (code, editor.pos);
 						
 										if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
 												code = addToCode (code, editor, "closeGate();");
-												gateLowered = true;
+						if(countLinesBefore (code, editor.pos) == 10)
+						{
+							elseVar = "gateLowered";
+						}
+						else
+						{
+												ifVar = "gateLowered";
+						}
 										} else {
 												errorString = cantType;
 												showError = true;
@@ -191,7 +219,14 @@ public class LifeSaving : MonoBehaviour
 					
 										if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
 												code = addToCode (code, editor, "openHole();");
-												holeOpened = true;
+						if(countLinesBefore (code, editor.pos) == 10)
+						{
+							elseVar  = "holeOpened";
+						}
+						else
+						{
+							ifVar  = "holeOpened";
+						}
 										} else {
 												errorString = cantType;
 												showError = true;
@@ -205,13 +240,20 @@ public class LifeSaving : MonoBehaviour
 						// Button that opens level door
 						if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.48f, Screen.width * 0.14f, Screen.height * 0.05f), "Open Door")) {
 								GUI.FocusControl ("textarea");
-				editor = goToNextEmptyLine(editor,code);				
-				if (ifAdded) {
+								editor = goToNextEmptyLine(editor,code);				
+								if (ifAdded) {
 										int num = getNumOfTabs (code, editor.pos);
 					
 										if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
 												code = addToCode (code, editor, "openDoor();");
-												doorOpen = true;
+						   if(countLinesBefore (code, editor.pos) == 10)
+						   {
+							elseVar = "doorOpen" ;
+						}
+						else
+						{
+							ifVar = "doorOpen" ;
+						}
 										} else {
 												errorString = cantType;
 												showError = true;
@@ -223,24 +265,38 @@ public class LifeSaving : MonoBehaviour
 			}		
 						GUI.Label (new Rect (500, 500, 200, 200), string.Format ("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
 			                                                      position,
-			                                                      editor.pos,
-			                                                      0,
+			                                                         gateLowered,
+			                                                         didTheThingAfterTheBallStopped,
 			                                                      countLinesBefore (code, editor.pos),
-			                                                      countLinesAfter (code, editor.pos)));
+			                                                      action));
 						// Button that activates the user's code
 						if (GUI.Button (new Rect (Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Submit")) {
-								if (doorOpen) {
-										// add code that opens door				
-								}
-								if (gateLowered) {
-										// add code that closes gate
-								}
-								if (holeOpened) {
-										//add code that opens hole
-								}
-								resume ();
-						}
-				
+				switch(ifVar)
+				{
+				case("doorOpen"):
+					doorOpen = true;
+					break;
+				case("gateLowered"):
+					gateLowered = true;
+					break;
+				case("holeOpened"):
+					holeOpened = true;
+					break;
+				}
+				switch(elseVar)
+				{
+				case("doorOpen"):
+					action = 3;
+					break;
+				case("gateLowered"):
+					action = 1;
+					break;
+				case("holeOpened"):
+					action = 2;
+					break;
+				}
+					resume ();
+			}
 						// Button that closes the UI and disregards changes
 						if (GUI.Button (new Rect (Screen.width * 0.7f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Cancel")) {
 								resume ();
@@ -270,6 +326,9 @@ public class LifeSaving : MonoBehaviour
 							holeOpenedDone = false;
 							gateLoweredDone = false;
 							reset = false;
+				action = -1;
+				ifVar = "";
+				elseVar = "";
 						}
 				
 				}
@@ -302,6 +361,8 @@ public class LifeSaving : MonoBehaviour
 		{
 				int lines = 0;
 				char[] a = s.ToCharArray ();
+		if (position == 0)
+						position++;
 				for (int i=0; i<position-1; i++) {
 						if (a [i] == '\n')
 								lines++;
@@ -385,6 +446,9 @@ public class LifeSaving : MonoBehaviour
 				GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = true;
 				GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = true;
 
+	}
+	public void lowerGateLater(){
+		gateLowered = true;
 	}
 }
 	

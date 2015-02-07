@@ -12,7 +12,7 @@ public class DoorOpen : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (open || Input.GetKeyDown ("d")){
+		if (open || Input.GetKeyDown ("0")){
 			animation.Play (doorOpen.name);
 			open = false;
 		}
