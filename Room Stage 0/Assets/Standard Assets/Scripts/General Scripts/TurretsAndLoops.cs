@@ -12,8 +12,8 @@ public class TurretsAndLoops : MonoBehaviour
 	bool showError = false;
 	bool ifAdded = false;
 	public bool reset = false;
-	public static bool doorOpen = false;
-	public static bool holeOpened = false;
+	public static bool shootAdded = false;
+	public static bool turnAdded = false;
 	public static bool gateLowered = false;
 	public static bool ballMoving = true;
 	public static bool doorOpenDone = false;
@@ -28,7 +28,6 @@ public class TurretsAndLoops : MonoBehaviour
 				"\t\tif(turretTriggered){\n" +
 				"\t\t\tshoot(1);\n" +
 				"\t\t\tturnTurret();\n" +
-				"\t\t\t\n" +
 				"\t\t}\n" +
 				"\t}\n" +
 				"}";
@@ -49,7 +48,8 @@ void OnTriggerEnter (Collider col2)
 
 void OnTriggerExit (Collider col2)
 {
-	if (col2.gameObject.name == "Wall_Jack_S5") {
+	if (col2.gameObject.name == "Wall_Jack_S5") 
+		{
 		atWall5 = false;
 		guiEnabled = false;
 		GameObject.Find ("Arm Camera").camera.enabled = true;
@@ -67,9 +67,12 @@ void Update ()
 {
 	//if (atWall5) {
 		if (Input.GetKeyDown ("e")) {
-			if (guiEnabled) {
+			if (guiEnabled) 
+			{
 				resume ();
-			} else {
+			} 
+			else 
+			{
 				Time.timeScale = 0.0f;
 				guiEnabled = true;
 				GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
@@ -138,7 +141,7 @@ public void OnGUI ()
 		
 		//*******************************************************
 		// Button that erases unwanted code
-		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.18f, Screen.width * 0.14f, Screen.height * 0.05f), "Remove code")) {
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.18f, Screen.width * 0.1f, Screen.height * 0.05f), "Remove code")) {
 			GUI.FocusControl ("textarea");
 			editor = goToNextEmptyLine(editor,code);				
 			if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
@@ -151,7 +154,9 @@ public void OnGUI ()
 							"\t}\n" +
 							"}";				
 					ifAdded = true;
-			} else {
+			} 
+				else 
+				{
 				showError = true;
 			}
 		}
@@ -159,9 +164,13 @@ public void OnGUI ()
 			// for loop starting value textfield
 			//*******************************************************
 			string fs = GUI.TextField (new Rect (Screen.width * 0.12f, Screen.height * 0.28f, Screen.width * 0.04f, Screen.height * 0.05f), forStart.ToString ());
-			if (int.TryParse (fs, out temp)) {
+			if (int.TryParse (fs, out temp)) 
+			{
 				forStart = Mathf.Clamp (temp, 0, 50);
-			} else if (fs == "") {
+			} 
+			else if 
+			(fs == "") 
+			{
 				forStart = 0;
 			}
 			//*******************************************************
@@ -179,11 +188,13 @@ public void OnGUI ()
 			GUI.Label (new Rect (Screen.width * 0.16f, Screen.height * 0.24f, Screen.width * 0.04f, Screen.height * 0.05f), ("finish"));  	//for loop parameter title
 
 			// Button that inserts a for loop
-			if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.28f, Screen.width * 0.1f, Screen.height * 0.05f), "For Loop")) {
+			if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.28f, Screen.width * 0.1f, Screen.height * 0.05f), "For Loop")) 
+			{
 				GUI.FocusControl ("textarea");
 				editor = goToNextEmptyLine (editor, code);				
 				int num = getNumOfTabs (code, editor.pos);
-				if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
+				if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) 
+				{
 					code = addToCode (code, editor, "For(int counter=" + fs + ";counter<=" + ff + ";counter++){\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "}");
 				}
 			}
@@ -191,17 +202,22 @@ public void OnGUI ()
 			GUI.Label (new Rect (Screen.width * 0.12f, Screen.height * 0.34f, Screen.width * 0.04f, Screen.height * 0.05f), ("value"));						//print statement title
 			text = GUI.TextField (new Rect (Screen.width * 0.12f, Screen.height * 0.38f, Screen.width * 0.04f, Screen.height * 0.05f), text); 
 
-		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.1f, Screen.height * 0.05f), "Shoot")) {
+		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.1f, Screen.height * 0.05f), "Shoot")) 
+			{
 			GUI.FocusControl ("textarea");
 			editor = goToNextEmptyLine(editor,code);				
 			if (ifAdded) {
-					if(text.Equals("i")){
+					if(text.Equals("i")||((int.TryParse(text)>=0)&&(int.TryParse(text)<51)))
+					{
 				int num = getNumOfTabs (code, editor.pos);
 				
-				if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
+				if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) 
+						{
 					code = addToCode (code, editor, "shoot("+text+");\n"+addedTabs(num));
-					holeOpened = true;
-				} else {
+					shootAdded = true;
+				} 
+						else 
+						{
 					errorString = cantType;
 					showError = true;
 				}
@@ -219,20 +235,26 @@ public void OnGUI ()
 		}
 		
 		// Button that opens level door
-			if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.48f, Screen.width * 0.1f, Screen.height * 0.05f), "Turn Turret")) {
+			if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.48f, Screen.width * 0.1f, Screen.height * 0.05f), "Turn Turret")) 
+			{
 			GUI.FocusControl ("textarea");
 			editor = goToNextEmptyLine(editor,code);				
-			if (ifAdded) {
+			if (ifAdded) 
+				{
 				int num = getNumOfTabs (code, editor.pos);
 				
 				if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
 					code = addToCode (code, editor, "turnTurret();");
-					doorOpen = true;
-				} else {
+					turnAdded = true;
+				} 
+					else 
+					{
 					errorString = cantType;
 					showError = true;
 				}
-			} else {
+			}
+				else 
+				{
 				showError = true;
 			}		
 		}		
@@ -244,20 +266,16 @@ public void OnGUI ()
 		                                                         countLinesAfter (code, editor.pos)));
 		// Button that activates the user's code
 		if (GUI.Button (new Rect (Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Submit")) {
-			if (doorOpen) {
-				// add code that opens door				
-			}
-			if (gateLowered) {
-				// add code that closes gate
-			}
-			if (holeOpened) {
-				//add code that opens hole
+			if (ifAdded) 
+			{
+					doForLoop(forStart,forFinish,text);
 			}
 			resume ();
 		}
 		
 		// Button that closes the UI and disregards changes
-		if (GUI.Button (new Rect (Screen.width * 0.7f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Cancel")) {
+		if (GUI.Button (new Rect (Screen.width * 0.7f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Cancel")) 
+			{
 			resume ();
 			code = restoreCode ();
 			showError = false;
@@ -267,7 +285,8 @@ public void OnGUI ()
 		
 		
 		// Button that restores the code in the textArea to its original state
-		if (GUI.Button (new Rect (Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Reset") || reset) {
+		if (GUI.Button (new Rect (Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Reset") || reset) 
+			{
 			code = restoreCode ();
 			showError = false;
 			ifAdded = false;
@@ -294,7 +313,6 @@ public string restoreCode ()
 				"\t\tif(turretTriggered){\n" +
 				"\t\t\tshoot(1);\n" +
 				"\t\t\tturnTurret();\n" +
-				"\t\t\t\n" +
 				"\t\t}\n" +
 				"\t}\n" +
 				"}";
@@ -307,7 +325,8 @@ public int countLinesBefore (string s, int position)
 	char[] a = s.ToCharArray ();
 		if (position == 0)
 			position++;
-	for (int i=0; i<position-1; i++) {
+	for (int i=0; i<position-1; i++) 
+	{
 		if (a [i] == '\n')
 			lines++;
 	}
@@ -359,7 +378,8 @@ public TextEditor moveNextLine (TextEditor te, string s)
 public string addedTabs (int num)
 {
 	string tabs = "";
-	while (num>0) {
+	while (num>0) 
+		{
 		tabs = tabs.Insert (0, "\t");
 		num--;
 	}
@@ -373,8 +393,10 @@ public TextEditor goToNextEmptyLine(TextEditor e,string s){
 		i = editor.pos;
 	else
 		i = editor.pos - 1;
-	for (; i<s.Length; i++) {
-		if((a[i] == '\t')&&(a[i+1]=='\n')){
+	for (; i<s.Length; i++) 
+		{
+		if((a[i] == '\t')&&(a[i+1]=='\n'))
+			{
 			e.pos = i+1;
 			return e;
 		}
@@ -389,6 +411,24 @@ public void resume ()
 	GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = true;
 	GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = true;
 }
-}
 
+public void doForLoop(int start, int finish, string arg)
+	{
+		for (int s = start; s<finish; s++) 
+		{
+			if(arg == "i")
+			{
+				//shoot(s);
+			}
+			else
+			{
+					//shoot(int.tryparse(arg);
+			}
+			if (turnAdded) 
+			{
+				// add code that turns turret
+			}
+		}
+}
+}
 
