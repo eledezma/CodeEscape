@@ -28,6 +28,7 @@ public class TurretsAndLoops : MonoBehaviour
 				"\t\tif(turretTriggered){\n" +
 				"\t\t\tshoot(1);\n" +
 				"\t\t\tturnTurret();\n" +
+				"\t\t\t\n"+
 				"\t\t}\n" +
 				"\t}\n" +
 				"}";
@@ -195,7 +196,7 @@ public void OnGUI ()
 				int num = getNumOfTabs (code, editor.pos);
 				if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) 
 				{
-					code = addToCode (code, editor, "For(int counter=" + fs + ";counter<=" + ff + ";counter++){\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "}");
+					code = addToCode (code, editor, "For(int i=" + fs + ";i<=" + ff + ";i++){\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "}");
 				}
 			}
 		
@@ -207,7 +208,8 @@ public void OnGUI ()
 			GUI.FocusControl ("textarea");
 			editor = goToNextEmptyLine(editor,code);				
 			if (ifAdded) {
-					if(text.Equals("i")||((int.TryParse(text)>=0)&&(int.TryParse(text)<51)))
+					int.TryParse(text,out temp);
+					if(text.Equals("i")||((temp>=0)&&(temp<51)))
 					{
 				int num = getNumOfTabs (code, editor.pos);
 				
@@ -280,7 +282,7 @@ public void OnGUI ()
 			code = restoreCode ();
 			showError = false;
 			ifAdded = false;
-			doorOpen = false;
+			//doorOpen = false;
 		}
 		
 		
@@ -290,7 +292,7 @@ public void OnGUI ()
 			code = restoreCode ();
 			showError = false;
 			ifAdded = false;
-			doorOpen = false;
+			//doorOpen = false;
 			reset = false;
 		}
 		
@@ -313,6 +315,7 @@ public string restoreCode ()
 				"\t\tif(turretTriggered){\n" +
 				"\t\t\tshoot(1);\n" +
 				"\t\t\tturnTurret();\n" +
+				"\t\t\t\n"+
 				"\t\t}\n" +
 				"\t}\n" +
 				"}";
