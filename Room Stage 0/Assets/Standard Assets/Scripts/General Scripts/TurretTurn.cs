@@ -7,6 +7,7 @@ public class TurretTurn : MonoBehaviour {
 	public AnimationClip turn2;
 	public AnimationClip turn3;
 	public AnimationClip reverseTurn;
+	public bool turretActive;
 	public bool reset;
 	public bool turn;
 	int pos;
@@ -16,6 +17,7 @@ public class TurretTurn : MonoBehaviour {
 		pos = 0;
 		reset = false;
 		turn = false;
+		turretActive = false;
 	}
 	
 	// Update is called once per frame
