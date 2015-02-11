@@ -9,11 +9,13 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 	public AnimationClip PushDown;
 	public AnimationClip PushUp;
 	public bool buttondown;
+	public int turret_case;
 	public int max;
 	string objectName;
 	
 	// Use this for initialization
 	void Start () {
+		turret_case = 1;
 		buttondown = false;
 		objectName = this.gameObject.name;
 		max = 1;
@@ -33,11 +35,47 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 			button.animation.Play (PushDown.name);
 			if (objectName == "ResetTrigger")
 				turret.GetComponent<TurretTurn>().reset = true;
-			else{
-				for (int i = 0; i < max; i++){
-					StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i+1));
-					float wait = (i+1) * 0.5f + 1.5f;
-					yield return new WaitForSeconds(wait);
+			else
+			{
+				switch(turret_case)
+				{
+				case 1:
+					for (int i = 0; i < max; i++)
+					{
+						Debug.Log ("1");
+						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shootTurn(i+1));
+						float wait = (i+1) * 0.5f + 1.5f;
+						yield return new WaitForSeconds(wait);
+						
+					}
+					break;
+				case 2:
+					for (int i = 0; i < max; i++)
+					{
+						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turnShoot(i+1));
+						float wait = (i+1) * 0.5f + 1.5f;
+						yield return new WaitForSeconds(wait);
+						Debug.Log ("2");
+					}
+					break;
+				case 3:
+					for (int i = 0; i < max; i++)
+					{
+						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i+1));
+						float wait = (i+1) * 0.5f;
+						yield return new WaitForSeconds(wait);
+						Debug.Log ("3");
+					}
+					break;
+				default:
+					for (int i = 0; i < max; i++)
+					{
+						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+						float wait = 1f;
+						yield return new WaitForSeconds(wait);
+						Debug.Log ("4");
+					}
+					break;
 				}
 			}
 			button.animation.Play (PushUp.name);
@@ -59,11 +97,47 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 			button.animation.Play (PushDown.name);
 			if (objectName == "ResetTrigger")
 				turret.GetComponent<TurretTurn>().reset = true;
-			else{
-				for (int i = 0; i < max; i++){
-					StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i+1));
-					float wait = (i+1) * 0.5f + 1.5f;
-					yield return new WaitForSeconds(wait);
+			else
+			{
+				switch(turret_case)
+				{
+				case 1:
+					for (int i = 0; i < max; i++)
+					{
+						Debug.Log ("1");
+						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shootTurn(i+1));
+						float wait = (i+1) * 0.5f + 1.5f;
+						yield return new WaitForSeconds(wait);
+
+					}
+					break;
+				case 2:
+					for (int i = 0; i < max; i++)
+					{
+						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turnShoot(i+1));
+						float wait = (i+1) * 0.5f + 1.5f;
+						yield return new WaitForSeconds(wait);
+						Debug.Log ("2");
+					}
+					break;
+				case 3:
+					for (int i = 0; i < max; i++)
+					{
+						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i+1));
+						float wait = (i+1) * 0.5f;
+						yield return new WaitForSeconds(wait);
+						Debug.Log ("3");
+					}
+					break;
+				default:
+					for (int i = 0; i < max; i++)
+					{
+						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+						float wait = 1f;
+						yield return new WaitForSeconds(wait);
+						Debug.Log ("4");
+					}
+					break;
 				}
 			}
 			button.animation.Play (PushUp.name);

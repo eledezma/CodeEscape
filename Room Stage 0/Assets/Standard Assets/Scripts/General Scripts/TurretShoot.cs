@@ -26,7 +26,7 @@ public class TurretShoot : MonoBehaviour {
 	}
 
 
-	public IEnumerator shoot(int max){
+	public IEnumerator shootTurn(int max){
 		for (int i = 0; i < max; i++){
 			GameObject thebullet = (GameObject)Instantiate(bullet_prefab, transform.position, transform.rotation);
 			thebullet.tag = "Bullet";
@@ -36,6 +36,32 @@ public class TurretShoot : MonoBehaviour {
 		//yield return new WaitForSeconds (0.5f);
 		this.gameObject.GetComponentInParent<TurretTurn>().turn = true;
 
+	}
+
+	public IEnumerator turnShoot(int max){
+		this.gameObject.GetComponentInParent<TurretTurn>().turn = true;
+		yield return new WaitForSeconds (1f);
+		for (int i = 0; i < max; i++){
+			GameObject thebullet = (GameObject)Instantiate(bullet_prefab, transform.position, transform.rotation);
+			thebullet.tag = "Bullet";
+			thebullet.rigidbody.AddForce( transform.forward * bulletImpulse, ForceMode.Impulse);
+			yield return new WaitForSeconds (0.5f);
+		}
+		
+	}
+
+	public IEnumerator shoot(int max){
+		for (int i = 0; i < max; i++){
+			GameObject thebullet = (GameObject)Instantiate(bullet_prefab, transform.position, transform.rotation);
+			thebullet.tag = "Bullet";
+			thebullet.rigidbody.AddForce( transform.forward * bulletImpulse, ForceMode.Impulse);
+			yield return new WaitForSeconds (0.5f);
+		}
+		
+	}
+	public IEnumerator turn(){
+		this.gameObject.GetComponentInParent<TurretTurn>().turn = true;
+		yield return new WaitForSeconds (1f);	
 	}
 
 }
