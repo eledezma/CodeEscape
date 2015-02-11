@@ -4,7 +4,7 @@ using System.Collections;
 public class shoot: MonoBehaviour {
 	
 	public GameObject bullet_prefab;
-	float bulletImpulse = 20f;
+	float bulletImpulse =60f;
 	GameObject[] NumBullets;
 	
 	// Use this for initialization
