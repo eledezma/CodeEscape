@@ -67,7 +67,7 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 						Debug.Log ("3");
 					}
 					break;
-				default:
+				case 4:
 					for (int i = 0; i < max; i++)
 					{
 						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
@@ -76,8 +76,12 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 						Debug.Log ("4");
 					}
 					break;
+				default:
+					break;
 				}
 			}
+			if (button.animation.isPlaying)
+				yield return new WaitForSeconds (0.5f);
 			button.animation.Play (PushUp.name);
 			buttondown = false;
 			yield return new WaitForSeconds (1f);
@@ -129,7 +133,7 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 						Debug.Log ("3");
 					}
 					break;
-				default:
+				case 4:
 					for (int i = 0; i < max; i++)
 					{
 						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
@@ -138,8 +142,12 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 						Debug.Log ("4");
 					}
 					break;
+				default:
+					break;
 				}
 			}
+			if (button.animation.isPlaying)
+				yield return new WaitForSeconds (0.5f);
 			button.animation.Play (PushUp.name);
 			buttondown = false;
 			yield return new WaitForSeconds (1f);
