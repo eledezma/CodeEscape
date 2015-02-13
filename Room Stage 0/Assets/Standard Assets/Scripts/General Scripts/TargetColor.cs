@@ -8,15 +8,17 @@ public class TargetColor : MonoBehaviour {
 	float lastBulletTime;
 	public Texture redTarget;
 	public Texture blueTarget;
+	public bool blue;
 	// Use this for initialization
 	void Start () {
 		bulletCount = 0;
 		lastBulletTime = Time.time;
+		blue = false;
 	}
 	
 	// Update is called once per frame
-	void Update () {  //to reset bulletcount after 5 seconds of no bullets being hit
-		if ((Time.time - lastBulletTime) > 5.0 && bulletCount > 0) {
+	void Update () {  //to reset bulletcount after 6 seconds if no bullets hitting target
+		if ((Time.time - lastBulletTime) > 6.0 && bulletCount > 0) {
 			bulletCount = 0;
 		}
 	}
@@ -29,6 +31,7 @@ public class TargetColor : MonoBehaviour {
 		}
 		if (bulletCount == goal) {
 			renderer.material.mainTexture = blueTarget;
+			blue = true;
 			StartCoroutine (ChangeColor ());
 		}
 	}
@@ -36,11 +39,13 @@ public class TargetColor : MonoBehaviour {
 	public void reset(){
 		renderer.material.mainTexture = redTarget;
 		bulletCount = 0;
+		blue = false;
 	}
 
 	IEnumerator ChangeColor(){
-		yield return new WaitForSeconds (5);
+		yield return new WaitForSeconds (6);
 		renderer.material.mainTexture = redTarget;	
 		bulletCount = 0;
+		blue = false;
 	}
 }

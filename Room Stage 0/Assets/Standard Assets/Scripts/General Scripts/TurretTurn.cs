@@ -50,7 +50,9 @@ public class TurretTurn : MonoBehaviour {
 			pos = 0;
 			break;
 		}
-
+		GameObject.Find ("Target1").GetComponent<TargetColor> ().reset ();
+		GameObject.Find ("Target2").GetComponent<TargetColor> ().reset ();
+		GameObject.Find ("Target3").GetComponent<TargetColor> ().reset ();
 	}
 
 	void Turn(){
