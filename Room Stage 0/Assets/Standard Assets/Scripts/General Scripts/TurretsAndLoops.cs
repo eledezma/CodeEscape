@@ -418,33 +418,27 @@ public void resume ()
 }
 
 public void doForLoop(int start, int finish, string arg)
-	{
-		GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().turret_case = 5;
-
-			if(arg == "i")
-			{
-				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().numIsConstant = false;
-			}
+{
+	if (ifAdded) {
+		if(turnAdded){
+			GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6> ().turret_case = 1;
+		}
 			else
 			{
-				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().numIsConstant = true;
+				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6> ().turret_case = 3;
+			}
+			if (arg == "i") {
+				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6> ().numIsConstant = false;
+			} 
+			else {
+				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6> ().numIsConstant = true;
 				int num;
-				int.TryParse(arg,out num);
-				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().numOfBullets = num;
+				int.TryParse (arg, out num);
+				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6> ().numOfBullets = num;
 			}
-				
-			/*if (turnAdded) 
-			{
-				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().turnAdded = true;
-			}
-			else
-			{
-				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().turnAdded = true;
-			}*/
-		GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().forStart = start;
-		GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().forFinish = finish;
-
-
-}
+			GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6> ().forStart = start;
+			GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6> ().forFinish = finish;
+		}
+	}
 }
 
