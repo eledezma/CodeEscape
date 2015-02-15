@@ -14,6 +14,7 @@ public class TurretsAndLoops : MonoBehaviour
 	public bool reset = false;
 	public static bool shootAdded = false;
 	public static bool turnAdded = false;
+	public static bool codereset = false;
 	public static bool gateLowered = false;
 	public static bool ballMoving = true;
 	public static bool doorOpenDone = false;
@@ -154,7 +155,7 @@ public void OnGUI ()
 							"\t\t}\n" +
 							"\t}\n" +
 							"}";				
-					ifAdded = true;
+					codereset = true;
 			} 
 				else 
 				{
@@ -197,6 +198,7 @@ public void OnGUI ()
 				if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) 
 				{
 					code = addToCode (code, editor, "For(int i=" + fs + ";i<=" + ff + ";i++){\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "}");
+					ifAdded = true;
 				}
 			}
 		
@@ -417,21 +419,32 @@ public void resume ()
 
 public void doForLoop(int start, int finish, string arg)
 	{
-		for (int s = start; s<finish; s++) 
-		{
+		GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().turret_case = 5;
+
 			if(arg == "i")
 			{
-				//shoot(s);
+				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().numIsConstant = false;
 			}
 			else
 			{
-					//shoot(int.tryparse(arg);
+				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().numIsConstant = true;
+				int num;
+				int.TryParse(arg,out num);
+				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().numOfBullets = num;
 			}
+				
 			if (turnAdded) 
 			{
-				// add code that turns turret
+				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().turnAdded = true;
 			}
-		}
+			else
+			{
+				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().turnAdded = true;
+			}
+		GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().forStart = start;
+		GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().forFinish = finish;
+
+
 }
 }
 

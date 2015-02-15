@@ -11,6 +11,11 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 	public bool buttondown;
 	public int turret_case;
 	public int max;
+	public int forStart;
+	public int forFinish;
+	public bool numIsConstant;
+	public bool turnAdded = false;
+	public int numOfBullets;
 	string objectName;
 	
 	// Use this for initialization
@@ -18,7 +23,7 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 		turret_case = 1;
 		buttondown = false;
 		objectName = this.gameObject.name;
-		max = 1;
+		max = 3;
 	}
 	
 	// Update is called once per frame
@@ -78,6 +83,27 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 						Debug.Log ("4");
 					}
 					break;
+			case 5:
+				for (int i = forStart; i < forFinish; i++)
+				{
+					if(numIsConstant)
+					{
+						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+					}
+					else
+					{
+						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+					}
+					float wait = (i+1) * 0.5f;
+					yield return new WaitForSeconds(wait);
+					Debug.Log ("5");
+				
+				if (turnAdded == true)
+				{
+				//	StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+				}
+				}
+				break;
 				default:
 					break;
 				}
