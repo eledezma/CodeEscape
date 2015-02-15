@@ -10,30 +10,39 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 	public AnimationClip PushUp;
 	public bool buttondown;
 	public int turret_case;
-	public int max;
 	public int forStart;
 	public int forFinish;
 	public bool numIsConstant;
-	public bool turnAdded = false;
 	public int numOfBullets;
 	string objectName;
+	bool less;
 	
 	// Use this for initialization
-	void Start () {
-		turret_case = 1;
+	void Start () 
+	{
 		buttondown = false;
+		turret_case = 1;
+		forStart = 0;
+		forFinish = 0;
+		numIsConstant = true;
+		numOfBullets = 1;
 		objectName = this.gameObject.name;
-		max = 3;
+		less = false;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		/*if (Input.GetKeyDown ("9") && objectName != "ResetTrigger")
 			StartCoroutine (test ());*/
-
 	}
 
-	IEnumerator test(){
+	IEnumerator test()
+	{
+			if (forStart > forFinish)
+				less = true;
+			else
+				less = false;
 			turret.GetComponent<TurretTurn>().turretActive = true;
 			buttondown = true;
 			if (button.animation.isPlaying)
@@ -44,68 +53,135 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 				turret.GetComponent<TurretTurn>().reset = true;
 			else
 			{
-				switch(turret_case)
+				if (less)
 				{
-				case 1:
-					for (int i = 0; i < max; i++)
+					for (int i = forStart; i >= forFinish; i--)
 					{
-						Debug.Log ("1");
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shootTurn(i+1));
-						float wait = (i+1) * 0.5f + 1.5f;
-						yield return new WaitForSeconds(wait);
-						
+						switch(turret_case)
+						{
+						case 1:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+							    float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+							    StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+							}
+							break;
+						case 2:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+							}
+							break;
+						case 3:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+							}
+							break;
+						case 4:
+							StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+							yield return new WaitForSeconds (1f);
+							break;
+						default:
+							break;
+						}
 					}
-					break;
-				case 2:
-					for (int i = 0; i < max; i++)
-					{
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turnShoot(i+1));
-						float wait = (i+1) * 0.5f + 1.5f;
-						yield return new WaitForSeconds(wait);
-						Debug.Log ("2");
-					}
-					break;
-				case 3:
-					for (int i = 0; i < max; i++)
-					{
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i+1));
-						float wait = (i+1) * 0.5f;
-						yield return new WaitForSeconds(wait);
-						Debug.Log ("3");
-					}
-					break;
-				case 4:
-					for (int i = 0; i < max; i++)
-					{
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
-						float wait = 1f;
-						yield return new WaitForSeconds(wait);
-						Debug.Log ("4");
-					}
-					break;
-			case 5:
-				for (int i = forStart; i < forFinish; i++)
-				{
-					if(numIsConstant)
-					{
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
-					}
-					else
-					{
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
-					}
-					float wait = (i+1) * 0.5f;
-					yield return new WaitForSeconds(wait);
-					Debug.Log ("5");
-				
-				if (turnAdded == true)
-				{
-				//	StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
 				}
-				}
-				break;
-				default:
-					break;
+				else
+				{
+					for (int i = forStart; i <= forFinish; i++)
+					{
+						switch(turret_case)
+						{
+						case 1:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+							}
+							break;
+						case 2:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+							}
+							break;
+						case 3:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+							}
+							break;
+						case 4:
+							StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+							yield return new WaitForSeconds (1f);
+							break;
+						default:
+							break;
+						}
+					}
 				}
 			}
 			if (button.animation.isPlaying)
@@ -114,12 +190,16 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 			buttondown = false;
 			yield return new WaitForSeconds (1f);
 			turret.GetComponent<TurretTurn>().turretActive = false;
-
-
 	}
 	
-	IEnumerator OnTriggerEnter (Collider other){
-		if (other.gameObject.tag == "Player" && !buttondown && !turret.GetComponent<TurretTurn>().turretActive){
+	IEnumerator OnTriggerEnter (Collider other)
+	{
+		if (other.gameObject.tag == "Player" && !buttondown && !turret.GetComponent<TurretTurn>().turretActive)
+		{
+			if (forStart > forFinish)
+				less = true;
+			else
+				less = false;
 			turret.GetComponent<TurretTurn>().turretActive = true;
 			buttondown = true;
 			if (button.animation.isPlaying)
@@ -130,47 +210,135 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 				turret.GetComponent<TurretTurn>().reset = true;
 			else
 			{
-				switch(turret_case)
+				if (less)
 				{
-				case 1:
-					for (int i = 0; i < max; i++)
+					for (int i = forStart; i >= forFinish; i--)
 					{
-						Debug.Log ("1");
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shootTurn(i+1));
-						float wait = (i+1) * 0.5f + 1.5f;
-						yield return new WaitForSeconds(wait);
-						
+						switch(turret_case)
+						{
+						case 1:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+							}
+							break;
+						case 2:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+							}
+							break;
+						case 3:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+							}
+							break;
+						case 4:
+							StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+							yield return new WaitForSeconds (1f);
+							break;
+						default:
+							break;
+						}
 					}
-					break;
-				case 2:
-					for (int i = 0; i < max; i++)
+				}
+				else
+				{
+					for (int i = forStart; i <= forFinish; i++)
 					{
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turnShoot(i+1));
-						float wait = (i+1) * 0.5f + 1.5f;
-						yield return new WaitForSeconds(wait);
-						Debug.Log ("2");
+						switch(turret_case)
+						{
+						case 1:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+							}
+							break;
+						case 2:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+							}
+							break;
+						case 3:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+							}
+							break;
+						case 4:
+							StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+							yield return new WaitForSeconds (1f);
+							break;
+						default:
+							break;
+						}
 					}
-					break;
-				case 3:
-					for (int i = 0; i < max; i++)
-					{
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i+1));
-						float wait = (i+1) * 0.5f;
-						yield return new WaitForSeconds(wait);
-						Debug.Log ("3");
-					}
-					break;
-				case 4:
-					for (int i = 0; i < max; i++)
-					{
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
-						float wait = 1f;
-						yield return new WaitForSeconds(wait);
-						Debug.Log ("4");
-					}
-					break;
-				default:
-					break;
 				}
 			}
 			if (button.animation.isPlaying)
@@ -179,13 +347,18 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 			buttondown = false;
 			yield return new WaitForSeconds (1f);
 			turret.GetComponent<TurretTurn>().turretActive = false;
-			
-		}	
+		}
 	}
 	
 
-	IEnumerator OnTriggerStay (Collider other){
-		if (other.gameObject.tag == "Player" && !buttondown && !turret.GetComponent<TurretTurn>().turretActive){
+	IEnumerator OnTriggerStay (Collider other)
+	{
+		if (other.gameObject.tag == "Player" && !buttondown && !turret.GetComponent<TurretTurn>().turretActive)
+		{
+			if (forStart > forFinish)
+				less = true;
+			else
+				less = false;
 			turret.GetComponent<TurretTurn>().turretActive = true;
 			buttondown = true;
 			if (button.animation.isPlaying)
@@ -196,47 +369,135 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 				turret.GetComponent<TurretTurn>().reset = true;
 			else
 			{
-				switch(turret_case)
+				if (less)
 				{
-				case 1:
-					for (int i = 0; i < max; i++)
+					for (int i = forStart; i >= forFinish; i--)
 					{
-						Debug.Log ("1");
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shootTurn(i+1));
-						float wait = (i+1) * 0.5f + 1.5f;
-						yield return new WaitForSeconds(wait);
-
+						switch(turret_case)
+						{
+						case 1:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+							}
+							break;
+						case 2:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+							}
+							break;
+						case 3:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+							}
+							break;
+						case 4:
+							StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+							yield return new WaitForSeconds (1f);
+							break;
+						default:
+							break;
+						}
 					}
-					break;
-				case 2:
-					for (int i = 0; i < max; i++)
+				}
+				else
+				{
+					for (int i = forStart; i <= forFinish; i++)
 					{
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turnShoot(i+1));
-						float wait = (i+1) * 0.5f + 1.5f;
-						yield return new WaitForSeconds(wait);
-						Debug.Log ("2");
+						switch(turret_case)
+						{
+						case 1:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+							}
+							break;
+						case 2:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+								yield return new WaitForSeconds (1f);
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+							}
+							break;
+						case 3:
+							if (numIsConstant)
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(numOfBullets));
+								float wait = 0.5f * numOfBullets;
+								yield return new WaitForSeconds(wait);
+							}
+							else
+							{
+								StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i));
+								float wait = 0.5f * i;
+								yield return new WaitForSeconds(wait);
+							}
+							break;
+						case 4:
+							StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
+							yield return new WaitForSeconds (1f);
+							break;
+						default:
+							break;
+						}
 					}
-					break;
-				case 3:
-					for (int i = 0; i < max; i++)
-					{
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().shoot(i+1));
-						float wait = (i+1) * 0.5f;
-						yield return new WaitForSeconds(wait);
-						Debug.Log ("3");
-					}
-					break;
-				case 4:
-					for (int i = 0; i < max; i++)
-					{
-						StartCoroutine (turret.GetComponentInChildren<TurretShoot>().turn());
-						float wait = 1f;
-						yield return new WaitForSeconds(wait);
-						Debug.Log ("4");
-					}
-					break;
-				default:
-					break;
 				}
 			}
 			if (button.animation.isPlaying)
@@ -245,7 +506,6 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 			buttondown = false;
 			yield return new WaitForSeconds (1f);
 			turret.GetComponent<TurretTurn>().turretActive = false;
-			
-		}	
+		}
 	}
 }

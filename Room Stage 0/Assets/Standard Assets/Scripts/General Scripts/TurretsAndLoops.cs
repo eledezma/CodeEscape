@@ -433,14 +433,14 @@ public void doForLoop(int start, int finish, string arg)
 				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().numOfBullets = num;
 			}
 				
-			if (turnAdded) 
+			/*if (turnAdded) 
 			{
 				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().turnAdded = true;
 			}
 			else
 			{
 				GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().turnAdded = true;
-			}
+			}*/
 		GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().forStart = start;
 		GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6>().forFinish = finish;
 
