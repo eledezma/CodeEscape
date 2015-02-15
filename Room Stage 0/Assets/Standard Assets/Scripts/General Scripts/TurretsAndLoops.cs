@@ -29,13 +29,16 @@ public class TurretsAndLoops : MonoBehaviour
 				"\t\tif(turretTriggered){\n" +
 				"\t\t\tshoot(1);\n" +
 				"\t\t\tturnTurret();\n" +
-				"\t\t\t\n"+
+			//	"\t\t\t\n"+
 				"\t\t}\n" +
 				"\t}\n" +
 				"}";
 string errorString = "";
 string cantType = "You can not add code here.";
 	string badInput = "You can only inter an integer value between 0 and 50";
+	string oneForLoop = "You can only use one for loop in this level.";
+	string oneTurn = "you can only use one turn method";
+	string oneShoot = "You can only use one shoot method";
 
 //Ray outwardRay;
 //RaycastHit hit;
@@ -73,7 +76,7 @@ void Update ()
 			{
 				resume ();
 			} 
-			else 
+			else if (!(GameObject.Find("turret").GetComponent<TurretTurn>().turretActive))
 			{
 				Time.timeScale = 0.0f;
 				guiEnabled = true;
@@ -144,10 +147,10 @@ public void OnGUI ()
 		//*******************************************************
 		// Button that erases unwanted code
 		if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.18f, Screen.width * 0.1f, Screen.height * 0.05f), "Remove code")) {
-			GUI.FocusControl ("textarea");
-			editor = goToNextEmptyLine(editor,code);				
-			if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
-				int num = getNumOfTabs (code, editor.pos);
+	//		GUI.FocusControl ("textarea");
+	//		editor = goToNextEmptyLine(editor,code);				
+	//		if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
+	//			int num = getNumOfTabs (code, editor.pos);
 					code = "public class game{\n" +
 						"\tpublic static void main(String[] args){\n" +
 							"\t\tif(turretTriggered){\n" +
@@ -157,11 +160,12 @@ public void OnGUI ()
 							"}";				
 					codereset = true;
 			} 
-				else 
-				{
-				showError = true;
-			}
-		}
+	//			else 
+	//			{
+	//				errorString = cantType;
+	//			showError = true;
+	//		}
+	//	}
 		
 			// for loop starting value textfield
 			//*******************************************************
@@ -192,13 +196,28 @@ public void OnGUI ()
 			// Button that inserts a for loop
 			if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.28f, Screen.width * 0.1f, Screen.height * 0.05f), "For Loop")) 
 			{
+				if(!ifAdded)
+				{
 				GUI.FocusControl ("textarea");
 				editor = goToNextEmptyLine (editor, code);				
 				int num = getNumOfTabs (code, editor.pos);
 				if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) 
 				{
-					code = addToCode (code, editor, "For(int i=" + fs + ";i<=" + ff + ";i++){\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "}");
+					if(ff.CompareTo(fs)>=0)
+					{
+						code = addToCode (code, editor, "For(int i=" + fs + ";i<=" + ff + ";i++){\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "}");
+					}
+					else
+					{
+						code = addToCode (code, editor, "For(int i=" + fs + ";i>=" + ff + ";i--){\n" + addedTabs (num) + "\t\n" + addedTabs (num) + "}");
+					}
 					ifAdded = true;
+				}
+				}
+				else
+				{
+					errorString = oneForLoop;
+					showError = true;
 				}
 			}
 		
@@ -210,6 +229,8 @@ public void OnGUI ()
 			GUI.FocusControl ("textarea");
 			editor = goToNextEmptyLine(editor,code);				
 			if (ifAdded) {
+					if(!shootAdded)
+					{
 					int.TryParse(text,out temp);
 					if(text.Equals("i")||((temp>=0)&&(temp<51)))
 					{
@@ -232,8 +253,15 @@ public void OnGUI ()
 						showError = true;
 					}
 				}
+				else
+				{
+					errorString = oneShoot;
+					showError = true;
+				}
+				}
 				else 
 				{
+				errorString = oneForLoop;
 				showError = true;
 			}
 		}
@@ -259,6 +287,7 @@ public void OnGUI ()
 			}
 				else 
 				{
+					errorString = oneForLoop;
 				showError = true;
 			}		
 		}		
@@ -284,6 +313,8 @@ public void OnGUI ()
 			code = restoreCode ();
 			showError = false;
 			ifAdded = false;
+			codereset = false;
+				turnAdded = false;
 			//doorOpen = false;
 		}
 		
@@ -317,7 +348,7 @@ public string restoreCode ()
 				"\t\tif(turretTriggered){\n" +
 				"\t\t\tshoot(1);\n" +
 				"\t\t\tturnTurret();\n" +
-				"\t\t\t\n"+
+			//	"\t\t\t\n"+
 				"\t\t}\n" +
 				"\t}\n" +
 				"}";
