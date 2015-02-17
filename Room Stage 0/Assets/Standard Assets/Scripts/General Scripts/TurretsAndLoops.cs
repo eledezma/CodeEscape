@@ -8,7 +8,7 @@ public class TurretsAndLoops : MonoBehaviour
 	int position = 0;
 	public static bool puzzle2Complete = false;
 	bool guiEnabled = false;
-	public static bool atWall5 = false;
+	public static bool atWall6 = false;
 	bool showError = false;
 	bool ifAdded = false;
 	public bool reset = false;
@@ -45,17 +45,17 @@ string cantType = "You can not add code here.";
 
 void OnTriggerEnter (Collider col2)
 {
-	if (col2.gameObject.name == "Wall_Jack_S5") {
-		atWall5 = true;
+	if (col2.gameObject.name == "Wall_Jack_S6") {
+		atWall6 = true;
 		GameObject.Find ("Arm Camera").camera.enabled = false;
 	}
 }
 
 void OnTriggerExit (Collider col2)
 {
-	if (col2.gameObject.name == "Wall_Jack_S5") 
+	if (col2.gameObject.name == "Wall_Jack_S6") 
 		{
-		atWall5 = false;
+		atWall6 = false;
 		guiEnabled = false;
 		GameObject.Find ("Arm Camera").camera.enabled = true;
 	}
@@ -70,7 +70,7 @@ void Start ()
 //*******************************************************
 void Update ()
 {
-	//if (atWall5) {
+	if (atWall6) {
 		if (Input.GetKeyDown ("e")) {
 			if (guiEnabled) 
 			{
@@ -86,7 +86,7 @@ void Update ()
 				Screen.lockCursor = false;
 			}
 		} 
-//	}	
+	}	
 
 	
 	// else if (!MakeOrder.atOrderWall && !atScanner) {
@@ -107,9 +107,9 @@ public void OnGUI ()
 	//			position = editor.pos;
 	//	}
 	//if(!(Physics.Raycast(outwardRay, out hit,15f))){
-	/*if (!atWall5) {  //If not at wall terminal jack in - "show crosshair"
+	if (!atWall6) {  //If not at wall terminal jack in - "show crosshair"
 		
-	} else */
+	} else 
 		if ( Input.GetKeyDown ("e")) { 
 		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false;
 		//If at wall terminal show default cursor instead
