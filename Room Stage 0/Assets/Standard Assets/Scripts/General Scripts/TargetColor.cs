@@ -18,9 +18,11 @@ public class TargetColor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {  //to reset bulletcount after 6 seconds if no bullets hitting target
-		if ((Time.time - lastBulletTime) > 6.0 && bulletCount > 0) {
+		if ((Time.time - lastBulletTime) > 3.7F && bulletCount > 0) {
 			bulletCount = 0;
 		}
+		if (GameObject.Find ("PlayButton").GetComponentInChildren<ButtonTriggerStage6> ().answer > 6.1F)
+			reset ();
 	}
 
 	void OnCollisionEnter(Collision col){
@@ -43,7 +45,7 @@ public class TargetColor : MonoBehaviour {
 	}
 
 	IEnumerator ChangeColor(){
-		yield return new WaitForSeconds (6);
+		yield return new WaitForSeconds (3.7F);
 		renderer.material.mainTexture = redTarget;	
 		bulletCount = 0;
 		blue = false;

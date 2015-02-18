@@ -158,7 +158,12 @@ public void OnGUI ()
 							"\t\t}\n" +
 							"\t}\n" +
 							"}";				
-					codereset = true;
+				codereset = true;
+				shootAdded = false;
+				showError = false;
+				ifAdded = false;
+				codereset = false;
+				turnAdded = false;
 			} 
 	//			else 
 	//			{
@@ -232,7 +237,7 @@ public void OnGUI ()
 					if(!shootAdded)
 					{
 					int.TryParse(text,out temp);
-					if(text.Equals("i")||((temp>=0)&&(temp<51)))
+					if((!text.Equals(""))&&(text.Equals("i")||((temp>=0)&&(temp<51))))
 					{
 				int num = getNumOfTabs (code, editor.pos);
 				
@@ -311,6 +316,7 @@ public void OnGUI ()
 			{
 			resume ();
 			code = restoreCode ();
+				shootAdded = false;
 			showError = false;
 			ifAdded = false;
 			codereset = false;
@@ -322,10 +328,12 @@ public void OnGUI ()
 		// Button that restores the code in the textArea to its original state
 		if (GUI.Button (new Rect (Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Reset") || reset) 
 			{
-			code = restoreCode ();
-			showError = false;
-			ifAdded = false;
-			//doorOpen = false;
+				code = restoreCode ();
+				shootAdded = false;
+				showError = false;
+				ifAdded = false;
+				codereset = false;
+				turnAdded = false;
 			reset = false;
 		}
 		
