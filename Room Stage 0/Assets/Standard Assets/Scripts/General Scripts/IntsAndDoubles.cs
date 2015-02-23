@@ -57,6 +57,10 @@ public class IntsAndDoubles : MonoBehaviour {
 	//*******************************************************
 	void Update ()
 	{
+		if (Input.GetKeyDown ("o")){
+			GameObject.Find("Enemy").GetComponent<Enemy>().enabled = true;
+			GameObject.Find("Enemy").GetComponent<MeshRenderer>().enabled = true;
+		}
 		if (atWall6) {
 			if (Input.GetKeyDown ("e")) {
 				if (guiEnabled) 
