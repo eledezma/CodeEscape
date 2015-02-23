@@ -15,14 +15,14 @@ public class BoulderTriggerZone : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		//blah blah
-		if (other.tag == "test Ball") {
+		if (other.tag == "Boulder") {
 			particleSystem.Play ();
 			Debug.Log("it hit us");
-			audio.Play();
+			//audio.Play();
 		}
 	}
 	void OnTriggerExit(Collider other){
-		if (other.tag == "test Ball")
+		if (other.tag == "Boulder")
 			particleSystem.Stop ();
 	}
 }
