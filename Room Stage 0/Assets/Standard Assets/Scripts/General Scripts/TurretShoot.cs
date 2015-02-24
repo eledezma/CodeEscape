@@ -4,7 +4,7 @@ using System.Collections;
 public class TurretShoot : MonoBehaviour {
 
 	public GameObject bullet_prefab;
-	float bulletImpulse =60f;
+	public float bulletImpulse =60f;
 	GameObject[] NumBullets;
 	public bool test;
 	
@@ -15,7 +15,7 @@ public class TurretShoot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update(){
-		if (test) { //remove this
+		if (test || Input.GetKeyDown ("9")) { //remove this
 			StartCoroutine(shoot (2));
 			test = false;
 		}

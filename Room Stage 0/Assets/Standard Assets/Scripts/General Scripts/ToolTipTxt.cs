@@ -11,7 +11,7 @@ public class ToolTipTxt : MonoBehaviour {
 	private GUIStyle guiStyleBack;
 	private bool nextTo = false;
 	bool clickable = false;
-	bool enabled = false;
+	bool Enabled = false;
 	
 	void  Start (){
 		guiStyleFore = new GUIStyle();
@@ -31,10 +31,10 @@ public class ToolTipTxt : MonoBehaviour {
 
 	void Update(){
 				if (Input.GetMouseButtonDown (0)) {
-						if (clickable && !enabled) {
-								enabled = true;
-						} else if (clickable && enabled) {
-								enabled = false;
+						if (clickable && !Enabled) {
+								Enabled = true;
+						} else if (clickable && Enabled) {
+								Enabled = false;
 						}
 				}
 	}
@@ -50,12 +50,12 @@ public class ToolTipTxt : MonoBehaviour {
 	void  OnMouseExit (){
 		currentToolTipText = "";
 		clickable = false;
-	//	enabled = false;
+	//	Enabled = false;
 	}
 	
 	void  OnGUI (){
 		GUI.UnfocusWindow ();
-		if ((enabled)&&(info!="")) {
+		if ((Enabled)&&(info!="")) {
 			GUI.Box(new Rect (Screen.width*0.35f,Screen.height*0.35f,Screen.width*0.3f,Screen.height*0.3f),currentToolTipText);
 		    GUI.Label(new Rect (Screen.width*0.35f,Screen.height*0.35f,Screen.width*0.3f,Screen.height*0.3f),"\n\n"+info);
 		}
