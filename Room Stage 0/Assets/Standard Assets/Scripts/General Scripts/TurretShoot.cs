@@ -4,12 +4,13 @@ using System.Collections;
 public class TurretShoot : MonoBehaviour {
 
 	public GameObject bullet_prefab;
-	public float bulletImpulse =60f;
+	public float bulletImpulse;
 	GameObject[] NumBullets;
 	public bool test;
 	
 	// Use this for initialization
 	void Start () {
+		bulletImpulse = 60f;
 		test = false;
 	}
 	

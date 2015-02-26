@@ -7,9 +7,11 @@ public class ButtonTriggerStage7 : MonoBehaviour {
 	public GameObject button;
 	public AnimationClip PushDown;
 	public AnimationClip PushUp;
+	public int numBullets;
 	private bool buttondown;
 	// Use this for initialization
 	void Start () {
+		numBullets = 1;
 		buttondown = false;
 	}
 	
@@ -24,7 +26,7 @@ public class ButtonTriggerStage7 : MonoBehaviour {
 			buttondown = true;
 			audio.PlayOneShot(ButtonClick);
 			button.animation.Play (PushDown.name);
-			StartCoroutine(GameObject.Find ("turret/ShootCube").GetComponent<TurretShoot> ().shoot (1));
+			StartCoroutine(GameObject.Find ("turret/ShootCube").GetComponent<TurretShoot> ().shoot (numBullets));
 			/*if (button.animation.isPlaying)
 				yield return new WaitForSeconds (0.5f);*/
 			yield return new WaitForSeconds(4.5F);
@@ -40,7 +42,7 @@ public class ButtonTriggerStage7 : MonoBehaviour {
 			buttondown = true;
 			audio.PlayOneShot(ButtonClick);
 			button.animation.Play (PushDown.name);
-			StartCoroutine(GameObject.Find ("turret/ShootCube").GetComponent<TurretShoot> ().shoot (1));
+			StartCoroutine(GameObject.Find ("turret/ShootCube").GetComponent<TurretShoot> ().shoot (numBullets));
 			/*if (button.animation.isPlaying)
 				yield return new WaitForSeconds (0.5f);*/
 			yield return new WaitForSeconds(4.5F);
