@@ -32,6 +32,7 @@ public class MKPlay : MonoBehaviour {
 		cam.depth = 1;
 		GameObject.Find ("Initialization").GetComponent<AudioSource> ().audio.Stop ();
 		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false;
+		GameObject.Find ("Initialization").GetComponent<AudioSource> ().volume = 1;
 		Screen.lockCursor = true;
 		Screen.showCursor = false;
 		GameObject.Find ("Main Camera").GetComponent<MouseLook>().enabled = false;
