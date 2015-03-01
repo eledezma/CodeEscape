@@ -14,18 +14,13 @@ public class IntsAndDoubles : MonoBehaviour {
 	TextEditor editor;
 	public static string text = "";
 	static string var = "";
-	public string code = "public class game{\n" +
-		"\tpublic static void main(String[] args){\n" +
-			"\t\tif(buttonClicked){\n" +
-			"\t\t\tint power = "+/*insert turret value here*/""+";\n"+
-			"\t\t\tlaunchBurger(power);\n" +
-			"\t\t}\n" +
-			"\t}\n" +
-			"}";
+	public string code;
 	string errorString = "";
 	string cantType = "You can not add code here.";
 	string badInput = "You can not assign a double value to an int";
 	string oneShoot = "You can only launch one burger at a time.";
+	string invalid = "invalid character.";
+	static float power = 1;
 	
 	//Ray outwardRay;
 	//RaycastHit hit;
@@ -50,7 +45,24 @@ public class IntsAndDoubles : MonoBehaviour {
 	
 	void Start ()
 	{
-		
+		if(converted)
+		{
+		power = GameObject.Find ("turret").GetComponentInChildren<TurretShoot> ().bulletImpulse/25;
+		}
+		else
+		{
+			power = (int)(GameObject.Find ("turret").GetComponentInChildren<TurretShoot> ().bulletImpulse/25);
+		}
+
+		code = "public class game{\n" +
+			"\tpublic static void main(String[] args){\n" +
+				"\t\tif(buttonClicked){\n" +
+				"\t\t\tint power = "+power+";\n"+
+				"\t\t\tlaunchBurger(power);\n" +
+				"\t\t}\n" +
+				"\t}\n" +
+				"}";
+
 	}
 	
 	//Switches the GUI on and off
@@ -93,7 +105,6 @@ public class IntsAndDoubles : MonoBehaviour {
 	//*******************************************************
 	public void OnGUI ()
 	{
-		int temp;
 		//	if (Input.GetMouseButtonDown (0) && editor.pos != 0) {
 		//			position = editor.pos;
 		//	}
@@ -136,16 +147,15 @@ public class IntsAndDoubles : MonoBehaviour {
 			
 			
 			//*******************************************************
-			// Button that erases unwanted code
 			if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.18f, Screen.width * 0.1f, Screen.height * 0.05f), "Change int to double")) {
 				//		GUI.FocusControl ("textarea");
-				//		editor = goToNextEmptyLine(editor,code);				
+				//		editor = goToNexpowertyLine(editor,code);				
 				//		if ((countLinesBefore (code, editor.pos) >= 2) && (countLinesAfter (code, editor.pos) >= 2) && isBlankLine (code, editor.pos)) {
 				//			int num = getNumOfTabs (code, editor.pos);
 				code = "public class game{\n" +
 					"\tpublic static void main(String[] args){\n" +
 						"\t\tif(buttonClicked){\n" +
-						"\t\t\tdouble power = "+/*insert turret value here*/""+";\n"+
+						"\t\t\tdouble power = "+power+";\n"+
 						"\t\t\tlaunchBurger(power);\n" +
 						"\t\t}\n" +
 						"\t}\n" +
@@ -164,21 +174,43 @@ public class IntsAndDoubles : MonoBehaviour {
 			if (GUI.Button (new Rect (Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.1f, Screen.height * 0.05f), "Assign power")) 
 			{
 				GUI.FocusControl ("textarea");
-				editor = goToNextEmptyLine(editor,code);			
-						int.TryParse(text,out temp);
-						if(text.Contains(".")&&!converted){
+				editor = goToNexpowertyLine(editor,code);			
+				if(!isNumber(text))
+				{
+					errorString = invalid;
+					showError = true;
+				}
+				else
+				{
+					float.TryParse(text,out power);
+
+				if(text.Contains(".")&&!converted)
+				{
 					errorString = badInput;
 					showError = true;
 				}
-				else{
+				else if (converted)
+				{
 						code = "public class game{\n" +
 							"\tpublic static void main(String[] args){\n" +
 								"\t\tif(buttonClicked){\n" +
-								"\t\t\tdouble power = "+text+";\n"+
+								"\t\t\tdouble power = "+power+";\n"+
 								"\t\t\tlaunchBurger(power);\n" +
 								"\t\t}\n" +
 								"\t}\n" +
 								"}";
+				}
+				else
+				{
+					code = "public class game{\n" +
+						"\tpublic static void main(String[] args){\n" +
+							"\t\tif(buttonClicked){\n" +
+							"\t\t\tint power = "+power+";\n"+
+							"\t\t\tlaunchBurger(power);\n" +
+							"\t\t}\n" +
+							"\t}\n" +
+							"}";
+				}
 				}
 					
 			}
@@ -193,6 +225,8 @@ public class IntsAndDoubles : MonoBehaviour {
 			// Button that activates the user's code
 			if (GUI.Button (new Rect (Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Submit")) {
 				//assign the actual turret power to whatever is in the text field
+				GameObject.Find ("turret").GetComponentInChildren<TurretShoot> ().bulletImpulse = power*25;
+
 				resume ();
 			}
 			
@@ -212,8 +246,11 @@ public class IntsAndDoubles : MonoBehaviour {
 				code = restoreCode ();
 				converted = false;
 				showError = false;
+				GameObject.Find ("turret").GetComponentInChildren<TurretShoot> ().bulletImpulse = 50;
+				power = 2;
 
-				}
+
+			}
 			
 		}
 		
@@ -229,10 +266,10 @@ public class IntsAndDoubles : MonoBehaviour {
 	
 	public string restoreCode ()
 	{
-		string dummy = code = "public class game{\n" +
+		string dummy = "public class game{\n" +
 			"\tpublic static void main(String[] args){\n" +
 				"\t\tif(buttonClicked){\n" +
-				"\t\t\tint power = "+/*insert turret value here*/""+";\n"+
+				"\t\t\tint power = "+power+";\n"+
 				"\t\t\tlaunchBurger(power);\n" +
 				"\t\t}\n" +
 				"\t}\n" +
@@ -307,7 +344,7 @@ public class IntsAndDoubles : MonoBehaviour {
 		return tabs;
 	}
 	
-	public TextEditor goToNextEmptyLine(TextEditor e,string s){
+	public TextEditor goToNexpowertyLine(TextEditor e,string s){
 		char[] a = s.ToCharArray ();
 		int i;
 		if (editor.pos < 1)
@@ -332,6 +369,21 @@ public class IntsAndDoubles : MonoBehaviour {
 		GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = true;
 		GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = true;
 	}
+
+	public bool isNumber(string input)
+	{
+		bool b = true;
+		char[] a = input.ToCharArray ();
+		for(int i=0;i<input.Length;i++)
+		{
+			if (!(((a[i].CompareTo('0')>0)&&(a[i].CompareTo('9')<0))||((a[i].CompareTo('.')==0))))
+			{
+				b=false;
+			}
+		}
+		return b;
+	}
+
 
 }
 
