@@ -38,7 +38,7 @@ public class ButtonTriggerStage6 : MonoBehaviour {
 		timeFinish = 0F;
 		objectName = this.gameObject.name;
 		less = false;
-		checkOnce = false;
+		checkOnce = true;
 	}
 	
 	// Update is called once per frame
