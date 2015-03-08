@@ -34,7 +34,6 @@ public class MaxLevel7 : MonoBehaviour {
 			this.gameObject.GetComponent<TimetoFly>().enabled = true;
 			//GameObject.Find ("Cube").GetComponent<TimetoFly> ().enabled = true;
 			GameObject.Find ("MaxCam").GetComponent<TimetoFly> ().enabled = true;
-			GameObject.Find ("Initialization").GetComponent<CubeCreationStage7> ().enabled = true;
 			//Destroy (this.gameObject);
 		}
 	}

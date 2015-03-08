@@ -17,9 +17,9 @@ public class PowBlock : MonoBehaviour {
 	}
 
 	IEnumerator OnTriggerEnter(Collider other){
-		Debug.Log ("SUCKIT");
 		if (other.gameObject.tag == "Player") {
 			audio.PlayOneShot (sound);
+			GameObject.Find ("Initialization").GetComponent<CubeCreationStage7> ().enabled = true;
 			this.gameObject.GetComponent<MeshRenderer>().enabled = false;
 			yield return new WaitForSeconds(0.5F);
 			GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled =true;
