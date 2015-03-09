@@ -1,35 +1,42 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HatchTrigger : MonoBehaviour {
+public class HatchTrigger : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Use this for initialization
+    void Start()
+    {
 
-	void OnTriggerEnter (Collider other){
+    }
 
-		if (other.gameObject.tag == "Boulder" && GameObject.Find ("Object").GetComponent<Rollinrollinrollin>().floorOpen) {
-			//GameObject.Find ("Object").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-			GameObject.Find ("Object").GetComponent<Rollinrollinrollin>().roll = false;
-			Debug.Log("Yahoo");
-			Destroy (this);
-		}
+    // Update is called once per frame
+    void Update()
+    {
 
-	}
-	void OnTriggerStay (Collider other){
-		
-		if (other.gameObject.tag == "Boulder" && GameObject.Find ("Object").GetComponent<Rollinrollinrollin>().floorOpen) {
-			//GameObject.Find ("Object").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-			GameObject.Find ("Object").GetComponent<Rollinrollinrollin>().roll = false;
-			Debug.Log("Yahoo");
-			Destroy (this);
-		}
-	}
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.tag == "Boulder" && GameObject.Find("Object").GetComponent<Rollinrollinrollin>().floorOpen)
+        {
+            //GameObject.Find ("Object").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            GameObject.Find("Object").GetComponent<Rollinrollinrollin>().roll = false;
+            Debug.Log("Yahoo");
+            Destroy(this);
+        }
+
+    }
+    void OnTriggerStay(Collider other)
+    {
+
+        if (other.gameObject.tag == "Boulder" && GameObject.Find("Object").GetComponent<Rollinrollinrollin>().floorOpen)
+        {
+            //GameObject.Find ("Object").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            GameObject.Find("Object").GetComponent<Rollinrollinrollin>().roll = false;
+            Debug.Log("Yahoo");
+            Destroy(this);
+        }
+    }
 }

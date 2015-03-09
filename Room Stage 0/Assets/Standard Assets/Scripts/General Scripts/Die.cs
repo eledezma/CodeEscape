@@ -78,40 +78,42 @@ public class Die : MonoBehaviour {
 		int side = 1;
 		Vector3 testHitVector;
 		// check all sides of this die, the side that has a valid hitVector and smallest x,y,z delta (if more sides are valid) will be the closest and this die's value
-		do
-		{
-			// get testHitVector from current side, HitVector is a overriden method in the dieType specific Die subclass
-			// eacht dieType subclass will expose all hitVectors for its sides,
-			testHitVector = HitVector(side);
-			if (testHitVector != Vector3.zero)
-			{
-				// this side has a hitVector so validate the x,y and z value against the local normalized hitVector using the margin.
-				if (valid(localHitNormalized.x, testHitVector.x) &&
-				    valid(localHitNormalized.y, testHitVector.y) &&
-				    valid(localHitNormalized.z, testHitVector.z))
-				{
-					// this side is valid within the margin, check the x,y, and z delta to see if we can set this side as this die's value
-					// if more than one side is within the margin (especially with d10, d12, d20 ) we have to use the closest as the right side
-					float nDelta = Mathf.Abs(localHitNormalized.x - testHitVector.x) + Mathf.Abs(localHitNormalized.y - testHitVector.y) + Mathf.Abs(localHitNormalized.z - testHitVector.z);
-					if (nDelta < delta)
-					{
-						value = side;
-						delta = nDelta;
-					}
-				}
-			}
-			// increment side
-			side++;
-			// if we got a Vector.zero as the testHitVector we have checked all sides of this die
-		} while (testHitVector != Vector3.zero);
+        do
+        {
+            // get testHitVector from current side, HitVector is a overriden method in the dieType specific Die subclass
+            // eacht dieType subclass will expose all hitVectors for its sides,
+            testHitVector = HitVector(side);
+            if (testHitVector != Vector3.zero)
+            {
+                // this side has a hitVector so validate the x,y and z value against the local normalized hitVector using the margin.
+                if (valid(localHitNormalized.x, testHitVector.x) &&
+                    valid(localHitNormalized.y, testHitVector.y) &&
+                    valid(localHitNormalized.z, testHitVector.z))
+                {
+                    // this side is valid within the margin, check the x,y, and z delta to see if we can set this side as this die's value
+                    // if more than one side is within the margin (especially with d10, d12, d20 ) we have to use the closest as the right side
+                    float nDelta = Mathf.Abs(localHitNormalized.x - testHitVector.x) + Mathf.Abs(localHitNormalized.y - testHitVector.y) + Mathf.Abs(localHitNormalized.z - testHitVector.z);
+                    if (nDelta < delta)
+                    {
+                        value = side;
+                        delta = nDelta;
+                    }
+                }
+            }
+            // increment side
+            side++;
+            // if we got a Vector.zero as the testHitVector we have checked all sides of this die
+        }
+        while (testHitVector != Vector3.zero);
 	}
 	
 	void Update()
 	{
 		// determine the value is the die is not rolling
-		if (!rolling && localHit)
-			GetValue();
-
+        if (!rolling && localHit)
+        {
+            GetValue();
+        }
 
 		
 	}

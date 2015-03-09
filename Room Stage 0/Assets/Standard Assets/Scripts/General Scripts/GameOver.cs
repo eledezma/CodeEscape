@@ -1,23 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameOver : MonoBehaviour {
+public class GameOver : MonoBehaviour
+{
 
-	public AudioClip sadness;
+    public AudioClip sadness;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Use this for initialization
+    void Start()
+    {
 
-	void OnTriggerEnter (Collider other){
-		if (other.gameObject.tag == "Player"){
-			audio.PlayOneShot(sadness);
-		}
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            audio.PlayOneShot(sadness);
+        }
+    }
 }
