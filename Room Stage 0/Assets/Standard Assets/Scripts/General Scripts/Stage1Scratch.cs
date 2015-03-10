@@ -68,12 +68,12 @@ public class Stage1Scratch : MonoBehaviour
         robo.transform.parent = GameObject.Find ("Main Camera").transform;*/
 
         //Robot Arms Again
-        //GameObject robo = Instantiate (robotarms,transform.position, transform.rotation) as GameObject;
-        //robotarms.transform.localRotation = Quaternion.Euler (0, 179.7853F, 0);
-        //robotarms.transform.position = new Vector3 (1.08997F, 7.021096F, -12.21104F);
-        //robotarms.GetComponent <Animator> ().runtimeAnimatorController = robotanim;	 
-        //robotarms.AddComponent ("MeshCollider");
-        //robotarms.AddComponent ("WalkingAnimation");
+        /*GameObject robo = Instantiate (robotarms,transform.position, transform.rotation) as GameObject;
+        robotarms.transform.localRotation = Quaternion.Euler (0, 179.7853F, 0);
+        robotarms.transform.position = new Vector3 (1.08997F, 7.021096F, -12.21104F);
+        robotarms.GetComponent <Animator> ().runtimeAnimatorController = robotanim;	 
+        robotarms.AddComponent ("MeshCollider");
+        robotarms.AddComponent ("WalkingAnimation");*/
 
 
         //First Person Controller
@@ -109,6 +109,7 @@ public class Stage1Scratch : MonoBehaviour
         graphics.GetComponent<MeshRenderer>().receiveShadows = false;
 
         //Build the First Person Controller
+		//robotarms.transform.parent = mainCam.transform;
         armCam.transform.parent = mainCam.transform;
         mainCam.transform.parent = fpc.transform;
         graphics.transform.parent = fpc.transform;
