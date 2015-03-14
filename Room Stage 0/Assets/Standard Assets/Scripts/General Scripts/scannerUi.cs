@@ -12,7 +12,6 @@ public class scannerUi : MonoBehaviour
     public Texture2D cursorImage;
     TextEditor editor;
     public static string output = "";
-    int forStart;
     static string var = "";
     public string code = "public class game{\n" +
             "\tpublic static void main(String[] args){\n" +
@@ -228,7 +227,6 @@ public class scannerUi : MonoBehaviour
             {
                 code = restoreCode();
                 output = "";
-                forStart = 0;
                 var = "";
                 showError = false;
                 scannerCreated = false;

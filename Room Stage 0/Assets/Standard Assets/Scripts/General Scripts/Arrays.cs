@@ -3,8 +3,9 @@ using System.Collections;
 
 public class Arrays : MonoBehaviour
 {
-    double value = 0;
+    int value = 0;
     int position = 0;
+	public int[] boxes = new int[5];
     public static bool puzzleComplete = false;
     bool guiEnabled = false;
     public static bool atWall6 = false;
@@ -22,7 +23,7 @@ public class Arrays : MonoBehaviour
     string outOfRange = "The index is outside the range of the array.";
     string oneShoot = "You can only launch one burger at a time.";
     string invalid = "invalid character.";
-    static float power = 1;
+    int index = 1;
 
     //Ray outwardRay;
     //RaycastHit hit;
@@ -48,6 +49,12 @@ public class Arrays : MonoBehaviour
 
     void Start()
     {
+		int i = 0;
+		while(i<5)
+		{
+			boxes[i]=1;
+			i++;
+		}
         code = "public class game{\n" +
                 "\tpublic static void main(String[] args){\n" +
                 "\t\tint steps[] = new steps(5);\n" +
@@ -68,8 +75,8 @@ public class Arrays : MonoBehaviour
             GameObject.Find("Enemy").GetComponent<Enemy>().enabled = true;
             GameObject.Find("Enemy").GetComponent<MeshRenderer>().enabled = true;
         }
-        if (!atWall6)
-        {
+    //    if (atWall6)
+      //  {
             if (Input.GetKeyDown("e"))
             {
                 if (guiEnabled)
@@ -86,14 +93,7 @@ public class Arrays : MonoBehaviour
                     Screen.lockCursor = false;
                 }
             }
-        }
 
-
-        // else if (!MakeOrder.atOrderWall && !atScanner) {
-
-        //Screen.lockCursor = true;
-        //Screen.lockCursor = false; //Cursor remains locked if not in terminal
-        //  }
     }
     //*******************************************************
 
@@ -117,7 +117,6 @@ public class Arrays : MonoBehaviour
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "Arrays Puzzle");
 
 
-            //GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\n",showError));
 
             if (showError)
             {
@@ -145,18 +144,15 @@ public class Arrays : MonoBehaviour
             GUI.skin.label.fontSize = 12;
 
 
-
-
-
             GUI.Label(new Rect(Screen.width * 0.12f, Screen.height * 0.34f, Screen.width * 0.04f, Screen.height * 0.05f), ("index"));                     //print statement title
             ind = GUI.TextField(new Rect(Screen.width * 0.12f, Screen.height * 0.38f, Screen.width * 0.04f, Screen.height * 0.05f), ind);
             GUI.Label(new Rect(Screen.width * 0.16f, Screen.height * 0.34f, Screen.width * 0.04f, Screen.height * 0.05f), ("value"));                     //print statement title
             val = GUI.TextField(new Rect(Screen.width * 0.16f, Screen.height * 0.38f, Screen.width * 0.04f, Screen.height * 0.05f), val);
 
-            if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.1f, Screen.height * 0.05f), "Assign power"))
+            if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.1f, Screen.height * 0.05f), "Assign index"))
             {
                 GUI.FocusControl("Textarea");
-                editor = goToNextLine(editor, code);
+                
                 if (!isNumber(ind))
                 {
                     errorString = invalid;
@@ -164,16 +160,19 @@ public class Arrays : MonoBehaviour
                 }
                 else
                 {
-                    float.TryParse(ind, out power);
+                    int.TryParse(ind, out index);
+					int.TryParse(val, out value);
 
-                    if (power > 4 || power < 0)
+					if (index > 4 || index < 0)
                     {
                         errorString = outOfRange;
                         showError = true;
                     }
                     else
                     {
-                        string s = "\t\tsteps[" + ind + "] = " + val + ";\n";
+                        string s = "steps[" + index + "] = " + value + ";\n\t\t";
+						boxes[index] = value;
+						editor = goToNextLine(editor, code);
                         code = addToCode(code, editor, s);
                     }
                 }
@@ -181,19 +180,18 @@ public class Arrays : MonoBehaviour
             }
 
 
-            GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected ind: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
-                                                   position,
-                                                   editor.pos,
-                                                   0,
-                                                   countLinesBefore(code, editor.pos),
-                                                   countLinesAfter(code, editor.pos)));
+            
             // Button that activates the user's code
             if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Submit"))
             {
-                //assign the actual turret power to whatever is in the ind field
-                GameObject.Find("turret").GetComponentInChildren<TurretShoot>().bulletImpulse = power * 25;
-
-                resume();
+                //assign the actual turret index to whatever is in the ind field
+				GameObject.Find("Initialization").GetComponent<CubeCreationStage8>().moveBlock1(boxes[0]);
+				GameObject.Find("Initialization").GetComponent<CubeCreationStage8>().moveBlock2(boxes[1]);
+				GameObject.Find("Initialization").GetComponent<CubeCreationStage8>().moveBlock3(boxes[2]);
+				GameObject.Find("Initialization").GetComponent<CubeCreationStage8>().moveBlock4(boxes[3]);
+				GameObject.Find("Initialization").GetComponent<CubeCreationStage8>().moveBlock5(boxes[4]);
+				
+				resume();
             }
 
             // Button that closes the UI and disregards changes
@@ -212,11 +210,20 @@ public class Arrays : MonoBehaviour
                 code = restoreCode();
                 converted = false;
                 showError = false;
-                GameObject.Find("turret").GetComponentInChildren<TurretShoot>().bulletImpulse = 50;
-                power = 2;
-
-
+				int i = 0;
+				while(i<5)
+				{
+					boxes[i]=1;
+					i++;
+				}
             }
+
+			GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected ind: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
+			                                                      boxes[0],
+			                                                      boxes[1],
+			                                                      0,
+			                                                      0,
+			                                                      0));
 
         }
 
@@ -232,14 +239,15 @@ public class Arrays : MonoBehaviour
 
     public string restoreCode()
     {
-        string dummy = "public class game{\n" +
-                "\tpublic static void main(String[] args){\n" +
-                "\t\tif(buttonClicked){\n" +
-                "\t\t\tint power = " + power + ";\n" +
-                "\t\t\tlaunchBurger(power);\n" +
-                "\t\t}\n" +
-                "\t}\n" +
-                "}";
+		string dummy = code = "public class game{\n" +
+			"\tpublic static void main(String[] args){\n" +
+				"\t\tint steps[] = new steps(5);\n" +
+				"\t\tfor(int i=0;i<steps.Length;i++){\n" +
+				"\t\t\tint steps[i] = 1;\n" +
+				"\t\t}\n" +
+				"\t\t\n" +
+				"\t}\n" +
+				"}";
         return dummy;
     }
 
@@ -346,7 +354,7 @@ public class Arrays : MonoBehaviour
         char[] a = input.ToCharArray();
         for (int i = 0; i < input.Length; i++)
         {
-            if (!(((a[i].CompareTo('0') > 0) && (a[i].CompareTo('9') < 0)) || ((a[i].CompareTo('.') == 0))))
+            if (!(((a[i].CompareTo('0') >= 0) && (a[i].CompareTo('9') <= 0)) || ((a[i].CompareTo('.') == 0))))
             {
                 b = false;
             }
