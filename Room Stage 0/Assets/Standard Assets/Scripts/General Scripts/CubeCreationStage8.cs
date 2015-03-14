@@ -58,6 +58,10 @@ public class CubeCreationStage8 : MonoBehaviour
 
     public void moveBlock1(int value)
     {
+		if (value == 0)
+		{
+			value = -1;
+		}
         float y = initial;
         y += 9.75F * (value - 1);
         cube1.transform.position = new Vector3(cube1.transform.position.x, y, cube1.transform.position.z);
@@ -65,6 +69,10 @@ public class CubeCreationStage8 : MonoBehaviour
 
     public void moveBlock2(int value)
     {
+		if (value == 0)
+		{
+			value = -1;
+		}
         float y = initial;
 		y += 9.75F * (value - 1);
         cube2.transform.position = new Vector3(cube2.transform.position.x, y, cube2.transform.position.z);
@@ -72,6 +80,10 @@ public class CubeCreationStage8 : MonoBehaviour
 
     public void moveBlock3(int value)
     {
+		if (value == 0)
+		{
+			value = -1;
+		}
         float y = initial;
 		y += 9.75F * (value - 1);
         cube3.transform.position = new Vector3(cube3.transform.position.x, y, cube3.transform.position.z);
@@ -79,6 +91,10 @@ public class CubeCreationStage8 : MonoBehaviour
 
     public void moveBlock4(int value)
     {
+		if (value == 0)
+		{
+			value = -1;
+		}
         float y = initial;
 		y += 9.75F * (value - 1);
         cube4.transform.position = new Vector3(cube4.transform.position.x, y, cube4.transform.position.z);
@@ -86,6 +102,10 @@ public class CubeCreationStage8 : MonoBehaviour
 
     public void moveBlock5(int value)
     {
+		if (value == 0)
+		{
+			value = -1;
+		}
         float y = initial;
 		y += 9.75F * (value - 1);
         cube5.transform.position = new Vector3(cube5.transform.position.x, y, cube5.transform.position.z);
