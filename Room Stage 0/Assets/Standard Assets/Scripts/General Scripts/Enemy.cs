@@ -4,13 +4,18 @@ using System.Collections;
 public class Enemy : MonoBehaviour
 {
 
-    public Transform target;
-    public int speed = 1;
-    public int rotationSpeed = 1;
+    public Transform player;
+	public Transform[] waypoints;
+	public bool patrol = true;
+	public int detectionRange = 100;
+    public int speed = 8;
+	public int curWayPoint = 0;
+    public int rotationSpeed = 8;
 	public bool attacking = false;
-	Vector3 Node1;
+	Vector3 Velocity;
+	Vector3 MoveDirection;
+	Vector3 Target;
 
-	public float timer = 4000.0F;
     private Transform myTransform;
     void awake()
     {
@@ -22,8 +27,7 @@ public class Enemy : MonoBehaviour
     {
         myTransform = transform;
         GameObject go = GameObject.Find("First Person Controller");
-        target = go.transform;
-		Node1 = new Vector3(myTransform.position.x + 1, myTransform.position.y,myTransform.position.z);
+        player = go.transform;
     }
 
     // Update is called once per frame
@@ -31,23 +35,45 @@ public class Enemy : MonoBehaviour
     {
 		if(attacking)
 		{
-      		Debug.DrawLine(target.position, myTransform.position, Color.red);
-        	myTransform.rotation = Quaternion.Slerp(myTransform.rotation, Quaternion.LookRotation(target.position - myTransform.position), rotationSpeed * Time.deltaTime);
-        	myTransform.position += myTransform.forward * speed * Time.deltaTime;
-    
+      		//Debug.DrawLine(target.position, myTransform.position, Color.red);
+        	//myTransform.rotation = Quaternion.Slerp(myTransform.rotation, Quaternion.LookRotation(target.position - myTransform.position), rotationSpeed * Time.deltaTime);
+        	//myTransform.position += myTransform.forward * speed * Time.deltaTime;
+			Target = player.position;
+			MoveDirection = Target - myTransform.position;
+			Velocity = MoveDirection.normalized * speed;
+			rigidbody.velocity = Velocity;
+			myTransform.LookAt(Target);
 		}
-		else
+		else if(patrol)
 		{
-			timer-=Time.deltaTime;
-			if(myTransform.position.x!=Node1.x)
-			myTransform.position += myTransform.forward * speed * Time.deltaTime;
-			if(timer<=0.0F)
+			if(curWayPoint<waypoints.Length)
 			{
-				speed = 100;
-
-				myTransform.Rotate(180,0,0);
-				timer = 4000.0F;
+			Target = waypoints[curWayPoint].position;
+			MoveDirection = Target - myTransform.position;
+			Velocity = rigidbody.velocity;
+			if(MoveDirection.magnitude <1)
+			{
+				curWayPoint++;
 			}
+			else
+			{
+				Velocity = MoveDirection.normalized * speed;
+		
+			}
+			}
+			else
+			{
+				curWayPoint = 0;
+			}
+			rigidbody.velocity = Velocity;
+			myTransform.LookAt(Target);
+		}
+
+
+		if(Vector3.Distance(player.position,myTransform.position)<detectionRange)
+		{
+			attacking=true;
+			patrol = false;
 		}
 	}
 }
