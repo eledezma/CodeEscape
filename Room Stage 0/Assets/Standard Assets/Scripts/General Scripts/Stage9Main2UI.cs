@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectUI : MonoBehaviour {
-	public bool setAdded = false;
-		public static bool puzzleComplete = false;
-		bool guiEnabled = false;
-		public static bool atWall6 = false;
+public class Stage9Main2UI : MonoBehaviour {
+	int positionI;
+	int positionG;
+	int positionS;
+	bool colorSet = false;
+	public static bool puzzleComplete = false;
+	bool guiEnabled = false;
+	public static bool atWall6 = false;
 		bool showError = false;
 		bool instantiated = false;
 		bool generated = false;
@@ -20,6 +23,8 @@ public class ObjectUI : MonoBehaviour {
 		string cantType = "You can not add code here.";
 		string already = "Object already instantiated.";
 		string invalid ="You must instantiate the object before generating it";
+		string noset = "The Object does not have a setColor method.";
+	bool setPointless = false;
 
 		//Ray outwardRay;
 		//RaycastHit hit;
@@ -46,34 +51,18 @@ public class ObjectUI : MonoBehaviour {
 		void Start()
 		{
 
-			code = "public class Sheild {\n" +
-				"\tprivate Color color;\n" +
-				"\tprivate boolean blocksBullets;\n" +
-				"\t\n" +
-				"\tSheild(){\n"+
-				"\t\t\n"+
-				"\t\tcolor = blue;\n"+
-				"\t\tblocksBullets = true;\n"+
-				"\t\t\n"+
-				"\t}\n" +
-				"\t\n"+
-				"\tpublic boolean getBlocksBullets(){\n"+
-				"\t\treturn blocksBullets;\n"+
-				"\t}\n"+
-				"\t\n" +
-				"\tpublic void setBlocksBullets(boolean b){\n"+
-				"\t\tblocksBullets = b;\n"+
-				"\t}\n"+
-				"\t\n"+
-				"\t\n"+
-				"}";
+			code = "public class game{\n" +
+				"\tpublic static void main(String[] args){\n" +
+					"\t\t\n" +
+					"\t}\n" +
+					"}";
 		}
 		
 		//Switches the GUI on and off
 		//*******************************************************
 		void Update()
 		{
-			if (Input.GetKeyDown("p"))
+			if (Input.GetKeyDown("r"))
 			{
 				if (guiEnabled)
 				{					
@@ -98,7 +87,7 @@ public class ObjectUI : MonoBehaviour {
 		//*******************************************************
 		public void OnGUI()
 		{
-			if (Input.GetKeyDown("p"))
+			if (Input.GetKeyDown("r"))
 			{
 				GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
 				//If at wall terminal show default cursor instead
@@ -118,7 +107,7 @@ public class ObjectUI : MonoBehaviour {
 					}
 				}
 				
-				GUI.SetNextControlName("textarea");
+				GUI.SetNextControlName("textarea2");
 				GUI.TextArea(new Rect(Screen.width * 0.2f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
 				
 				if (showError)
@@ -135,25 +124,83 @@ public class ObjectUI : MonoBehaviour {
 				GUI.skin.label.fontSize = 12;
 
 				
-				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.1f, Screen.height * 0.05f), "Add setColor() method"))
+				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.1f, Screen.height * 0.05f), "Instantiate Sheild"))
 				{
-					GUI.FocusControl("Textarea");
-					
-					string s = "public void setColor(Color newColor){ \n\t\t"+
-									"color = newColor;\n\t"+
-								"}\n\t";
-					editor.pos = 274;
-					code = addToCode(code, editor, s);
 
+				if(instantiated)
+				{
+					showError = true;
+					errorString = already;
 				}
-				
-				
+				else
+				{
+					GUI.FocusControl("textarea2");
+					string s = "Sheild sh = new Sheild();\n\t\t";
+					instantiated = true;
+					editor = goToNextLine(editor, code);
+					code = addToCode(code, editor, s);
+				}
+				}
+
+				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.44f, Screen.width * 0.1f, Screen.height * 0.05f), "Set Color to Blue"))
+				{
+				if(GameObject.Find("First Person Controller").GetComponent<ObjectUI>().setAdded)
+				{
+				if(!instantiated)
+				{
+					showError = true;
+					errorString = invalid;
+				}
+				else
+				{
+					GUI.FocusControl("textarea2");
+					string s = "sh.setColor(green);\n\t\t";
+					colorSet = true;
+					if(generated)
+						{
+							setPointless = true;
+						}
+					editor = goToNextLine(editor, code);
+					code = addToCode(code, editor, s);
+				}
+				}
+				else
+				{
+					showError = true;
+					errorString = noset;
+				}
+				}
+				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.50f, Screen.width * 0.1f, Screen.height * 0.05f), "Generate Sheild"))
+				{
+				if(!instantiated)
+				{
+					showError = true;
+					errorString = invalid;
+				}
+				else
+				{
+					GUI.FocusControl("textarea2");
+					string s = "generate(sh);\n\t\t";
+					editor = goToNextLine(editor, code);
+					code = addToCode(code, editor, s);
+					generated = true;
+				}
+				}
 				
 				// Button that activates the user's code
 				if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Submit"))
 				{
-					setAdded = true;
-					resume();
+					
+					if((generated)&&(setPointless||!colorSet))
+				   	{
+					GameObject.Find("Initialization").GetComponent<InitialStage9>().activate(3);
+
+					}
+				else if(colorSet&&generated&&positionS<positionG)
+				{
+					GameObject.Find("Initialization").GetComponent<InitialStage9>().activate(2);
+				}
+				resume();
 				}
 				
 				// Button that closes the UI and disregards changes
@@ -164,6 +211,8 @@ public class ObjectUI : MonoBehaviour {
 					instantiated = false;
 					generated = false;
 					showError = false;
+					colorSet = false;
+				setPointless = false;
 				}
 				
 				
@@ -174,10 +223,12 @@ public class ObjectUI : MonoBehaviour {
 					instantiated = false;
 					generated = false;
 					showError = false;
+				colorSet = false;
+				setPointless = false;
 				}
 				
 				GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected ind: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
-				                                                      editor.pos,
+				                                                      0,
 				                                                      0,
 				                                                      0,
 				                                                      0,
@@ -197,25 +248,10 @@ public class ObjectUI : MonoBehaviour {
 		
 		public string restoreCode()
 		{
-		string dummy = "public class Sheild {\n" +
-			"\tprivate Color color;\n" +
-				"\tprivate boolean blocksBullets;\n" +
-				"\t\n" +
-				"\tSheild(){\n"+
-				"\t\t;\n"+
-				"\t\tcolor = blue;\n"+
-				"\t\tblocksBullets = true;\n"+
-				"\t\t;\n"+
+		string dummy = "public class game{\n" +
+			"\tpublic static void main(String[] args){\n" +
+				"\t\t\n" +
 				"\t}\n" +
-				"\t;\n"+
-				"\tpublic boolean getBlocksBullets(){\n"+
-				"\t\treturn blocksBullets;\n"+
-				"\t}\n"+
-				"\tpublic void setBlocksBullets(boolean b){\n"+
-				"\t\tblocksBullets = b;\n"+
-				"\t}\n"+
-				"\t\n"+
-				"\t\n"+
 				"}";
 			return dummy;
 		}

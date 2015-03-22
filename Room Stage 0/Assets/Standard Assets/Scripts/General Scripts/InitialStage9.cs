@@ -85,31 +85,61 @@ public class InitialStage9 : MonoBehaviour
 
 	public void activate(int color)
 	{
-		if (color == 1)  //blue
+		if (color == 1)  //blue in front
 		{ 
-			cube5.renderer.material.mainTexture = blueShield;
-			cube5.GetComponent<MeshRenderer> ().enabled = true;
-			cube5.GetComponent<ShieldActivate> ().enabled = true;
-			cube5.GetComponent<ShieldActivate> ().color = 1;
-			
+
 			cube6.renderer.material.mainTexture = blueShield;
 			cube6.GetComponent<MeshRenderer> ().enabled = true;
 			cube6.GetComponent<ShieldActivate> ().enabled = true;
 			cube6.GetComponent<ShieldActivate> ().color = 1;
 		} 
-		else if (color == 2)  //green
+		else if (color == 2)  //green in middle
 		{
 			cube5.renderer.material.mainTexture = greenShield;
 			cube5.GetComponent<MeshRenderer> ().enabled = true;
 			cube5.GetComponent<ShieldActivate> ().enabled = true;
 			cube5.GetComponent<ShieldActivate> ().color = 2;
 
+		}
+
+		else if (color == 3) // blue in middle
+		{
+			cube5.renderer.material.mainTexture = blueShield;
+			cube5.GetComponent<MeshRenderer> ().enabled = true;
+			cube5.GetComponent<ShieldActivate> ().enabled = true;
+			cube5.GetComponent<ShieldActivate> ().color = 1;
+		}
+
+		else if (color ==4)   //green in front
+		{
 			cube6.renderer.material.mainTexture = greenShield;
 			cube6.GetComponent<MeshRenderer> ().enabled = true;
 			cube6.GetComponent<ShieldActivate> ().enabled = true;
 			cube6.GetComponent<ShieldActivate> ().color = 2;
 		}
 
-
+		else if (color == 5) // all
+		{
+			cube6.renderer.material.mainTexture = blueShield;
+			cube6.GetComponent<MeshRenderer> ().enabled = true;
+			cube6.GetComponent<ShieldActivate> ().enabled = true;
+			cube6.GetComponent<ShieldActivate> ().color = 1;
+		
+			cube5.renderer.material.mainTexture = greenShield;
+			cube5.GetComponent<MeshRenderer> ().enabled = true;
+			cube5.GetComponent<ShieldActivate> ().enabled = true;
+			cube5.GetComponent<ShieldActivate> ().color = 2;
+			
+		
+			cube5.renderer.material.mainTexture = blueShield;
+			cube5.GetComponent<MeshRenderer> ().enabled = true;
+			cube5.GetComponent<ShieldActivate> ().enabled = true;
+			cube5.GetComponent<ShieldActivate> ().color = 1;
+		
+			cube6.renderer.material.mainTexture = greenShield;
+			cube6.GetComponent<MeshRenderer> ().enabled = true;
+			cube6.GetComponent<ShieldActivate> ().enabled = true;
+			cube6.GetComponent<ShieldActivate> ().color = 2;
+		}
 	}
 }
