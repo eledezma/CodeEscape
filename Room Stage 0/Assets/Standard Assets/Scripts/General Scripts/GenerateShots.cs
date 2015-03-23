@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GenerateShots : MonoBehaviour {
+public class GenerateShots : MonoBehaviour 
+{
 
 	public GameObject sphere;
 	public Texture green;
@@ -54,7 +55,8 @@ public class GenerateShots : MonoBehaviour {
 		{
 			GameObject shot = (GameObject)Instantiate(sphere, new Vector3(-8.177089F, 11.09282F, 37.93257F), transform.rotation);
 			shot.AddComponent ("ShotMovement");
-			shot.GetComponent<SphereCollider> ().isTrigger = true;
+			shot.GetComponent<BoxCollider> ().isTrigger = true;
+			shot.GetComponent<BoxCollider>().size = new Vector3(2,1,1);
 			shot.GetComponent<ShotMovement>().color = 1;
 			shot.renderer.material = new Material(Shader.Find("Unlit/Texture"));
 			shot.transform.localScale = new Vector3(2, 2, 2);
@@ -76,7 +78,8 @@ public class GenerateShots : MonoBehaviour {
 		{
 			GameObject shot = (GameObject)Instantiate(sphere, new Vector3(-8.184517F, 23.23381F, 38.21523F), transform.rotation);
 			shot.AddComponent ("ShotMovement");
-			shot.GetComponent<SphereCollider> ().isTrigger = true;
+			shot.GetComponent<BoxCollider> ().isTrigger = true;
+			shot.GetComponent<BoxCollider>().size = new Vector3(2,1,1);
 			shot.GetComponent<ShotMovement>().color = 1;
 			shot.renderer.material = new Material(Shader.Find("Unlit/Texture"));
 			shot.transform.localScale = new Vector3(2, 2, 2);
@@ -98,7 +101,8 @@ public class GenerateShots : MonoBehaviour {
 		{
 			GameObject shot = (GameObject)Instantiate (sphere, new Vector3 (-81.6478F, 11.08865F, 38.21523F), transform.rotation);
 			shot.AddComponent ("ShotMovement");
-			shot.GetComponent<SphereCollider> ().isTrigger = true;
+			shot.GetComponent<BoxCollider> ().isTrigger = true;
+			shot.GetComponent<BoxCollider>().size = new Vector3(2,1,1);
 			shot.GetComponent<ShotMovement>().color = 2;
 			shot.renderer.material = new Material (Shader.Find ("Unlit/Texture"));
 			shot.transform.localScale = new Vector3(2, 2, 2);
@@ -120,7 +124,8 @@ public class GenerateShots : MonoBehaviour {
 		{
 			GameObject shot = (GameObject)Instantiate (sphere, new Vector3 (-81.98382F, 24.1359F, 38.21523F), transform.rotation);
 			shot.AddComponent ("ShotMovement");
-			shot.GetComponent<SphereCollider> ().isTrigger = true;
+			shot.GetComponent<BoxCollider> ().isTrigger = true;
+			shot.GetComponent<BoxCollider>().size = new Vector3(2,1,1);
 			shot.GetComponent<ShotMovement>().color = 2;
 			shot.renderer.material = new Material (Shader.Find ("Unlit/Texture"));
 			shot.transform.localScale = new Vector3 (2, 2, 2);
