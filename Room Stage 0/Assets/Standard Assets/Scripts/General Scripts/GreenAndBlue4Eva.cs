@@ -71,9 +71,9 @@ public class GreenAndBlue4Eva : MonoBehaviour {
 		if(Input.GetKeyDown("3")){ //YOU CAN'T STOP DA PARTY, BOYZ!!!
 			inviteOnly=true;
 			discoParty=inviteOnly;
-			for(int i=0; i<50;i++){
-				OnGUI(); //OnGUI claims to be a function within itself...huh?
-			}
+			//for(int i=0; i<50;i++){
+			//	OnGUI(); //OnGUI claims to be a function within itself...huh?
+			//}
 		}
 	}
 	void OnGUI()
