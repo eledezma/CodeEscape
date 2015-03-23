@@ -3,19 +3,35 @@ using System.Collections;
 
 public class GreenAndBlue4Eva : MonoBehaviour {
 
-	private bool green = false;
-	private bool blue = false;
-	private bool discoParty = false;
-	private GUIStyle style = null;
-	private float sheildStrength = 0.6f; // 0 < sheildStrength < 1
+	public bool greenTime;
+	public bool blueTime;
+	public bool regTime;
+	private bool green;
+	private bool blue;
+	private bool discoParty;
+	private GUIStyle style;
+	private float sheildStrength;// 0 < sheildStrength < 1
 
 	//I tried to do this without having to make transparent textures. I just procedurally make a small one 
 	//to repeat on the GUI, 
 	//IS THIS OK?
+	void Start ()
+	{
+		greenTime = false;
+		blueTime = false;
+		regTime = false;
+		green = false;
+		blue = false;
+		discoParty = false;
+		style = null;
+		sheildStrength = 0.2f;
+
+	}
 
 	// Update is called once per frame
-	void Update () {  //customize the triggers for "sheild", I made them toggles for now
-		if (Input.GetKeyDown("1")) //green
+	void Update ()
+	{  //customize the triggers for "sheild", I made them toggles for now
+		if (Input.GetKeyDown("1") || greenTime) //green
 		{
 			if(green==false && blue==false)
 			{
@@ -27,9 +43,13 @@ public class GreenAndBlue4Eva : MonoBehaviour {
 				green=true;
 			}
 			else
+			{
 				green=false;
+			}
+
+			greenTime = false;
 		}
-		if (Input.GetKeyDown("2")) //blue
+		if (Input.GetKeyDown("2") || blueTime) //blue
 		{
 			if(blue==false && green==false)
 			{
@@ -41,7 +61,11 @@ public class GreenAndBlue4Eva : MonoBehaviour {
 				green=false;
 			}
 			else
+			{
 				blue=false;
+			}
+
+			blueTime = false;
 		}
 		bool inviteOnly = false;
 		if(Input.GetKeyDown("3")){ //YOU CAN'T STOP DA PARTY, BOYZ!!!
