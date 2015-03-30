@@ -13,10 +13,10 @@ animate= GetComponent(Animator);
 }
 
 function Update () {
-if(Input.GetKeyDown("r")){
+if(Input.GetKeyDown("q")){
 run=0.1;
 }
-if(Input.GetKeyUp("r")){
+if(Input.GetKeyUp("q")){
 run=0.0;
 }
 if(Input.GetKeyDown("y")){
