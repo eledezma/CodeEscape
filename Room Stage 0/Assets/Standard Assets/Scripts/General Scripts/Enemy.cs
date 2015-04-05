@@ -73,11 +73,11 @@ public class Enemy : MonoBehaviour
 			break;
 		case "chasing":
 		{
-			if(!decrement)
+			if(!decrement)	
 			{
 				speed = originalSpeed;
 			}
-			Target = player.position;
+			Target = new Vector3(player.position.x,player.position.y-3,player.position.z);
 			MoveDirection = Target - myTransform.position;
 			Velocity = MoveDirection.normalized * speed;
 			rigidbody.velocity = Velocity;
