@@ -3,63 +3,65 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
-
-    public Transform player;
+	public string state = "patrol";
+	public Transform player;
 	public Transform[] waypoints;
-	public bool patrol = true;
-	public int detectionRange = 100;
-    public int speed = 8;
+	public int detectionRange = 50;
+	public int attackRange = 5;
+	public int attackSpeed = 15;
+	public int originalSpeed = 6;
 	public int curWayPoint = 0;
-    public int rotationSpeed = 8;
-	public bool attacking = false;
+	public int rotationSpeed = 6;
+	public float distance;
+	public int speed;
 	Vector3 Velocity;
-	Vector3 MoveDirection;
+	public Vector3 MoveDirection;
 	Vector3 Target;
-
-    private Transform myTransform;
-    void awake()
-    {
-
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-        myTransform = transform;
-        GameObject go = GameObject.Find("First Person Controller");
-        player = go.transform;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-		if(attacking)
+	GameObject go;
+	public float time = 2000;
+	bool decrement = false;
+	public bool attacking = false;
+	
+	private Transform myTransform;
+	void awake()
+	{
+		
+	}
+	
+	// Use this for initialization
+	void Start()
+	{
+		myTransform = transform;
+		go = GameObject.Find("First Person Controller");
+		player = go.transform;
+		speed = originalSpeed;
+	}
+	
+	// Update is called once per frame
+	void Update()
+	{
+		distance = Vector3.Distance(player.position,myTransform.position);
+		switch (state)
 		{
-      		//Debug.DrawLine(target.position, myTransform.position, Color.red);
-        	//myTransform.rotation = Quaternion.Slerp(myTransform.rotation, Quaternion.LookRotation(target.position - myTransform.position), rotationSpeed * Time.deltaTime);
-        	//myTransform.position += myTransform.forward * speed * Time.deltaTime;
-			Target = player.position;
-			MoveDirection = Target - myTransform.position;
-			Velocity = MoveDirection.normalized * speed;
-			rigidbody.velocity = Velocity;
-			myTransform.LookAt(Target);
-		}
-		else if(patrol)
+		case "patrol":
 		{
+			if(!decrement)
+				{
+					speed = originalSpeed;
+				}
 			if(curWayPoint<waypoints.Length)
 			{
-			Target = waypoints[curWayPoint].position;
-			MoveDirection = Target - myTransform.position;
-			Velocity = rigidbody.velocity;
-			if(MoveDirection.magnitude <1)
-			{
-				curWayPoint++;
-			}
-			else
-			{
-				Velocity = MoveDirection.normalized * speed;
-		
-			}
+				Target = waypoints[curWayPoint].position;
+				MoveDirection = Target - myTransform.position;
+				Velocity = rigidbody.velocity;
+				if(MoveDirection.magnitude <1)
+				{
+					curWayPoint++;
+				}
+				else
+				{
+					Velocity = MoveDirection.normalized * speed;		
+				}
 			}
 			else
 			{
@@ -68,12 +70,83 @@ public class Enemy : MonoBehaviour
 			rigidbody.velocity = Velocity;
 			myTransform.LookAt(Target);
 		}
-
-
-		if(Vector3.Distance(player.position,myTransform.position)<detectionRange)
+			break;
+		case "chasing":
 		{
-			attacking=true;
-			patrol = false;
+			if(!decrement)
+			{
+				speed = originalSpeed;
+			}
+			Target = player.position;
+			MoveDirection = Target - myTransform.position;
+			Velocity = MoveDirection.normalized * speed;
+			rigidbody.velocity = Velocity;
+			myTransform.LookAt(Target);
 		}
+			break;
+		//case "pausing":
+	//	{
+	//		decrement = true;
+//			speed = 0;
+//		}
+			break;
+		case "attacking":
+		{
+			speed = attackSpeed;
+			Target = player.position;
+			MoveDirection = Target - myTransform.position;
+			Velocity = MoveDirection.normalized * speed;
+			rigidbody.velocity = Velocity;
+
+
+		}
+			break;
+		case "repelling":
+		{
+			MoveDirection = Target + myTransform.position;
+			attacking = false;
+		}
+			break;
+		case "dead":
+		{
+			this.GetComponent<Rigidbody>().useGravity = true;
+		}
+			break;
+	}
+		if(distance<1)
+		{
+			state = "repelling";
+			go.GetComponent<Player>().health--;
+			
+		} 
+		else if((distance<attackRange)&&(!attacking))
+		{
+			state = "attacking";
+		}
+
+		else if(distance<detectionRange&&!attacking)
+		{
+			state = "chasing";
+		}
+		else if(!attacking)
+		{
+			state = "patrol";
+		}
+
+		if(go.GetComponent<Player>().health<1)
+		{
+			state = "dead";
+		}
+/*		if(decrement)
+		{
+			time-=Time.deltaTime*1000;
+		}
+		if(time<0)
+		{
+			state="attacking";
+			time = 2000;
+			decrement = false;
+			attacking = true;
+		}*/
 	}
 }
