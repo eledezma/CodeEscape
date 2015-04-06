@@ -22,9 +22,10 @@ public class Stage9Main2UI : MonoBehaviour {
 		string errorString = "";
 		string cantType = "You can not add code here.";
 		string already = "Object already instantiated.";
-		string invalid ="You must instantiate the object before generating it";
+		string invalid ="You must instantiate the object first.";
 		string noset = "The Object does not have a setColor method.";
 	bool setPointless = false;
+	bool setLast = false;
 
 		//Ray outwardRay;
 		//RaycastHit hit;
@@ -107,7 +108,7 @@ public class Stage9Main2UI : MonoBehaviour {
 					}
 				}
 				
-				GUI.SetNextControlName("textarea2");
+				GUI.SetNextControlName("Textarea2");
 				GUI.TextArea(new Rect(Screen.width * 0.2f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
 				
 				if (showError)
@@ -134,9 +135,10 @@ public class Stage9Main2UI : MonoBehaviour {
 				}
 				else
 				{
-					GUI.FocusControl("textarea2");
+					GUI.FocusControl("Textarea2");
 					string s = "Sheild sh = new Sheild();\n\t\t";
 					instantiated = true;
+					editor.pos=1;
 					editor = goToNextLine(editor, code);
 					code = addToCode(code, editor, s);
 				}
@@ -153,13 +155,14 @@ public class Stage9Main2UI : MonoBehaviour {
 				}
 				else
 				{
-					GUI.FocusControl("textarea2");
+					GUI.FocusControl("Textarea2");
 					string s = "sh.setColor(green);\n\t\t";
 					colorSet = true;
 					if(generated)
 						{
 							setPointless = true;
 						}
+						editor.pos=1;
 					editor = goToNextLine(editor, code);
 					code = addToCode(code, editor, s);
 				}
@@ -179,11 +182,16 @@ public class Stage9Main2UI : MonoBehaviour {
 				}
 				else
 				{
-					GUI.FocusControl("textarea2");
+					GUI.FocusControl("Textarea2");
 					string s = "generate(sh);\n\t\t";
+					editor.pos=1;
 					editor = goToNextLine(editor, code);
 					code = addToCode(code, editor, s);
 					generated = true;
+					if(!colorSet)
+					{
+						setLast = true;
+					}
 				}
 				}
 				
@@ -191,12 +199,12 @@ public class Stage9Main2UI : MonoBehaviour {
 				if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Submit"))
 				{
 					
-					if((generated)&&(setPointless||!colorSet))
+					if((generated)&&(setPointless||!colorSet||setLast))
 				   	{
 					GameObject.Find("Initialization").GetComponent<InitialStage9>().activate(3);
 
 					}
-				else if(colorSet&&generated&&positionS<positionG)
+				else if(colorSet&&generated)
 				{
 					GameObject.Find("Initialization").GetComponent<InitialStage9>().activate(2);
 				}

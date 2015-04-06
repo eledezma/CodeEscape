@@ -20,7 +20,7 @@ public class Stage9Main1UI : MonoBehaviour {
 		string errorString = "";
 		string cantType = "You can not add code here.";
 		string already = "Object already instantiated.";
-		string invalid ="You must instantiate the object before generating it";
+		string invalid ="You must instantiate the object first.";
 
 		//Ray outwardRay;
 		//RaycastHit hit;
@@ -103,7 +103,7 @@ public class Stage9Main1UI : MonoBehaviour {
 					}
 				}
 				
-				GUI.SetNextControlName("textarea");
+				GUI.SetNextControlName("Textarea");
 				GUI.TextArea(new Rect(Screen.width * 0.2f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
 				
 				if (showError)
@@ -134,6 +134,7 @@ public class Stage9Main1UI : MonoBehaviour {
 					string s = "Sheild sh = new Sheild();\n\t\t";
 					positionG = countLinesBefore(code, editor.pos);
 					instantiated = true;
+					editor.pos=1;
 					editor = goToNextLine(editor, code);
 					code = addToCode(code, editor, s);
 				}
@@ -150,6 +151,7 @@ public class Stage9Main1UI : MonoBehaviour {
 				{
 					GUI.FocusControl("Textarea");
 					string s = "generate(sh);\n\t\t";
+					editor.pos=1;
 					editor = goToNextLine(editor, code);
 					code = addToCode(code, editor, s);
 					generated = true;

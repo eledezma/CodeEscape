@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
 	public float time = 2000;
 	bool decrement = false;
 	public bool attacking = false;
+	bool pushedBack = false;
 	
 	private Transform myTransform;
 	void awake()
@@ -41,6 +42,8 @@ public class Enemy : MonoBehaviour
 	void Update()
 	{
 		distance = Vector3.Distance(player.position,myTransform.position);
+		if(!pushedBack)
+		{
 		switch (state)
 		{
 		case "patrol":
@@ -136,6 +139,19 @@ public class Enemy : MonoBehaviour
 		if(go.GetComponent<Player>().health<1)
 		{
 			state = "dead";
+		}
+		}
+		if(Input.GetKeyDown("e")&&(state == "attacking" || state == "repelling"))
+		{
+			pushedBack = true;
+			MoveDirection = player.forward;
+			Velocity = MoveDirection.normalized * speed;
+			rigidbody.velocity = Velocity;
+		}
+
+		if(distance > 15)
+		{
+			pushedBack = false;
 		}
 /*		if(decrement)
 		{
