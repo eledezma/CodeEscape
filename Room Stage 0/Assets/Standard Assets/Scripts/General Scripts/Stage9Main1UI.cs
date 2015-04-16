@@ -6,7 +6,7 @@ public class Stage9Main1UI : MonoBehaviour {
 	int positionG;
 		public static bool puzzleComplete = false;
 		bool guiEnabled = false;
-		public static bool atWall6 = false;
+		public static bool atWall9_1 = false;
 		bool showError = false;
 		bool instantiated = false;
 		bool generated = false;
@@ -27,18 +27,18 @@ public class Stage9Main1UI : MonoBehaviour {
 		
 		void OnTriggerEnter(Collider col2)
 		{
-			if (col2.gameObject.name == "Wall_Jack_S2")
+			if (col2.gameObject.name == "Wall_Jack_S9_1")
 			{
-				atWall6 = true;
+				atWall9_1 = true;
 				GameObject.Find("Arm Camera").camera.enabled = false;
 			}
 		}
 		
 		void OnTriggerExit(Collider col2)
 		{
-			if (col2.gameObject.name == "Wall_Jack_S2")
+			if (col2.gameObject.name == "Wall_Jack_S9_1")
 			{
-				atWall6 = false;
+				atWall9_1 = false;
 				guiEnabled = false;
 				GameObject.Find("Arm Camera").camera.enabled = true;
 			}
@@ -83,7 +83,7 @@ public class Stage9Main1UI : MonoBehaviour {
 		//*******************************************************
 		public void OnGUI()
 		{
-			if (Input.GetKeyDown("e"))
+			if (atWall9_1 && Input.GetKeyDown("e"))
 			{
 				GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
 				//If at wall terminal show default cursor instead
