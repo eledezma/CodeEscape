@@ -9,21 +9,22 @@ public class Questions : MonoBehaviour {
 	public AudioClip missionComplete;
 	TextEditor editor;
 	public Texture2D cursorImage;
+	string code;
 
 	bool added = false;
 	bool deleted = false;
 	string output = "Door is open";
 	
 	public string question1 = "Which of these is a method that can be used to print somtething on the screen?";
-	string[] answers1 = {"System.out.display()","System.out.print()","System.out.write()","System.out.displaySomethingOnScreenPlease()"};
+	string[] answer1 = {"System.out.display()","System.out.print()","System.out.write()","System.out.displaySomethingOnScreenPlease()"};
 	public string question2 = "What's the output of the following code?\n"+
 		"\n"+
 			"System.out.println(\"A\");"+
 			"System.out.print(\"B\")"+
 			"System.out.print(\"C\")";
-	string[] answers2 = {"ABC","A\nB\nC","A\nBC","AB\nC"};
+	string[] answer2 = {"ABC","A\nB\nC","A\nBC","AB\nC"};
 	public string question3 = "What class can be used to get input from the user?";
-	string[] answers3 = {"Scanner","Input","Console","Text"};
+	string[] answer3 = {"Scanner","Input","Console","Text"};
 	public string question4 = "Which of the follwing is a double?";
 	string[] answers4 = {"III","3","three","3.0"};
 	public string question5 = "If boolean1 was false and boolean2 was true, which of the the print out statements gets executed?"+
@@ -39,15 +40,15 @@ public class Questions : MonoBehaviour {
 			"else{\n"+
 			"\tSystem.out.print(\"C\")\n"+
 			"}\n";
-	string[] answers5 = {"A","B","C","None of the above"};
+	string[] answer5 = {"A","B","C","None of the above"};
 	public string question6 = "What's the output of the following code?\n"+
 		"\n"+
 			"for(int i=0;i<7;i++){\n"+
 			"\tSystem.out.print(\"A\");\n"+
 			"}\n";
-	string[] answers6 = {"AAAAA","AAAAAA","AAAAAAA","AAAAAAAA"};
+	string[] answer6 = {"AAAAA","AAAAAA","AAAAAAA","AAAAAAAA"};
 	public string question7 = "What are all the possible values that the random method (int)(Math.random()*3)+2 generates?\n";
-	      string[] answers7 = {"1,2,3","2,3,4","2,3,4,5","3,4,5"};
+	      string[] answer7 = {"1,2,3","2,3,4","2,3,4,5","3,4,5"};
 	public string question8 = "What's the output of the following code:"+
 		"\n"+
 			"int numbers[] = {3,5,7,9};\n"+
@@ -58,6 +59,9 @@ public class Questions : MonoBehaviour {
 	string[] answers9 = {"Another variable","Set method","Key","Get method"};
 	public string question10 = "What programming language was introduced in the game?";
 	string[] answers10 = {"C++","Java","Python","Prolog"};
+
+
+
 
 
 
@@ -159,20 +163,7 @@ public class Questions : MonoBehaviour {
 				code = addToCode(code, editor, "\t");
 				if (added)
 				{
-					if (countLinesBefore(code, editor.pos) == 0)
-						height1--;
-					else if (countLinesBefore(code, editor.pos) == 1)
-						height2--;
-					else if (countLinesBefore(code, editor.pos) == 2)
-						height3--;
-					else if (countLinesBefore(code, editor.pos) == 3)
-						height4--;
-					else if (countLinesBefore(code, editor.pos) == 4)
-						height5--;
-					else if (countLinesBefore(code, editor.pos) == 5)
-						height6--;
-					else if (countLinesBefore(code, editor.pos) == 6)
-						height7--;
+
 				}
 			}
 			
@@ -184,20 +175,7 @@ public class Questions : MonoBehaviour {
 				code = deleteFromCode(code, editor);
 				if (deleted)
 				{
-					if (countLinesBefore(code, editor.pos) == 0)
-						height1++;
-					else if (countLinesBefore(code, editor.pos) == 1)
-						height2++;
-					else if (countLinesBefore(code, editor.pos) == 2)
-						height3++;
-					else if (countLinesBefore(code, editor.pos) == 3)
-						height4++;
-					else if (countLinesBefore(code, editor.pos) == 4)
-						height5++;
-					else if (countLinesBefore(code, editor.pos) == 5)
-						height6++;
-					else if (countLinesBefore(code, editor.pos) == 6)
-						height7++;
+				
 				}
 			}
 			
@@ -206,13 +184,7 @@ public class Questions : MonoBehaviour {
 			if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Submit"))
 			{
 				TextChanger.Update();
-				GameObject.Find("Cube1").GetComponent<MoveBlockStage3>().height += height1;
-				GameObject.Find("Cube2").GetComponent<MoveBlockStage3>().height += height2;
-				GameObject.Find("Cube3").GetComponent<MoveBlockStage3>().height += height3;
-				GameObject.Find("Cube4").GetComponent<MoveBlockStage3>().height += height4;
-				GameObject.Find("Cube5").GetComponent<MoveBlockStage3>().height += height5;
-				GameObject.Find("Cube6").GetComponent<MoveBlockStage3>().height += height6;
-				GameObject.Find("Cube7").GetComponent<MoveBlockStage3>().height += height7;
+
 				
 				int cube1 = GameObject.Find("Cube1").GetComponent<MoveBlockStage3>().height;
 				int cube2 = GameObject.Find("Cube2").GetComponent<MoveBlockStage3>().height;
@@ -239,14 +211,7 @@ public class Questions : MonoBehaviour {
 			if (GUI.Button(new Rect(Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Reset"))
 			{
 				code = restoreCode();
-				height1 = 0;
-				height2 = 0;
-				height3 = 0;
-				height4 = 0;
-				height5 = 0;
-				height6 = 0;
-				height7 = 0;
-				
+
 				GameObject.Find("Cube1").GetComponent<MoveBlockStage3>().height = 0;
 				GameObject.Find("Cube2").GetComponent<MoveBlockStage3>().height = 0;
 				GameObject.Find("Cube3").GetComponent<MoveBlockStage3>().height = 0;
