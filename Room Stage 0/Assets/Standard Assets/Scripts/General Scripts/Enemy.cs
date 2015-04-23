@@ -18,10 +18,12 @@ public class Enemy : MonoBehaviour
 	public Vector3 MoveDirection;
 	Vector3 Target;
 	GameObject go;
+	GameObject enemy;
 	public float time = 2000;
 	bool decrement = false;
 	public bool attacking = false;
 	bool pushedBack = false;
+	AnimationClip Walk;
 	
 	private Transform myTransform;
 	void awake()
@@ -34,13 +36,17 @@ public class Enemy : MonoBehaviour
 	{
 		myTransform = transform;
 		go = GameObject.Find("First Person Controller");
+		enemy = GameObject.Find("SPIDER");
 		player = go.transform;
 		speed = originalSpeed;
+		enemy.animation["Walk"].wrapMode = WrapMode.Loop;
+		enemy.animation.Play("Walk");
 	}
 	
 	// Update is called once per frame
 	void Update()
 	{
+		//go.animation.Play();
 		distance = Vector3.Distance(player.position,myTransform.position);
 		if(!pushedBack)
 		{
@@ -100,6 +106,7 @@ public class Enemy : MonoBehaviour
 			MoveDirection = Target - myTransform.position;
 			Velocity = MoveDirection.normalized * speed;
 			rigidbody.velocity = Velocity;
+				enemy.animation.Play("Attack");
 
 
 		}
