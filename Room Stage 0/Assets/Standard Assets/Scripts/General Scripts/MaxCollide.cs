@@ -31,9 +31,14 @@ public class MaxCollide : MonoBehaviour {
 			StartCoroutine(fall());
 		}
 
-		if (other.gameObject.tag == "Player") {
+		if (other.gameObject.tag == "Player" && GameObject.Find("First Person Controller").GetComponent<GreenAndBlue4Eva>().discoParty) {
 			//play video
-			audio.PlayOneShot(clip1, 1);
+
+			GameObject.Find("First Person Controller").GetComponent<GreenAndBlue4Eva>().discoParty = false;
+			GameObject.Find ("Star").GetComponent<StarPanel> ().dark ();
+			Destroy (this.gameObject);
+
+			//audio.PlayOneShot(clip1, 1);
 		}
 
 	}
@@ -43,9 +48,11 @@ public class MaxCollide : MonoBehaviour {
 		drop = true;
 		audio.PlayOneShot(clip2, 1);
 		yield return new WaitForSeconds (5);
-		transform.position = new Vector3(-29.58626F, 1.345127F, -141.5573F);
-		transform.Rotate(new Vector3(90,0,0));
+		transform.position = new Vector3(152.6644F, -5.639513F, 283.6994F);
+		transform.Rotate(new Vector3(90,270,0));
 		drop = false;
 		cam.depth = -1;
+		GameObject.Find ("Star").GetComponent<StarPanel> ().yellow ();
+		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 	}
 }

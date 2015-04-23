@@ -6,9 +6,9 @@ public class GreenAndBlue4Eva : MonoBehaviour {
 	public bool greenTime;
 	public bool blueTime;
 	public bool regTime;
-	private bool green;
+	public bool green;
 	private bool blue;
-	private bool discoParty;
+	public bool discoParty;
 	private GUIStyle style;
 	private float sheildStrength;// 0 < sheildStrength < 1
 
