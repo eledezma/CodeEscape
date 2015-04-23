@@ -17,7 +17,7 @@ public class Questions : MonoBehaviour {
 	string output = "Door is open";
 	
 	public static string question1 = "Which of these is a method that can be used to print somtething on the screen?";
-	static string[] answer1 = {"System.out.display()","System.out.print()","System.out.write()","System.out.displaySomethingOnScreenPlease()"};
+	static string[] answer1 = {"System.out.display()","System.out.print()","System.out.write()","System.displaySomethingPlease()"};
 	public static string question2 = "What's the output of the following code?\n"+
 		"\n"+
 			"System.out.println(\"A\");\n"+
@@ -50,7 +50,7 @@ public class Questions : MonoBehaviour {
 	static string[] answer6 = {"AAAAA","AAAAAA","AAAAAAA","AAAAAAAA"};
 	public static string question7 = "What are all the possible values that the random method (int)(Math.random()*3)+2 generates?\n";
 	static string[]answer7 = {"1,2,3","2,3,4","2,3,4,5","3,4,5"};
-	public static string question8 = "What's the output of the following code:"+
+	public static string question8 = "What's the output of the following code:\n"+
 		"\n"+
 			"int numbers[] = {3,5,7,9};\n"+
 			"System.out.print(numbers[1]+numbers[2]);";
@@ -99,6 +99,10 @@ public class Questions : MonoBehaviour {
 	{
 	//	if (atWall)
 	//	{
+		if (Input.GetKeyDown("k"))
+		{
+			questionNumber++;
+		}
 			if (Input.GetKeyDown("l"))
 			{
 				//			Screen.lockCursor = false;  //Cursor is free to move when user goes into terminal
@@ -116,7 +120,7 @@ public class Questions : MonoBehaviour {
 				Screen.lockCursor = false;
 
 			}
-			}
+		}
 	
 
 	}
@@ -150,24 +154,24 @@ public class Questions : MonoBehaviour {
 			
 			
 			// Button that inserts a tab 
-			if (GUI.Button(new Rect(Screen.width * 0.3f, Screen.height * 0.6f, Screen.width * 0.25f, Screen.height * 0.2f), answers[questionNumber-1][0]))
+			if (GUI.Button(new Rect(Screen.width * 0.20f, Screen.height * 0.6f, Screen.width * 0.25f, Screen.height * 0.2f), answers[questionNumber-1][0]))
 			{
 					userAnswer = 1;
 				
 			}
 			
-			if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.6f, Screen.width * 0.25f, Screen.height * 0.2f), answers[questionNumber-1][1]))
+			if (GUI.Button(new Rect(Screen.width * 0.55f, Screen.height * 0.6f, Screen.width * 0.25f, Screen.height * 0.2f), answers[questionNumber-1][1]))
 			{
 					userAnswer=2;
 			}
 
-			if (GUI.Button(new Rect(Screen.width * 0.3f, Screen.height * 0.8f, Screen.width * 0.2f, Screen.height * 0.2f), answers[questionNumber-1][2]))
+			if (GUI.Button(new Rect(Screen.width * 0.20f, Screen.height * 0.8f, Screen.width * 0.25f, Screen.height * 0.2f), answers[questionNumber-1][2]))
 				{
 					userAnswer=3;
 					
 				}
 				
-			if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.8f, Screen.width * 0.2f, Screen.height * 0.2f), answers[questionNumber-1][3]))
+			if (GUI.Button(new Rect(Screen.width * 0.55f, Screen.height * 0.8f, Screen.width * 0.25f, Screen.height * 0.2f), answers[questionNumber-1][3]))
 				{
 					userAnswer =4;
 				}
