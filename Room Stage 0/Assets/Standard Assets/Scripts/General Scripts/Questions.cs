@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class Questions : MonoBehaviour {
-	bool answered = false;
-	int userAnswer = 0;
-	int questionNumber = 1;
+	static bool answered = false;
+
+	static int questionNumber = 1;
 	bool guiEnabled = false;
 	bool atWall = false;
 	public AudioClip missionComplete;
@@ -63,7 +63,9 @@ public class Questions : MonoBehaviour {
 
 	static string[][] answers = {answer1,answer2,answer3,answer4,answer5,answer6,answer7,answer8,answer9,answer10};
 	static string[] questions = {question1,question2,question3,question4,question5,question6,question7,question8,question9,question10};
+
 	static int[] correctAnswers = {2,3,1,4,4,3,2,3,4,2};
+	static int userAnswer = 0;
 
 
 
@@ -150,12 +152,10 @@ public class Questions : MonoBehaviour {
 			GUI.SetNextControlName("textarea");
 			GUI.Label(new Rect(Screen.width*0.1f,Screen.height*0.1f,Screen.width*0.8f,Screen.height*0.5f),questions[questionNumber-1]);
 			
-
-			
-			
-			// Button that inserts a tab 
+				
 			if (GUI.Button(new Rect(Screen.width * 0.20f, Screen.height * 0.6f, Screen.width * 0.25f, Screen.height * 0.2f), answers[questionNumber-1][0]))
 			{
+					//tariq here the user picked first choice
 					userAnswer = 1;
 				
 			}
@@ -163,6 +163,7 @@ public class Questions : MonoBehaviour {
 			if (GUI.Button(new Rect(Screen.width * 0.55f, Screen.height * 0.6f, Screen.width * 0.25f, Screen.height * 0.2f), answers[questionNumber-1][1]))
 			{
 					userAnswer=2;
+
 			}
 
 			if (GUI.Button(new Rect(Screen.width * 0.20f, Screen.height * 0.8f, Screen.width * 0.25f, Screen.height * 0.2f), answers[questionNumber-1][2]))
@@ -180,6 +181,15 @@ public class Questions : MonoBehaviour {
 			
 			
 			
+			}
+		}
+		else{  // the user has answered
+			if(userAnswer == correctAnswers[questionNumber-1]){
+			//tariq the user answered correctly here
+			}
+			else
+			{
+			//tariq the user fucked up
 			}
 		}
 	}
@@ -223,7 +233,13 @@ public class Questions : MonoBehaviour {
 		}
 		return s;
 	}
-	
+
+	// tariq call this whenever you open up a new question
+	public static void reset(){
+		userAnswer = 0;
+		answered = false;
+	}
+
 	public string restoreCode()
 	{
 		string dummy = "public static game{\n" +
