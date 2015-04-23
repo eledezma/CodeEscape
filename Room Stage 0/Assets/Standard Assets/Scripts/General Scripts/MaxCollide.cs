@@ -36,7 +36,7 @@ public class MaxCollide : MonoBehaviour {
 
 			GameObject.Find("First Person Controller").GetComponent<GreenAndBlue4Eva>().discoParty = false;
 			GameObject.Find ("Star").GetComponent<StarPanel> ().dark ();
-			Destroy (this);
+			Destroy (this.gameObject);
 
 			//audio.PlayOneShot(clip1, 1);
 		}
