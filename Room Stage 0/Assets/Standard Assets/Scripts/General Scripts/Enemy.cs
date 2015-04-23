@@ -3,11 +3,12 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
+	public float timer=1.35f;
 	public string state = "patrol";
 	public Transform player;
 	public Transform[] waypoints;
 	public int detectionRange = 50;
-	public int attackRange = 5;
+	public int attackRange = 4;
 	public int attackSpeed = 15;
 	public int originalSpeed = 6;
 	public int curWayPoint = 0;
@@ -46,7 +47,6 @@ public class Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		//go.animation.Play();
 		distance = Vector3.Distance(player.position,myTransform.position);
 		if(!pushedBack)
 		{
@@ -82,15 +82,16 @@ public class Enemy : MonoBehaviour
 			break;
 		case "chasing":
 		{
-			if(!decrement)	
-			{
+			//if(!decrement)	
+			//{
 				speed = originalSpeed;
-			}
+			//}
 			Target = new Vector3(player.position.x,player.position.y-3,player.position.z);
 			MoveDirection = Target - myTransform.position;
 			Velocity = MoveDirection.normalized * speed;
 			rigidbody.velocity = Velocity;
 			myTransform.LookAt(Target);
+			enemy.animation.Play("Run");
 		}
 			break;
 		//case "pausing":
@@ -98,17 +99,24 @@ public class Enemy : MonoBehaviour
 	//		decrement = true;
 //			speed = 0;
 //		}
-			break;
+//			break;
 		case "attacking":
 		{
-			speed = attackSpeed;
+			//speed = attackSpeed;
+			speed = 0;
 			Target = player.position;
 			MoveDirection = Target - myTransform.position;
 			Velocity = MoveDirection.normalized * speed;
 			rigidbody.velocity = Velocity;
-				enemy.animation.Play("Attack");
-
-
+			enemy.animation.Play("Attack");
+			timer-=Time.deltaTime;
+				
+			if(timer<0){
+				timer=1.35f;
+				go.GetComponent<Player>().health-=25;
+			}
+			
+					
 		}
 			break;
 		case "repelling":
@@ -123,22 +131,22 @@ public class Enemy : MonoBehaviour
 		}
 			break;
 	}
-		if(distance<1)
-		{
-			state = "repelling";
-			go.GetComponent<Player>().health--;
-			
-		} 
-		else if((distance<attackRange)&&(!attacking))
+//		if(distance<1)
+//		{
+//			state = "repelling";
+///			go.GetComponent<Player>().health--;
+//			
+//		} 
+		if(distance<attackRange)
 		{
 			state = "attacking";
 		}
 
-		else if(distance<detectionRange&&!attacking)
+		else if(distance<detectionRange&&(distance>attackRange))
 		{
 			state = "chasing";
 		}
-		else if(!attacking)
+		else
 		{
 			state = "patrol";
 		}
@@ -146,20 +154,27 @@ public class Enemy : MonoBehaviour
 		if(go.GetComponent<Player>().health<1)
 		{
 			state = "dead";
+			enemy.animation.Play("Death");
+
 		}
-		}
-		if(Input.GetKeyDown("e")&&(state == "attacking" || state == "repelling"))
+		if(Input.GetKeyDown("e")&&(state == "attacking"))
 		{
+			speed = attackSpeed;
 			pushedBack = true;
 			MoveDirection = player.forward;
 			Velocity = MoveDirection.normalized * speed;
 			rigidbody.velocity = Velocity;
+				attacking=false;
 		}
 
-		if(distance > 15)
-		{
-			pushedBack = false;
-		}
+		
+
+//		if(distance<4.5)
+//		{
+///			state = "repelling";
+//			go.GetComponent<Player>().health--;
+//				//			
+//		} 
 /*		if(decrement)
 		{
 			time-=Time.deltaTime*1000;
@@ -172,4 +187,11 @@ public class Enemy : MonoBehaviour
 			attacking = true;
 		}*/
 	}
+		else if(distance > 15)
+		{
+			pushedBack = false;
+			state = "chasing";
+		}
+	}
+
 }

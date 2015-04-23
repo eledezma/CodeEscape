@@ -19,6 +19,7 @@ public class TemporaryDeathAnimation : MonoBehaviour
 		if(die)
 		{
 			this.GetComponent<Transform>().Translate(Vector3.up * speed);
+			this.GetComponent<CharacterMotor>().enabled = false;
 		}
 
 		// If rose to heaven reload level
