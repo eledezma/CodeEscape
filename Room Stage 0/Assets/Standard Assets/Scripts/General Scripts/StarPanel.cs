@@ -36,6 +36,8 @@ public class StarPanel : MonoBehaviour
 	public void dark()
 	{
 		StartCoroutine(GameObject.Find("StarVideo").GetComponent<Level10Video>().PlayVideo ());
+		GameObject.Find("DoorFinal").transform.position = new Vector3(176.5465F, 8.741457F, 331.659F);
+		GameObject.Find("DoorFinal").transform.Rotate (new Vector3(0,270,0));
 		GameObject.Find ("StarTrigger").GetComponent<StarTrig> ().active = false;
 		plane.renderer.material.mainTexture = darkstar;
 		this.gameObject.renderer.material.mainTexture = greybak;

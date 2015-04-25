@@ -32,6 +32,7 @@ public class PowBlockLevel10 : MonoBehaviour
 			Screen.lockCursor = false;
 
 			cam.depth = -2;
+			GameObject.Find("First Person Controller").GetComponent<Level10Health>().guiEnabled = true;
 			GameObject.Find("First Person Controller").GetComponent<GreenAndBlue4Eva>().greenTime = true;
 			GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
 			GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;

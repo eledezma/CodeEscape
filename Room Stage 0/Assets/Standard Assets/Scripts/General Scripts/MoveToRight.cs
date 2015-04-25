@@ -18,6 +18,7 @@ public class MoveToRight : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.U)) 
 		{
 			cam.depth = 2;
+			Screen.lockCursor = true;
 			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
 			this.gameObject.GetComponent<MeshRenderer> ().enabled = true;
 			right = true;
@@ -25,7 +26,7 @@ public class MoveToRight : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.P)) 
 		{
 			GameObject.Find("First Person Controller").transform.position = new Vector3(-32.01288F, 8.895495F, 121.8482F);
-			GameObject.Find("First Person Controller").transform.Rotate(new Vector3(0,0,0));
+			GameObject.Find("First Person Controller").transform.rotation = Quaternion.identity;
 			GameObject.Find("First Person Controller").GetComponent<Questions>().correctNum = 0;
 			if (!GameObject.Find("First Person Controller").GetComponent<GreenAndBlue4Eva>().green)
 			{
@@ -34,7 +35,7 @@ public class MoveToRight : MonoBehaviour {
 			NumQuestions = GameObject.FindGameObjectsWithTag("Question");
 			for (int i = 0; i < NumQuestions.Length; i++)
 			{
-				NumQuestions[i].GetComponent<Level10FloorPanel>().enabled = true;
+				NumQuestions[i].GetComponent<Level10FloorPanel>().active = true;
 			}
 	
 		}
@@ -47,6 +48,7 @@ public class MoveToRight : MonoBehaviour {
 
 	public void complete()
 	{
+		GameObject.Find ("First Person Controller").GetComponent<Level10Health> ().guiEnabled = false;
 		cam.depth = 2;
 		Screen.lockCursor = true;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;

@@ -4,15 +4,15 @@ using System.Collections;
 public class Level10Floor : MonoBehaviour 
 {
 
-	public enum floorColor{Green, Red, Grey};
+	//public enum floorColor{Green, Red, Grey};
 
-	public floorColor col;
+	//public floorColor col;
 	public Texture red;
 	public Texture green;
 	// Use this for initialization
 	void Start () 
 	{
-		col = floorColor.Grey;
+		//col = floorColor.Grey;
 	}
 	
 	// Update is called once per frame
@@ -27,12 +27,12 @@ public class Level10Floor : MonoBehaviour
 		if (correct) 
 		{
 			this.gameObject.renderer.material.mainTexture = green;
-			col = floorColor.Green;
+			//col = floorColor.Green;
 		} 
 		else
 		{
 			this.gameObject.renderer.material.mainTexture = red;
-			col = floorColor.Red;
+			//col = floorColor.Red;
 		}
 
 	}

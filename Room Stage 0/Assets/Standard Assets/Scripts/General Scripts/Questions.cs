@@ -3,11 +3,11 @@ using System.Collections;
 
 public class Questions : MonoBehaviour {
 	public bool answered;
-
+	GameObject[] NumQuestions;
 	public int questionNumber;
 	public int correctNum;
 	bool guiEnabled = false;
-	bool atWall = false;
+	public bool atWall = false;
 	public AudioClip missionComplete;
 	TextEditor editor;
 	public Texture2D cursorImage;
@@ -103,13 +103,14 @@ public class Questions : MonoBehaviour {
 	//*******************************************************
 	void Update()
 	{
-	//	if (atWall)
-	/*
+		if (atWall)
+		{
+		/*
 		if (Input.GetKeyDown("k"))
 		{
 			questionNumber++;
 		}*/
-			if (Input.GetKeyDown("l"))
+			if (Input.GetKeyDown("e"))
 			{
 				//			Screen.lockCursor = false;  //Cursor is free to move when user goes into terminal
 				if (guiEnabled)
@@ -118,6 +119,7 @@ public class Questions : MonoBehaviour {
 				}
 				else
 				{
+					GameObject.Find("First Person Controller").GetComponent<Level10Health>().guiEnabled = false;
 					Time.timeScale = 0.0f;
 					guiEnabled = true;
 					GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
@@ -126,7 +128,7 @@ public class Questions : MonoBehaviour {
 					Screen.lockCursor = false;
 				}
 			}
-		
+		}
 
 	}
 	//*******************************************************
@@ -193,17 +195,36 @@ public class Questions : MonoBehaviour {
 			}
 		}
 		else{  // the user has answered
+
+
 			string num = questionNumber.ToString();
 			num = "Platform" + num;
+			string panel = num + "/Trigger";
+			GameObject.Find (panel).GetComponent<Level10FloorPanel>().active = false;
+			atWall = false;
 			if(userAnswer == correctAnswers[questionNumber-1]){
 			//tariq the user answered correctly here
 				correctNum++;
 				GameObject.Find(num).GetComponent<Level10Floor>().answer (true);
+				if (correctNum == 7)
+				{
+					Destroy(GameObject.Find("MainFloor/FloorTrigger"));
+					NumQuestions = GameObject.FindGameObjectsWithTag("Question");
+					for (int i = 0; i < NumQuestions.Length; i++)
+					{
+						NumQuestions[i].GetComponent<Level10FloorPanel>().active = false;
+					}
+					GameObject.Find("SphereKill").GetComponent<MoveToRight>().complete ();
+				}
+				else
+				{
+					GameObject.Find("First Person Controller").GetComponent<GreenAndBlue4Eva>().greenTime = true;
+				}
 			}
 			else
 			{
 				GameObject.Find(num).GetComponent<Level10Floor>().answer (false);
-			//tariq the user fucked up
+			//tariq the user messed up
 			}
 			answered = false;
 		}
@@ -360,6 +381,7 @@ public class Questions : MonoBehaviour {
 	{
 		Time.timeScale = 1.0f;
 		guiEnabled = false;
+		GameObject.Find ("First Person Controller").GetComponent<Level10Health> ().guiEnabled = true;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;

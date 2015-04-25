@@ -52,6 +52,7 @@ public class MaxCollide : MonoBehaviour {
 		transform.position = new Vector3(152.6644F, -5.639513F, 283.6994F);
 		transform.Rotate(new Vector3(90,270,0));
 		cam.depth = -1;
+		GameObject.Find ("First Person Controller").GetComponent<Level10Health> ().guiEnabled = true;
 		Screen.lockCursor = false;
 		GameObject.Find ("Star").GetComponent<StarPanel> ().yellow ();
 		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;

@@ -31,6 +31,7 @@ public class Level10Video : MonoBehaviour {
 	
 	public IEnumerator PlayVideo()
 	{
+		GameObject.Find ("First Person Controller").GetComponent<Level10Health> ().guiEnabled = false;
 		cam.depth = 2;
 		GameObject.Find("Initialization").GetComponent<AudioSource>().audio.Stop();
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
@@ -55,6 +56,7 @@ public class Level10Video : MonoBehaviour {
 		GameObject.Find("Initialization").GetComponent<AudioSource>().audio.Play ();
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
 		cam.depth = -2;
+		GameObject.Find ("First Person Controller").GetComponent<Level10Health> ().guiEnabled = true;
 		//Application.LoadLevel(Application.loadedLevel);
 	}
 }
