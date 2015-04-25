@@ -86,6 +86,7 @@ public class IntsAndDoubles : MonoBehaviour
                 }
                 else
                 {
+					GameObject.Find("First Person Controller").GetComponent<Player>().guiEnabled = false;
                     Time.timeScale = 0.0f;
                     guiEnabled = true;
                     GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
@@ -383,6 +384,7 @@ public class IntsAndDoubles : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         guiEnabled = false;
+		GameObject.Find ("First Person Controller").GetComponent<Player> ().guiEnabled = true;
         GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
         GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
         GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;

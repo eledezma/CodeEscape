@@ -15,6 +15,7 @@ public class MoveToRight : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
+		/*
 		if (Input.GetKeyDown (KeyCode.U)) 
 		{
 			cam.depth = 2;
@@ -23,6 +24,7 @@ public class MoveToRight : MonoBehaviour {
 			this.gameObject.GetComponent<MeshRenderer> ().enabled = true;
 			right = true;
 		}
+		*/
 		if (Input.GetKeyDown (KeyCode.P)) 
 		{
 			GameObject.Find("First Person Controller").transform.position = new Vector3(-32.01288F, 8.895495F, 121.8482F);
