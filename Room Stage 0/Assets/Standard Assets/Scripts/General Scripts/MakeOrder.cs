@@ -107,18 +107,21 @@ public class MakeOrder : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         guiEnabled = false;
-        if (string.Compare(order, "hamburger", true) == 0)
-        {
-            GameObject.Find("Door").GetComponent<Food>().ham = true;
-        }
-        if (string.Compare(order, "waffle", true) == 0)
-        {
-            GameObject.Find("Door").GetComponent<Food>().bfast = true;
-        }
-        if (string.Compare(order, "cake", true) == 0)
-        {
-            GameObject.Find("Door").GetComponent<Food>().pie = true;
-        }
+		if (scannerUi.puzzle2Complete)
+		{
+	        if (string.Compare(order, "hamburger", true) == 0)
+	        {
+	            GameObject.Find("Door").GetComponent<Food>().ham = true;
+	        }
+	        if (string.Compare(order, "waffle", true) == 0)
+	        {
+	            GameObject.Find("Door").GetComponent<Food>().bfast = true;
+	        }
+	        if (string.Compare(order, "cake", true) == 0)
+	        {
+	            GameObject.Find("Door").GetComponent<Food>().pie = true;
+        	}
+		}
         GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
         GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
         GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;

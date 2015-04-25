@@ -18,7 +18,6 @@ public class TextChanger : MonoBehaviour
 
     public static void Update()
     {
-
         print(inputmessage1);
         tm.text = codingUI.output;
 
