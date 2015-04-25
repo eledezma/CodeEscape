@@ -112,14 +112,17 @@ public class MakeOrder : MonoBehaviour
 	        if (string.Compare(order, "hamburger", true) == 0)
 	        {
 	            GameObject.Find("Door").GetComponent<Food>().ham = true;
+				Destroy(this);
 	        }
 	        if (string.Compare(order, "waffle", true) == 0)
 	        {
 	            GameObject.Find("Door").GetComponent<Food>().bfast = true;
+				Destroy (this);
 	        }
 	        if (string.Compare(order, "cake", true) == 0)
 	        {
 	            GameObject.Find("Door").GetComponent<Food>().pie = true;
+				Destroy (this);
         	}
 		}
         GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
