@@ -13,7 +13,7 @@ public class InitialStage7 : MonoBehaviour
         GameObject cube1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
         cube1.name = "PowBlock";
         cube1.transform.localScale = new Vector3(2, 2, 2);
-        cube1.transform.position = new Vector3(-29.58157F, 15.99304F, -131.2278F);
+		cube1.transform.position = new Vector3(-19.5565F, 15.99304F, -131.2278F);
         cube1.renderer.material = new Material(Shader.Find("Unlit/Texture"));
         cube1.GetComponent<BoxCollider>().isTrigger = true;
         cube1.renderer.material.mainTexture = pow;
