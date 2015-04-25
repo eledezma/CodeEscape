@@ -2,9 +2,10 @@ using UnityEngine;
 using System.Collections;
 
 public class Questions : MonoBehaviour {
-	static bool answered = false;
+	public bool answered;
 
-	static int questionNumber = 1;
+	public int questionNumber;
+	public int correctNum;
 	bool guiEnabled = false;
 	bool atWall = false;
 	public AudioClip missionComplete;
@@ -73,10 +74,11 @@ public class Questions : MonoBehaviour {
 
 
 
-	
+	/*
 	void OnTriggerEnter(Collider other)
 	{
 		atWall = true;
+		Debug.Log ("Yo");
 		GameObject.Find("Arm Camera").camera.enabled = false;
 		//Arms.camera.enabled = false;
 	}
@@ -88,10 +90,12 @@ public class Questions : MonoBehaviour {
 		//Arms.camera.enabled = true;
 		GameObject.Find("Arm Camera").camera.enabled = true;
 	}
-	
+	*/
 	void Start()
 	{
-
+		answered = false;
+		questionNumber = 1;
+		correctNum = 0;
 		Screen.lockCursor = true;
 		//Screen.showCursor = false;
 	}
@@ -100,11 +104,11 @@ public class Questions : MonoBehaviour {
 	void Update()
 	{
 	//	if (atWall)
-	//	{
+	/*
 		if (Input.GetKeyDown("k"))
 		{
 			questionNumber++;
-		}
+		}*/
 			if (Input.GetKeyDown("l"))
 			{
 				//			Screen.lockCursor = false;  //Cursor is free to move when user goes into terminal
@@ -118,12 +122,11 @@ public class Questions : MonoBehaviour {
 					guiEnabled = true;
 					GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
 					GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
-				GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false; 
-				Screen.lockCursor = false;
-
+					GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false; 
+					Screen.lockCursor = false;
+				}
 			}
-		}
-	
+		
 
 	}
 	//*******************************************************
@@ -157,24 +160,30 @@ public class Questions : MonoBehaviour {
 			{
 					//tariq here the user picked first choice
 					userAnswer = 1;
+					answered =true;
+					resume ();
 				
 			}
 			
 			if (GUI.Button(new Rect(Screen.width * 0.55f, Screen.height * 0.6f, Screen.width * 0.25f, Screen.height * 0.2f), answers[questionNumber-1][1]))
 			{
 					userAnswer=2;
-
+					answered = true;
+					resume ();
 			}
 
 			if (GUI.Button(new Rect(Screen.width * 0.20f, Screen.height * 0.8f, Screen.width * 0.25f, Screen.height * 0.2f), answers[questionNumber-1][2]))
 				{
 					userAnswer=3;
-					
+					answered = true;
+					resume ();
 				}
 				
 			if (GUI.Button(new Rect(Screen.width * 0.55f, Screen.height * 0.8f, Screen.width * 0.25f, Screen.height * 0.2f), answers[questionNumber-1][3]))
 				{
 					userAnswer =4;
+					answered = true;
+					resume ();
 				}
 			
 			
@@ -184,13 +193,19 @@ public class Questions : MonoBehaviour {
 			}
 		}
 		else{  // the user has answered
+			string num = questionNumber.ToString();
+			num = "Platform" + num;
 			if(userAnswer == correctAnswers[questionNumber-1]){
 			//tariq the user answered correctly here
+				correctNum++;
+				GameObject.Find(num).GetComponent<Level10Floor>().answer (true);
 			}
 			else
 			{
+				GameObject.Find(num).GetComponent<Level10Floor>().answer (false);
 			//tariq the user fucked up
 			}
+			answered = false;
 		}
 	}
 	
@@ -235,9 +250,9 @@ public class Questions : MonoBehaviour {
 	}
 
 	// tariq call this whenever you open up a new question
-	public static void reset(){
-		userAnswer = 0;
-		answered = false;
+	public void reset(){
+		//userAnswer = 0;
+		//answered = false;
 	}
 
 	public string restoreCode()

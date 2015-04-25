@@ -35,7 +35,7 @@ public class Level10Video : MonoBehaviour {
 		GameObject.Find("Initialization").GetComponent<AudioSource>().audio.Stop();
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
 		GameObject.Find("Initialization").GetComponent<AudioSource>().volume = 1;
-		//Screen.lockCursor = true;
+		Screen.lockCursor = true;
 		//Screen.showCursor = false;
 		//GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
 		//GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
@@ -50,6 +50,7 @@ public class Level10Video : MonoBehaviour {
 		yield return new WaitForSeconds(0.2F);
 		movie.Pause();
 		audio.Pause();
+		Screen.lockCursor = false;
 		GameObject.Find("Initialization").GetComponent<AudioSource>().audio.clip = scary;
 		GameObject.Find("Initialization").GetComponent<AudioSource>().audio.Play ();
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;

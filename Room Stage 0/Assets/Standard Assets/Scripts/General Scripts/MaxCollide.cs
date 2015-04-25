@@ -48,10 +48,11 @@ public class MaxCollide : MonoBehaviour {
 		drop = true;
 		audio.PlayOneShot(clip2, 1);
 		yield return new WaitForSeconds (5);
+		drop = false;
 		transform.position = new Vector3(152.6644F, -5.639513F, 283.6994F);
 		transform.Rotate(new Vector3(90,270,0));
-		drop = false;
 		cam.depth = -1;
+		Screen.lockCursor = false;
 		GameObject.Find ("Star").GetComponent<StarPanel> ().yellow ();
 		GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = true;
 	}
