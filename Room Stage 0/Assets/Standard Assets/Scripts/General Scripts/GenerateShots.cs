@@ -4,6 +4,7 @@ using System.Collections;
 public class GenerateShots : MonoBehaviour 
 {
 
+	public AudioClip hit;
 	public GameObject sphere;
 	public Texture green;
 	public Texture blue;
@@ -58,6 +59,7 @@ public class GenerateShots : MonoBehaviour
 			shot.GetComponent<BoxCollider> ().isTrigger = true;
 			shot.GetComponent<BoxCollider>().size = new Vector3(2,1,1);
 			shot.GetComponent<ShotMovement>().color = 1;
+			shot.GetComponent<ShotMovement>().hit = hit;
 			shot.renderer.material = new Material(Shader.Find("Unlit/Texture"));
 			shot.transform.localScale = new Vector3(2, 2, 2);
 			shot.renderer.material.mainTexture = blue;
@@ -81,6 +83,7 @@ public class GenerateShots : MonoBehaviour
 			shot.GetComponent<BoxCollider> ().isTrigger = true;
 			shot.GetComponent<BoxCollider>().size = new Vector3(2,1,1);
 			shot.GetComponent<ShotMovement>().color = 1;
+			shot.GetComponent<ShotMovement>().hit = hit;
 			shot.renderer.material = new Material(Shader.Find("Unlit/Texture"));
 			shot.transform.localScale = new Vector3(2, 2, 2);
 			shot.renderer.material.mainTexture = blue;
@@ -104,6 +107,7 @@ public class GenerateShots : MonoBehaviour
 			shot.GetComponent<BoxCollider> ().isTrigger = true;
 			shot.GetComponent<BoxCollider>().size = new Vector3(2,1,1);
 			shot.GetComponent<ShotMovement>().color = 2;
+			shot.GetComponent<ShotMovement>().hit = hit;
 			shot.renderer.material = new Material (Shader.Find ("Unlit/Texture"));
 			shot.transform.localScale = new Vector3(2, 2, 2);
 			shot.renderer.material.mainTexture = green;
@@ -127,6 +131,7 @@ public class GenerateShots : MonoBehaviour
 			shot.GetComponent<BoxCollider> ().isTrigger = true;
 			shot.GetComponent<BoxCollider>().size = new Vector3(2,1,1);
 			shot.GetComponent<ShotMovement>().color = 2;
+			shot.GetComponent<ShotMovement>().hit = hit;
 			shot.renderer.material = new Material (Shader.Find ("Unlit/Texture"));
 			shot.transform.localScale = new Vector3 (2, 2, 2);
 			shot.renderer.material.mainTexture = green;
