@@ -58,20 +58,18 @@ public class Stage9Main1UI : MonoBehaviour {
 		//*******************************************************
 		void Update()
 		{
-			if (Input.GetKeyDown("e"))
-			{
-				if (guiEnabled)
-				{					
-					resume();
-				}
-				else
-				{
-					Time.timeScale = 0.0f;
-					guiEnabled = true;
-					GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-					GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
-					GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false; //remove this line when atScanner works
-					Screen.lockCursor = false;
+			if (atWall9_1) {
+				if (Input.GetKeyDown ("e")) {
+						if (guiEnabled) {					
+								resume ();
+						} else {
+								Time.timeScale = 0.0f;
+								guiEnabled = true;
+								GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
+								GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
+								GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false; //remove this line when atScanner works
+								Screen.lockCursor = false;
+						}
 				}
 			}
 			

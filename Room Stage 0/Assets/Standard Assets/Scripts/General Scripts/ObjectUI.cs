@@ -5,7 +5,7 @@ public class ObjectUI : MonoBehaviour {
 	public bool setAdded = false;
 		public static bool puzzleComplete = false;
 		bool guiEnabled = false;
-		public static bool atWall6 = false;
+		public static bool atWall9_3 = false;
 		bool showError = false;
 		bool instantiated = false;
 		bool generated = false;
@@ -26,18 +26,18 @@ public class ObjectUI : MonoBehaviour {
 		
 		void OnTriggerEnter(Collider col2)
 		{
-			if (col2.gameObject.name == "Wall_Jack_S2")
+			if (col2.gameObject.name == "Wall_Jack_S9_3")
 			{
-				atWall6 = true;
+				atWall9_3 = true;
 				GameObject.Find("Arm Camera").camera.enabled = false;
 			}
 		}
 		
 		void OnTriggerExit(Collider col2)
 		{
-			if (col2.gameObject.name == "Wall_Jack_S2")
+		if (col2.gameObject.name == "Wall_Jack_S9_3")
 			{
-				atWall6 = false;
+				atWall9_3 = false;
 				guiEnabled = false;
 				GameObject.Find("Arm Camera").camera.enabled = true;
 			}
@@ -73,22 +73,20 @@ public class ObjectUI : MonoBehaviour {
 		//*******************************************************
 		void Update()
 		{
-			if (Input.GetKeyDown("p"))
-			{
-				if (guiEnabled)
-				{					
-					resume();
-				}
-				else
-				{
-					Time.timeScale = 0.0f;
-					guiEnabled = true;
-					GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-					GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
-					GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false; //remove this line when atScanner works
-					Screen.lockCursor = false;
-				}
+		if (atWall9_3) {
+			if (Input.GetKeyDown ("e")) {
+					if (guiEnabled) {					
+							resume ();
+					} else {
+							Time.timeScale = 0.0f;
+							guiEnabled = true;
+							GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
+							GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
+							GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false; //remove this line when atScanner works
+							Screen.lockCursor = false;
+					}
 			}
+		}
 			
 		}
 		//*******************************************************
@@ -98,7 +96,7 @@ public class ObjectUI : MonoBehaviour {
 		//*******************************************************
 		public void OnGUI()
 		{
-			if (Input.GetKeyDown("p"))
+			if (atWall9_3 && Input.GetKeyDown("e"))
 			{
 				GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
 				//If at wall terminal show default cursor instead

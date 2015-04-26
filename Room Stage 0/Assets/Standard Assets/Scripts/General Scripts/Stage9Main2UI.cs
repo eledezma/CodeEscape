@@ -8,7 +8,7 @@ public class Stage9Main2UI : MonoBehaviour {
 	bool colorSet = false;
 	public static bool puzzleComplete = false;
 	bool guiEnabled = false;
-	public static bool atWall6 = false;
+	public static bool atWall9_2 = false;
 		bool showError = false;
 		bool instantiated = false;
 		bool generated = false;
@@ -32,18 +32,18 @@ public class Stage9Main2UI : MonoBehaviour {
 		
 		void OnTriggerEnter(Collider col2)
 		{
-			if (col2.gameObject.name == "Wall_Jack_S2")
+		if (col2.gameObject.name == "Wall_Jack_S9_2")
 			{
-				atWall6 = true;
+				atWall9_2 = true;
 				GameObject.Find("Arm Camera").camera.enabled = false;
 			}
 		}
 		
 		void OnTriggerExit(Collider col2)
 		{
-			if (col2.gameObject.name == "Wall_Jack_S2")
+			if (col2.gameObject.name == "Wall_Jack_S9_2")
 			{
-				atWall6 = false;
+				atWall9_2 = false;
 				guiEnabled = false;
 				GameObject.Find("Arm Camera").camera.enabled = true;
 			}
@@ -63,23 +63,20 @@ public class Stage9Main2UI : MonoBehaviour {
 		//*******************************************************
 		void Update()
 		{
-			if (Input.GetKeyDown("r"))
-			{
-				if (guiEnabled)
-				{					
-					resume();
-				}
-				else
-				{
-					Time.timeScale = 0.0f;
-					guiEnabled = true;
-					GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-					GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
-					GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false; //remove this line when atScanner works
-					Screen.lockCursor = false;
+		if (atWall9_2) {
+				if (Input.GetKeyDown ("e")) {
+						if (guiEnabled) {					
+								resume ();
+						} else {
+								Time.timeScale = 0.0f;
+								guiEnabled = true;
+								GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
+								GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
+								GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false; //remove this line when atScanner works
+								Screen.lockCursor = false;
+						}
 				}
 			}
-			
 		}
 		//*******************************************************
 		
@@ -88,7 +85,7 @@ public class Stage9Main2UI : MonoBehaviour {
 		//*******************************************************
 		public void OnGUI()
 		{
-			if (Input.GetKeyDown("r"))
+		if (atWall9_2 && Input.GetKeyDown("e"))
 			{
 				GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
 				//If at wall terminal show default cursor instead
