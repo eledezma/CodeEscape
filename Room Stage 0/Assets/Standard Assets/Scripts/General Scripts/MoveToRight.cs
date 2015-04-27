@@ -52,6 +52,19 @@ public class MoveToRight : MonoBehaviour {
 	{
 		GameObject.Find ("First Person Controller").GetComponent<Level10Health> ().guiEnabled = false;
 		cam.depth = 2;
+		GameObject.Find("teslaOrbs1").GetComponent<Lightning>().removelight ();
+		GameObject.Find("teslaOrbs2").GetComponent<Lightning>().removelight ();
+		GameObject.Find("teslaOrbs3").GetComponent<Lightning>().removelight ();
+		GameObject.Find("teslaOrbs4").GetComponent<Lightning>().removelight ();
+		GameObject.Find("teslaOrbs5").GetComponent<Lightning>().removelight ();
+		GameObject.Find("teslaOrbs6").GetComponent<Lightning>().removelight ();
+		GameObject.Find("teslaOrbs7").GetComponent<Lightning>().removelight ();
+		GameObject.Find("teslaOrbs8").GetComponent<Lightning>().removelight ();
+		GameObject.Find("teslaOrbs9").GetComponent<Lightning>().removelight ();
+		GameObject.Find("teslaOrbs10").GetComponent<Lightning>().removelight ();
+		GameObject.Find("teslaOrbs11").GetComponent<Lightning>().removelight ();
+		GameObject.Find("teslaOrbs12").GetComponent<Lightning>().removelight ();
+		GameObject.Find("teslaOrbs13").GetComponent<Lightning>().removelight ();
 		Screen.lockCursor = true;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
 		this.gameObject.GetComponent<MeshRenderer> ().enabled = true;

@@ -31,10 +31,21 @@ public class Lightning : MonoBehaviour {
 
 
 	void Update () {  //could add sound for shut off but...don't know which node you guys want sound on
-	if (Input.GetKeyDown("4") && lineRenderer.enabled == false)
+	/*if (Input.GetKeyDown("4") && lineRenderer.enabled == false)
 		lineRenderer.enabled = true;
 	else if(Input.GetKeyDown("4") && lineRenderer.enabled == true)
+		lineRenderer.enabled = false;*/
+	}
+
+	public void lighttime()
+	{
+		lineRenderer.enabled = true;
+	}
+
+	public void removelight()
+	{
 		lineRenderer.enabled = false;
+
 	}
 
 }
