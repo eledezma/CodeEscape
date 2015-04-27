@@ -4,6 +4,7 @@ using System.Collections;
 public class Level10Health : MonoBehaviour 
 {
 	GameObject[] NumQuestions;
+	GameObject[] NumQuesTrig;
 	public float health;
 	public bool guiEnabled;
 	bool textureEnabled;
@@ -21,8 +22,8 @@ public class Level10Health : MonoBehaviour
 		if(health<1)
 		{
 			health = 100;
-			GameObject.Find("First Person Controller").transform.position = new Vector3(-32.01288F, 8.895495F, 121.8482F);
-			GameObject.Find("First Person Controller").transform.rotation = Quaternion.identity;
+			GameObject.Find("First Person Controller").transform.position = new Vector3(-63.59985F, 8.895495F, 248.9179F);
+			GameObject.Find("First Person Controller").transform.rotation = Quaternion.Euler (0,90,0);
 			GameObject.Find("First Person Controller").GetComponent<Questions>().correctNum = 0;
 			if (!GameObject.Find("First Person Controller").GetComponent<GreenAndBlue4Eva>().green)
 			{
@@ -31,7 +32,24 @@ public class Level10Health : MonoBehaviour
 			NumQuestions = GameObject.FindGameObjectsWithTag("Question");
 			for (int i = 0; i < NumQuestions.Length; i++)
 			{
+
 				NumQuestions[i].GetComponent<Level10FloorPanel>().active = true;
+			}
+			GameObject.Find("Platform1").GetComponent<Level10Floor>().reset ();
+			GameObject.Find("Platform2").GetComponent<Level10Floor>().reset ();
+			GameObject.Find("Platform3").GetComponent<Level10Floor>().reset ();
+			GameObject.Find("Platform4").GetComponent<Level10Floor>().reset ();
+			GameObject.Find("Platform5").GetComponent<Level10Floor>().reset ();
+			GameObject.Find("Platform6").GetComponent<Level10Floor>().reset ();
+			GameObject.Find("Platform7").GetComponent<Level10Floor>().reset ();
+			GameObject.Find("Platform8").GetComponent<Level10Floor>().reset ();
+			GameObject.Find("Platform9").GetComponent<Level10Floor>().reset ();
+			GameObject.Find("Platform10").GetComponent<Level10Floor>().reset ();
+
+			NumQuesTrig = GameObject.FindGameObjectsWithTag ("QuestionTrig");
+			for (int i = 0; i < NumQuesTrig.Length; i++)
+			{
+				NumQuesTrig[i].GetComponent<QuestionStart>().active = true;
 			}
 		}
 		if (!guiEnabled && textureEnabled)

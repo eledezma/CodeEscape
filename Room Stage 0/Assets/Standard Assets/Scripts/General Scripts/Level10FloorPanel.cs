@@ -24,7 +24,6 @@ public class Level10FloorPanel : MonoBehaviour {
 			if (other.gameObject.tag == "Player") 
 			{
 				GameObject.Find ("First Person Controller").GetComponent<Questions> ().questionNumber = problem;
-				GameObject.Find ("First Person Controller").GetComponent<Questions> ().atWall = true;
 				if (GameObject.Find ("First Person Controller").GetComponent<GreenAndBlue4Eva> ().green) 
 				{
 					GameObject.Find ("First Person Controller").GetComponent<GreenAndBlue4Eva> ().greenTime = true;

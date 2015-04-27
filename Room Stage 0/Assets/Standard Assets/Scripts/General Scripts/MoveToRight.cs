@@ -27,8 +27,8 @@ public class MoveToRight : MonoBehaviour {
 		*/
 		if (Input.GetKeyDown (KeyCode.P)) 
 		{
-			GameObject.Find("First Person Controller").transform.position = new Vector3(-32.01288F, 8.895495F, 121.8482F);
-			GameObject.Find("First Person Controller").transform.rotation = Quaternion.identity;
+			GameObject.Find("First Person Controller").transform.position = new Vector3(-63.59985F, 8.895495F, 248.9179F);
+			GameObject.Find("First Person Controller").transform.rotation = Quaternion.Euler (0,90,0);
 			GameObject.Find("First Person Controller").GetComponent<Questions>().correctNum = 0;
 			if (!GameObject.Find("First Person Controller").GetComponent<GreenAndBlue4Eva>().green)
 			{

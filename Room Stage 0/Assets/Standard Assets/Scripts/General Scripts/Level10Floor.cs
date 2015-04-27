@@ -9,6 +9,7 @@ public class Level10Floor : MonoBehaviour
 	//public floorColor col;
 	public Texture red;
 	public Texture green;
+	public Texture grey;
 	// Use this for initialization
 	void Start () 
 	{
@@ -34,6 +35,12 @@ public class Level10Floor : MonoBehaviour
 			this.gameObject.renderer.material.mainTexture = red;
 			//col = floorColor.Red;
 		}
+
+	}
+
+	public void reset()
+	{
+		this.gameObject.renderer.material.mainTexture = grey;
 
 	}
 }

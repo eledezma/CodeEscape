@@ -4,6 +4,7 @@ using System.Collections;
 public class Questions : MonoBehaviour {
 	public bool answered;
 	GameObject[] NumQuestions;
+	GameObject[] NumQuesTrig;
 	public int questionNumber;
 	public int correctNum;
 	bool guiEnabled = false;
@@ -198,14 +199,17 @@ public class Questions : MonoBehaviour {
 
 
 			string num = questionNumber.ToString();
-			num = "Platform" + num;
-			string panel = num + "/Trigger";
-			GameObject.Find (panel).GetComponent<Level10FloorPanel>().active = false;
+			string tomb = "tombstone" + num;
+			tomb = tomb + "/Wall Panel";
+			string panel = "Platform" + num;
+			string panelTrig = panel + "/Trigger";
+			GameObject.Find (panelTrig).GetComponent<Level10FloorPanel>().active = false;
+			GameObject.Find (tomb).GetComponent<QuestionStart>().active = false;
 			atWall = false;
 			if(userAnswer == correctAnswers[questionNumber-1]){
 			//tariq the user answered correctly here
 				correctNum++;
-				GameObject.Find(num).GetComponent<Level10Floor>().answer (true);
+				GameObject.Find(panel).GetComponent<Level10Floor>().answer (true);
 				if (correctNum == 7)
 				{
 					Destroy(GameObject.Find("MainFloor/FloorTrigger"));
@@ -215,6 +219,11 @@ public class Questions : MonoBehaviour {
 						NumQuestions[i].GetComponent<Level10FloorPanel>().active = false;
 					}
 					GameObject.Find("SphereKill").GetComponent<MoveToRight>().complete ();
+					NumQuesTrig = GameObject.FindGameObjectsWithTag ("QuestionTrig");
+					for (int i = 0; i < NumQuesTrig.Length; i++)
+					{
+						NumQuesTrig[i].GetComponent<QuestionStart>().active = false;
+					}
 				}
 				else
 				{
@@ -223,7 +232,7 @@ public class Questions : MonoBehaviour {
 			}
 			else
 			{
-				GameObject.Find(num).GetComponent<Level10Floor>().answer (false);
+				GameObject.Find(panel).GetComponent<Level10Floor>().answer (false);
 			//tariq the user messed up
 			}
 			answered = false;
