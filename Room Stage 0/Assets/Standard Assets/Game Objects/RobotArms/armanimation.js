@@ -13,49 +13,51 @@ animate= GetComponent(Animator);
 }
 
 function Update () {
-if(Input.GetKeyDown("q")){
-run=0.1;
+//if(walking<-1||walking>1){walking=0.0;}
+if(Input.GetKeyDown(KeyCode.LeftShift)){
+run++;
+
 }
-if(Input.GetKeyUp("q")){
-run=0.0;
+if(Input.GetKeyUp(KeyCode.LeftShift)){
+run--;
 }
-if(Input.GetKeyDown("y")){
-jackn=0.1;
+if(Input.GetKeyDown("e")){
+jackn++;
 }
-if(Input.GetKeyUp("y")){
-jackn=0.0;
+if(Input.GetKeyUp("e")){
+jackn--;
 }
 
 if(Input.GetKeyDown("w")||Input.GetKeyDown("up")){
-		walking=0.1;
+		walking++;
 	
 	}
 	if(Input.GetKeyUp("w")||Input.GetKeyUp("up")){
-		walking=0.0;
+		walking--;
 	
 	}
 	if(Input.GetKeyDown("s")||Input.GetKeyDown("down")){
-		walking=0.1;
+		walking++;
 	
 	}
 	if(Input.GetKeyUp("s")||Input.GetKeyUp("down")){
-		walking=0.0;
+		walking--;
 	
 	}
 	if(Input.GetKeyDown("a")||Input.GetKeyDown("left")){
-		walking=0.1;
+		walking++;
 	
 	}
 	if(Input.GetKeyUp("a")||Input.GetKeyUp("left")){
-		walking=0.0;
+		walking--;
 	
 	}
     if(Input.GetKeyDown("d")||Input.GetKeyDown("right")){
-		walking=0.1;
+		walking++;
 	
 	}
 	if(Input.GetKeyUp("d")||Input.GetKeyUp("right")){
-		walking=0.0;
+		walking--;
 	
 	}
 }
