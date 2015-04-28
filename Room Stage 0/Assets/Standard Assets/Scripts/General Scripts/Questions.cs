@@ -189,14 +189,11 @@ public class Questions : MonoBehaviour {
 					answered = true;
 					resume ();
 				}
-			
-			
-			
-			
-			
+					
 			}
 		}
-		else{  // the user has answered
+		else  // the user has answered
+		{  
 
 
 			string num = questionNumber.ToString();
@@ -206,9 +203,9 @@ public class Questions : MonoBehaviour {
 			string panelTrig = panel + "/Trigger";
 			GameObject.Find (panelTrig).GetComponent<Level10FloorPanel>().active = false;
 			GameObject.Find (tomb).GetComponent<QuestionStart>().active = false;
-			atWall = false;
-			if(userAnswer == correctAnswers[questionNumber-1]){
-			//tariq the user answered correctly here
+			if(userAnswer == correctAnswers[questionNumber-1])
+			{
+				//tariq the user answered correctly here
 				correctNum++;
 				GameObject.Find(panel).GetComponent<Level10Floor>().answer (true);
 				if (correctNum == 7)
@@ -233,8 +230,9 @@ public class Questions : MonoBehaviour {
 			}
 			else
 			{
+				//tariq the user messed up
 				GameObject.Find(panel).GetComponent<Level10Floor>().answer (false);
-			//tariq the user messed up
+			
 			}
 			answered = false;
 		}
@@ -389,6 +387,7 @@ public class Questions : MonoBehaviour {
 	
 	public void resume()
 	{
+		atWall = false;
 		Time.timeScale = 1.0f;
 		guiEnabled = false;
 		GameObject.Find ("First Person Controller").GetComponent<Level10Health> ().guiEnabled = true;
