@@ -114,11 +114,12 @@ public class Questions : MonoBehaviour {
 			if (Input.GetKeyDown("e"))
 			{
 				//			Screen.lockCursor = false;  //Cursor is free to move when user goes into terminal
-				if (guiEnabled)
+				/*if (guiEnabled)
 				{
 					resume();
 				}
-				else
+				else*/
+				if (!guiEnabled)
 				{
 					GameObject.Find("First Person Controller").GetComponent<Level10Health>().guiEnabled = false;
 					Time.timeScale = 0.0f;
