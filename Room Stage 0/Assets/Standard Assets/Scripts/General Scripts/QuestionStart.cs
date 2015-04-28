@@ -28,4 +28,15 @@ public class QuestionStart : MonoBehaviour
 			}
 		}
 	}
+
+	void OnTriggerExit(Collider other)
+	{
+		if (active) 
+		{
+			if (other.gameObject.tag == "Player") 
+			{
+				GameObject.Find ("First Person Controller").GetComponent<Questions> ().atWall = false;
+			}
+		}
+	}
 }

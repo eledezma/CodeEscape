@@ -203,6 +203,7 @@ public class Questions : MonoBehaviour {
 			string panelTrig = panel + "/Trigger";
 			GameObject.Find (panelTrig).GetComponent<Level10FloorPanel>().active = false;
 			GameObject.Find (tomb).GetComponent<QuestionStart>().active = false;
+			atWall = false;
 			if(userAnswer == correctAnswers[questionNumber-1])
 			{
 				//tariq the user answered correctly here
@@ -387,7 +388,6 @@ public class Questions : MonoBehaviour {
 	
 	public void resume()
 	{
-		atWall = false;
 		Time.timeScale = 1.0f;
 		guiEnabled = false;
 		GameObject.Find ("First Person Controller").GetComponent<Level10Health> ().guiEnabled = true;
