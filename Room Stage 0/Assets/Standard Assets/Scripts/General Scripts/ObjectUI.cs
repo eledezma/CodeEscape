@@ -105,7 +105,7 @@ public class ObjectUI : MonoBehaviour {
 			
 			if (guiEnabled)
 			{
-				GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "Arrays Puzzle");
+				GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "Sheild Object");
 				
 				if (showError)
 				{
@@ -117,7 +117,7 @@ public class ObjectUI : MonoBehaviour {
 				}
 				
 				GUI.SetNextControlName("textarea");
-				GUI.TextArea(new Rect(Screen.width * 0.2f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
+				GUI.TextArea(new Rect(Screen.width * 0.24f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
 				
 				if (showError)
 				{
@@ -133,7 +133,7 @@ public class ObjectUI : MonoBehaviour {
 				GUI.skin.label.fontSize = 12;
 
 				
-				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.1f, Screen.height * 0.05f), "Add setColor() method"))
+				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.2f, Screen.height * 0.1f), "Add setColor() method"))
 				{
 					GUI.FocusControl("Textarea");
 					
@@ -148,14 +148,14 @@ public class ObjectUI : MonoBehaviour {
 				
 				
 				// Button that activates the user's code
-				if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Submit"))
+				if (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.9f, Screen.width * 0.15f, Screen.height * 0.08f), "Submit"))
 				{
 					setAdded = true;
 					resume();
 				}
 				
 				// Button that closes the UI and disregards changes
-				if (GUI.Button(new Rect(Screen.width * 0.7f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Cancel"))
+				if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.15f, Screen.height * 0.08f), "Cancel"))
 				{
 					resume();
 					code = restoreCode();
@@ -166,20 +166,13 @@ public class ObjectUI : MonoBehaviour {
 				
 				
 				// Button that restores the code in the indArea to its original state
-				if (GUI.Button(new Rect(Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Reset") || reset)
+				if (GUI.Button(new Rect(Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.15f, Screen.height * 0.08f), "Reset") || reset)
 				{
 					code = restoreCode();
 					instantiated = false;
 					generated = false;
 					showError = false;
 				}
-				
-				GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected ind: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
-				                                                      editor.pos,
-				                                                      0,
-				                                                      0,
-				                                                      0,
-				                                                      0));
 				
 			}
 			

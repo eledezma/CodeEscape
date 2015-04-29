@@ -106,7 +106,7 @@ public class Stage9Main2UI : MonoBehaviour {
 				}
 				
 				GUI.SetNextControlName("Textarea2");
-				GUI.TextArea(new Rect(Screen.width * 0.2f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
+				GUI.TextArea(new Rect(Screen.width * 0.24f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
 				
 				if (showError)
 				{
@@ -122,7 +122,7 @@ public class Stage9Main2UI : MonoBehaviour {
 				GUI.skin.label.fontSize = 12;
 
 				
-				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.1f, Screen.height * 0.05f), "Instantiate Sheild"))
+				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.32f, Screen.width * 0.2f, Screen.height * 0.1f), "Instantiate Sheild"))
 				{
 
 				if(instantiated)
@@ -141,7 +141,7 @@ public class Stage9Main2UI : MonoBehaviour {
 				}
 				}
 
-				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.44f, Screen.width * 0.1f, Screen.height * 0.05f), "Set Color to Blue"))
+				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.44f, Screen.width * 0.2f, Screen.height * 0.1f), "Set Color to Green"))
 				{
 				if(GameObject.Find("First Person Controller").GetComponent<ObjectUI>().setAdded)
 				{
@@ -170,7 +170,7 @@ public class Stage9Main2UI : MonoBehaviour {
 					errorString = noset;
 				}
 				}
-				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.50f, Screen.width * 0.1f, Screen.height * 0.05f), "Generate Sheild"))
+				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.56f, Screen.width * 0.2f, Screen.height * 0.1f), "Generate Sheild"))
 				{
 				if(!instantiated)
 				{
@@ -193,7 +193,7 @@ public class Stage9Main2UI : MonoBehaviour {
 				}
 				
 				// Button that activates the user's code
-				if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Submit"))
+				if (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.9f, Screen.width * 0.15f, Screen.height * 0.08f), "Submit"))
 				{
 					
 					if((generated)&&(setPointless||!colorSet||setLast))
@@ -209,7 +209,7 @@ public class Stage9Main2UI : MonoBehaviour {
 				}
 				
 				// Button that closes the UI and disregards changes
-				if (GUI.Button(new Rect(Screen.width * 0.7f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Cancel"))
+				if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.15f, Screen.height * 0.08f), "Cancel"))
 				{
 					resume();
 					code = restoreCode();
@@ -218,11 +218,12 @@ public class Stage9Main2UI : MonoBehaviour {
 					showError = false;
 					colorSet = false;
 				setPointless = false;
+				setLast = false;
 				}
 				
 				
 				// Button that restores the code in the indArea to its original state
-				if (GUI.Button(new Rect(Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Reset") || reset)
+				if (GUI.Button(new Rect(Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.15f, Screen.height * 0.08f), "Reset") || reset)
 				{
 					code = restoreCode();
 					instantiated = false;
@@ -230,14 +231,10 @@ public class Stage9Main2UI : MonoBehaviour {
 					showError = false;
 				colorSet = false;
 				setPointless = false;
+				setLast = false;
 				}
 				
-				GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected ind: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
-				                                                      0,
-				                                                      0,
-				                                                      0,
-				                                                      0,
-				                                                      0));
+
 				
 			}
 			

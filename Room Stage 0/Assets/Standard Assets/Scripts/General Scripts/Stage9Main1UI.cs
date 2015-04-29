@@ -102,7 +102,7 @@ public class Stage9Main1UI : MonoBehaviour {
 				}
 				
 				GUI.SetNextControlName("Textarea");
-				GUI.TextArea(new Rect(Screen.width * 0.2f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
+				GUI.TextArea(new Rect(Screen.width * 0.24f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
 				
 				if (showError)
 				{
@@ -118,7 +118,7 @@ public class Stage9Main1UI : MonoBehaviour {
 				GUI.skin.label.fontSize = 12;
 
 				
-				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.1f, Screen.height * 0.05f), "Instantiate Sheild"))
+				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.32f, Screen.width * 0.2f, Screen.height * 0.1f), "Instantiate Sheild"))
 				{
 
 				if(instantiated)
@@ -138,7 +138,7 @@ public class Stage9Main1UI : MonoBehaviour {
 				}
 				}
 
-				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.44f, Screen.width * 0.1f, Screen.height * 0.05f), "Generate Sheild"))
+				if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.44f, Screen.width * 0.2f, Screen.height * 0.1f), "Generate Sheild"))
 				{
 				if(!instantiated)
 				{
@@ -158,14 +158,14 @@ public class Stage9Main1UI : MonoBehaviour {
 				}
 				
 				// Button that activates the user's code
-				if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Submit"))
+				if (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.9f, Screen.width * 0.15f, Screen.height * 0.08f), "Submit"))
 				{
 				GameObject.Find("Initialization").GetComponent<InitialStage9>().activate(1);
 					resume();
 				}
 				
 				// Button that closes the UI and disregards changes
-				if (GUI.Button(new Rect(Screen.width * 0.7f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Cancel"))
+				if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.15f, Screen.height * 0.08f), "Cancel"))
 				{
 					resume();
 					code = restoreCode();
@@ -176,20 +176,14 @@ public class Stage9Main1UI : MonoBehaviour {
 				
 				
 				// Button that restores the code in the indArea to its original state
-				if (GUI.Button(new Rect(Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Reset") || reset)
+				if (GUI.Button(new Rect(Screen.width * 0.8f, Screen.height * 0.9f, Screen.width * 0.15f, Screen.height * 0.08f), "Reset") || reset)
 				{
 					code = restoreCode();
 					instantiated = false;
 					generated = false;
 					showError = false;
 				}
-				
-				GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected ind: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
-				                                                      0,
-				                                                      0,
-				                                                      0,
-				                                                      0,
-				                                                      0));
+
 				
 			}
 			
