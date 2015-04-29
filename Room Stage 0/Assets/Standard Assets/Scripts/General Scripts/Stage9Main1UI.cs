@@ -5,7 +5,7 @@ public class Stage9Main1UI : MonoBehaviour {
 	int positionI;
 	int positionG;
 		public static bool puzzleComplete = false;
-		bool guiEnabled = false;
+		public bool guiEnabled = false;
 		public static bool atWall9_1 = false;
 		bool showError = false;
 		bool instantiated = false;

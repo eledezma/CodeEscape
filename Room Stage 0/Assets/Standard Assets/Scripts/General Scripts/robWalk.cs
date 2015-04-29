@@ -44,7 +44,9 @@ public class robWalk : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(myTransform.position.y<0.5f)
+			myTransform.Translate(0,0.05f,0);
+
 		friendDistance = Vector3.Distance (player.position, friend.position);
 		playerEnemyDistance = Vector3.Distance (player.position, enemy.position);
 		enemybotDistance = Vector3.Distance (enemy.position, friend.position);
@@ -54,7 +56,7 @@ public class robWalk : MonoBehaviour {
 		{
 			if (friendDistance > 10) {
 				
-				Target = new Vector3 (player.position.x, player.position.y-2, player.position.z);
+				Target = new Vector3 (player.position.x, 1, player.position.z);
 				MoveDirection = Target - myTransform.position;
 				Velocity = MoveDirection.normalized * 6;
 				rigidbody.velocity = Velocity;
@@ -74,7 +76,7 @@ public class robWalk : MonoBehaviour {
 		{
 			if (enemybotDistance > 8) {
 				
-				Target = new Vector3 (enemy.position.x, enemy.position.y, enemy.position.z);
+				Target = new Vector3 (enemy.position.x, 1, enemy.position.z);
 				MoveDirection = Target - myTransform.position;
 				Velocity = MoveDirection.normalized * 6;
 				rigidbody.velocity = Velocity;

@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
 	public int rotationSpeed = 6;
 	public float distance;
 	public int speed;
+	private int pushRange = 7;
 	Vector3 Velocity;
 	public Vector3 MoveDirection;
 	Vector3 Target;
@@ -23,18 +24,16 @@ public class Enemy : MonoBehaviour
 	public float time = 2000;
 	bool decrement = false;
 	public bool attacking = false;
-	bool pushedBack = false;
+	public bool pushedBack = false;
 	AnimationClip Walk;
+	private float distToGround;
 	
 	private Transform myTransform;
-	void awake()
-	{
-		
-	}
 	
 	// Use this for initialization
 	void Start()
 	{
+		distToGround = (float)(collider.bounds.extents.y);
 		myTransform = transform;
 		go = GameObject.Find("First Person Controller");
 		enemy = GameObject.Find("SPIDER");
@@ -48,7 +47,9 @@ public class Enemy : MonoBehaviour
 	void Update()
 	{
 		distance = Vector3.Distance(player.position,myTransform.position);
-		if(!pushedBack)
+		if(myTransform.position.y<0.5f)
+			myTransform.Translate(0,0.05f,0);
+		if(!pushedBack&&IsGrounded())
 		{
 		switch (state)
 		{
@@ -60,7 +61,9 @@ public class Enemy : MonoBehaviour
 				}
 			if(curWayPoint<waypoints.Length)
 			{
-				Target = waypoints[curWayPoint].position;
+				//Target = new Vector3(waypoints[curWayPoint].position.x,1,waypoints[curWayPoint].position.z);
+					Target = waypoints[curWayPoint].position;
+
 				MoveDirection = Target - myTransform.position;
 				Velocity = rigidbody.velocity;
 				if(MoveDirection.magnitude <1)
@@ -86,7 +89,7 @@ public class Enemy : MonoBehaviour
 			//{
 				speed = originalSpeed;
 			//}
-			Target = new Vector3(player.position.x,player.position.y-3,player.position.z);
+			Target = new Vector3(player.position.x,1,player.position.z);
 			MoveDirection = Target - myTransform.position;
 			Velocity = MoveDirection.normalized * speed;
 			rigidbody.velocity = Velocity;
@@ -94,21 +97,16 @@ public class Enemy : MonoBehaviour
 			enemy.animation.Play("Run");
 		}
 			break;
-		//case "pausing":
-	//	{
-	//		decrement = true;
-//			speed = 0;
-//		}
-//			break;
 		case "attacking":
 		{
 			//speed = attackSpeed;
 			speed = 0;
-			Target = player.position;
-			MoveDirection = Target - myTransform.position;
+			//Target = player.position;
+			//MoveDirection = Target - myTransform.position;
 			Velocity = MoveDirection.normalized * speed;
 			rigidbody.velocity = Velocity;
 			enemy.animation.Play("Attack");
+			
 			timer-=Time.deltaTime;
 				
 			if(timer<0){
@@ -154,27 +152,12 @@ public class Enemy : MonoBehaviour
 		if(go.GetComponent<Player>().health<1)
 		{
 			state = "dead";
-			enemy.animation.Play("Death");
+		//	enemy.animation.Play("Death");
 
-		}
-		if(Input.GetKeyDown("e")&&(state == "attacking"))
-		{
-			speed = attackSpeed;
-			pushedBack = true;
-			MoveDirection = player.forward;
-			Velocity = MoveDirection.normalized * speed;
-			rigidbody.velocity = Velocity;
-				attacking=false;
 		}
 
 		
 
-//		if(distance<4.5)
-//		{
-///			state = "repelling";
-//			go.GetComponent<Player>().health--;
-//				//			
-//		} 
 /*		if(decrement)
 		{
 			time-=Time.deltaTime*1000;
@@ -192,6 +175,24 @@ public class Enemy : MonoBehaviour
 			pushedBack = false;
 			state = "chasing";
 		}
+
+		if(Input.GetKeyDown("e")&&(distance<pushRange))
+		{
+			speed = attackSpeed;
+			pushedBack = true;
+			MoveDirection = myTransform.forward*-1;
+			Velocity = MoveDirection.normalized * speed;
+			rigidbody.velocity = Velocity;
+			attacking=false;
+		}
 	}
 
+	public bool IsGrounded(){
+		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+	}
+
+	public bool PushedBack{
+		get{ return pushedBack; }
+		set{ value = pushedBack; }
+	}
 }
