@@ -4,12 +4,13 @@ using System.Collections;
 public class TemporaryDeathAnimation : MonoBehaviour 
 {
 
-	public bool die = false;
-	public float speed = 0.5f;
+	private bool die;
+	private float speed;
 	// Use this for initialization
 	void Start ()
 	{
-	
+		speed = 0.5f;
+		die = false;
 	}
 	
 	// Update is called once per frame
@@ -27,5 +28,10 @@ public class TemporaryDeathAnimation : MonoBehaviour
 		{
 			Application.LoadLevel(Application.loadedLevel);
 		}
+	}
+
+	public bool Die{
+		get{return die;}
+		set{die=value;}
 	}
 }

@@ -113,7 +113,7 @@ public class robWalk : MonoBehaviour {
 			break;
 		}
 		
-		if(spiderScript.state == "chasing")
+		if(spiderScript.State == "chasing")
 		{
 			state = "enemyEngaged";
 		}

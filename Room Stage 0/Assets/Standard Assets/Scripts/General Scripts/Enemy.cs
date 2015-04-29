@@ -3,31 +3,30 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
-	public float timer=1.35f;
-	public string state = "patrol";
-	public Transform player;
+	private float timer=1.25f;
+	private string state = "patrol";
+	private Transform player;
 	public Transform[] waypoints;
-	public int detectionRange = 50;
-	public int attackRange = 4;
-	public int attackSpeed = 15;
-	public int originalSpeed = 6;
-	public int curWayPoint = 0;
-	public int rotationSpeed = 6;
-	public float distance;
-	public int speed;
+	private int detectionRange = 30;
+	private int attackRange = 4;
+	private int attackSpeed = 15;
+	private int originalSpeed = 6;
+	private int curWayPoint = 0;
+	private int rotationSpeed = 6;
+	private float distance;
+	private int speed;
 	private int pushRange = 7;
-	Vector3 Velocity;
-	public Vector3 MoveDirection;
-	Vector3 Target;
-	GameObject go;
-	GameObject enemy;
-	public float time = 2000;
-	bool decrement = false;
-	public bool attacking = false;
-	public bool pushedBack = false;
-	AnimationClip Walk;
+	private Vector3 Velocity;
+	private Vector3 MoveDirection;
+	private Vector3 Target;
+	private GameObject go;
+	private GameObject enemy;
+	private float time = 2000;
+	private bool decrement = false;
+	private bool attacking = false;
+	private bool pushedBack = false;
+	private AnimationClip Walk;
 	private float distToGround;
-	
 	private Transform myTransform;
 	
 	// Use this for initialization
@@ -47,8 +46,10 @@ public class Enemy : MonoBehaviour
 	void Update()
 	{
 		distance = Vector3.Distance(player.position,myTransform.position);
+
 		if(myTransform.position.y<0.5f)
 			myTransform.Translate(0,0.05f,0);
+
 		if(!pushedBack&&IsGrounded())
 		{
 		switch (state)
@@ -108,10 +109,10 @@ public class Enemy : MonoBehaviour
 			enemy.animation.Play("Attack");
 			
 			timer-=Time.deltaTime;
-				
+
 			if(timer<0){
-				timer=1.35f;
-				go.GetComponent<Player>().health-=25;
+				timer=1.25f;
+				go.GetComponent<Player>().Health-=25;
 			}
 			
 					
@@ -149,7 +150,7 @@ public class Enemy : MonoBehaviour
 			state = "patrol";
 		}
 
-		if(go.GetComponent<Player>().health<1)
+		if(go.GetComponent<Player>().Health<1)
 		{
 			state = "dead";
 		//	enemy.animation.Play("Death");
@@ -180,7 +181,7 @@ public class Enemy : MonoBehaviour
 		{
 			speed = attackSpeed;
 			pushedBack = true;
-			MoveDirection = myTransform.forward*-1;
+			MoveDirection = go.transform.forward;
 			Velocity = MoveDirection.normalized * speed;
 			rigidbody.velocity = Velocity;
 			attacking=false;
@@ -193,6 +194,11 @@ public class Enemy : MonoBehaviour
 
 	public bool PushedBack{
 		get{ return pushedBack; }
-		set{ value = pushedBack; }
+		set{ pushedBack = value; }
+	}
+
+	public string State{
+		get{ return state; }
+		set{ state = value; }
 	}
 }

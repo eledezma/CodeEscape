@@ -4,8 +4,8 @@ using System.Collections;
 public class Player : MonoBehaviour 
 {
 
-	public float health;
-	public bool guiEnabled;
+	private float health;
+	private bool guiEnabled;
 	bool textureEnabled;
 	Texture2D texture;
 	// Use this for initialization
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 	{
 		if(health<1)
 		{
-			this.GetComponent<TemporaryDeathAnimation>().die = true;
+			this.GetComponent<TemporaryDeathAnimation>().Die = true;
 		}
 		if (!guiEnabled && textureEnabled)
 		{
@@ -51,5 +51,14 @@ public class Player : MonoBehaviour
 		texture.Apply();
 		GUI.skin.box.normal.background = texture;
 		GUI.Box(position, GUIContent.none);
+	}
+
+	public bool GuiEnabled{
+		get{ return guiEnabled; }
+		set{ guiEnabled = value; }
+	}
+	public float Health{
+		get{ return health; }
+		set{ health = value; }
 	}
 }
