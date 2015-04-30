@@ -19,13 +19,13 @@ run++;
 
 }
 if(Input.GetKeyUp(KeyCode.LeftShift)){
-run--;
+run=0.0;
 }
 if(Input.GetKeyDown("e")){
 jackn++;
 }
 if(Input.GetKeyUp("e")){
-jackn--;
+jackn=0.0;
 }
 
 if(Input.GetKeyDown("w")||Input.GetKeyDown("up")){
