@@ -24,8 +24,10 @@ public class robWalk : MonoBehaviour {
 	float bulletImpulse = 10f;
 	GameObject theSpider;
 	Enemy spiderScript;
+	private float distToGround;
 	// Use this for initialization
 	void Start () {
+		distToGround = (float)(collider.bounds.extents.y);
 		theSpider = GameObject.Find("SPIDER");
 		spiderScript = theSpider.GetComponent<Enemy>();
 		myTransform = transform;
@@ -36,7 +38,7 @@ public class robWalk : MonoBehaviour {
 		enemy = spider.transform;
 		player = fpc.transform;
 		friend.animation["Anim_Walk"].wrapMode = WrapMode.Loop;
-		friend.animation.Play("Anim_Walk");
+		//friend.animation.Play("Anim_Walk");
 		
 		//enemy.animation["Walk"].wrapMode = WrapMode.Loop;
 		//enemy.animation.Play("Walk");
@@ -50,7 +52,7 @@ public class robWalk : MonoBehaviour {
 		friendDistance = Vector3.Distance (player.position, friend.position);
 		playerEnemyDistance = Vector3.Distance (player.position, enemy.position);
 		enemybotDistance = Vector3.Distance (enemy.position, friend.position);
-		
+	if(IsGrounded()){	
 		switch (state) {
 		case "patrol":
 		{
@@ -62,9 +64,9 @@ public class robWalk : MonoBehaviour {
 				rigidbody.velocity = Velocity;
 				myTransform.LookAt (Target);
 			} else {
-				MoveDirection = myTransform.position;
-				Velocity = MoveDirection.normalized * 6;
-				rigidbody.velocity = Velocity;
+//				MoveDirection = myTransform.position;
+					Velocity = MoveDirection.normalized * 0;
+					rigidbody.velocity = Velocity;
 				myTransform.LookAt (Target);
 				
 			}
@@ -82,10 +84,10 @@ public class robWalk : MonoBehaviour {
 				rigidbody.velocity = Velocity;
 				myTransform.LookAt (enemy);
 			} else {
-				MoveDirection = myTransform.position;
-				Velocity = MoveDirection.normalized * 6;
+		//		MoveDirection = myTransform.position;
+				Velocity = MoveDirection.normalized * 0;
 				rigidbody.velocity = Velocity;
-				myTransform.LookAt (enemy);
+		//		myTransform.LookAt (enemy);
 				
 			}
 			
@@ -123,9 +125,17 @@ public class robWalk : MonoBehaviour {
 			state = "patrol";
 			attacking = false;
 		}
-		
-		
-		
-		
+
+		if(Velocity.x == 0){
+				friend.animation.Stop("Anim_Walk");
+		}
+		else{
+				friend.animation.Play("Anim_Walk");
+		}
+
+		}
+	}
+	public bool IsGrounded(){
+		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
 	}
 }

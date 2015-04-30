@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 	private bool attacking = false;
 	private bool pushedBack = false;
 	private AnimationClip Walk;
-	private float distToGround;
+	public float distToGround;
 	private Transform myTransform;
 	
 	// Use this for initialization
@@ -189,7 +189,7 @@ public class Enemy : MonoBehaviour
 	}
 
 	public bool IsGrounded(){
-		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.5f);
 	}
 
 	public bool PushedBack{
