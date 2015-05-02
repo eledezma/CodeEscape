@@ -21,7 +21,7 @@ public class robWalk : MonoBehaviour {
 	AnimationClip Walk;
 	private Transform myTransform;
 	public GameObject bullet_prefab;
-	float bulletImpulse = 25f;
+	float bulletImpulse = 15f;
 	GameObject theSpider;
 	Enemy spiderScript;
 	private float distToGround;
@@ -94,9 +94,9 @@ public class robWalk : MonoBehaviour {
 			if (enemybotDistance < 10) {
 				
 				if(shootTime > 100){
-						GameObject thebullet = (GameObject)Instantiate(bullet_prefab, friend.position + friend.transform.forward, enemy.rotation);
+						GameObject thebullet = (GameObject)Instantiate(bullet_prefab, new Vector3(friend.position.x,friend.position.y+3,friend.position.z) + friend.transform.forward, enemy.rotation);
 					thebullet.tag = "Bullet";
-					thebullet.rigidbody.AddForce(friend.transform.forward * bulletImpulse, ForceMode.Impulse);
+						thebullet.rigidbody.AddForce((thebullet.transform.position-enemy.transform.position) * bulletImpulse, ForceMode.Impulse);
 					MoveDirection = Target - thebullet.transform.position;
 					Velocity = MoveDirection.normalized * 6;
 					rigidbody.velocity = Velocity;
