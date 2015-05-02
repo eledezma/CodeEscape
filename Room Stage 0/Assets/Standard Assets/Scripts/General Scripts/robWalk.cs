@@ -91,7 +91,7 @@ public class robWalk : MonoBehaviour {
 				
 			}
 			
-			if (enemybotDistance < 10) {
+			if (enemybotDistance < 12) {
 				
 					Vector3 temp = friend.transform.position;
 					temp.y = 4.0f;
@@ -100,7 +100,7 @@ public class robWalk : MonoBehaviour {
 					thebullet.tag = "Bullet";
 						MoveDirection = Target - thebullet.transform.position;
 						thebullet.rigidbody.AddForce(MoveDirection * bulletImpulse, ForceMode.Impulse);
-					;
+						spider.GetComponent<Enemy>().BulletShot=thebullet;    // set the current bullet on the spider script
 					Velocity = MoveDirection.normalized * 6;
 					rigidbody.velocity = Velocity;
 					shootTime = 0;
