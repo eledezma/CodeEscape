@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof (AudioSource))]
+
 public class MakeOrder : MonoBehaviour
 {
 
     public static string order = "";
     bool guiEnabled = false;
+	public AudioClip foodtime;
     public static bool atOrderWall = false;
     public Texture2D cursorImage;
     GUIStyle title;
@@ -109,6 +112,7 @@ public class MakeOrder : MonoBehaviour
         guiEnabled = false;
 		if (scannerUi.puzzle2Complete)
 		{
+			audio.PlayOneShot(foodtime, 1);
 	        if (string.Compare(order, "hamburger", true) == 0)
 	        {
 	            GameObject.Find("Door").GetComponent<Food>().ham = true;

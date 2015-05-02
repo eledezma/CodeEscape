@@ -5,6 +5,7 @@ public class ButtonTriggerStage6 : MonoBehaviour
 {
 
     public AudioClip ButtonClick;
+	public AudioClip excellent;
     public GameObject button;
     public GameObject turret;
     public AnimationClip PushDown;
@@ -59,7 +60,10 @@ public class ButtonTriggerStage6 : MonoBehaviour
             answer = timeFinish - timeStart;
             Debug.Log(answer);
             if (answer <= 6.1F)
+			{
+				audio.PlayOneShot(excellent, 1);
                 GameObject.Find("Door").GetComponent<DoorOpen>().open = true;
+			}
             checkOnce = false;
         }
     }

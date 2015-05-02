@@ -5,7 +5,7 @@ public class ScannerInfoLevel10: MonoBehaviour
 {
 
 	public bool guiEnabeled = true;
-	public string info = "The Scanner class is part of the java.util package." +
+	private string info = "The Scanner class is part of the java.util package." +
 		"\nScanner's in java are used to get user input, but" +
 			"\n that is not their only purpose. The method nextLine()" +
 			"\n is part of the Scanner class and is used to get the " +
