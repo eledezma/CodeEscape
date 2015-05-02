@@ -8,7 +8,7 @@ public class Arrays : MonoBehaviour
 	public int[] boxes = new int[5];
     public static bool puzzleComplete = false;
     bool guiEnabled = false;
-    public bool atWall6 = false;
+    public static bool atWall6 = false;
     bool showError = false;
     bool converted = false;
     public bool reset = false;
