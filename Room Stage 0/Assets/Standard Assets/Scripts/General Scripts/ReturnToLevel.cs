@@ -14,6 +14,15 @@ public class ReturnToLevel : MonoBehaviour
         char[] delimiter = { ':' };
         string[] textArr = text.Split(delimiter);
         level = int.Parse(textArr[1]);
+		Application.LoadLevel (level);
+
+
+		if (!System.IO.File.Exists (Application.dataPath + "/Resources/currentlevel.sav")) 
+		{
+			string line = "LoadedLevel:1";
+			System.IO.File.WriteAllText(Application.dataPath + "/Resources/currentlevel.sav", line);
+		}
+
         //Debug.Log (x);
     }
 

@@ -12,6 +12,7 @@ public class ScannerInfoLevel2 : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		Screen.showCursor = false;
         GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
         GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
         GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
@@ -41,6 +42,7 @@ public class ScannerInfoLevel2 : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         guiEnabeled = false;
+		Screen.showCursor = true;
         GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
 		GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = true;
         GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
