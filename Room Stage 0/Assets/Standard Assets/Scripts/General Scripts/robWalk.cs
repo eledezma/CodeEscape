@@ -58,7 +58,7 @@ public class robWalk : MonoBehaviour {
 		{
 			if (friendDistance > 10) {
 				
-					Target = new Vector3 (player.position.x, player.position.y, player.position.z);
+					Target = new Vector3 (player.position.x, 1, player.position.z);
 				MoveDirection = Target - myTransform.position;
 				Velocity = MoveDirection.normalized * 6;
 				rigidbody.velocity = Velocity;
