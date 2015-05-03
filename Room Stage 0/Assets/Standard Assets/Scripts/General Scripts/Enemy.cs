@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
 	public Transform[] waypoints;
 	private int detectionRange = 30;
 	private int attackRange = 4;
-	private int attackSpeed = 15;
 	private int originalSpeed = 6;
 	private int curWayPoint = 0;
 	private int rotationSpeed = 6;
@@ -22,14 +21,13 @@ public class Enemy : MonoBehaviour
 	private GameObject go;
 	private GameObject enemy;
 	private float time = 2000;
-	private bool decrement = false;
 	private bool attacking = false;
 	private bool pushedBack = false;
 	private AnimationClip Walk;
 	private float distToGround;
 	private Transform myTransform;
-	public float health = 100;
-	public GameObject bulletShot;
+	private float health = 100;
+	private GameObject bulletShot;
 
 	
 	// Use this for initialization
@@ -59,10 +57,8 @@ public class Enemy : MonoBehaviour
 		{
 		case "patrol":
 		{
-			if(!decrement)
-				{
-					speed = originalSpeed;
-				}
+			speed = originalSpeed;
+				
 			if(curWayPoint<waypoints.Length)
 			{
 				//Target = new Vector3(waypoints[curWayPoint].position.x,1,waypoints[curWayPoint].position.z);
@@ -89,10 +85,8 @@ public class Enemy : MonoBehaviour
 			break;
 		case "chasing":
 		{
-			//if(!decrement)	
-			//{
-				speed = originalSpeed;
-			//}
+			
+			speed = originalSpeed;
 			Target = new Vector3(player.position.x,1,player.position.z);
 			MoveDirection = Target - myTransform.position;
 			Velocity = MoveDirection.normalized * speed;
@@ -103,10 +97,7 @@ public class Enemy : MonoBehaviour
 			break;
 		case "attacking":
 		{
-			//speed = attackSpeed;
 			speed = 0;
-			//Target = player.position;
-			//MoveDirection = Target - myTransform.position;
 			Velocity = MoveDirection.normalized * speed;
 			rigidbody.velocity = Velocity;
 			enemy.animation.Play("Attack");
@@ -159,7 +150,7 @@ public class Enemy : MonoBehaviour
 
 		if(Input.GetKeyDown("e")&&(distance<pushRange))
 		{
-			speed = attackSpeed;
+			speed = originalSpeed;
 			pushedBack = true;
 			MoveDirection = go.transform.forward;
 			Velocity = MoveDirection.normalized * speed;
