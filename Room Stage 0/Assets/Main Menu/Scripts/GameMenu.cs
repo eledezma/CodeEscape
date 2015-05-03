@@ -14,18 +14,16 @@ void OnMouseExit(){
 }
 
 
+	void OnTriggerEnter (Collider col) {
+		if (col.gameObject.name == "txt_Start_Game") {
+				
+			Application.LoadLevel(1); 
+
+				}
+	}
 
 
 void Update(){
-	//quit game if escape key is pressed
-		if (Input.GetKey (KeyCode.Q)) {
-			Application.Quit (); //"Q" QUITS GAME
-		} 
-		else if (Input.GetKey (KeyCode.S)) {
-			Application.LoadLevel(1); // "S" STARTS GAME
-		}
-		else if (Input.GetKey (KeyCode.C)) {
-			// CONTINUE GOES HIERE
-		}
+
 	}
 }

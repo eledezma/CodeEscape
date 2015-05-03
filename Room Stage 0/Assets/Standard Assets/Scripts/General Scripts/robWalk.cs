@@ -21,7 +21,7 @@ public class robWalk : MonoBehaviour {
 	AnimationClip Walk;
 	private Transform myTransform;
 	public GameObject bullet_prefab;
-	float bulletImpulse = 15f;
+	float bulletImpulse = 10f;
 	GameObject theSpider;
 	Enemy spiderScript;
 	private float distToGround;
@@ -58,7 +58,7 @@ public class robWalk : MonoBehaviour {
 		{
 			if (friendDistance > 10) {
 				
-				Target = new Vector3 (player.position.x, 1, player.position.z);
+					Target = new Vector3 (player.position.x, player.position.y, player.position.z);
 				MoveDirection = Target - myTransform.position;
 				Velocity = MoveDirection.normalized * 6;
 				rigidbody.velocity = Velocity;
@@ -78,7 +78,7 @@ public class robWalk : MonoBehaviour {
 		{
 			if (enemybotDistance > 8) {
 				
-				Target = new Vector3 (enemy.position.x, 1, enemy.position.z);
+					Target = new Vector3 (enemy.position.x, 1, enemy.position.z);
 				MoveDirection = Target - myTransform.position;
 				Velocity = MoveDirection.normalized * 6;
 				rigidbody.velocity = Velocity;
@@ -93,11 +93,14 @@ public class robWalk : MonoBehaviour {
 			
 			if (enemybotDistance < 10) {
 				
+					Vector3 temp = friend.transform.position;
+					temp.y = 4.0f;
 				if(shootTime > 100){
-						GameObject thebullet = (GameObject)Instantiate(bullet_prefab, new Vector3(friend.position.x,friend.position.y+3,friend.position.z) + friend.transform.forward, enemy.rotation);
+						GameObject thebullet = (GameObject)Instantiate(bullet_prefab, temp, friend.transform.rotation);
 					thebullet.tag = "Bullet";
-						thebullet.rigidbody.AddForce((thebullet.transform.position-enemy.transform.position) * bulletImpulse, ForceMode.Impulse);
-					MoveDirection = Target - thebullet.transform.position;
+						MoveDirection = Target - thebullet.transform.position;
+						thebullet.rigidbody.AddForce(MoveDirection * bulletImpulse, ForceMode.Impulse);
+					;
 					Velocity = MoveDirection.normalized * 6;
 					rigidbody.velocity = Velocity;
 					shootTime = 0;
