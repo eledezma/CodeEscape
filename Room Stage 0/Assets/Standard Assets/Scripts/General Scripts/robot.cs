@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class robot : MonoBehaviour {
+public class Robot : MonoBehaviour {
 	public Transform player;
 	public Transform friend;
 	public Transform enemy;
