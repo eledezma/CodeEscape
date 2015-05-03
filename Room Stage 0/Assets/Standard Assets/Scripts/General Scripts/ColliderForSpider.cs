@@ -15,7 +15,7 @@ public class ColliderForSpider : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 
-		if (other.gameObject.tag == "Spidey")
+		if (other.gameObject.tag == "Spidey")             // if spider hit wall, turn pushedBack to false to resume chasing
 		{
 			GameObject.Find("SPIDER").GetComponent<Enemy>().PushedBack = false;
 		}

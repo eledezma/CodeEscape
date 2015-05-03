@@ -25,8 +25,9 @@ public class Enemy : MonoBehaviour
 	private AnimationClip Walk;
 	private float distToGround;
 	private Transform myTransform;
-	public float health = 100;
-	public GameObject bulletShot;
+	private int pushedBackDistance = 15;
+	private float health = 100;
+	private GameObject bulletShot;
 	
 	
 	// Use this for initialization
@@ -46,7 +47,8 @@ public class Enemy : MonoBehaviour
 	void Update()
 	{
 		distance = Vector3.Distance(player.position,myTransform.position);
-		
+	
+		// lift spider up when getting stuck in floor
 		if(myTransform.position.y<0.5f)
 			myTransform.Translate(0,0.05f,0);
 		
@@ -60,14 +62,12 @@ public class Enemy : MonoBehaviour
 				
 				if(curWayPoint<waypoints.Length)
 				{
-					//Target = new Vector3(waypoints[curWayPoint].position.x,1,waypoints[curWayPoint].position.z);
-					Target = waypoints[curWayPoint].position;
-					
+					Target = waypoints[curWayPoint].position;					
 					MoveDirection = Target - myTransform.position;
 					Velocity = rigidbody.velocity;
-					if(MoveDirection.magnitude <1)
+					if(MoveDirection.magnitude <1)   // when reached a way point go to next
 					{
-						curWayPoint++;
+						curWayPoint++;        
 					}
 					else
 					{
@@ -100,10 +100,9 @@ public class Enemy : MonoBehaviour
 				Velocity = MoveDirection.normalized * speed;
 				rigidbody.velocity = Velocity;
 				enemy.animation.Play("Attack");
-				
+	
 				timer-=Time.deltaTime;
-				
-				if(timer<0){
+				if(timer<0){             // timer to only decrease health after attack animation is done
 					timer=1.25f;
 					go.GetComponent<Player>().Health-=25;
 				}
@@ -139,9 +138,8 @@ public class Enemy : MonoBehaviour
 			{
 				state = "patrol";
 			}
-			
 		}
-		else if(distance > 15)
+		else if(distance > pushedBackDistance)     // when pushed back a certain distance resume chasing
 		{
 			pushedBack = false;
 			state = "chasing";
@@ -168,7 +166,7 @@ public class Enemy : MonoBehaviour
 		
 	}
 	
-	public bool IsGrounded(){
+	public bool IsGrounded(){       // checks if the model is on the ground
 		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.5f);
 	}
 	

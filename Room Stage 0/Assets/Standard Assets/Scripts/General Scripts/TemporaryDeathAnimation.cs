@@ -5,7 +5,7 @@ public class TemporaryDeathAnimation : MonoBehaviour
 {
 
 	private bool die;
-	private float speed;
+	private float speed;           //ascending speed
 	// Use this for initialization
 	void Start ()
 	{
@@ -19,12 +19,12 @@ public class TemporaryDeathAnimation : MonoBehaviour
 		// if dead rise to heaven
 		if(die)
 		{
-			this.GetComponent<Transform>().Translate(Vector3.up * speed);
-			this.GetComponent<CharacterMotor>().enabled = false;
+			this.GetComponent<Transform>().Translate(Vector3.up * speed); // Raise the player up if dead
+			this.GetComponent<CharacterMotor>().enabled = false;          // disable character controller
 		}
 
-		// If rose to heaven reload level
-		if(this.GetComponent<Transform>().position.y>100)
+		// If rose to heaven reload level 
+		if(this.GetComponent<Transform>().position.y>100)                   // when reached height 100 reload level
 		{
 			Application.LoadLevel(Application.loadedLevel);
 		}
