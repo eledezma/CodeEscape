@@ -91,7 +91,7 @@ public class Robot : MonoBehaviour {
 					if(shootTime > bulletCooldown){  //shoot cooldown, keeps friend from shooting too much at a time
 						
 						GameObject thebullet = (GameObject)Instantiate(bullet_prefab, temp, friend.transform.rotation);  //bullet is a sphere and shoots from friend
-						thebullet.tag = "Bullet";
+						thebullet.tag = "Fireball";
 						MoveDirection = Target - thebullet.transform.position;  //calculate vector from friend to enemy 
 						thebullet.rigidbody.AddForce(MoveDirection * bulletImpulse, ForceMode.Impulse);  //add power to this vector to have a fast shot
 						spider.GetComponent<Enemy>().BulletShot = thebullet;

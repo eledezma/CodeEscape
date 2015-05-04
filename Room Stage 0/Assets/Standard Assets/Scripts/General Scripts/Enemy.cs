@@ -150,7 +150,7 @@ public class Enemy : MonoBehaviour
 			speed = originalSpeed;
 			pushedBack = true;
 			MoveDirection = go.transform.forward;
-			Velocity = MoveDirection.normalized * speed;
+			Velocity = MoveDirection.normalized * speed*2;
 			rigidbody.velocity = Velocity;
 			attacking=false;
 		}
