@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
+	public AudioClip Clip;
 	private float timer=1.25f;
 	private string state = "patrol";
 	private Transform player;
@@ -161,6 +162,7 @@ public class Enemy : MonoBehaviour
 			if(health<=0)
 			{
 				state="dead";
+				audio.PlayOneShot(Clip);
 			}
 		}
 		
