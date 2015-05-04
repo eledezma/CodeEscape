@@ -46,6 +46,8 @@ public class Level10Video : MonoBehaviour {
 		movie.Play();
 		yield return new WaitForSeconds(audio.clip.length);
 		movie.Stop();
+		cam.depth = -2;
+		audio.volume = 0;
 		movie.Play();
 		audio.Play();
 		yield return new WaitForSeconds(0.2F);
@@ -53,9 +55,9 @@ public class Level10Video : MonoBehaviour {
 		audio.Pause();
 		Screen.lockCursor = false;
 		GameObject.Find("Initialization").GetComponent<AudioSource>().audio.clip = scary;
+		audio.volume = 1;
 		GameObject.Find("Initialization").GetComponent<AudioSource>().audio.Play ();
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
-		cam.depth = -2;
 		GameObject.Find ("First Person Controller").GetComponent<Level10Health> ().guiEnabled = true;
 		//Application.LoadLevel(Application.loadedLevel);
 	}
