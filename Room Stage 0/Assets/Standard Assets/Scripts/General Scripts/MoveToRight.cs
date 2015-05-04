@@ -37,7 +37,7 @@ public class MoveToRight : MonoBehaviour {
 			NumQuestions = GameObject.FindGameObjectsWithTag("Question");
 			for (int i = 0; i < NumQuestions.Length; i++)
 			{
-				NumQuestions[i].GetComponent<Level10FloorPanel>().active = true;
+				NumQuestions[i].GetComponent<Level10FloorPanel>().isActive = true;
 			}
 	
 		}

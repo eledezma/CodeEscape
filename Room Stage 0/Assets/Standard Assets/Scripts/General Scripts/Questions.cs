@@ -197,8 +197,8 @@ public class Questions : MonoBehaviour {
 			tomb = tomb + "/Wall Panel";
 			string panel = "Platform" + num;
 			string panelTrig = panel + "/Trigger";
-			GameObject.Find (panelTrig).GetComponent<Level10FloorPanel>().active = false;
-			GameObject.Find (tomb).GetComponent<QuestionStart>().active = false;
+			GameObject.Find (panelTrig).GetComponent<Level10FloorPanel>().isActive = false;
+			GameObject.Find (tomb).GetComponent<QuestionStart>().isActive = false;
 			atWall = false;
 			if(userAnswer == correctAnswers[questionNumber-1])
 			{
@@ -211,13 +211,13 @@ public class Questions : MonoBehaviour {
 					NumQuestions = GameObject.FindGameObjectsWithTag("Question");
 					for (int i = 0; i < NumQuestions.Length; i++)
 					{
-						NumQuestions[i].GetComponent<Level10FloorPanel>().active = false;
+						NumQuestions[i].GetComponent<Level10FloorPanel>().isActive = false;
 					}
 					GameObject.Find("SphereKill").GetComponent<MoveToRight>().complete ();
 					NumQuesTrig = GameObject.FindGameObjectsWithTag ("QuestionTrig");
 					for (int i = 0; i < NumQuesTrig.Length; i++)
 					{
-						NumQuesTrig[i].GetComponent<QuestionStart>().active = false;
+						NumQuesTrig[i].GetComponent<QuestionStart>().isActive = false;
 					}
 				}
 				else

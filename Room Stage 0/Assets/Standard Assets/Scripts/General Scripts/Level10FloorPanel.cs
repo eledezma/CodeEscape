@@ -4,11 +4,11 @@ using System.Collections;
 public class Level10FloorPanel : MonoBehaviour {
 	
 	public int problem;
-	public bool active;
+	public bool isActive;
 	// Use this for initialization
 	void Start () 
 	{
-		active = true;
+		isActive = true;
 	}
 	
 	// Update is called once per frame
@@ -19,7 +19,7 @@ public class Level10FloorPanel : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (active) 
+		if (isActive) 
 		{
 			if (other.gameObject.tag == "Player") 
 			{
@@ -36,7 +36,7 @@ public class Level10FloorPanel : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Player" && this.gameObject.transform.parent.gameObject.GetComponent<Level10Floor>().col ==  Level10Floor.floorColor.Green) 
 		{
-			active = false;
+			isActive = false;
 		}
 	}
 	*/

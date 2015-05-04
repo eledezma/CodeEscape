@@ -4,11 +4,11 @@ using System.Collections;
 public class StarTrig : MonoBehaviour
 {
 	public AudioClip star;
-	public bool active;
+	public bool isActive;
 	// Use this for initialization
 	void Start ()
 	{
-		active = false;
+		isActive = false;
 	}
 	
 	// Update is called once per frame
@@ -19,7 +19,7 @@ public class StarTrig : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.tag == "Player" && active) 
+		if (other.gameObject.tag == "Player" && isActive) 
 		{
 			GameObject.Find("First Person Controller").GetComponent<GreenAndBlue4Eva>().discoParty = true;
 			GameObject.Find("Initialization").GetComponent<AudioSource>().audio.clip = star;

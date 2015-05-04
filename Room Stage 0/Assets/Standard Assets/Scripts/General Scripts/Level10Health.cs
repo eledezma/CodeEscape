@@ -33,7 +33,7 @@ public class Level10Health : MonoBehaviour
 			for (int i = 0; i < NumQuestions.Length; i++)
 			{
 
-				NumQuestions[i].GetComponent<Level10FloorPanel>().active = true;
+				NumQuestions[i].GetComponent<Level10FloorPanel>().isActive = true;
 			}
 			GameObject.Find("Platform1").GetComponent<Level10Floor>().reset ();
 			GameObject.Find("Platform2").GetComponent<Level10Floor>().reset ();
@@ -49,7 +49,7 @@ public class Level10Health : MonoBehaviour
 			NumQuesTrig = GameObject.FindGameObjectsWithTag ("QuestionTrig");
 			for (int i = 0; i < NumQuesTrig.Length; i++)
 			{
-				NumQuesTrig[i].GetComponent<QuestionStart>().active = true;
+				NumQuesTrig[i].GetComponent<QuestionStart>().isActive = true;
 			}
 		}
 		if (!guiEnabled && textureEnabled)

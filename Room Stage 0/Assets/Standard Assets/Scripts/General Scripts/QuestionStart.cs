@@ -4,11 +4,11 @@ using System.Collections;
 public class QuestionStart : MonoBehaviour 
 {
 
-	public bool active;
+	public bool isActive;
 	// Use this for initialization
 	void Start () 
 	{
-		active = true;
+		isActive = true;
 	}
 	
 	// Update is called once per frame
@@ -20,7 +20,7 @@ public class QuestionStart : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (active) 
+		if (isActive) 
 		{
 			if (other.gameObject.tag == "Player") 
 			{
@@ -31,7 +31,7 @@ public class QuestionStart : MonoBehaviour
 
 	void OnTriggerExit(Collider other)
 	{
-		if (active) 
+		if (isActive) 
 		{
 			if (other.gameObject.tag == "Player") 
 			{
