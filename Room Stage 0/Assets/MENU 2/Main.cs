@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Main : MonoBehaviour {
+public class Main : MonoBehaviour 
+{
 	//Top Banner
 	public float topBannerH;
 	public float topBannerW;
@@ -19,8 +20,10 @@ public class Main : MonoBehaviour {
 	public GUISkin customSkin1;
 	public GUISkin customSkin2;
 	public GUISkin customSkin3;
+	private int level;
 	
-	void  Awake (){
+	void  Awake ()
+	{
 		topBannerH = Screen.height/4;
 		topBannerW = Screen.width;
 		buttonSizeH = Screen.height/7;
@@ -33,23 +36,42 @@ public class Main : MonoBehaviour {
 		bottomBannerPos = topBannerH+buttonSizeH*3;	
 	}
 	
-	void  OnGUI (){
+	void  OnGUI ()
+	{
 		GUI.skin = customSkin1;
 		//Title Banner
 		GUI.Box( new Rect(0,0,topBannerW,topBannerH),exampleVar1);
 		
 		GUI.skin = customSkin2;
 		//Button 1
-		if (GUI.Button( new Rect(0,buttonPos1,buttonSizeW,buttonSizeH),"START")){
+		if (GUI.Button( new Rect(0,buttonPos1,buttonSizeW,buttonSizeH),"START"))
+		{
 			Debug.Log("START");
+			Application.LoadLevel(1);
 		}
 		//Button 2
-		if (GUI.Button( new Rect(0,buttonPos2,buttonSizeW,buttonSizeH),"CONTINUE")){
+		if (GUI.Button( new Rect(0,buttonPos2,buttonSizeW,buttonSizeH),"CONTINUE"))
+		{
 			Debug.Log("CONTINUE");
+			if (!System.IO.File.Exists (Application.dataPath + "/Resources/currentlevel.sav")) 
+			{
+				string line = "LoadedLevel:1";
+				System.IO.File.WriteAllText(Application.dataPath + "/Resources/currentlevel.sav", line);
+			}
+
+			System.IO.StreamReader file = new System.IO.StreamReader(Application.dataPath + "/Resources/currentlevel.sav");
+			string text = file.ReadLine(); //this is the content as string
+			char[] delimiter = { ':' };
+			string[] textArr = text.Split(delimiter);
+			level = int.Parse(textArr[1]);
+			Application.LoadLevel (level);
+
 		}
 		//Button 3
-		if (GUI.Button( new Rect(0,buttonPos3,buttonSizeW,buttonSizeH),"QUIT")){
+		if (GUI.Button( new Rect(0,buttonPos3,buttonSizeW,buttonSizeH),"QUIT"))
+		{
 			Debug.Log("QUIT");
+			Application.Quit();
 		}
 		GUI.skin = customSkin3;
 		//Bottom Banner
