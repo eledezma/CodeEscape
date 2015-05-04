@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Robot : MonoBehaviour {
+	public AudioClip ButtonClick;
 	private Transform player;
 	private Transform friend;
 	private Transform enemy;
@@ -98,8 +99,10 @@ public class Robot : MonoBehaviour {
 						Velocity = MoveDirection.normalized * 6;
 						rigidbody.velocity = Velocity;
 						shootTime = 0;
+						audio.PlayOneShot(ButtonClick);
+
 					}
-					
+						
 					transform.LookAt(enemy); // keep looking at enemy once following
 					
 					shootTime++;  //adds to shoottime on every frame
