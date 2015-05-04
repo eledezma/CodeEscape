@@ -26,11 +26,8 @@ public class Enemy : MonoBehaviour
 	private bool attacking = false;
 	private bool pushedBack = false;
 	private AnimationClip Walk;
-	private float distToGround;
+	public float distToGround;
 	private Transform myTransform;
-	public float health = 100;
-	public GameObject bulletShot;
-
 	
 	// Use this for initialization
 	void Start()
@@ -129,13 +126,16 @@ public class Enemy : MonoBehaviour
 			break;
 		case "dead":
 		{
-			enemy.animation.Play("Death");
-				Velocity*=0;
-				MoveDirection*=0;
-				GetComponent<Enemy>().enabled=false;
+			this.GetComponent<Rigidbody>().useGravity = true;
 		}
 			break;
 	}
+//		if(distance<1)
+//		{
+//			state = "repelling";
+///			go.GetComponent<Player>().health--;
+//			
+//		} 
 		if(distance<attackRange)
 		{
 			state = "attacking";
@@ -150,6 +150,26 @@ public class Enemy : MonoBehaviour
 			state = "patrol";
 		}
 
+		if(go.GetComponent<Player>().Health<1)
+		{
+			state = "dead";
+		//	enemy.animation.Play("Death");
+
+		}
+
+		
+
+/*		if(decrement)
+		{
+			time-=Time.deltaTime*1000;
+		}
+		if(time<0)
+		{
+			state="attacking";
+			time = 2000;
+			decrement = false;
+			attacking = true;
+		}*/
 	}
 		else if(distance > 15)
 		{
@@ -166,16 +186,6 @@ public class Enemy : MonoBehaviour
 			rigidbody.velocity = Velocity;
 			attacking=false;
 		}
-
-		if(bulletShot!= null && Vector3.Distance(bulletShot.transform.position,transform.position)<1.0f)
-		{
-			health-=50;
-			if(health<=0)
-			{
-				state="dead";
-			}
-		}
-		
 	}
 
 	public bool IsGrounded(){
@@ -190,10 +200,5 @@ public class Enemy : MonoBehaviour
 	public string State{
 		get{ return state; }
 		set{ state = value; }
-	}
-
-	public GameObject BulletShot{
-		get{ return bulletShot; }
-		set{ bulletShot = value; }
 	}
 }
