@@ -75,23 +75,25 @@ public class Questions : MonoBehaviour {
 
 
 
-	/*
+
 	void OnTriggerEnter(Collider other)
 	{
-		atWall = true;
-		Debug.Log ("Yo");
-		GameObject.Find("Arm Camera").camera.enabled = false;
+		if (other.gameObject.tag == "QuestionTrig")
+		{
+			GameObject.Find("Arm Camera").camera.enabled = false;
 		//Arms.camera.enabled = false;
+		}
 	}
 	
 	void OnTriggerExit(Collider other)
 	{
-		atWall = false;
-		guiEnabled = false;
+		if (other.gameObject.tag == "QuestionTrig")
+		{
 		//Arms.camera.enabled = true;
 		GameObject.Find("Arm Camera").camera.enabled = true;
+		}
 	}
-	*/
+
 	void Start()
 	{
 		answered = false;
@@ -121,13 +123,7 @@ public class Questions : MonoBehaviour {
 				else*/
 				if (!guiEnabled)
 				{
-					GameObject.Find("First Person Controller").GetComponent<Level10Health>().guiEnabled = false;
-					Time.timeScale = 0.0f;
-					guiEnabled = true;
-					GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-					GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
-					GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false; 
-					Screen.lockCursor = false;
+					StartCoroutine (jackin ());
 				}
 			}
 		}
@@ -148,7 +144,7 @@ public class Questions : MonoBehaviour {
 		}
 		else if (atWall && Input.GetKeyDown("l"))
 		{
-			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+			//GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
 			//If at wall terminal show default cursor instead
 		}
 		
@@ -394,6 +390,20 @@ public class Questions : MonoBehaviour {
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
+	}
+
+	IEnumerator jackin()
+	{
+		atWall = false;
+		GameObject.Find("First Person Controller").GetComponent<Level10Health>().guiEnabled = false;
+		yield return new WaitForSeconds (1.3F);
+		Time.timeScale = 0.0f;
+		guiEnabled = true;
+		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false; 
+		Screen.lockCursor = false;
+		atWall = true;
 	}
 
 }

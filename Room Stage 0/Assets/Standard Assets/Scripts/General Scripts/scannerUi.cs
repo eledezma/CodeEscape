@@ -65,10 +65,7 @@ public class scannerUi : MonoBehaviour
                 }
                 else
                 {
-                    Time.timeScale = 0.0f;
-                    guiEnabled = true;
-                    GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-                    GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+					StartCoroutine(jackin ());
                 }
             }
 
@@ -113,7 +110,7 @@ public class scannerUi : MonoBehaviour
         }
         else if (atScanner && Input.GetKeyDown("e"))
         {
-            GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+            
             //If at wall terminal show default cursor instead
         }
 
@@ -351,5 +348,17 @@ public class scannerUi : MonoBehaviour
         GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
         GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
     }
+
+	IEnumerator jackin()
+	{
+		atScanner = false;
+		yield return new WaitForSeconds (1.3F);
+		Time.timeScale = 0.0f;
+		guiEnabled = true;
+		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+		atScanner = true;
+	}
 }
 
