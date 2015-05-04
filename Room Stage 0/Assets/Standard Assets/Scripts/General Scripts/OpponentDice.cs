@@ -351,10 +351,6 @@ public class OpponentDice : MonoBehaviour
                 TextChanger.Update();
                 if (facesCorrect && face3 && switch2 && rand1 && randCorrect)
                 {
-                    //code = restoreCode();
-                    //GameObject.Find("ButtonTrigger").GetComponent<ButtonTrigger>().puzzleComplete = true;
-                    audio.PlayOneShot(missionComplete);
-                    //puzzle1Complete = false;
                     GameObject.Find("d6").GetComponent<DiceRotateLoaded>().loaded = false;
                     GameObject.Find("Initialization").GetComponent<PoisonTime>().cheating = false;
                 }
