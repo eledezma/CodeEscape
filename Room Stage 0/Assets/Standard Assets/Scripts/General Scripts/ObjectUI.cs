@@ -78,12 +78,7 @@ public class ObjectUI : MonoBehaviour {
 					if (guiEnabled) {					
 							resume ();
 					} else {
-							Time.timeScale = 0.0f;
-							guiEnabled = true;
-							GameObject.Find ("Main Camera").GetComponent<MouseLook> ().enabled = false;
-							GameObject.Find ("First Person Controller").GetComponent<MouseLook> ().enabled = false;
-							GameObject.Find ("Initialization").GetComponent<CursorTime> ().showCursor = false; //remove this line when atScanner works
-							Screen.lockCursor = false;
+						StartCoroutine(jackin ());
 					}
 			}
 		}
@@ -98,7 +93,7 @@ public class ObjectUI : MonoBehaviour {
 		{
 			if (atWall9_3 && Input.GetKeyDown("e"))
 			{
-				GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+				//GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
 				//If at wall terminal show default cursor instead
 			}
 			
@@ -322,6 +317,17 @@ public class ObjectUI : MonoBehaviour {
 			return b;
 		}
 		
+		IEnumerator jackin()
+		{
+			atWall9_3 = false;
+			yield return new WaitForSeconds (1.3F);
+			Time.timeScale = 0.0f;
+			guiEnabled = true;
+			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+			GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+			GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+			atWall9_3 = true;
+		}
 		
 	}
 

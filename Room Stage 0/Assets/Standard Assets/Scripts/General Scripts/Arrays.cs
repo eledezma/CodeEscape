@@ -85,12 +85,7 @@ public class Arrays : MonoBehaviour
                 }
                 else
                 {
-                    Time.timeScale = 0.0f;
-                    guiEnabled = true;
-                    GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-                    GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
-                    GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false; //remove this line when atScanner works
-                    Screen.lockCursor = false;
+					StartCoroutine(jackin());
                 }
             }
 		}
@@ -371,6 +366,17 @@ public class Arrays : MonoBehaviour
         return b;
     }
 
+	IEnumerator jackin()
+	{
+		atWall6 = false;
+		yield return new WaitForSeconds (1.3F);
+		Time.timeScale = 0.0f;
+		guiEnabled = true;
+		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+		atWall6 = true;
+	}
 
 }
 
