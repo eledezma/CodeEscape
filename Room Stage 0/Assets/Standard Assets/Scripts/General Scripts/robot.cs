@@ -11,7 +11,7 @@ public class Robot : MonoBehaviour {
 	Vector3 Target;
 	public float friendDistance;
 	public float playerEnemyDistance;
-	public float enemybotDistance;
+	public float enemyFriendDistance;
 	GameObject fpc;
 	GameObject bot;
 	GameObject spider;
@@ -21,6 +21,10 @@ public class Robot : MonoBehaviour {
 	private Transform myTransform;
 	public GameObject bullet_prefab;
 	float bulletImpulse = 10f;
+	public int maxFriendPlayerDistance = 10;
+	public int maxEnemyFriendDistance1 = 12;
+	public int maxEnemyFriendDistance2 = 8;
+	public int bulletCooldown = 100;
 	GameObject theSpider;
 	Enemy spiderScript;
 	private float distToGround;
@@ -48,14 +52,13 @@ public class Robot : MonoBehaviour {
 		
 		//gets distances between enemy, player, and friend
 		friendDistance = Vector3.Distance (player.position, friend.position);
-		playerEnemyDistance = Vector3.Distance (player.position, enemy.position);
-		enemybotDistance = Vector3.Distance (enemy.position, friend.position);
+		enemyFriendDistance = Vector3.Distance (enemy.position, friend.position);
 		
 		if(IsGrounded()){	
 			switch (state) {
 			case "patrol":  //Friendly AI is on patrol mode, protecting player
 			{
-				if (friendDistance > 10) {  //if friendly AI is distant then allow him to come 
+				if (friendDistance >  maxFriendPlayerDistance) {  //if friendly AI is distant then allow him to come 
 					
 					Target = new Vector3 (player.position.x, 1, player.position.z); //retrieve only x,z position
 					MoveDirection = Target - myTransform.position; // get vector distance from friend to player
@@ -76,7 +79,7 @@ public class Robot : MonoBehaviour {
 				
 			case "enemyEngaged":  //when enemy is close to player
 			{
-				if (enemybotDistance > 8) {  //if friend is close to enemy follow 
+				if (enemyFriendDistance > maxEnemyFriendDistance2) {  //if friend is close to enemy follow 
 					
 					Target = new Vector3 (enemy.position.x, 1, enemy.position.z);  //get position of enemy
 					MoveDirection = Target - friend.position;  //calculate vector from friend to enemy
@@ -91,12 +94,12 @@ public class Robot : MonoBehaviour {
 					
 				}
 				
-				if (enemybotDistance < 12) {  //if enemy gets really close to friend then friend shoots spider
+				if (enemyFriendDistance < maxEnemyFriendDistance1) {  //if enemy gets really close to friend then friend shoots spider
 					
 					Vector3 temp = friend.transform.position;
 					temp.y = 4.0f; //vertical position where bullets shoot from
 					
-					if(shootTime > 100){  //shoot cooldown, keeps friend from shooting too much at a time
+					if(shootTime > bulletCooldown){  //shoot cooldown, keeps friend from shooting too much at a time
 						
 						GameObject thebullet = (GameObject)Instantiate(bullet_prefab, temp, friend.transform.rotation);  //bullet is a sphere and shoots from friend
 						thebullet.tag = "Bullet";
