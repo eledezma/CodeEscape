@@ -2,31 +2,31 @@
 using System.Collections;
 
 public class Robot : MonoBehaviour {
-	public Transform player;
-	public Transform friend;
-	public Transform enemy;
-	public string state = "patrol";
-	Vector3 Velocity;
-	public Vector3 MoveDirection;
-	Vector3 Target;
-	public float friendDistance;
-	public float playerEnemyDistance;
-	public float enemyFriendDistance;
-	GameObject fpc;
-	GameObject bot;
-	GameObject spider;
-	public int shootTime = 0;
-	public bool attacking = false;
-	AnimationClip Walk;
+	private Transform player;
+	private Transform friend;
+	private Transform enemy;
+	private string state = "patrol";
+	private Vector3 Velocity;
+	private Vector3 MoveDirection;
+	private Vector3 Target;
+	private float friendDistance;
+	private float playerEnemyDistance;
+	private float enemyFriendDistance;
+	private GameObject fpc;
+	private GameObject bot;
+	private GameObject spider;
+	private int shootTime = 0;
+	private bool attacking = false;
+	private AnimationClip Walk;
 	private Transform myTransform;
 	public GameObject bullet_prefab;
-	float bulletImpulse = 10f;
-	public int maxFriendPlayerDistance = 10;
-	public int maxEnemyFriendDistance1 = 12;
-	public int maxEnemyFriendDistance2 = 8;
-	public int bulletCooldown = 100;
-	GameObject theSpider;
-	Enemy spiderScript;
+	private float bulletImpulse = 10f;
+	private int maxFriendPlayerDistance = 10;
+	private int maxEnemyFriendDistance1 = 12;
+	private int maxEnemyFriendDistance2 = 8;
+	private int bulletCooldown = 100;
+	private GameObject theSpider;
+	private Enemy spiderScript;
 	private float distToGround;
 	// Use this for initialization
 	void Start () {  
@@ -129,6 +129,10 @@ public class Robot : MonoBehaviour {
 
 			else{
 				friend.animation.Play("Anim_Walk");
+			}
+
+			if(friend.position.y-enemy.position.y>1){       // Don't follow enemy to pit
+				state = "patrol";
 			}
 		}
 	}
