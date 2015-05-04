@@ -64,10 +64,7 @@ public class Indentation : MonoBehaviour
                 }
                 else
                 {
-                    Time.timeScale = 0.0f;
-                    guiEnabled = true;
-                    GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-                    GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+					StartCoroutine(jackin ());
                 }
             }
         }
@@ -95,7 +92,7 @@ public class Indentation : MonoBehaviour
         }
         else if (atWall && Input.GetKeyDown("e"))
         {
-            GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+           // GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
             //If at wall terminal show default cursor instead
         }
 
@@ -380,5 +377,17 @@ public class Indentation : MonoBehaviour
         GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
         GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
     }
+
+	IEnumerator jackin()
+	{
+		atWall = false;
+		yield return new WaitForSeconds (1.3F);
+		Time.timeScale = 0.0f;
+		guiEnabled = true;
+		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+		atWall = true;
+	}
 
 }
