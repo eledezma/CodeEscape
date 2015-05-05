@@ -51,8 +51,14 @@ public class evilRob : MonoBehaviour {
 			bot.animation.Play("Anim_Walk");
 
 
+
 				}
 
+
+		if(playerEnemyDistance < 5 && playerEnemyDistance > 3){
+			
+			fpc.GetComponent<Level10Health>().health-=25;
+		}
 			
 
 		}
