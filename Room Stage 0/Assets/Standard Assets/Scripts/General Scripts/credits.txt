@@ -3,6 +3,31 @@
 
 
 
+Good job gorgeous ;)
+
+
+
+
+
+Now that you have passed the game, you have 
+proven worthy of becoming a programmer.
+
+
+
+
+
+This is why you get to keep your robot arms.
+
+
+
+
+
+And now ...
+
+
+
+
+
 Credits:
 
 
@@ -73,9 +98,35 @@ Jose Pech
 
 
 
+This game was developed for the senior design project at
+the California State University of Northridge
+
+
+
+
 Special Thanks To:
-Patricia Dousette
+
+Professor Patricia Dousette
 Comp 491 Classmates
+The Cashier at Wingstop
+
+
+
+
+
+Thanks for playing!
+
+
+
+
+
+Happy Coding :)
+
+
+
+
+Bye.
+
 
 
 
