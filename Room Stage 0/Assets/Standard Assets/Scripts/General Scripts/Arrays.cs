@@ -222,12 +222,7 @@ public class Arrays : MonoBehaviour
 				}
             }
 
-			GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected ind: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
-			                                                      boxes[0],
-			                                                      boxes[1],
-			                                                      0,
-			                                                      0,
-			                                                      0));
+
 
         }
 

@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 
 	private float health;
 	private bool guiEnabled;   // to disable health bar when need to
-	bool textureEnabled;
+	public bool textureEnabled;
 	Texture2D texture;
 	// Use this for initialization
 	void Start () 

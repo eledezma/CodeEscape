@@ -129,7 +129,7 @@ public class OpponentDice : MonoBehaviour
                 }
             }
             GUI.SetNextControlName("textarea");
-            GUI.TextArea(new Rect(Screen.width * 0.2f, Screen.width * 0.04f, Screen.width * 0.75f, Screen.height * 0.75f), code);
+            GUI.TextArea(new Rect(Screen.width * 0.3f, Screen.width * 0.04f, Screen.width * 0.65f, Screen.height * 0.75f), code);
 
             if (showError)
             {
@@ -145,12 +145,7 @@ public class OpponentDice : MonoBehaviour
             editor.MoveLineEnd();
 
 
-            GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
-                                                                  facesCorrect,
-                                                                  randCorrect,
-                                                                  rand1,
-                                                                  switch2,
-                                                                  face3));
+        
 
             int temp;
 
@@ -158,7 +153,7 @@ public class OpponentDice : MonoBehaviour
 
             // for loop starting value textfield
             //*******************************************************
-            string fs = GUI.TextField(new Rect(Screen.width * 0.12f, Screen.height * 0.28f, Screen.width * 0.04f, Screen.height * 0.05f), forStart.ToString());
+            string fs = GUI.TextField(new Rect(Screen.width * 0.22f, Screen.height * 0.28f, Screen.width * 0.04f, Screen.height * 0.05f), forStart.ToString());
             if (int.TryParse(fs, out temp))
             {
                 forStart = Mathf.Clamp(temp, 0, 100);
@@ -168,11 +163,11 @@ public class OpponentDice : MonoBehaviour
                 forStart = 0;
             }
             //*******************************************************
-            GUI.Label(new Rect(Screen.width * 0.12f, Screen.height * 0.24f, Screen.width * 0.04f, Screen.height * 0.05f), ("start"));  	//for loop parameter title
+            GUI.Label(new Rect(Screen.width * 0.22f, Screen.height * 0.24f, Screen.width * 0.04f, Screen.height * 0.05f), ("start"));  	//for loop parameter title
 
             //for loop ending value textfield
             //*******************************************************
-            string ff = GUI.TextField(new Rect(Screen.width * 0.16f, Screen.height * 0.28f, Screen.width * 0.04f, Screen.height * 0.05f), forFinish.ToString());
+            string ff = GUI.TextField(new Rect(Screen.width * 0.26f, Screen.height * 0.28f, Screen.width * 0.04f, Screen.height * 0.05f), forFinish.ToString());
             if (int.TryParse(ff, out temp))
             {
                 forFinish = Mathf.Clamp(temp, 0, 100);
@@ -183,7 +178,7 @@ public class OpponentDice : MonoBehaviour
             }
             //*******************************************************
 
-            string val = GUI.TextField(new Rect(Screen.width * 0.12f, Screen.height * 0.48f, Screen.width * 0.04f, Screen.height * 0.05f), value.ToString());
+            string val = GUI.TextField(new Rect(Screen.width * 0.22f, Screen.height * 0.56f, Screen.width * 0.04f, Screen.height * 0.05f), value.ToString());
             if (int.TryParse(val, out temp))
             {
                 value = Mathf.Clamp(temp, 0, 100);
@@ -194,11 +189,11 @@ public class OpponentDice : MonoBehaviour
             }
 
 
-            GUI.Label(new Rect(Screen.width * 0.16f, Screen.height * 0.24f, Screen.width * 0.04f, Screen.height * 0.05f), ("finish"));  	//for loop parameter title
+            GUI.Label(new Rect(Screen.width * 0.26f, Screen.height * 0.24f, Screen.width * 0.04f, Screen.height * 0.05f), ("finish"));  	//for loop parameter title
 
 
             // Button that inserts a Random generator function
-            if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.28f, Screen.width * 0.1f, Screen.height * 0.05f), "Assign a Random int between"))
+            if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.28f, Screen.width * 0.2f, Screen.height * 0.1f), "Assign a Random int between"))
             {
                 GUI.FocusControl("textarea");
                 editor = goToNextEmptyLine(editor, code);
@@ -228,7 +223,7 @@ public class OpponentDice : MonoBehaviour
 
             }
             // Button inserts a switch statement
-            if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.38f, Screen.width * 0.1f, Screen.height * 0.05f), "Add Switch Statement"))
+            if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.42f, Screen.width * 0.2f, Screen.height * 0.1f), "Add Switch Statement"))
             {
                 GUI.FocusControl("textarea");
                 editor = goToNextEmptyLine(editor, code);
@@ -278,7 +273,7 @@ public class OpponentDice : MonoBehaviour
 
 
             // Button that assigns a number to face
-            if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.48f, Screen.width * 0.1f, Screen.height * 0.05f), "Assign an int to topFace"))
+            if (GUI.Button(new Rect(Screen.width * 0.02f, Screen.height * 0.56f, Screen.width * 0.2f, Screen.height * 0.1f), "Assign an int to topFace"))
             {
                 GUI.FocusControl("textarea");
                 editor = goToNextEmptyLine(editor, code);

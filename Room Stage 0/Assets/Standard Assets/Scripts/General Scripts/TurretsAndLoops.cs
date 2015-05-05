@@ -313,12 +313,7 @@ public class TurretsAndLoops : MonoBehaviour
                     showError = true;
                 }
             }
-            GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
-                                                                     position,
-                                                                     editor.pos,
-                                                                     0,
-                                                                     countLinesBefore(code, editor.pos),
-                                                                     countLinesAfter(code, editor.pos)));
+          
             // Button that activates the user's code
             if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Submit"))
             {

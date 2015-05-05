@@ -146,12 +146,6 @@ public class PlayerDice : MonoBehaviour
             editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
             editor.SelectNone();
             editor.MoveLineEnd();
-            GUI.Label(new Rect(500, 500, 200, 200), string.Format("Selected text: {0}\nPos: {1}\nSelect pos: {2}\nLines Before: {3}\nLines After: {4}",
-                                                      editor.SelectedText,
-                                                      editor.pos,
-                                                      0,
-                                                      countLinesBefore(code, editor.pos),
-                                                      countLinesAfter(code, editor.pos)));
 
             int temp;
 
