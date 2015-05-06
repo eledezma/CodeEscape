@@ -73,6 +73,8 @@ public class Rollinrollinrollin : MonoBehaviour
 			GameObject.Find("First Person Controller").GetComponent<LifeSaving>().reset = true;
 			GameObject.Find("Gate").transform.position = new Vector3(0.52129F, -142.71F, 471.017F);
 			GameObject.Find("Object").transform.position = new Vector3(-0.2081F, -20.871F, 19.3425F);
+			GameObject.Find("Object").transform.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | 
+				RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
 			GameObject.Find("First Person Controller").transform.position = new Vector3(1.01357F, -65.637466F, 131.416F);
 			GameObject.Find("First Person Controller").transform.rotation = Quaternion.Euler(-10, 180, 0);
 			GameObject.Find("Object").GetComponent<Rollinrollinrollin>().roll = true;
@@ -91,6 +93,8 @@ public class Rollinrollinrollin : MonoBehaviour
 			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
 			//GameObject.Find("First Person Controller").GetComponent<CharacterController>().enabled = true;
 			GameObject.Find("Robo_Arm10").AddComponent<ArmAnimation2>();
+			GameObject.Find("HatchTrigger").GetComponent<HatchTrigger>().stopit = false;
+			GameObject.Find("DeathTrigger").GetComponent<DeathTriggerLevel5>().scream = false;
         }
         if (col.gameObject.tag == "Stop_Boulder") 
 		{

@@ -4,10 +4,11 @@ using System.Collections;
 public class HatchTrigger : MonoBehaviour
 {
 
+	public bool stopit;
     // Use this for initialization
     void Start()
     {
-
+		stopit = false;
     }
 
     // Update is called once per frame
@@ -23,6 +24,7 @@ public class HatchTrigger : MonoBehaviour
         {
             //GameObject.Find ("Object").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             GameObject.Find("Object").GetComponent<Rollinrollinrollin>().roll = false;
+			GameObject.Find("Object").transform.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
             Debug.Log("Yahoo");
             //Destroy(this);
         }
@@ -30,13 +32,17 @@ public class HatchTrigger : MonoBehaviour
     }
     void OnTriggerStay(Collider other)
     {
-
-        if (other.gameObject.tag == "Boulder" && GameObject.Find("Object").GetComponent<Rollinrollinrollin>().floorOpen)
-        {
-            //GameObject.Find ("Object").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            GameObject.Find("Object").GetComponent<Rollinrollinrollin>().roll = false;
-            Debug.Log("Yahoo");
-            //Destroy(this);
-        }
+		if (!stopit)
+		{
+	        if (other.gameObject.tag == "Boulder" && GameObject.Find("Object").GetComponent<Rollinrollinrollin>().floorOpen)
+	        {
+				stopit = true;
+	            //GameObject.Find ("Object").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+	            GameObject.Find("Object").GetComponent<Rollinrollinrollin>().roll = false;
+				GameObject.Find("Object").transform.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+	            Debug.Log("Yahoo");
+	            //Destroy(this);
+	        }
+		}
     }
 }
