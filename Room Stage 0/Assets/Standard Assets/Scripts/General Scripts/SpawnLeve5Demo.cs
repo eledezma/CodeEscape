@@ -46,7 +46,7 @@ public class SpawnLeve5Demo : MonoBehaviour
             GameObject.Find("First Person Controller").GetComponent<CharacterController>().enabled = true;
 
         }
-*/
+
         if (Input.GetKeyDown("p"))
         { //spawn near hatch
             Destroy(GameObject.Find("IndianaTrigger"));
@@ -79,6 +79,6 @@ public class SpawnLeve5Demo : MonoBehaviour
             GameObject.Find("First Person Controller").GetComponent<CharacterController>().enabled = true;
 
         }
-        
+        */
     }
 }

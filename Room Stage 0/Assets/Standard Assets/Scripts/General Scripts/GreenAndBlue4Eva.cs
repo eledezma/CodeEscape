@@ -31,7 +31,7 @@ public class GreenAndBlue4Eva : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{  //customize the triggers for "sheild", I made them toggles for now
-		if (Input.GetKeyDown("1") || greenTime) //green
+		if (/*Input.GetKeyDown("1") ||*/ greenTime) //green
 		{
 			if(green==false && blue==false)
 			{
@@ -49,7 +49,7 @@ public class GreenAndBlue4Eva : MonoBehaviour {
 
 			greenTime = false;
 		}
-		if (Input.GetKeyDown("2") || blueTime) //blue
+		if (/*Input.GetKeyDown("2") ||*/ blueTime) //blue
 		{
 			if(blue==false && green==false)
 			{
@@ -67,7 +67,7 @@ public class GreenAndBlue4Eva : MonoBehaviour {
 
 			blueTime = false;
 		}
-		bool inviteOnly = false;
+		/*bool inviteOnly = false;
 		if(Input.GetKeyDown("3")){ //YOU CAN'T STOP DA PARTY, BOYZ!!!
 			inviteOnly=true;
 			discoParty=inviteOnly;
@@ -75,6 +75,7 @@ public class GreenAndBlue4Eva : MonoBehaviour {
 			//	OnGUI(); //OnGUI claims to be a function within itself...huh?
 			//}
 		}
+		*/
 	}
 	void OnGUI()
 	{
