@@ -61,7 +61,7 @@ Tariq Rafiq
 
 Level Design:
 Kasun Hettiarachchi
-Joseph Peña
+Joseph Pena
 
 
 Product Management:
@@ -75,7 +75,7 @@ Abel Lawal
 
 
 Special Affects:
-Joseph Peña
+Joseph Pena
 Ernie Ledezma
 Tariq Rafiq
 
@@ -108,7 +108,7 @@ Special Thanks To:
 
 Professor Patricia Dousette
 Comp 491 Classmates
-The Cashier at Wingstop
+The Cashier at Wingstop (Thanks Rayleen)
 
 
 
