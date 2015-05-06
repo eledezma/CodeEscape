@@ -484,13 +484,18 @@ public class LifeSaving : MonoBehaviour
     }
     public void resume()
     {
-       // Time.timeScale = 1.0f;
-        guiEnabled = false;
-        GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
-        GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
-        GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
-        GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = true;
-		GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = true;
+		guiEnabled = false;
+		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
+		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
+		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
+		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = true;
+		GameObject.Find("Robo_Arm10").GetComponent<Animator>().enabled = true;
+		
+		//GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = true;
+		
+		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().walking = 0;
+		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().jackn = 0;
+		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().run = 0;
 		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().disable = false;
     }
     public void lowerGateLater()
@@ -501,15 +506,16 @@ public class LifeSaving : MonoBehaviour
 	IEnumerator jackin()
 	{
 		atWall5 = false;
+		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().disable = true;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
 		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
-		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().disable = true;
 		yield return new WaitForSeconds (1.0F);
 		//Time.timeScale = 0.0f;
 		guiEnabled = true;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
-		GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = false;
+		//GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = false;
+		GameObject.Find("Robo_Arm10").GetComponent<Animator>().enabled = false;
 		atWall5 = true;
 	}
 }

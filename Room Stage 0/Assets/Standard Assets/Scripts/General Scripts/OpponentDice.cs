@@ -496,14 +496,19 @@ public class OpponentDice : MonoBehaviour
 
     public void resume()
     {
-        //Time.timeScale = 1.0f;
-        guiEnabled = false;
-        GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
-        GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
-        GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = true;
-		GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = true;
+		guiEnabled = false;
+		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
+		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
+		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
+		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = true;
+		GameObject.Find("Robo_Arm10").GetComponent<Animator>().enabled = true;
+		
+		//GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = true;
+		
+		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().walking = 0;
+		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().jackn = 0;
+		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().run = 0;
 		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().disable = false;
-        GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
         text = "The opponent die is not fair\n" +
                 "You need to make it fair.";
     }
@@ -519,7 +524,8 @@ public class OpponentDice : MonoBehaviour
 		//Time.timeScale = 0.0f;
 		guiEnabled = true;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
-		GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = false;
+		//GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = false;
+		GameObject.Find("Robo_Arm10").GetComponent<Animator>().enabled = false;
 		atOpponentWall = true;
 	}
 }
