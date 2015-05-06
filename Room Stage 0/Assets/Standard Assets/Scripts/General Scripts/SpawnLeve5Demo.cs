@@ -13,6 +13,7 @@ public class SpawnLeve5Demo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		/*
         if (Input.GetKeyDown("o"))
         {   //spawn after movie playing
             Destroy(GameObject.Find("IndianaTrigger"));
@@ -45,7 +46,7 @@ public class SpawnLeve5Demo : MonoBehaviour
             GameObject.Find("First Person Controller").GetComponent<CharacterController>().enabled = true;
 
         }
-
+*/
         if (Input.GetKeyDown("p"))
         { //spawn near hatch
             Destroy(GameObject.Find("IndianaTrigger"));
@@ -78,5 +79,6 @@ public class SpawnLeve5Demo : MonoBehaviour
             GameObject.Find("First Person Controller").GetComponent<CharacterController>().enabled = true;
 
         }
+        
     }
 }

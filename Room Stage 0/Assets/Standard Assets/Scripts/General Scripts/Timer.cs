@@ -37,7 +37,7 @@ public class Timer : MonoBehaviour
         audio.clip = suck;
         audio.Play();
         yield return new WaitForSeconds(audio.clip.length);
-        Application.LoadLevel(3);
+        Application.LoadLevel(Application.loadedLevel);
     }
 
     void OnGUI()

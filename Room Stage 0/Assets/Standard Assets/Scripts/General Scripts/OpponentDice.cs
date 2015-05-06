@@ -83,14 +83,7 @@ public class OpponentDice : MonoBehaviour
                 }
                 else
                 {
-                    GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
-                    //										Time.timeScale = 0.0f;
-                    guiEnabled = true;
-                    GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-                    GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
-                    GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
-
-
+					StartCoroutine(jackin ());
                 }
             }
             editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl);
@@ -346,6 +339,7 @@ public class OpponentDice : MonoBehaviour
                 TextChanger.Update();
                 if (facesCorrect && face3 && switch2 && rand1 && randCorrect)
                 {
+					audio.PlayOneShot (missionComplete);
                     GameObject.Find("d6").GetComponent<DiceRotateLoaded>().loaded = false;
                     GameObject.Find("Initialization").GetComponent<PoisonTime>().cheating = false;
                 }
@@ -502,14 +496,30 @@ public class OpponentDice : MonoBehaviour
 
     public void resume()
     {
-        Time.timeScale = 1.0f;
+        //Time.timeScale = 1.0f;
         guiEnabled = false;
         GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
         GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
         GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = true;
-
+		GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = true;
+		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().disable = false;
         GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
         text = "The opponent die is not fair\n" +
                 "You need to make it fair.";
     }
+
+	IEnumerator jackin()
+	{
+		atOpponentWall = false;
+		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().disable = true;
+		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
+		yield return new WaitForSeconds (1.0F);
+		//Time.timeScale = 0.0f;
+		guiEnabled = true;
+		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+		GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = false;
+		atOpponentWall = true;
+	}
 }

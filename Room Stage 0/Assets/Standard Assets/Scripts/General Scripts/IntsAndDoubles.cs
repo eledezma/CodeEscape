@@ -377,6 +377,7 @@ public class IntsAndDoubles : MonoBehaviour
         GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
         GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
         GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
+		GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = true;
     }
 
     public bool isNumber(string input)
@@ -396,13 +397,14 @@ public class IntsAndDoubles : MonoBehaviour
 	IEnumerator jackin()
 	{
 		GameObject.Find("First Person Controller").GetComponent<Player>().GuiEnabled = false;
+		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = false;
 		atWall6 = false;
-		yield return new WaitForSeconds (1.3F);
+		yield return new WaitForSeconds (1.0F);
 		Time.timeScale = 0.0f;
 		guiEnabled = true;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
-		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
 		atWall6 = true;
 	}
 

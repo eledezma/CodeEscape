@@ -24,7 +24,7 @@ public class HatchTrigger : MonoBehaviour
             //GameObject.Find ("Object").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             GameObject.Find("Object").GetComponent<Rollinrollinrollin>().roll = false;
             Debug.Log("Yahoo");
-            Destroy(this);
+            //Destroy(this);
         }
 
     }
@@ -36,7 +36,7 @@ public class HatchTrigger : MonoBehaviour
             //GameObject.Find ("Object").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             GameObject.Find("Object").GetComponent<Rollinrollinrollin>().roll = false;
             Debug.Log("Yahoo");
-            Destroy(this);
+            //Destroy(this);
         }
     }
 }

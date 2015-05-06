@@ -482,6 +482,7 @@ public class TurretsAndLoops : MonoBehaviour
         GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
         GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
         GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
+		GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = true;
     }
 
     public void doForLoop(int start, int finish, string arg)
@@ -522,12 +523,13 @@ public class TurretsAndLoops : MonoBehaviour
 	IEnumerator jackin()
 	{
 		atWall6 = false;
-		yield return new WaitForSeconds (1.3F);
+		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
+		yield return new WaitForSeconds (1.0F);
 		Time.timeScale = 0.0f;
 		guiEnabled = true;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
-		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
 		atWall6 = true;
 	}
 }

@@ -41,6 +41,7 @@ public class IndianaTime : MonoBehaviour
         GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
         cam.depth = -2;
         movie.Stop();
+		Destroy(GameObject.Find("IndianaTrigger"));
         GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
         GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
         GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().canControl = true;

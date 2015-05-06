@@ -24,7 +24,7 @@ public class MoveToRight : MonoBehaviour {
 			this.gameObject.GetComponent<MeshRenderer> ().enabled = true;
 			right = true;
 		}
-		*/
+
 		if (Input.GetKeyDown (KeyCode.P)) 
 		{
 			GameObject.Find("First Person Controller").transform.position = new Vector3(-63.59985F, 8.895495F, 248.9179F);
@@ -41,6 +41,7 @@ public class MoveToRight : MonoBehaviour {
 			}
 	
 		}
+		*/
 		if (right)
 		{
 			transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 0.1F);

@@ -343,11 +343,14 @@ public class Stage9Main2UI : MonoBehaviour {
 		
 		public void resume()
 		{
-			Time.timeScale = 1.0f;
+			//Time.timeScale = 1.0f;
 			guiEnabled = false;
 			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
 			GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
 			GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
+			GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = true;
+			GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = true;
+			GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().disable = false;
 		}
 		
 		public bool isNumber(string input)
@@ -367,12 +370,15 @@ public class Stage9Main2UI : MonoBehaviour {
 		IEnumerator jackin()
 		{
 			atWall9_2 = false;
-			yield return new WaitForSeconds (1.3F);
-			Time.timeScale = 0.0f;
-			guiEnabled = true;
-			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+			GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().disable = true;
 			GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
 			GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+			GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
+			yield return new WaitForSeconds (1.3F);
+			//Time.timeScale = 0.0f;
+			guiEnabled = true;
+			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+			GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = false;
 			atWall9_2 = true;
 		}
 		

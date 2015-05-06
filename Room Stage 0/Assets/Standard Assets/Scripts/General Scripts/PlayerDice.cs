@@ -82,13 +82,8 @@ public class PlayerDice : MonoBehaviour
                 }
                 else
                 {
-                    GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
-                    //										Time.timeScale = 0.0f;
-                    guiEnabled = true;
-                    GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-                    GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
-                    GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
-
+					//GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().disable = true;
+					StartCoroutine(jackin ());
                 }
             }
             //	} 
@@ -320,15 +315,32 @@ public class PlayerDice : MonoBehaviour
 
     public void resume()
     {
-        Time.timeScale = 1.0f;
+        //Time.timeScale = 1.0f;
         guiEnabled = false;
         GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
         GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
         GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
         GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = true;
+		GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = true;
+		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().disable = false;
 
         text = "Your die is fair. Don't" +
                         "mess with it. Cheating will" +
                         "result in dire consequences.";
     }
+
+	IEnumerator jackin()
+	{
+		atPlayerWall = false;
+		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().disable = true;
+		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
+		yield return new WaitForSeconds (1.0F);
+		//Time.timeScale = 0.0f;
+		guiEnabled = true;
+		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+		GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = false;
+		atPlayerWall = true;
+	}
 }

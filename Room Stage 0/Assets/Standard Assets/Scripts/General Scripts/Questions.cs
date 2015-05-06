@@ -390,17 +390,19 @@ public class Questions : MonoBehaviour {
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
+		GameObject.Find ("First Person Controller").GetComponent<CharacterMotor> ().enabled = true;
 	}
 
 	IEnumerator jackin()
 	{
 		atWall = false;
+		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
 		GameObject.Find("First Person Controller").GetComponent<Level10Health>().guiEnabled = false;
 		yield return new WaitForSeconds (1.3F);
 		Time.timeScale = 0.0f;
 		guiEnabled = true;
-		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false; 
 		Screen.lockCursor = false;
 		atWall = true;

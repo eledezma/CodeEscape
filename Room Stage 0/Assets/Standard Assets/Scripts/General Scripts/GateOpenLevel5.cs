@@ -15,7 +15,7 @@ public class GateOpenLevel5 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lowered || Input.GetKeyDown("g"))
+        if (lowered /*|| Input.GetKeyDown("g")*/)
         {
             animation.Play(gateClosed.name);
             lowered = false;
