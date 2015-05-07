@@ -5,11 +5,12 @@ public class ScannerInfoLevel8 : MonoBehaviour
 {
 
 	public bool guiEnabeled = true;
-	private string info = "The Scanner class is part of the java.util package." +
-		"\nScanner's in java are used to get user input, but" +
-			"\n that is not their only purpose. The method nextLine()" +
-			"\n is part of the Scanner class and is used to get the " +
-			"\n next line the user enters as the input.";
+	private string info ="Arrays are containers that hold a fixed number of values of a single type. The length of" +
+		"\nthe array is assigned when the aray is created, and the length is fixed one created. Each item in the array is called an" +
+			"\nelement and it can be accessed with their numerical index. The index ranges from a value of 0 to n-1, where n " +
+			"\nis the number of items. This means that the first item will be in index 0 and the nth item will be in index n-1. In Java, there" +
+			"\n an Array Class that can help get useful information about arrays, or manipulate arrays. For example the length method would tell you the " +
+			"\nthe size if the array and the copyFromRange method lets you copy item from a certain range.";
 	// Use this for initialization
 	void Start()
 	{

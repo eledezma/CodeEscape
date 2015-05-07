@@ -5,11 +5,12 @@ public class ScannerInfoLevel3 : MonoBehaviour
 {
 
 	public bool guiEnabeled = true;
-	private string info = "The Scanner class is part of the java.util package." +
-		"\nScanner's in java are used to get user input, but" +
-			"\n that is not their only purpose. The method nextLine()" +
-			"\n is part of the Scanner class and is used to get the " +
-			"\n next line the user enters as the input.";
+	private string info = "Ints and doubles are two out of the eight primitive types, supported in Java." +
+		"\nInts are a 32-bit signed two's complements integer, which just means that it can range from a" +
+			"\n minimum value of -2^31 to a maximum value of ((2^31)-1). Ints are also used to represent whole numbers" +
+			"\nwith no decimal places. Doubles are double precision 64-bit floating point. Doubles are used to" +
+			"\n represent whole numbers followed by decimal values in Java." +
+			"\n\n\n\n\nPress E to coninue";
 	// Use this for initialization
 	void Start()
 	{

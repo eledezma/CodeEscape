@@ -4,12 +4,11 @@ using System.Collections;
 public class ScannerInfoLevel2 : MonoBehaviour
 {
     public bool guiEnabeled = true;
-    private string info = "The Scanner class is part of the java.util package." +
-        "\nScanner's in java are used to get user input, but" +
-        "\n that is not their only purpose. The method nextLine()" +
-        "\n is part of the Scanner class and is used to get the " +
-        "\n next line the user enters as the input.";
-    // Use this for initialization
+	private string info = "Indenting is used to make your code more readable." +
+		"\nHaving the correct indentation makes it easier to debug your code if a bug appears." +
+			"\nThey also make your code look professional and not messy. So make life easier" +
+			"\n for the person that is going to read your code and indent it correctly." +
+			"\n\n\n\n\nPress E to continue";
     void Start()
     {
 		Screen.showCursor = false;
