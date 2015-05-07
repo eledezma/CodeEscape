@@ -16,7 +16,7 @@ public class ScannerInfoLevel3 : MonoBehaviour
 	{
 		Screen.showCursor = false;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-		//GameObject.Find("First Person Controller").GetComponent<Level10Health>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<Player>().enabled = false;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().enabled = false;
 		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
@@ -48,7 +48,7 @@ public class ScannerInfoLevel3 : MonoBehaviour
 		guiEnabeled = false;
 		Screen.showCursor = true;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
-		//GameObject.Find("First Person Controller").GetComponent<Level10Health>().enabled = true;
+		GameObject.Find("First Person Controller").GetComponent<Player>().enabled = true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().enabled = true;
 		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().enabled = true;
