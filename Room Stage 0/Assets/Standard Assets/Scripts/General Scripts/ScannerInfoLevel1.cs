@@ -3,11 +3,10 @@ using System.Collections;
 
 public class ScannerInfoLevel1 : MonoBehaviour 
 {
-
 	public bool guiEnabeled = true;
 	private string info = "If you want to print data to the screen, two of the methods available" +
-						  "\nin java are the System.out.print() and System.out.println(). If you use the print() method it will " +
-						  "\nprint the variables with out making a new line. For example:" +
+						  "in java are the System.out.print() and System.out.println(). If you use the print() method it will " +
+						  "print the variables with out making a new line. For example:" +
 			"\n\n\t int i = 1;" +
 			"\n\tSystem.out.print("+"This is a example using the number: "+");"+
 			"\n\tSystem.out.print(i);" +
@@ -20,7 +19,8 @@ public class ScannerInfoLevel1 : MonoBehaviour
 			"\n\nThe output for this example will be " +
 			"\nThis is a example using the number:" +
 			"\n1" +
-			"\n\n\n\nPress E to continue";
+			"\n\n\n\nPress E to continue ... ";
+			
 	// Use this for initialization
 	void Start()
 	{
@@ -36,19 +36,18 @@ public class ScannerInfoLevel1 : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		
 	}
 	public void OnGUI()
 	{
+		GUI.skin.label.fontSize = 16;
 		if (guiEnabeled)
 		{
-			GUILayout.Box("Info");
-			GUILayout.TextArea(info);
-			//if(GUILayout.Button("Submit")){
+			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Info");
+			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f),info);
 			if (Input.GetKeyDown("e"))
 			{
 				resume();
-				//CursorTime.showCursor = false;
 			}
 		}
 	}
