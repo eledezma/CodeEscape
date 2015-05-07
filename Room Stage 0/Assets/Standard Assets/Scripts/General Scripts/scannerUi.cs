@@ -206,7 +206,6 @@ public class scannerUi : MonoBehaviour
             // Button that activates the user's code
             if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.9f, Screen.width * 0.08f, Screen.height * 0.05f), "Submit"))
             {
-                puzzle2Complete = true;
                 if ((scannerCreated) && (scannerAssigned))
                     puzzle2Complete = true;
                 resume();
