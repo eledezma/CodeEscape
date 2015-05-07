@@ -19,7 +19,7 @@ public class ScannerInfoLevel2 : MonoBehaviour
 			"Having the correct indentation makes it easier to debug your code if a bug appears. " +
 			"They also make your code look professional and not messy. So make life easier" +
 			" for yourself and for the person that is going to read your code and indent it correctly." +
-			"\n\n\n\nPress E to continue";
+			"\n\n\n\nJumping is disabled in this level. Press E to continue";
 
 	// Use this for initialization
 	void Start()
