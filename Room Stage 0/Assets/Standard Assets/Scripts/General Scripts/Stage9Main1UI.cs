@@ -155,6 +155,7 @@ public class Stage9Main1UI : MonoBehaviour {
 				// Button that activates the user's code
 				if (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.9f, Screen.width * 0.15f, Screen.height * 0.08f), "Submit"))
 				{
+				if(generated)
 				GameObject.Find("Initialization").GetComponent<InitialStage9>().activate(1);
 					resume();
 				}
