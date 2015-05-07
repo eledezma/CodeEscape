@@ -6,18 +6,18 @@ public class ScannerInfoLevel4 : MonoBehaviour
 
 	public bool guiEnabeled = true;
 	private string info = "The Scanner class is part of the java.util package. Scanner's in java are used to get user input to be used" +
-		"\n by the program, but this is not their only functions. Scanners are also used to read data from small text files, but" +
-			"\n if you need to read from a big files, it's better to use one of the other method available.The method nextLine()" +
-			"\n is part of the Scanner class and is used to get the next line the user enters as the input. It can also be used to" +
-			"\n read the next line. Scanners can read specific values like Ints and Doubles and you can also give it a certain Delimiter" +
-			"\npatern and it will tokenize the string based on the pattern." +
+		" by the program, but this is not their only purpose. Scanners are also used to read data from small text files, but" +
+			" if you need to read from a big files, it's better to use one of the other method available.The method nextLine()" +
+			" is part of the Scanner class and is used to get the next line the user enters as the input. It can also be used to" +
+			" read the next line. Scanners can read specific values like Ints and Doubles and you can also give it a certain Delimiter" +
+			" patern and it will tokenize the string based on the pattern." +
 			"\n\nIf you want to use a scanner you will have to first have to create a Scanner variable and extantiate the Scanner Object" +
 			"\nFor Example:" +
 			"\nScanner scan;" +
-			"\n\nThis will make a Scanner variable but it doesn't extantiate the Scanner object yet. In order to extantiate the Scanner" +
-			"\nObject you have to make a new Scanner. For Example:" +
+			"\nThis will make a Scanner variable but it doesn't Instantiate the Scanner object yet.\n\n In order to Instantiate the Scanner" +
+			" object you have to make a new Scanner. For Example:" +
 			"\n\nscan = new Scanner(System.in);" +
-			"\n\nafter this is done you can now start to read the input from the user by using the nextLine() method like this" +
+			"\nAfter this is done you can now start to read the input from the user by using the nextLine() method like this" +
 			"\n\nscan.nextLine();" +
 			"\n\n\n\n\nPress E to continue";
 
@@ -40,6 +40,8 @@ public class ScannerInfoLevel4 : MonoBehaviour
 		GUI.skin.label.fontSize = 16;
 		if (guiEnabeled)
 		{
+			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
 			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
 			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Info");
 			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f),info);

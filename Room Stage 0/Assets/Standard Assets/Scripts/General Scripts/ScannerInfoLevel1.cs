@@ -4,21 +4,22 @@ using System.Collections;
 public class ScannerInfoLevel1 : MonoBehaviour 
 {
 	public bool guiEnabeled = true;
-	private string info = "If you want to print data to the screen, two of the methods available" +
+	private string info = "When you first start learning a programming language, the first program you learn to write is " +
+						  "the \"Hello World\" program. Which displays the words hello world on the screen.\n\n"+
+						  "If you want to print data to the screen, two of the methods available " +
 						  "in java are the System.out.print() and System.out.println(). If you use the print() method it will " +
 						  "print the variables with out making a new line. For example:" +
-			"\n\n\t int i = 1;" +
+
 			"\n\tSystem.out.print("+"This is a example using the number: "+");"+
-			"\n\tSystem.out.print(i);" +
+			"\n\tSystem.out.print(\"Java\");" +
 			"\n\nThe output for this example will be" +
-			"\nThis is a example using the number: 1" +
-			"\n\nIf we use the prinln() method our output will be different, for example:" +
-			"\n\n\t int i = 1;" +
+			"\nThis is a example using the number: Java" +
+			"\n\nIf we use the prinln() method our output will be different, for example:"+
 			"\n\tSysytem.out.println("+"This is a example using the number: "+");" +
-			"\n\tSystem.out.println(i);" +
+			"\n\tSystem.out.println(\"Java\");" +
 			"\n\nThe output for this example will be " +
 			"\nThis is a example using the number:" +
-			"\n1" +
+			"\nJava" +
 			"\n\n\n\nPress E to continue ... ";
 			
 	// Use this for initialization
@@ -43,7 +44,8 @@ public class ScannerInfoLevel1 : MonoBehaviour
 		if (guiEnabeled)
 		{
 			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Info");
+			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Hello World");
 			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f),info);
 			if (Input.GetKeyDown("e"))
 			{

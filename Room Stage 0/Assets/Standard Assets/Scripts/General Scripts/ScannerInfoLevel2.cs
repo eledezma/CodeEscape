@@ -4,11 +4,22 @@ using System.Collections;
 public class ScannerInfoLevel2 : MonoBehaviour
 {
     public bool guiEnabeled = true;
-	private string info = "Indenting is used to make your code more readable." +
-		"\nHaving the correct indentation makes it easier to debug your code if a bug appears." +
-			"\nThey also make your code look professional and not messy. So make life easier" +
-			"\n for the person that is going to read your code and indent it correctly." +
-			"\n\n\n\n\nPress E to continue";
+	private string info = "Indetaion is structering the code to make it more readable. " +
+		    "The basic indentation convention is that every line that has an open brace, it's matching closing brace needs "+
+			"to be aligned with the line that has the open brace. Every line in between the open and closed braces need to be tabbed. "+
+			"\n\nExample of well indented code: "+
+			"\npublic void method(){" +
+			"\n\tcode;"+
+			"\n\tif(something){"+
+			"\n\t\tcode;"+
+			"\n\t\tcode;"+
+			"\n\t}"+
+			"\n}"+
+			"\n\nIndenting is used to make your code more readable." +
+			"Having the correct indentation makes it easier to debug your code if a bug appears. " +
+			"They also make your code look professional and not messy. So make life easier" +
+			" for yourself and for the person that is going to read your code and indent it correctly." +
+			"\n\n\n\nPress E to continue";
 
 	// Use this for initialization
 	void Start()
@@ -33,7 +44,9 @@ public class ScannerInfoLevel2 : MonoBehaviour
 		if (guiEnabeled)
 		{
 			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Info");
+			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Indentation");
 			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f),info);
 			if (Input.GetKeyDown("e"))
 			{
