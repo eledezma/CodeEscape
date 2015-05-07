@@ -20,18 +20,16 @@ public class ScannerInfoLevel4 : MonoBehaviour
 			"\n\nafter this is done you can now start to read the input from the user by using the nextLine() method like this" +
 			"\n\nscan.nextLine();" +
 			"\n\n\n\n\nPress E to continue";
-	// Use this for initialization
+
 	void Start()
 	{
 		Screen.showCursor = false;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-		//GameObject.Find("First Person Controller").GetComponent<Level10Health>().enabled = false;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
-		GameObject.Find("Initialization").GetComponent<CursorTime>().enabled = false;
 		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
 		GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = false;
 	}
-	
+
 	// Update is called once per frame
 	void Update()
 	{
@@ -57,10 +55,13 @@ public class ScannerInfoLevel4 : MonoBehaviour
 		guiEnabeled = false;
 		Screen.showCursor = true;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
-		//GameObject.Find("First Person Controller").GetComponent<Level10Health>().enabled = true;
+		GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().enabled = true;
-		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().enabled = true;
+		GameObject.Find("First Person Controller").GetComponent<MakeOrder>().enabled = true;
+		GameObject.Find("First Person Controller").GetComponent<scannerUi>().enabled = true;
+		GameObject.Find("Wall_Jack_S2").GetComponent<ToolTipTxt>().enabled = true;
+		GameObject.Find("Terminal_Stage2").GetComponent<ToolTipTxt>().enabled = true;
 		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = true;
 	}
 }
