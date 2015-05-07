@@ -183,6 +183,7 @@ public class scannerUi : MonoBehaviour
                         if ((countLinesBefore(code, editor.pos) >= 2) && (countLinesAfter(code, editor.pos) >= 2) && isBlankLine(code, editor.pos))
                         {
                             code = addToCode(code, editor, "order = reader.nextLine();");
+							scannerAssigned = true;
                         }
                         else
                         {
