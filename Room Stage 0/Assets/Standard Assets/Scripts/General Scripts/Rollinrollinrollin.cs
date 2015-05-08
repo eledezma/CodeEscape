@@ -99,6 +99,9 @@ public class Rollinrollinrollin : MonoBehaviour
 			GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().disable = false;
 			GameObject.Find("HatchTrigger").GetComponent<HatchTrigger>().stopit = false;
 			GameObject.Find("DeathTrigger").GetComponent<DeathTriggerLevel5>().scream = false;
+			GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().walking = 0;
+			GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().jackn = 0;
+			GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().run = 0;
         }
         if (col.gameObject.tag == "Stop_Boulder") 
 		{

@@ -5,10 +5,11 @@ public class NoCheating : MonoBehaviour
 {
 
 	public AudioClip pain;
+	public bool triggerTime;
 	// Use this for initialization
 	void Start () 
 	{
-	
+		triggerTime = false;
 	}
 	
 	// Update is called once per frame
@@ -19,7 +20,7 @@ public class NoCheating : MonoBehaviour
 
 	IEnumerator OnTriggerEnter(Collider col)
 	{
-		if (col.gameObject.tag == "Player")
+		if (col.gameObject.tag == "Player" && triggerTime)
 		{
 			GameObject.Find("Object").GetComponent<Rollinrollinrollin>().roll = false;
 			//Destroy(GameObject.Find("Main Camera").GetComponent<MouseLook>());
@@ -28,7 +29,8 @@ public class NoCheating : MonoBehaviour
 			GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false; //this line and next four help in changing position and rotation of character
 			GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
 			GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
-			Destroy(GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>());
+			//Destroy(GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>());
+			GameObject.Find("Robo_Arm10").GetComponent<Animator>().enabled = false;
 			audio.clip = pain;
 			audio.Play();
 			yield return new WaitForSeconds(audio.clip.length);
@@ -62,8 +64,15 @@ public class NoCheating : MonoBehaviour
 			GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = true;
 			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
 			//GameObject.Find("First Person Controller").GetComponent<CharacterController>().enabled = true;
-			GameObject.Find("Robo_Arm10").AddComponent<ArmAnimation2>();
+			//GameObject.Find("Robo_Arm10").AddComponent<ArmAnimation2>();
+			GameObject.Find("Robo_Arm10").GetComponent<Animator>().enabled = true;
+			GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = true;
+			GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().disable = false;
 			GameObject.Find("HatchTrigger").GetComponent<HatchTrigger>().stopit = false;
+			GameObject.Find("DeathTrigger").GetComponent<DeathTriggerLevel5>().scream = false;
+			GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().walking = 0;
+			GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().jackn = 0;
+			GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().run = 0;
 		
 		}
 	}

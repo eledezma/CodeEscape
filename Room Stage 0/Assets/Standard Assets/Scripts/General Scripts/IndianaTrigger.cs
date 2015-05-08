@@ -20,6 +20,7 @@ public class IndianaTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+			GameObject.Find("Object").GetComponent<NoCheating>().triggerTime = true;
             GameObject.Find("Initialization").GetComponent<AudioSource>().audio.Stop();
             GameObject.Find("IndianaJones").GetComponent<IndianaTime>().playVideo = true;
             GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
