@@ -62,8 +62,8 @@ public class codingUI : MonoBehaviour
         else
         {
             //Screen.showCursor = false;
-            Screen.lockCursor = true;  //Hiding Cursor means redoing the way the crosshair was implemented -Josephs
-            Screen.lockCursor = false; //Cursor remains locked if not in terminal
+            //Screen.lockCursor = true;  //Hiding Cursor means redoing the way the crosshair was implemented -Josephs
+            //Screen.lockCursor = false; //Cursor remains locked if not in terminal
         }
     }
     //*******************************************************
