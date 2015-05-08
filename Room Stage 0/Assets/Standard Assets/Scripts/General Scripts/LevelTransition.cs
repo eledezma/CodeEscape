@@ -21,7 +21,14 @@ public class LevelTransition : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
 
-
+			if(Application.loadedLevel==3)
+			{
+				GameObject.Find("First Person Controller").GetComponent<Player>().GuiEnabled = false;
+			}
+			if(Application.loadedLevel==10)
+			{
+				GameObject.Find("First Person Controller").GetComponent<Level10Health>().guiEnabled = false;
+			}
             Application.LoadLevel(Application.loadedLevel + 1);
         }
     }
