@@ -1,0 +1,76 @@
+Initialize engine version: 4.5.4f1 (e036f44c54c9)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics Family (ID=0xa1e)
+    Vendor:   Intel
+    VRAM:     32 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Dani\Desktop\CodeEscape\CodeEscape\Game\CodeEscape_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Dani\Desktop\CodeEscape\CodeEscape\Game\CodeEscape_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Dani\Desktop\CodeEscape\CodeEscape\Game\CodeEscape_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Dani\Desktop\CodeEscape\CodeEscape\Game\CodeEscape_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Dani\Desktop\CodeEscape\CodeEscape\Game\CodeEscape_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Dani\Desktop\CodeEscape\CodeEscape\Game\CodeEscape_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Dani\Desktop\CodeEscape\CodeEscape\Game\CodeEscape_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\Dani\Desktop\CodeEscape\CodeEscape\Game\CodeEscape_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Dani\Desktop\CodeEscape\CodeEscape\Game\CodeEscape_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\Dani\Desktop\CodeEscape\CodeEscape\Game\CodeEscape_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+- Completed reload, in  0.289 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+START
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+UnloadTime: 1.081795 ms
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1407.
+Total: 4.027482 ms (FindLiveObjects: 0.298332 ms CreateObjectMapping: 0.102637 ms MarkObjects: 0.858046 ms  DeleteObjects: 0.168324 ms)
+
+UnloadTime: 5.730574 ms
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 304 unused Assets to reduce memory usage. Loaded Objects now: 907.
+Total: 7.862690 ms (FindLiveObjects: 0.173114 ms CreateObjectMapping: 0.129322 ms MarkObjects: 0.774568 ms  DeleteObjects: 3.179014 ms)
+
+I did it
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+UnloadTime: 10.810430 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 73 unused Assets to reduce memory usage. Loaded Objects now: 853.
+Total: 12.620265 ms (FindLiveObjects: 0.150534 ms CreateObjectMapping: 0.067740 ms MarkObjects: 0.572031 ms  DeleteObjects: 9.097756 ms)
+
+UnloadTime: 5.765471 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 26 unused Assets to reduce memory usage. Loaded Objects now: 892.
+Total: 11.931227 ms (FindLiveObjects: 0.186115 ms CreateObjectMapping: 0.094426 ms MarkObjects: 1.517661 ms  DeleteObjects: 6.977958 ms)
+
+UnloadTime: 4.850632 ms
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 63 unused Assets to reduce memory usage. Loaded Objects now: 877.
+Total: 8.541464 ms (FindLiveObjects: 0.203221 ms CreateObjectMapping: 0.107426 ms MarkObjects: 0.951788 ms  DeleteObjects: 3.830418 ms)
+
+UnloadTime: 5.401451 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 34 unused Assets to reduce memory usage. Loaded Objects now: 781.
+Total: 6.890374 ms (FindLiveObjects: 0.193642 ms CreateObjectMapping: 0.106742 ms MarkObjects: 0.983263 ms  DeleteObjects: 2.071217 ms)
+
+UnloadTime: 5.909847 ms
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 4424.
+Total: 6.678257 ms (FindLiveObjects: 0.841624 ms CreateObjectMapping: 0.286699 ms MarkObjects: 1.503292 ms  DeleteObjects: 0.567241 ms)
+
+agagad
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ScannerInfoLevel4 : MonoBehaviour 
 {
-
+	public GUIStyle style;
 	public bool guiEnabeled = true;
 	private string info = "The Scanner class is part of the java.util package. Scanner's in java are used to get user input to be used" +
 		" by the program, but this is not their only purpose. Scanners are also used to read data from small text files, but" +
@@ -23,11 +23,14 @@ public class ScannerInfoLevel4 : MonoBehaviour
 
 	void Start()
 	{
+		style = new GUIStyle();
 		Screen.showCursor = false;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
 		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
 		GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = false;
+		GameObject.Find("First Person Controller").GetComponent<MakeOrder>().enabled = false;
+
 	}
 
 	// Update is called once per frame
@@ -39,6 +42,8 @@ public class ScannerInfoLevel4 : MonoBehaviour
 			else{
 				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
 				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+				GameObject.Find("First Person Controller").GetComponent<MakeOrder>().enabled = false;
+
 				GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
 				guiEnabeled = true;
 				GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
@@ -47,13 +52,14 @@ public class ScannerInfoLevel4 : MonoBehaviour
 		}
 		
 	}
+
+
 	public void OnGUI()
 	{
 		GUI.skin.label.fontSize = 16;
 		if (guiEnabeled)
 		{
-			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+
 			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
 			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Console I/O");
 			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f),info);
@@ -78,5 +84,7 @@ public class ScannerInfoLevel4 : MonoBehaviour
 		GameObject.Find("Terminal_Stage2").GetComponent<ToolTipTxt>().enabled = true;
 		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = true;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
+		GameObject.Find("First Person Controller").GetComponent<MakeOrder>().enabled = true;
+
 	}
 }

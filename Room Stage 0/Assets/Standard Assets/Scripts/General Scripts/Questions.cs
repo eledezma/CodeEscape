@@ -41,7 +41,9 @@ public class Questions : MonoBehaviour {
 			"\t}\n"+
 			"}\n"+
 			"else{\n"+
-			"\tSystem.out.print(\"C\")\n"+
+			"\tif(!boolean2){\n"+
+			"\t\tSystem.out.print(\"C\")\n"+
+			"\t}\n"+
 			"}\n";
 	static string[] answer5 = {"A","B","C","None of the above"};
 	public static  string question6 = "What's the output of the following code?\n"+

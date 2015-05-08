@@ -48,15 +48,16 @@ public class ScannerInfoLevel3 : MonoBehaviour
 		GUI.skin.label.fontSize = 16;
 		if (guiEnabeled)
 		{
-			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+
 			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Ints and Doubles");
 			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f),info);
 			//if (Input.GetKeyDown("e"))
 			//{
 				//resume();
 			//}
+			GUI.Box(new Rect(1, 1, Screen.width, Screen.height), "");
+		//	GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+		//	GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
 		}
 	}
 	public void resume()
