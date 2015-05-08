@@ -6,8 +6,23 @@ public class ScannerInfoLevel6 : MonoBehaviour
 
 	public bool guiEnabeled = true;
 	private string info = "The Switch Case in Java is another way to control the flow of the program with decisions." +
-		"\n They are used to test a certain range of a variable. Unlike the if-else statement," +
-			"\n the switch case satement .";
+		" They are used to test a certain range of a variable. Unlike the if-else statement," +
+			" the switch case satement can have mutiple paths. For Example:" +
+			"\n\nint num = 2;" +
+			"\nswitch(num){" +
+			"\n\tcase 1:" +
+			"\n\t\tSystem.out.println(1);" +
+			"\n\t\tbreak;" +
+			"\n\tcase 2:" +
+			"\n\t\tSystem.out.println(2);" +
+			"\n\t\tbreak;" +
+			"\n\tcase 3:" +
+			"\n\t\tSystem.out.println(3);" +
+			"\n\t\tbreak;" +
+			"\n}" +
+			"\n\nIn this example switch(num) checks the value of num. Depending on the value it will print what is " +
+			"inside the case statement. In this case it will print the number 2." +
+			"\n\n\n\n\nPress H to continue...";
 	// Use this for initialization
 	void Start()
 	{
