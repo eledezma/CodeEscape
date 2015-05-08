@@ -5,11 +5,26 @@ public class ScannerInfoLevel5 : MonoBehaviour
 {
 
 	public bool guiEnabeled = true;
-	private string info = "The Scanner class is part of the java.util package." +
-		"\nScanner's in java are used to get user input, but" +
-			"\n that is not their only purpose. The method nextLine()" +
-			"\n is part of the Scanner class and is used to get the " +
-			"\n next line the user enters as the input.";
+	private string info = "If you want your program to execute a certain part of the code only if a certain value is true, then the " +
+		"If-Else statement is one of the ways that Java lets you do this. The If-Else Statement has the following structure:" +
+			"\n\n if(boolean expression){" +
+			"\n\tstatements;" +
+			"\n}" +
+			"\nelse{" +
+			"\n\tstatements;" +
+			"\n}" +
+			"\n\nThe boolean expression will be the value or values, that your program will check if it's true. If this values is true" +
+			"it will execute the statements inside the if statement. If the value is false then your program will execute the staments in" +
+			"the else block. For example:" +
+			"\n\nif(age>12 || age<20){" +
+			"\n\tSystem.out.println("+"I am a teenager"+");" +
+			"\n}" +
+			"\nelse{" +
+			"\n\tSystem.out.println(" +"I am not a teenager :(" + ");" +
+			"\n}" +
+			"\n\nIn this example the program will print out 'I am a teenager' only if the variable age is between 12 and 20. If the" +
+			"age is not between 12 or 20 it will print out 'I am not a teenager'." +
+			"\n\n\n\n\nPress H to continue";
 	// Use this for initialization
 	void Start()
 	{
@@ -25,7 +40,18 @@ public class ScannerInfoLevel5 : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		
+		if (Input.GetKeyDown ("h")) {
+			if(guiEnabeled)
+				resume ();
+			else{
+				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+				GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
+				guiEnabeled = true;
+				GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+				
+			}
+		}
 	}
 	public void OnGUI()
 	{

@@ -19,7 +19,7 @@ public class ScannerInfoLevel2 : MonoBehaviour
 			"Having the correct indentation makes it easier to debug your code if a bug appears. " +
 			"They also make your code look professional and not messy. So make life easier" +
 			" for yourself and for the person that is going to read your code and indent it correctly." +
-			"\n\n\n\nJumping is disabled in this level. Press E to continue";
+			"\n\n\n\nJumping is disabled in this level. Press H to continue";
 
 	// Use this for initialization
 	void Start()
@@ -36,7 +36,18 @@ public class ScannerInfoLevel2 : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		
+		if (Input.GetKeyDown ("h")) {
+			if(guiEnabeled)
+				resume ();
+			else{
+				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+				GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
+				guiEnabeled = true;
+				GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+				
+			}
+		}
 	}
 	public void OnGUI()
 	{
@@ -48,10 +59,10 @@ public class ScannerInfoLevel2 : MonoBehaviour
 			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
 			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Indentation");
 			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f),info);
-			if (Input.GetKeyDown("e"))
-			{
-				resume();
-			}
+			//if (Input.GetKeyDown("e"))
+			//{
+				//resume();
+			//}
 		}
 	}
 	public void resume()

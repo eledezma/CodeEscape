@@ -20,7 +20,7 @@ public class ScannerInfoLevel1 : MonoBehaviour
 			"\n\nThe output for this example will be " +
 			"\nThis is a example using the number:" +
 			"\nJava" +
-			"\n\n\n\nPress E to continue ... ";
+			"\n\n\n\nPress H to continue ... ";
 			
 	// Use this for initialization
 	void Start()
@@ -37,6 +37,18 @@ public class ScannerInfoLevel1 : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (Input.GetKeyDown ("h")) {
+			if(guiEnabeled)
+				resume ();
+			else{
+				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+				GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
+				guiEnabeled = true;
+				GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+				
+			}
+		}
 	}
 	public void OnGUI()
 	{
@@ -47,10 +59,10 @@ public class ScannerInfoLevel1 : MonoBehaviour
 			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
 			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Hello World");
 			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f),info);
-			if (Input.GetKeyDown("e"))
-			{
-				resume();
-			}
+			//if (Input.GetKeyDown("e"))
+			//{
+				//resume();
+			//}
 		}
 	}
 	public void resume()

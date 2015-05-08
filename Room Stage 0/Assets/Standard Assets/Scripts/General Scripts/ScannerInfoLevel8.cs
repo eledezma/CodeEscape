@@ -10,7 +10,7 @@ public class ScannerInfoLevel8 : MonoBehaviour
 			" is the number of items. This means that the first item will be in index 0 and the nth item will be in index n-1. In Java, there" +
 			"  an Array Class that can help get useful information about arrays, or manipulate arrays. For example the length method would tell you the " +
 			" the size if the array and the copyFromRange method lets you copy item from a certain range."+
-			"\n\nPress E to continue...";
+			"\n\nPress H to continue...";
 
 	// Use this for initialization
 	void Start()
@@ -27,7 +27,18 @@ public class ScannerInfoLevel8 : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		
+		if (Input.GetKeyDown ("h")) {
+			if(guiEnabeled)
+				resume ();
+			else{
+				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
+				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
+				GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
+				guiEnabeled = true;
+				GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
+				
+			}
+		}
 	}
 	public void OnGUI()
 	{
@@ -38,10 +49,10 @@ public class ScannerInfoLevel8 : MonoBehaviour
 			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
 			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Arrays");
 			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f),info);
-			if (Input.GetKeyDown("e"))
-			{
-				resume();
-			}
+			//if (Input.GetKeyDown("e"))
+			//{
+				//resume();
+			//}
 		}
 	}
 	public void resume()
