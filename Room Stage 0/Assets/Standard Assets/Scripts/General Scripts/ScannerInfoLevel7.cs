@@ -71,5 +71,6 @@ public class ScannerInfoLevel7 : MonoBehaviour
 		GameObject.Find("Initialization").GetComponent<CursorTime>().enabled = true;
 		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().enabled = true;
 		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = true;
+		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
 	}
 }

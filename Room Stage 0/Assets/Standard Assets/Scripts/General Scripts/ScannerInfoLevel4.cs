@@ -77,5 +77,6 @@ public class ScannerInfoLevel4 : MonoBehaviour
 		GameObject.Find("Wall_Jack_S2").GetComponent<ToolTipTxt>().enabled = true;
 		GameObject.Find("Terminal_Stage2").GetComponent<ToolTipTxt>().enabled = true;
 		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = true;
+		GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
 	}
 }
