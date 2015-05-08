@@ -55,7 +55,7 @@ public class ScannerInfoLevel4 : MonoBehaviour
 			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
 			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
 			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Info");
+			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Console I/O");
 			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f),info);
 			//if (Input.GetKeyDown("e"))
 			//{

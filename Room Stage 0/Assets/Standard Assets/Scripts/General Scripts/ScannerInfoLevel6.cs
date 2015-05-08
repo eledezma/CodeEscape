@@ -6,7 +6,7 @@ public class ScannerInfoLevel6 : MonoBehaviour
 
 	public bool guiEnabeled = true;
 	private string info = "The Switch Case in Java is another way to control the flow of the program with decisions." +
-		" They are used to test a certain range of a variable. Unlike the if-else statement," +
+		" They are used to test a certain range of a variables. Unlike the if-else statement," +
 			" the switch case satement can have mutiple paths. For Example:" +
 			"\n\nint num = 2;" +
 			"\nswitch(num){" +
@@ -58,7 +58,9 @@ public class ScannerInfoLevel6 : MonoBehaviour
 		if (guiEnabeled)
 		{
 			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Info");
+			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Switch Statements");
 			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f),info);
 			//if (Input.GetKeyDown("e"))
 			//{

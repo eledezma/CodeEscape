@@ -9,7 +9,7 @@ public class ScannerInfoLevel10: MonoBehaviour
 		"took your arms, this is the time. Go to the room and answer at least 7 out of the 10 questions about the" +
 			"previous levels. I hope you were paying attention to what you did in the previous levels, it all comes down " +
 			"to the next quiz. Be careful, and answer the quiz correctly, there's a cost if you answer a question" +
-			"wrong." +
+			" wrong." +
 			"\n\n\n\n\nPress H to continue";
 	// Use this for initialization
 	void Start()
@@ -46,6 +46,8 @@ public class ScannerInfoLevel10: MonoBehaviour
 		GUI.skin.label.fontSize = 16;
 		if (guiEnabeled)
 		{
+			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
 			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
 			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Info");
 			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f),info);

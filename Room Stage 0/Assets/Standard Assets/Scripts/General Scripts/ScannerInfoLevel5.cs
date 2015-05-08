@@ -5,7 +5,7 @@ public class ScannerInfoLevel5 : MonoBehaviour
 {
 
 	public bool guiEnabeled = true;
-	private string info = "If you want your program to execute a certain part of the code only if a certain value is true, then the " +
+	private string info = "If you want your program to execute a certain part of the code only if a condition is true, then the " +
 		"If-Else statement is one of the ways that Java lets you do this. The If-Else Statement has the following structure:" +
 			"\n\n if(boolean expression){" +
 			"\n\tstatements;" +
@@ -20,11 +20,11 @@ public class ScannerInfoLevel5 : MonoBehaviour
 			"\n\tSystem.out.println("+"I am a teenager"+");" +
 			"\n}" +
 			"\nelse{" +
-			"\n\tSystem.out.println(" +"I am not a teenager :(" + ");" +
+			"\n\tSystem.out.println(" +"I am not a teenager " + ");" +
 			"\n}" +
 			"\n\nIn this example the program will print out 'I am a teenager' only if the variable age is between 12 and 20. If the" +
 			"age is not between 12 or 20 it will print out 'I am not a teenager'." +
-			"\n\n\n\n\nPress H to continue";
+			"\n\n\n\n\nPress H to continue...";
 	// Use this for initialization
 	void Start()
 	{
@@ -59,8 +59,11 @@ public class ScannerInfoLevel5 : MonoBehaviour
 		if (guiEnabeled)
 		{
 			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"Info");
-			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f),info);
+			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+			GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+
+			GUI.Label(new Rect(Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f),"If Statements");
+			GUI.Label(new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.9f),info);
 			if (Input.GetKeyDown("e"))
 			{
 				resume();

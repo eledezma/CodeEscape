@@ -58,7 +58,9 @@ public class ScannerInfoLevel9 : MonoBehaviour
 		GUI.skin.label.fontSize = 16;
 		if (guiEnabeled) {
 			GUI.Box (new Rect (0, 0, Screen.width, Screen.height), "");
-			GUI.Label (new Rect (Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f), "Info");
+			GUI.Box (new Rect (0, 0, Screen.width, Screen.height), "");
+			GUI.Box (new Rect (0, 0, Screen.width, Screen.height), "");
+			GUI.Label (new Rect (Screen.width * 0.45f, Screen.height * 0.01f, Screen.width * 0.1f, Screen.height * 0.05f), "Object Oriented");
 			GUI.Label (new Rect (Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.8f, Screen.height * 0.8f), info);
 		//	if (Input.GetKeyDown ("h")) {
 		//		resume ();
