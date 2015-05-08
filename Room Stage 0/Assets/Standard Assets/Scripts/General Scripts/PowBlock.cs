@@ -29,7 +29,7 @@ public class PowBlock : MonoBehaviour
             yield return new WaitForSeconds(0.5F);
             GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
             GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
-            armCam.SetActive(true);
+            //armCam.SetActive(true);
             Screen.lockCursor = false;
             GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = true;
             GameObject.Find("MaxCam").GetComponent<Camera>().depth = -1;
