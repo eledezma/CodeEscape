@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ScannerInfoLevel3 : MonoBehaviour 
 {
-
+	Texture2D texture;
 	public bool guiEnabeled = true;
 	private string info = "Ints and doubles are two out of the eight primitive types, supported in Java." +
 		" Ints are a 32-bit signed two's complements integer, which just means that it can range from a" +
@@ -17,9 +17,9 @@ public class ScannerInfoLevel3 : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		texture = new Texture2D(1, 1);
 		Screen.showCursor = false;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
-		GameObject.Find("First Person Controller").GetComponent<Player>().enabled = false;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().enabled = false;
 		GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
@@ -33,12 +33,13 @@ public class ScannerInfoLevel3 : MonoBehaviour
 			if(guiEnabeled)
 				resume ();
 			else{
+				guiEnabeled = true;
+				GameObject.Find("First Person Controller").GetComponent<Player>().GuiEnabled = false;
 				GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = false;
 				GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
 				GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = false;
-				guiEnabeled = true;
+				GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = false;
 				GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = false;
-				
 			}
 		}
 		
@@ -66,7 +67,7 @@ public class ScannerInfoLevel3 : MonoBehaviour
 		guiEnabeled = false;
 		Screen.showCursor = true;
 		GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = true;
-		GameObject.Find("First Person Controller").GetComponent<Player>().enabled = true;
+		GameObject.Find("First Person Controller").GetComponent<Player>().GuiEnabled = true;
 		GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = true;
 		GameObject.Find("Initialization").GetComponent<CursorTime>().enabled = true;
 		GameObject.Find ("Robo_Arm10").GetComponent<ArmAnimation2> ().enabled = true;

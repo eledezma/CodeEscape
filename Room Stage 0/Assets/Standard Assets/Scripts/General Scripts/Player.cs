@@ -11,7 +11,8 @@ public class Player : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		guiEnabled = true;
+		texture = new Texture2D(1, 1);
+		guiEnabled = false;
 		health = 100;
 	}
 	
@@ -22,12 +23,7 @@ public class Player : MonoBehaviour
 		{
 			this.GetComponent<TemporaryDeathAnimation>().Die = true;
 		}
-		if (!guiEnabled && textureEnabled)            //disable health bar
-		{
-			texture.SetPixel (0,0,Color.clear);
-			texture.Apply ();
-			textureEnabled = false;
-		} 
+
 	}
 
 	public void OnGUI(){                           //draws a health bar with width relative to player's health
@@ -40,11 +36,16 @@ public class Player : MonoBehaviour
 				DrawQuad(new Rect(10,20,health*2.0f,10.0f), Color.red);
 			}
 		}
-
+		if (!guiEnabled && textureEnabled)            //disable health bar
+		{
+			texture.SetPixel (0,0,Color.clear);
+			texture.Apply ();
+			textureEnabled = false;
+		} 
 	}
 
 	public void DrawQuad(Rect position, Color color) {            // Draws a box
-		texture = new Texture2D(1, 1);
+
 		texture.SetPixel(0,0,color);
 		texture.Apply();
 		GUI.skin.box.normal.background = texture;

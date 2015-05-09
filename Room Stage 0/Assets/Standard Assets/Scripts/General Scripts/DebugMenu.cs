@@ -18,7 +18,7 @@ public class DebugMenu : MonoBehaviour
 			GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled = !GameObject.Find("Main Camera").GetComponent<MouseLook>().enabled;
 			GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = !GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled;
 			GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor = !GameObject.Find("Initialization").GetComponent<CursorTime>().showCursor;
-			GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled = !GameObject.Find("Robo_Arm10").GetComponent<ArmAnimation2>().enabled;
+			GameObject.Find("First Person Controller/Main Camera/Robo_Arm10").GetComponent<ArmAnimation2>().enabled = !GameObject.Find("First Person Controller/Main Camera/Robo_Arm10").GetComponent<ArmAnimation2>().enabled;
 			GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled = !GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().enabled;
 			Screen.showCursor = !Screen.showCursor;
 			debugTime = !debugTime;
