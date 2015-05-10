@@ -4,7 +4,7 @@ using System.Collections;
 public class ScannerInfoLevel2 : MonoBehaviour
 {
     public bool guiEnabeled = true;
-	private string info = "Indentation is structering the code to make it more readable. " +
+	private string info = "Indentation is structuring the code to make it more readable. " +
 		    "The basic indentation convention is that every line that has an open brace, it's matching closing brace needs "+
 			"to be aligned with the line that has the open brace. Every line in between the open and closed braces need to be tabbed. "+
 			"\n\nExample of well indented code: "+
